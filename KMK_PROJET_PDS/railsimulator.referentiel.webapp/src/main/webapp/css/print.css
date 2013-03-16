@@ -1,0 +1,11 @@
+#RnoGlobalLinksTop,
+#RnoNav1Top,
+#RnoNav2Top,
+#RnoNav3Left{
+	display:none;
+}
+#RnoPage,
+.RnoLayout-1col #RnoBody,
+.RnoLayout-2col #RnoBody{
+	margin:0;
+}
