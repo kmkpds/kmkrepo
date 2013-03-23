@@ -16,7 +16,7 @@ public class StationDAO {
 	private Station station = new Station();
 
     
-    public  void createStation(String nomStation , String commentaireStation) {
+    public  void createStation(String nomStation , String commentaireStation, double latitude, double longitude, Ligne ligne) {
 	      
 		 
 		 se = HibernateUtils.getSession();
@@ -25,15 +25,39 @@ public class StationDAO {
 	     
 	     station.setNomStation(nomStation);
 	     station.setCommentaireStation(commentaireStation);
-
-	   
-	     
-	    
-		 se.save(station);
-		
+	     station.setLatitude(latitude);
+	     station.setLongitude(longitude);
+	     station.setLigne(ligne);
+    
+		 se.save(station);		
 	     t.commit();
 	     se.close();
 	}
+    
+    public  void createStationToStation(Station station1, Station station2) {
+	      
+     
+	  
+	 	 se = HibernateUtils.getSession();       
+    	 Transaction tr=se.beginTransaction(); 
+    	 
+		 List<Station> listStation = station1.getStationAlle();
+		 listStation.add(station2);		
+		 List<Station> listStation2 = station2.getStationAlle();
+		 listStation2.add(station1);
+	
+         station1.setStationAlle(listStation);
+    	 station2.setStationAlle(listStation2);
+    
+
+	     se.update(station1);
+	     se.update(station2);
+
+    	 tr.commit();
+    	 se.close();
+	    
+	}
+    
     
     public void supprimerStation(int id) {
     	

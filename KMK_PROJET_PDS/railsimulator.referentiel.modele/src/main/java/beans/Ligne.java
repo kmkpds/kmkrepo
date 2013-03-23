@@ -5,11 +5,14 @@ package beans;
 
 
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.OneToMany;
 import java.util.List;
@@ -32,7 +35,15 @@ public class Ligne  {
 	private String commentaire;
 	
 	@OneToMany(mappedBy="ligne")
-	private List<Canton> cantonlist;
+	private List<Station> stationlist;
+	
+	
+	@ManyToOne(
+			cascade={CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH}
+	)
+	@JoinColumn(name="reseau_idreseau")
+	private Reseau reseau;
+	
 	
 	public Ligne() {
 		// TODO Auto-generated constructor stub
@@ -62,14 +73,15 @@ public class Ligne  {
 		this.commentaire = commentaire;
 	}
 
-	public List<Canton> getCantonlist() {
-		return cantonlist;
+	public List<Station> getStationlist() {
+		return stationlist;
 	}
 
-	public void setCantonlist(List<Canton> cantonlist) {
-		this.cantonlist = cantonlist;
+	public void setStationlist(List<Station> stationlist) {
+		this.stationlist = stationlist;
 	}
 
+	
 
 	
 }

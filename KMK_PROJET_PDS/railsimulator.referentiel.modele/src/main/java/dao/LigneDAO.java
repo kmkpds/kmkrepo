@@ -18,6 +18,7 @@ public class LigneDAO {
 	      
 		 
 		se = HibernateUtils.getSession();
+		
 	     Transaction t = se.beginTransaction();
 	     Ligne ligne = new Ligne();
 	     ligne.setNomLigne(nomLigne);

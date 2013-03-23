@@ -17,10 +17,22 @@
 
 <!-- Navigation Top Level 2 -->
 <div id="RnoNav2Top" class="sc">
+
+
 	<ul>
 		<li>
 			<a href="#">Création Reseau</a>
 			<ul>
+			<li>
+					<a href="/kmk_ref_webapp/reseau?action=test">test</a>
+				</li>
+			<li>
+			<li>
+					<a href="/kmk_ref_webapp/reseau?action=definirReseau">Definir la Zone</a>
+				</li>
+			<li>
+					<a href="/kmk_ref_webapp/reseau?action=creerReseau" >Créer Reseau</a>
+				</li>
 				<li>
 					<a href="/kmk_ref_webapp/reseau?action=visualisationReseau">Visualisation Reseau</a>
 				</li>
@@ -29,5 +41,7 @@
 		</li>
 
 	</ul>
+	
+	
 </div>
 <!-- /Navigation Top Level 2 -->

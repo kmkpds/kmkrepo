@@ -13,8 +13,7 @@
   <artifactId>railsimulator.jms</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   <name>KMK JMS</name>
-  
-  
+    
   <build>
   	<plugins>
   		<plugin>

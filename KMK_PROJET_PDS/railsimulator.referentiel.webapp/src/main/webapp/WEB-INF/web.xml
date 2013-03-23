@@ -5,27 +5,27 @@
       
 	<servlet>
 		<servlet-name>AccueilControler</servlet-name>
-		<servlet-class>railsimulator.referentiel.webapp.controleur.AccueilControler</servlet-class>
+		<servlet-class>railsimulator.referentiel.controleur.AccueilControler</servlet-class>
 	</servlet>
 
 	<servlet>
 		<servlet-name>LigneControler</servlet-name>
-		<servlet-class>railsimulator.referentiel.webapp.controleur.LigneControler</servlet-class>
+		<servlet-class>railsimulator.referentiel.controleur.LigneControler</servlet-class>
 	</servlet>
 	
 	<servlet>
 		<servlet-name>CantonControler</servlet-name>
-		<servlet-class>railsimulator.referentiel.webapp.controleur.CantonControler</servlet-class>
+		<servlet-class>railsimulator.referentiel.controleur.CantonControler</servlet-class>
 	</servlet>
 	
 	<servlet>
 		<servlet-name>StationControler</servlet-name>
-		<servlet-class>railsimulator.referentiel.webapp.controleur.StationControler</servlet-class>
+		<servlet-class>railsimulator.referentiel.controleur.StationControler</servlet-class>
 	</servlet>
 	
 	<servlet>
 		<servlet-name>ReseauControler</servlet-name>
-		<servlet-class>railsimulator.referentiel.webapp.controleur.ReseauControler</servlet-class>
+		<servlet-class>railsimulator.referentiel.controleur.ReseauControler</servlet-class>
 	</servlet>
 
 	<servlet-mapping>

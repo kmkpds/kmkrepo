@@ -3,14 +3,22 @@ package beans;
 import java.util.List;
 
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+
 
 @Entity
 @Table(name="station")
@@ -24,61 +32,121 @@ public class Station {
 	@Column(name="commentaire")
 	private String commentaireStation;
 	@Column(name="latitude")
-	private float latitude;
+	private double latitude;
 	@Column(name="longitude")
-	private float longitude;
+	private double longitude;	
 	
-	@OneToMany(mappedBy="station")
-	private List<Canton> cantonlist;
+	
+	@ManyToOne(
+			cascade={CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH}
+	)
+	@JoinColumn(name="ligne_idligne")
+	private Ligne ligne;
+	
+	
+	@ManyToMany(fetch=FetchType.EAGER,
+			cascade={CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
+	@JoinTable(name="station_has_station",
+	 joinColumns=@JoinColumn(name="station_idstation1"),
+	 inverseJoinColumns=@JoinColumn(name="station_idstation2")
+	)
+	private List<Station> stationAlle;
+	
+	
+	@ManyToMany(fetch=FetchType.EAGER,
+			cascade={CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
+	@JoinTable(name="station_has_station",
+	 joinColumns=@JoinColumn(name="station_idstation2"),
+	 inverseJoinColumns=@JoinColumn(name="station_idstation1")
+	)
+	private List<Station> stationRetour;
+
 
 	public Integer getIdStation() {
 		return idStation;
 	}
 
+
 	public void setIdStation(Integer idStation) {
 		this.idStation = idStation;
 	}
+
 
 	public String getNomStation() {
 		return nomStation;
 	}
 
+
 	public void setNomStation(String nomStation) {
 		this.nomStation = nomStation;
 	}
+
 
 	public String getCommentaireStation() {
 		return commentaireStation;
 	}
 
+
 	public void setCommentaireStation(String commentaireStation) {
 		this.commentaireStation = commentaireStation;
 	}
 
-	public List<Canton> getCantonlist() {
-		return cantonlist;
-	}
 
-	public void setCantonlist(List<Canton> cantonlist) {
-		this.cantonlist = cantonlist;
-	}
-
-	public float getLatitude() {
+	public double getLatitude() {
 		return latitude;
 	}
 
-	public void setLatitude(float latitude) {
+
+	public void setLatitude(double latitude) {
 		this.latitude = latitude;
 	}
 
-	public float getLongitude() {
+
+	public double getLongitude() {
 		return longitude;
 	}
 
-	public void setLongitude(float longitude) {
+
+	public void setLongitude(double longitude) {
 		this.longitude = longitude;
 	}
-	
+
+
+	public Ligne getLigne() {
+		return ligne;
+	}
+
+
+	public void setLigne(Ligne ligne) {
+		this.ligne = ligne;
+	}
+
+
+	public List<Station> getStationAlle() {
+		return stationAlle;
+	}
+
+
+	public void setStationAlle(List<Station> stationAlle) {
+		this.stationAlle = stationAlle;
+	}
+
+
+	public List<Station> getStationRetour() {
+		return stationRetour;
+	}
+
+
+	public void setStationRetour(List<Station> stationRetour) {
+		this.stationRetour = stationRetour;
+	}
+
+
+
+
+
+
+
 	
 
 }

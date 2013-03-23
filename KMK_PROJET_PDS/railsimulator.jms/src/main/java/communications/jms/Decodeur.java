@@ -12,7 +12,7 @@ import javax.xml.validation.SchemaFactory;
 import org.xml.sax.SAXException;
 
 public class Decodeur {
-
+	
 	private JAXBContext context;
 	private Marshaller changeurObjetsEnXML;
 	private Unmarshaller changeurXMLEnObjet;
@@ -41,7 +41,7 @@ public class Decodeur {
 			changeurObjetsEnXML.marshal(o, sw);
 			return sw.getBuffer().toString();
 		} catch (JAXBException e) {
-			System.out.println("JAXBException dans la methode objetToXML() du Decodeur du jar jmsPerso : " + e.toString());
+			System.out.println("JAXBException dans la methode objetToXML() du Decodeur : " + e.toString());
 			e.printStackTrace();
 		}
 		
@@ -54,7 +54,7 @@ public class Decodeur {
 		try {
 			result = changeurXMLEnObjet.unmarshal(reader);
 		} catch (JAXBException e) {
-			System.out.println("JAXBException dans la methode xmlToObject() du Decodeur du jar jmsPerso : " + e.toString());
+			System.out.println("JAXBException dans la methode xmlToObject() du Decodeur : " + e.toString());
 			e.printStackTrace();
 		}
 		return result;
@@ -80,10 +80,10 @@ public class Decodeur {
 			}
 
 		} catch (JAXBException e1) {
-			System.out.println("JAXBException dans la methode init() du Decodeur du jar jmsPerso : " + e1.toString());
+			System.out.println("JAXBException dans la methode init() du Decodeur : " + e1.toString());
 			e1.printStackTrace();
 		} catch (SAXException e2) {
-			System.out.println("SAXException dans la methode init() du Decodeur du jar jmsPerso : " + e2.toString());
+			System.out.println("SAXException dans la methode init() du Decodeur : " + e2.toString());
 			e2.printStackTrace();
 		}
 	}

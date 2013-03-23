@@ -12,25 +12,30 @@ public class Consommateur {
 
 
 	//Variables de fonctionnement
+	private String brokerURL;
 	private QueueConnectionFactory connectionQueueFactory;
 	private QueueConnection queueConnection;
 	private QueueSession queueSession;
 	private Queue queue;
-	private QueueReceiver consommateur;
+	private QueueReceiver messageReceive;
 
 	public Consommateur(String ip, String nomQueue){
 
 		try {
 
-			connectionQueueFactory = new ActiveMQConnectionFactory(("tcp://") + ip + ":61616"); 
-
+			//Identification du provider JMS
+			brokerURL = "tcp://" + ip + ":61616";
+			//Factory de QueueConnections
+			connectionQueueFactory = (QueueConnectionFactory) new ActiveMQConnectionFactory(brokerURL);
+			//Création d'un objet Queueconnections
 			queueConnection = connectionQueueFactory.createQueueConnection();
+			//Connexion au provider
 			queueConnection.start();
 			queueSession = queueConnection.createQueueSession(false, QueueSession.AUTO_ACKNOWLEDGE);
+			//Nom de la file réceptionnée
 			queue = queueSession.createQueue(nomQueue);
-
-			//Creation du consommateur sur la queue
-			consommateur = queueSession.createReceiver(queue);
+			//Récupération du message
+			messageReceive = queueSession.createReceiver(queue);
 
 		}
 		catch (JMSException e1){
@@ -43,10 +48,10 @@ public class Consommateur {
 
 		try {
 			//Demarrage des consommateurs pour recevoir.
-			consommateur.receiveNoWait();
+			messageReceive.receiveNoWait();
 
 			//Attribution d'un Thread à ces consommateurs pour traiter les messsages de manières asynchrones.
-			consommateur.setMessageListener(ml);
+			messageReceive.setMessageListener(ml);
 
 		}
 		catch (JMSException e){
@@ -64,7 +69,7 @@ public class Consommateur {
 
 		try {
 
-			consommateur.close();
+			messageReceive.close();
 			queueSession.close();
 			queueConnection.close();
 
