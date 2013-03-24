@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:camel="http://camel.apache.org/schema/spring"
+	xsi:schemaLocation="
+       http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://camel.apache.org/schema/spring http://camel.apache.org/schema/spring/camel-spring.xsd">
+
+	<!-- Définition de routes en donnant en paramètre un package -->	
+	<!-- <packageScan>
+			<package>kamikaze.esb.testOrchestration</package>
+			<excludes>**.*Excluded*</excludes>
+			<includes>**.*</includes>
+		</packageScan> --><!-- 
+		La lecture des routes du package fonctionne.
+		Voir dans les classes du package ce que font les routes.
+		--><!-- Définition d'une route avec une classe java --><!-- 
+		Utilisation d'une classe java via un bean pour définir une route
+		Voir dans la classe ce qu'elle fait.
+		-->
+	<camelContext id="camelcontext" xmlns="http://camel.apache.org/schema/spring">
+    <routeBuilder ref="testOrchestration"/>
+</camelContext>
+
+	<!-- Définition des beans -->
+	<bean id="testOrchestration" class="kamikaze.esb.testOrchestration.Orchestration" />
+	<!--bean id="testOrchestration" class="kamikaze.esb.bean.OrchestrerMessage" />-->
+</beans>
