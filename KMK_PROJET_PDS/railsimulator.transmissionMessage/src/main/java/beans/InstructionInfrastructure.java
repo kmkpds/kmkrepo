@@ -2,11 +2,7 @@ package beans;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
-/**
- * 
- * @author faycallemseffer
- *
- */
+
 @XmlRootElement
 public class InstructionInfrastructure {
 
