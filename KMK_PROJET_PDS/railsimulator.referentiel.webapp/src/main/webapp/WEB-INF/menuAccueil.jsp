@@ -10,6 +10,9 @@
 		<li>
 			<a href="/kmk_ref_webapp/accueil?action=creationReseau">Création Réseau</a>
 		</li>
+				<li>
+			<a href="/kmk_ref_webapp/visualiser?action=visualiserTrafic">Visualisation Réseau</a>
+		</li>
 	</ul>
 </div>
 <!-- /Navigation Top Level 1 -->

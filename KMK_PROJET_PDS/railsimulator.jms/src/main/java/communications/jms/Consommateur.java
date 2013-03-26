@@ -68,7 +68,6 @@ public class Consommateur {
 	public void arreter(){
 
 		try {
-
 			messageReceive.close();
 			queueSession.close();
 			queueConnection.close();

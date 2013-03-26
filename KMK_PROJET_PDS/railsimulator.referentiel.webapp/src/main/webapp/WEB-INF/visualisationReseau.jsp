@@ -27,7 +27,7 @@
     	
     	//initialisation de la map		
     	  function initialize() {
-      	//coordonnées de la ville Orléans		
+      	//coordonnées de la ville Orléans
           var myLatlng = new google.maps.LatLng(47.904, 1.907);
 
 		  var mapOptions = {
@@ -45,7 +45,7 @@
 		  	var latitude = '<c:out value="${station.latitude}"/>';
 		  	var longitude = '<c:out value="${station.longitude}"/>'; 
 		  	var nom = '<c:out value="${station.nomStation}"/>';
-		  
+		    
 		  	var gare = new google.maps.LatLng(latitude,longitude);
 		  	
 		  	/* Personnalisation d'icone */
@@ -80,6 +80,7 @@
 		 			new google.maps.LatLng(latitudeStationDepart, longitudeStationDepart),
 					new google.maps.LatLng(latitudeStationArrive, longitudeStationArrive)
 		     	];
+			 	
 		     	var ligne = new google.maps.Polyline({
 			        path: tabCoordonnees,
 			        strokeColor: "#4169E1",//ligne de couleur rouge
@@ -87,14 +88,15 @@
 			        strokeWeight: 5
 		     	});
 		     	
+		     	
+		     	
 		     	ligne.setMap(map);
 		      </c:forEach>
 		      
 		    </c:forEach>
 		    
       		}
-    	
-    	
+    	    	
     	</script>
 	
 	</head>

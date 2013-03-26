@@ -27,6 +27,11 @@
 		<servlet-name>ReseauControler</servlet-name>
 		<servlet-class>railsimulator.referentiel.controleur.ReseauControler</servlet-class>
 	</servlet>
+	
+	<servlet>
+		<servlet-name>VisualisationControler</servlet-name>
+		<servlet-class>railsimulator.visualisation.controleur.VisualisationControler</servlet-class>
+	</servlet>
 
 	<servlet-mapping>
 		<servlet-name>LigneControler</servlet-name>
@@ -53,5 +58,11 @@
 		<servlet-name>ReseauControler</servlet-name>
 		<url-pattern>/reseau</url-pattern>
 	</servlet-mapping>
+	
+	<servlet-mapping>
+		<servlet-name>VisualisationControler</servlet-name>
+		<url-pattern>/visualiser</url-pattern>
+	</servlet-mapping>
+	
 	
 </web-app>

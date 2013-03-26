@@ -35,15 +35,7 @@ public class Ligne  {
 	private String commentaire;
 	
 	@OneToMany(mappedBy="ligne")
-	private List<Station> stationlist;
-	
-	
-	@ManyToOne(
-			cascade={CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH}
-	)
-	@JoinColumn(name="reseau_idreseau")
-	private Reseau reseau;
-	
+	private List<Station> stationlist;	
 	
 	public Ligne() {
 		// TODO Auto-generated constructor stub
