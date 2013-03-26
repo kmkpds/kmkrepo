@@ -14,7 +14,6 @@ xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xs
        <module>railsimulator.referentiel.modele</module>
        <module>railsimulator.referentiel.webapp</module>
        <module>railsimulator.jms</module>
-       <module>railsimulator.esb</module>
        <module>railsimulator.transmissionMessage</module>
      </modules>
 
