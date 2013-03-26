@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+	targetNamespace="http://www.example.org/MockTrain"
+	xmlns:tns="http://www.example.org/MockTrain"
+	elementFormDefault="qualified">
+
+
+
+
+
+
+    <complexType name="Event">
+    	<sequence>
+    		<element name="type" type="tns:EventType"></element>
+    		<sequence>
+    			<choice>
+    				<element name="Canton" type="tns:Canton"></element>
+    				<element name="Train" type="tns:Train"></element>
+    				<element name="Troncon" type="tns:Troncon"></element>
+    			</choice>
+    		</sequence>
+    	</sequence>
+    	<attribute name="idEvent" type="int"></attribute>
+    	<attribute name="criticite" type="string"></attribute>
+    	<attribute name="libelle" type="string"></attribute>
+    </complexType>
+
+    <complexType name="Capteur">
+        <attribute name="idCapteur" type="int"></attribute>
+    </complexType>
+
+
+    <complexType name="Train">
+
+    	<sequence>
+    		<element name="capteur" type="tns:Capteur"
+    			maxOccurs="unbounded">
+    		</element>
+    		<element name="position" type="tns:Canton"></element>
+    	</sequence>
+    	<attribute name="idTrain" type="int"></attribute>
+    	<attribute name="nomTrain" type="string"></attribute>
+
+    </complexType>
+
+    <complexType name="Ligne">
+
+    	<sequence>
+    		<element name="listeTrains" type="tns:Train"
+    			maxOccurs="unbounded">
+    		</element>
+    		<element name="listeTroncons" type="tns:Troncon" maxOccurs="unbounded"></element>
+    	</sequence>
+    	<attribute name="idLigne" type="int"></attribute>
+    	<attribute name="nomLigne" type="string"></attribute>
+    	<attribute name="heurePremierTrain" type="time"></attribute>
+    	<attribute name="heureDernierTrain" type="time"></attribute>
+    	<attribute name="capaciteCirculation" type="double"></attribute>
+    	<attribute name="nombreCanton" type="double"></attribute>
+    	<attribute name="kilometrageTotal" type="float"></attribute>
+    	<attribute name="commentaireLigne" type="string"></attribute>
+    	<attribute name="capaciteMaxDeVoyageur" type="double"></attribute>
+
+    </complexType>
+   <element name="envoyerEventToServiceMix">
+    	<complexType>
+    		<sequence>
+    			<element name="mess" type="tns:Event"></element>
+    		</sequence>
+    	</complexType>
+    </element>
+
+    <complexType name="Wagon">
+    	<sequence>
+    		<element name="capteur" type="tns:Capteur"
+    			maxOccurs="unbounded">
+    		</element>
+    		<element name="train" type="tns:Train"></element>
+    		<element name="typewagon" type="tns:TypeWagon"></element>
+    	</sequence>
+    	<attribute name="idWagon" type="int"></attribute>
+    </complexType>
+
+    <complexType name="TypeWagon">
+    	<attribute name="idTypeWagon" type="int"></attribute>
+    	<attribute name="moteur" type="boolean"></attribute>
+    </complexType>
+
+    <element name="envoyerEventServiceMixToSI">
+    	<complexType>
+    		<sequence>
+    			<element name="mess" type="tns:Event"></element>
+    			<choice minOccurs="0" maxOccurs="unbounded">
+    				<element name="ligne" type="tns:Ligne"></element>
+    				<element name="wagon" type="tns:Wagon"></element>
+    				<element name="train" type="tns:Train"></element>
+    				<element name="canton" type="tns:Canton"></element>
+    				<element name="station" type="tns:Station"></element>
+    			</choice>
+    		</sequence>
+    	</complexType>
+    </element>
+
+    <complexType name="Canton">
+    	<sequence>
+    		<element name="capteur" type="tns:Capteur"
+    			maxOccurs="unbounded">
+    		</element>
+    	</sequence>
+    	<attribute name="idCanton" type="int"></attribute>
+    	<attribute name="longueur" type="int"></attribute>
+    	<attribute name="Lattitude" type="int"></attribute>
+    	<attribute name="Longitude" type="int"></attribute>
+    </complexType>
+
+    <complexType name="Station">
+    	<sequence>
+    		<element name="capteur" type="tns:Capteur" maxOccurs="unbounded"></element>
+    	</sequence>
+    	<attribute name="idStation" type="int"></attribute>
+    	<attribute name="nomStation" type="string"></attribute>
+    </complexType>
+
+    <complexType name="EventType">
+    	<attribute name="idEventType" type="int"></attribute>
+    	<attribute name="libelle" type="string"></attribute>
+    </complexType>
+
+    <element name="MockInfoTraffic">
+    	<complexType>
+    		<sequence>
+    			<element name="ligne" type="tns:Ligne" maxOccurs="unbounded"></element>
+    		</sequence>
+    	</complexType>
+    </element>
+
+    <complexType name="Troncon">
+    	<sequence>
+    		<element name="capteur" type="tns:Capteur" maxOccurs="unbounded"></element>
+    		<element name="StationDepart" type="tns:Station"></element>
+    		<element name="StationArrivee" type="tns:Station"></element>
+    		<element name="listeCanton" type="tns:Canton" maxOccurs="unbounded"></element>
+    	</sequence>
+    	<attribute name="idTroncon" type="int"></attribute>
+    	<attribute name="taille" type="float"></attribute>
+    	<attribute name="latitude" type="double"></attribute>
+    	<attribute name="longitude" type="double"></attribute>
+    </complexType>
+</schema>
