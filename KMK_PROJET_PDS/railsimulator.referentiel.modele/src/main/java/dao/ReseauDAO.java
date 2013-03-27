@@ -10,12 +10,12 @@ import beans.Reseau;
 import beans.Station;
 
 
-public class ReseauDao {	
+public class ReseauDAO {	
 	private Session se = null;
 	private List<Reseau> listeReseau;
 	private Reseau reseau = new Reseau() ;
 	
-	public ReseauDao() {
+	public ReseauDAO() {
 		// TODO Auto-generated constructor stub
 	}
 	

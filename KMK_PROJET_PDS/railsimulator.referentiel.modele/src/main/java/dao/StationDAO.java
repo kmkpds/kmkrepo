@@ -41,13 +41,13 @@ public class StationDAO {
 	 	 se = HibernateUtils.getSession();       
     	 Transaction tr=se.beginTransaction(); 
     	 
-		 List<Station> listStation = station1.getStationAlle();
+		 List<Station> listStation = station1.getStationAller();
 		 listStation.add(station2);		
-		 List<Station> listStation2 = station2.getStationAlle();
+		 List<Station> listStation2 = station2.getStationAller();
 		 listStation2.add(station1);
 	
-         station1.setStationAlle(listStation);
-    	 station2.setStationAlle(listStation2);
+         station1.setStationAller(listStation);
+    	 station2.setStationAller(listStation2);
     
 
 	     se.update(station1);

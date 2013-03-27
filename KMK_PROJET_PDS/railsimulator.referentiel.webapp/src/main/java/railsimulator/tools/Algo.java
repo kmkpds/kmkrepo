@@ -11,25 +11,35 @@ public class Algo {
 	StationDAO station_dao = new StationDAO();
 	Station station1 = new Station();
 	Station station2 = new Station();
+	
+	
+	/*
+	 * Création Matrice reseau incidence
+	 */
 
-	public int [][] getMatricePoids( String reseauMatrice[][]) {
+	public int [][] getMatriceIncidence( String reseauMatrice[][]) {
 		
 		
-		int [][] matricePoids = new int[reseauMatrice[0].length][reseauMatrice[0].length] ;
+		int [][] matriceIncidence = new int[reseauMatrice[0].length][reseauMatrice[0].length] ;
 		int ligne = 0;
-		for(int i=1 ; i< reseauMatrice[0].length-1 ; i++) {
-			
-			for(int j=0 ; j< reseauMatrice[0].length ; j++) {
 		
-			 matricePoids [ligne][j] = Integer.parseInt( reseauMatrice [i][j]);
+		for(int i=1 ; i<= reseauMatrice[0].length ; i++) {
+			for(int j=0 ; j< reseauMatrice[0].length ; j++) {
+		        
+				matriceIncidence [ligne][j] = Integer.parseInt( reseauMatrice [i][j]);
+				
 		
 			}
 			
 		ligne ++;
-		}				
-		return(matricePoids);
+		}	
+		return(matriceIncidence);
 	}
 	
+	
+	/*
+	 * Création Matrice nomStation
+	 */
 	
 	public int [] getMatriceNomStation( String reseauMatrice[][]) {
 	       
@@ -38,17 +48,19 @@ public class Algo {
             
 			for(int j=0 ; j< reseauMatrice[0].length ; j++) {
 				 nomStation [j] = Integer.parseInt(reseauMatrice [0][j]);
-			}		
-		
 				
+			}		
+						
 		return(nomStation);
 	}
 	
 	
 	
+	/*
+	 * récupération index de l'arc minimal
+	 */
 
 
-	/* === DEBUT DES FONCTIONS POUR KRUSKAL === */
 
     public int getIndexMinPoids(int[] matrice) {
         int n       = matrice.length;
@@ -61,40 +73,29 @@ public class Algo {
                 index = i;
             }
         }
-        System.out.println("index:"+index);
+        System.out.println(index);
         return index;
     }
 
-	public int kruskal(String reseauMatrice[][]) {
+    
+	/*
+	 * Création des tronçons
+	 */
+    
+	public void stationToStation(String reseauMatrice[][]) {
 		
-	//	int graphe[][] = getMatricePoids(reseauMatrice);
-	//	int corressNom[] =  getMatriceNomStation(reseauMatrice);
-	int corressNom[] = {1,2,4,5,6,7};
+		int matriceIncidence[][] = getMatriceIncidence(reseauMatrice);
+		int nomStation[] =  getMatriceNomStation(reseauMatrice);
+	
 		
-		int graphe[][] ={ 
-				
-				{0,652,1739,2499,0,0},
-				
-				{652,0,1088,1855,0,0},
-											
-				{1739,1088,0,868,856,2280},
-				
-				{2499,1855,868,0,1181,2130},
-				
-				{0,0,856,1181,0,1485},
-				
-				{0,0,2280,2130,1485,0},		
-					 
-					
-					
-};
-		 int n = graphe.length;
-		 System.out.println("n:"+n);
+
+		 int n = matriceIncidence.length;
+
 		
-         int[] matrice = new int[n*n];
+         int[] tabDistance = new int[n*n];
          int index = -2;
          int row, col, rowListe, colListe, rowIndex, colIndex;
-         boolean pasBon;
+         boolean erreur;
 
          ArrayList<Integer> res = new ArrayList<Integer>();
 
@@ -102,77 +103,55 @@ public class Algo {
          // Initialisation d'une matrice à une dimension à partir du graphe
          for(int i=0 ; i<n ; i++) {
              for(int j=0 ; j<n ; j++) {
-                 matrice[(i*n)+j] = graphe[i][j];
+            	 tabDistance[(i*n)+j] = matriceIncidence[i][j];
              }
          }
 
          while(res.size()<n-1 || index==-1) {
-             index = getIndexMinPoids(matrice);
+             index = getIndexMinPoids(tabDistance);
 
              if(index>=0) {
             	 
                  rowIndex   = index/n; // La nouvelle matrice n'étant plus qu'à une dimension on retrouve sa ligne en divisant nb par n
                  colIndex   = index%n; // La nouvelle matrice n'étant plus qu'à une dimension on retrouve sa colone en prenant nb modulo
-                 pasBon     = false;
+                 erreur     = false;
 
                  for(Integer nb : res) {
                      rowListe = nb/n; // La nouvelle matrice n'étant plus qu'à une dimension on retrouve sa ligne en divisant nb par n
                      colListe = nb%n; // La nouvelle matrice n'étant plus qu'à une dimension on retrouve sa colone en prenant nb modulo n
-                    //  int  cptr = 0;
-                   //  ArrayList<Integer> sommetAllantPoint1= new ArrayList<Integer>();
-             	  // ArrayList<Integer> sommetAllantPoint2= new ArrayList<Integer>();
+
                     
                 
              
                      
-                    if(colListe==colIndex && rowIndex!=rowListe) {
-                        pasBon = true;
+                    if(colListe==colIndex && rowIndex!=rowListe  ) {
+                    	erreur = true;
                     }
+                    
                   
+                    
+                    
 
                      // Ne pas prendre A<->B ET B<->A
                     if(rowIndex==colListe && colIndex==rowListe) {
-                         pasBon = true;
-                     }
-                    
-                	/* ===  
-                    while(pasBon==false && cptr < res.size() ){
-                    	
-                    	System.out.println(corressNom[rowIndex]);
-                    	System.out.println(corressNom[colIndex]);
-                    	
-                    	for(Integer cycle : res) {
-                    		
-                    		int rowcycle = cycle/n; // La nouvelle matrice n'étant plus qu'à une dimension on retrouve sa ligne en divisant nb par n
-                            int colcycle = cycle%n;
-                    		
-                            if(corressNom[rowIndex]== corressNom[rowcycle] && corressNom[rowIndex]== corressNom[colcycle] ){
-                            	sommetAllantPoint1.add(index);
-                            }
-                            if(corressNom[colIndex]== corressNom[rowcycle] && corressNom[colIndex]== corressNom[colcycle] ){
-                            	sommetAllantPoint2.add(index);
-                            }
-                    	}
-
-                    	
-                    	cptr++;
-                    	
+                    erreur = true;
                     }
-                    **/
+                    
+                	
                  }
                  
                  
                  
                  // Ne pas prendre A<->B ET B<->A
                  if(res.contains((colIndex*n)+rowIndex)) {
-                     pasBon = true;
+                	 erreur = true;
                  }
 
                  // On ajoute ce vecteur à la liste
-                 if(!pasBon) { res.add(index); }
+                 if(!erreur) { res.add(index); }
 
                  // On marque ce vecteur comme traité
-                 matrice[index] = -1;
+                 tabDistance[index] = -1;
              }
          }
 
@@ -187,11 +166,11 @@ public class Algo {
         for(int nb : res) {
             row = nb/n;
             col = nb%n;
-			station1 =  station_dao.getStationByID(corressNom[row]);
-			station2 =  station_dao.getStationByID(corressNom[col]);
+			station1 =  station_dao.getStationByID(nomStation[row]);
+			station2 =  station_dao.getStationByID(nomStation[col]);
 			
-			station_dao.createStationToStation(station1, station2);
-            System.out.println("matrice["+row+"]["+col+"] - "+corressNom[row]+"->"+corressNom[col]);
+		    station_dao.createStationToStation(station1, station2);
+            System.out.println("matrice["+row+"]["+col+"] - "+nomStation[row]+"->"+nomStation[col]);
         }
         System.out.println("=== FIN Kruscal ===");
     
@@ -200,10 +179,10 @@ public class Algo {
 		
 		
 		
-		return 1;
+	
 	}
 
-	/* === FIN DES FONCTIONS POUR KRUSKAL === */
+
 
 
 

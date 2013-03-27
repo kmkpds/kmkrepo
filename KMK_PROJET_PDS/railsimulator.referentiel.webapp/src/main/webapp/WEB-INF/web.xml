@@ -7,21 +7,6 @@
 		<servlet-name>AccueilControler</servlet-name>
 		<servlet-class>railsimulator.referentiel.controleur.AccueilControler</servlet-class>
 	</servlet>
-
-	<servlet>
-		<servlet-name>LigneControler</servlet-name>
-		<servlet-class>railsimulator.referentiel.controleur.LigneControler</servlet-class>
-	</servlet>
-	
-	<servlet>
-		<servlet-name>CantonControler</servlet-name>
-		<servlet-class>railsimulator.referentiel.controleur.CantonControler</servlet-class>
-	</servlet>
-	
-	<servlet>
-		<servlet-name>StationControler</servlet-name>
-		<servlet-class>railsimulator.referentiel.controleur.StationControler</servlet-class>
-	</servlet>
 	
 	<servlet>
 		<servlet-name>ReseauControler</servlet-name>
@@ -34,24 +19,8 @@
 	</servlet>
 
 	<servlet-mapping>
-		<servlet-name>LigneControler</servlet-name>
-		<url-pattern>/ligne</url-pattern>
-	</servlet-mapping>
-
-
-	<servlet-mapping>
 		<servlet-name>AccueilControler</servlet-name>
 		<url-pattern>/accueil</url-pattern>
-	</servlet-mapping>
-	
-	<servlet-mapping>
-		<servlet-name>CantonControler</servlet-name>
-		<url-pattern>/canton</url-pattern>
-	</servlet-mapping>
-	
-	<servlet-mapping>
-		<servlet-name>StationControler</servlet-name>
-		<url-pattern>/station</url-pattern>
 	</servlet-mapping>
 	
 	<servlet-mapping>

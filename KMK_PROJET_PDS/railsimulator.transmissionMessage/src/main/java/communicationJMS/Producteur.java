@@ -28,28 +28,28 @@ public class Producteur {
 	 public void ecrireMessage(String messageXML) throws JMSException, NamingException {
 
 	 BasicConfigurator.configure();
-	 // Obtention de connexion JMS à partir du serveur
+	 // Obtention de connexion JMS ÀÜ partir du serveur
 	  ConnectionFactory connectionFactory = new ActiveMQConnectionFactory(url);
 	  Connection connection = connectionFactory.createConnection();
 	  connection.start();
 	  try { 
-	   // Creation de session (Messages JMS sont envoyés et reçus en utilisant une session)
+	   // Creation de session (Messages JMS sont envoy≈Ωs et reÔøΩus en utilisant une session)
 	   Session session = connection.createSession(false, Session.AUTO_ACKNOWLEDGE);
 	  // Destination de la file
 	   Destination destination = session.createQueue(subject);
-	   // MessageProducer est utilisé pour l'envoi de messages
+	   // MessageProducer est utilis≈Ω pour l'envoi de messages
 	   MessageProducer producer = session.createProducer(destination);
-	   // le message à transferer
+	   // le message ÀÜ transferer
 	   TextMessage message = session.createTextMessage(messageXML);
-	   // Transfert de message vers la file (à L'ESB)
+	   // Transfert de message vers la file (ÀÜ L'ESB)
 	   producer.send(message);
-	   System.out.println("message envoyé :  " + message.getText() + "");
+	   System.out.println("message envoy≈Ω :  " + message.getText() + "");
 	  } finally {
 	   connection.close();
 	  }
  	}
 
- /**public static void main(String[] args) throws JMSException {
+ /*public static void main(String[] args) throws JMSException {
   try {
 	  String messageXML = "premier message que j'envoie";
    BasicConfigurator.configure();
@@ -58,5 +58,5 @@ public class Producteur {
    e.printStackTrace();
   }
 
- }	**/
+ }	*/
 }

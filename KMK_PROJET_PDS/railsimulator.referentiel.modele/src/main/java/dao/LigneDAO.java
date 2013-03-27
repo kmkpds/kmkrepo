@@ -4,6 +4,7 @@ import java.util.*;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import beans.Ligne;
+import beans.Reseau;
 
 
 public class LigneDAO {	
@@ -11,10 +12,11 @@ public class LigneDAO {
 	private Session se = null;
 	private List<Ligne> listeLigne;
     private Ligne ligne;
+   
 
     
     
-	public  void createLigne(String nomLigne , String commentaireLigne ) {
+	public  void createLigne(String nomLigne , String commentaireLigne, Reseau reseau ) {
 	      
 		 
 		se = HibernateUtils.getSession();
@@ -23,6 +25,7 @@ public class LigneDAO {
 	     Ligne ligne = new Ligne();
 	     ligne.setNomLigne(nomLigne);
 	     ligne.setCommentaire(commentaireLigne);
+	     ligne.setReseau(reseau);
 	   
 	      
 	      

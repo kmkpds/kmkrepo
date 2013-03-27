@@ -35,8 +35,16 @@ public class Ligne  {
 	private String commentaire;
 	
 	@OneToMany(mappedBy="ligne")
-	private List<Station> stationlist;	
+	private List<Station> stationlist;
 	
+	@ManyToOne(
+			cascade={CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH}
+	)
+	@JoinColumn(name="reseau_idreseau")
+	private Reseau reseau;
+	
+
+
 	public Ligne() {
 		// TODO Auto-generated constructor stub
 	}
@@ -71,6 +79,13 @@ public class Ligne  {
 
 	public void setStationlist(List<Station> stationlist) {
 		this.stationlist = stationlist;
+	}
+	public Reseau getReseau() {
+		return reseau;
+	}
+
+	public void setReseau(Reseau reseau) {
+		this.reseau = reseau;
 	}
 
 	

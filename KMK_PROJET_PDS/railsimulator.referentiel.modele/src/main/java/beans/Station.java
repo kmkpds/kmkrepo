@@ -14,6 +14,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+
+
 import javax.persistence.Table;
 
 
@@ -23,7 +25,7 @@ import javax.persistence.Table;
 public class Station {	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	@Column(name="idstation")
+	@Column(name="idstation" )
 	private Integer idStation ;
 	@Column(name="nomstation")
 	private String nomStation;
@@ -42,16 +44,16 @@ public class Station {
 	private Ligne ligne;
 	
 	
-	@ManyToMany(fetch=FetchType.EAGER,
+	@ManyToMany(fetch = FetchType.EAGER,
 			cascade={CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
 	@JoinTable(name="station_has_station",
 	 joinColumns=@JoinColumn(name="station_idstation1"),
 	 inverseJoinColumns=@JoinColumn(name="station_idstation2")
 	)
-	private List<Station> stationAlle;
+	private List<Station> stationAller;
 	
 	
-	@ManyToMany(fetch=FetchType.EAGER,
+	@ManyToMany(
 			cascade={CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
 	@JoinTable(name="station_has_station",
 	 joinColumns=@JoinColumn(name="station_idstation2"),
@@ -120,13 +122,13 @@ public class Station {
 	}
 
 
-	public List<Station> getStationAlle() {
-		return stationAlle;
+	public List<Station> getStationAller() {
+		return stationAller;
 	}
 
 
-	public void setStationAlle(List<Station> stationAlle) {
-		this.stationAlle = stationAlle;
+	public void setStationAller(List<Station> stationAlle) {
+		this.stationAller = stationAlle;
 	}
 
 
