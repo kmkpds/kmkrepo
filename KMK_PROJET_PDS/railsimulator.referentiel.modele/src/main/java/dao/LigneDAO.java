@@ -75,7 +75,6 @@ public class LigneDAO {
     	se.update(ligne);
     	tr.commit();
     	se.close();
-    	 
     }
 	
 	

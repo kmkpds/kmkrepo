@@ -11,7 +11,7 @@
 			<a href="/kmk_ref_webapp/accueil?action=creationReseau">Création Réseau</a>
 		</li>
 		<li>
-			<a href="/kmk_ref_webapp/visualiser?action=visualiserTrafic">Visualisation Réseau</a>
+			<a href="/kmk_ref_webapp/visualiser?action=visualiserTrafic">Visualisation Trafic</a>
 		</li>
 
 	</ul>

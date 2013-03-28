@@ -143,7 +143,5 @@
     	</sequence>
     	<attribute name="idTroncon" type="int"></attribute>
     	<attribute name="taille" type="float"></attribute>
-    	<attribute name="latitude" type="double"></attribute>
-    	<attribute name="longitude" type="double"></attribute>
     </complexType>
 </schema>

@@ -10,8 +10,8 @@
 		<li class="on">
 			<a href="/kmk_ref_webapp/accueil?action=creationReseau">Création Réseau</a>
 		</li>
-		<li class="on">
-			<a href="/kmk_ref_webapp/visualiser?action=visualiserTrafic">Visualisation du trafic</a>
+		<li>
+			<a href="/kmk_ref_webapp/visualiser?action=visualiserTrafic">Visualisation Trafic</a>
 		</li>
 
 	</ul>

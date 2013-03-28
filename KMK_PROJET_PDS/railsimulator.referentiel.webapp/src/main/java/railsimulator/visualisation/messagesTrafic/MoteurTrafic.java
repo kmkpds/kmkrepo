@@ -1,4 +1,4 @@
-package railsimulator.visualisation.messagesTerrain;
+package railsimulator.visualisation.messagesTrafic;
 
 import communications.jms.Consommateur;
 
