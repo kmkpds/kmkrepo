@@ -8,8 +8,6 @@
 
 package kamikaze.esb.model;
 
-import java.util.ArrayList;
-import java.util.List;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
@@ -18,20 +16,19 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java class for train complex type.
+ * <p>Java class for IncidentCritique complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType name="train">
+ * &lt;complexType name="IncidentCritique">
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="capteur" type="{http://www.example.org/Event}capteur" maxOccurs="unbounded"/>
- *         &lt;element name="position" type="{http://www.example.org/Event}canton"/>
+ *         &lt;element name="libelleIncidentCritique" type="{http://www.example.org/Event}LibelleIncidentCritique"/>
  *       &lt;/sequence>
  *       &lt;attribute name="id" type="{http://www.w3.org/2001/XMLSchema}int" />
- *       &lt;attribute name="nom" type="{http://www.w3.org/2001/XMLSchema}string" />
+ *       &lt;attribute name="criticite" type="{http://www.w3.org/2001/XMLSchema}int" />
  *     &lt;/restriction>
  *   &lt;/complexContent>
  * &lt;/complexType>
@@ -40,72 +37,40 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "train", propOrder = {
-    "capteur",
-    "position"
+@XmlType(name = "IncidentCritique", propOrder = {
+    "libelleIncidentCritique"
 })
-public class Train {
+public class IncidentCritique {
 
     @XmlElement(required = true)
-    protected List<Capteur> capteur;
-    @XmlElement(required = true)
-    protected Canton position;
+    protected LibelleIncidentCritique libelleIncidentCritique;
     @XmlAttribute
     protected Integer id;
     @XmlAttribute
-    protected String nom;
+    protected Integer criticite;
 
     /**
-     * Gets the value of the capteur property.
-     * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the capteur property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getCapteur().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Capteur }
-     * 
-     * 
-     */
-    public List<Capteur> getCapteur() {
-        if (capteur == null) {
-            capteur = new ArrayList<Capteur>();
-        }
-        return this.capteur;
-    }
-
-    /**
-     * Gets the value of the position property.
+     * Gets the value of the libelleIncidentCritique property.
      * 
      * @return
      *     possible object is
-     *     {@link Canton }
+     *     {@link LibelleIncidentCritique }
      *     
      */
-    public Canton getPosition() {
-        return position;
+    public LibelleIncidentCritique getLibelleIncidentCritique() {
+        return libelleIncidentCritique;
     }
 
     /**
-     * Sets the value of the position property.
+     * Sets the value of the libelleIncidentCritique property.
      * 
      * @param value
      *     allowed object is
-     *     {@link Canton }
+     *     {@link LibelleIncidentCritique }
      *     
      */
-    public void setPosition(Canton value) {
-        this.position = value;
+    public void setLibelleIncidentCritique(LibelleIncidentCritique value) {
+        this.libelleIncidentCritique = value;
     }
 
     /**
@@ -133,27 +98,27 @@ public class Train {
     }
 
     /**
-     * Gets the value of the nom property.
+     * Gets the value of the criticite property.
      * 
      * @return
      *     possible object is
-     *     {@link String }
+     *     {@link Integer }
      *     
      */
-    public String getNom() {
-        return nom;
+    public Integer getCriticite() {
+        return criticite;
     }
 
     /**
-     * Sets the value of the nom property.
+     * Sets the value of the criticite property.
      * 
      * @param value
      *     allowed object is
-     *     {@link String }
+     *     {@link Integer }
      *     
      */
-    public void setNom(String value) {
-        this.nom = value;
+    public void setCriticite(Integer value) {
+        this.criticite = value;
     }
 
 }

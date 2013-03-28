@@ -185,4 +185,10 @@
     </plugins>
   </build>
 
+  <parent>
+  	<groupId>esiag.isiad.kmk</groupId>
+  	<artifactId>kmk-parent</artifactId>
+  	<version>1.0</version>
+  	<relativePath>..</relativePath>
+  </parent>
 </project>

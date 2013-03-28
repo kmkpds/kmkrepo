@@ -10,22 +10,21 @@ package kamikaze.esb.model;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java class for EventType complex type.
+ * <p>Java class for LibelleEventType complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType name="EventType">
+ * &lt;complexType name="LibelleEventType">
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
- *       &lt;sequence>
- *         &lt;element name="libelleEventType" type="{http://www.example.org/Event}LibelleEventType"/>
- *       &lt;/sequence>
+ *       &lt;attribute name="libelleEventType" type="{http://www.w3.org/2001/XMLSchema}string" />
+ *       &lt;attribute name="id" type="{http://www.w3.org/2001/XMLSchema}int" />
  *     &lt;/restriction>
  *   &lt;/complexContent>
  * &lt;/complexType>
@@ -34,23 +33,23 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "EventType", propOrder = {
-    "libelleEventType"
-})
-public class EventType {
+@XmlType(name = "LibelleEventType")
+public class LibelleEventType {
 
-    @XmlElement(required = true)
-    protected LibelleEventType libelleEventType;
+    @XmlAttribute
+    protected String libelleEventType;
+    @XmlAttribute
+    protected Integer id;
 
     /**
      * Gets the value of the libelleEventType property.
      * 
      * @return
      *     possible object is
-     *     {@link LibelleEventType }
+     *     {@link String }
      *     
      */
-    public LibelleEventType getLibelleEventType() {
+    public String getLibelleEventType() {
         return libelleEventType;
     }
 
@@ -59,11 +58,35 @@ public class EventType {
      * 
      * @param value
      *     allowed object is
-     *     {@link LibelleEventType }
+     *     {@link String }
      *     
      */
-    public void setLibelleEventType(LibelleEventType value) {
+    public void setLibelleEventType(String value) {
         this.libelleEventType = value;
+    }
+
+    /**
+     * Gets the value of the id property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link Integer }
+     *     
+     */
+    public Integer getId() {
+        return id;
+    }
+
+    /**
+     * Sets the value of the id property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link Integer }
+     *     
+     */
+    public void setId(Integer value) {
+        this.id = value;
     }
 
 }

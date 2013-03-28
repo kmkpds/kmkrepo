@@ -15,14 +15,15 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java class for capteur complex type.
+ * <p>Java class for LibelleIncidentCritique complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType name="capteur">
+ * &lt;complexType name="LibelleIncidentCritique">
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
+ *       &lt;attribute name="libelleIncidentCritique" type="{http://www.w3.org/2001/XMLSchema}string" />
  *       &lt;attribute name="id" type="{http://www.w3.org/2001/XMLSchema}int" />
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -32,11 +33,37 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "capteur")
-public class Capteur {
+@XmlType(name = "LibelleIncidentCritique")
+public class LibelleIncidentCritique {
 
     @XmlAttribute
+    protected String libelleIncidentCritique;
+    @XmlAttribute
     protected Integer id;
+
+    /**
+     * Gets the value of the libelleIncidentCritique property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getLibelleIncidentCritique() {
+        return libelleIncidentCritique;
+    }
+
+    /**
+     * Sets the value of the libelleIncidentCritique property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setLibelleIncidentCritique(String value) {
+        this.libelleIncidentCritique = value;
+    }
 
     /**
      * Gets the value of the id property.

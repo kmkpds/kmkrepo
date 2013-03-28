@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.example.org/Event" xmlns:tns="http://www.example.org/Event" elementFormDefault="qualified">
+
+
+
+
+    <complexType name="IncSimpleMessage">
+    	<sequence>
+    		<element name="type" type="tns:IncidentSimple"></element>
+    		<element name="location" type="tns:Sujet"></element>
+    	</sequence>
+    	<attribute name="id" type="int"></attribute>
+    </complexType>
+
+
+
+
+
+
+    <complexType name="EventMessage">
+    	<sequence>
+    		<element name="type" type="tns:EventType" maxOccurs="1"></element>
+    	</sequence>
+    	<attribute name="id" type="int"></attribute>
+    </complexType>
+
+
+    <complexType name="EventType">
+    	<sequence>
+    		<element name="libelleEventType" type="tns:LibelleEventType" maxOccurs="1"></element>
+    	</sequence>
+    </complexType>
+
+    <complexType name="IncidentSimple">
+    	<sequence>
+    		<element name="libelleIncidentSimple"
+    			type="tns:LibelleIncidentSimple">
+    		</element>
+    	</sequence>
+    	<attribute name="id" type="int"></attribute>
+    </complexType>
+
+    <complexType name="Sujet">
+    	<choice>
+    		<element name="ligne" type="tns:ligne"></element>
+    		<element name="wagon" type="tns:wagon"></element>
+    		<element name="canton" type="tns:canton"></element>
+    		<element name="station" type="tns:station"></element>
+    		<element name="troncon" type="tns:troncon"></element>
+    		<element name="train" type="tns:train"></element>
+    	</choice>
+
+    </complexType>
+
+    <complexType name="IncCritiqueMessage">
+    	<sequence>
+    		<element name="type" type="tns:IncidentCritique"></element>
+    		<element name="location" type="tns:Sujet"></element>
+    	</sequence>
+    	<attribute name="id" type="int"></attribute>
+    </complexType>
+
+    <complexType name="IncidentCritique">
+    	<sequence>
+    		<element name="libelleIncidentCritique"
+    			type="tns:LibelleIncidentCritique">
+    		</element>
+    	</sequence>
+    	<attribute name="id" type="int"></attribute>
+    	<attribute name="criticite" type="int"></attribute>
+    </complexType>
+
+
+
+
+    <complexType name="LibelleIncidentCritique">
+    	<attribute name="libelleIncidentCritique" type="string"></attribute>
+    	<attribute name="id" type="int"></attribute>
+    </complexType>
+
+    <complexType name="LibelleIncidentSimple">
+    	<attribute name="libelleIncidentSimple" type="string"></attribute>
+    	<attribute name="id" type="int"></attribute>
+    </complexType>
+
+    <complexType name="LibelleEventType">
+    	<attribute name="libelleEventType" type="string"></attribute>
+    	<attribute name="id" type="int"></attribute>
+    </complexType>
+
+
+    <element name="envoiEventMessage">
+    	<complexType>
+    		<sequence>
+    			<element name="eventmess" type="tns:EventMessage" maxOccurs="unbounded"></element>
+    		</sequence>
+    	</complexType>
+    </element>
+
+    <element name="envoiIncCritiqueMessage">
+    	<complexType>
+    		<sequence>
+    			<element name="critiquemessage" type="tns:IncCritiqueMessage" maxOccurs="unbounded"></element>
+    		</sequence>
+    	</complexType>
+    </element>
+
+    <element name="envoiIncSimpleMessage">
+    	<complexType>
+    		<sequence>
+    			<element name="simpleMessage" type="tns:IncSimpleMessage" maxOccurs="unbounded"></element>
+    		</sequence>
+    	</complexType>
+    </element>
+
+    <complexType name="ligne">
+    	<sequence>
+    		<element name="listeTrains" type="tns:train"
+    			maxOccurs="unbounded">
+    		</element>
+    		<element name="listeTroncons" type="tns:troncon" maxOccurs="unbounded"></element>
+    	</sequence>
+    	<attribute name="id" type="int"></attribute>
+    	<attribute name="nom" type="string"></attribute>
+    	<attribute name="heurePremierTrain" type="time"></attribute>
+    	<attribute name="heureDernierTrain" type="time"></attribute>
+    	<attribute name="capaciteCirculation" type="double"></attribute>
+    	<attribute name="nombreCanton" type="double"></attribute>
+    	<attribute name="kilometrageTotal" type="float"></attribute>
+    	<attribute name="commentaireLigne" type="string"></attribute>
+    	<attribute name="capaciteMaxDeVoyageur" type="double"></attribute>
+    </complexType>
+
+    <complexType name="troncon">
+    	<sequence>
+    		<element name="StationDepart" type="tns:station"></element>
+            <element name="StationArrivee" type="tns:station"></element>
+            <element name="listeCantons" type="tns:canton"
+    			maxOccurs="unbounded">
+    		</element>
+    	</sequence>
+    	<attribute name="id" type="int"></attribute>
+    	<attribute name="taille" type="float"></attribute>
+    </complexType>
+
+    <complexType name="station">
+    	<sequence>
+    		<element name="capteur" type="tns:capteur" maxOccurs="unbounded"></element>
+    	</sequence>
+    	<attribute name="id" type="int"></attribute>
+    	<attribute name="nom" type="string"></attribute>
+    </complexType>
+
+    <complexType name="wagon">
+    	<sequence>
+    		<element name="capteur" type="tns:capteur"
+    			maxOccurs="unbounded">
+    		</element>
+    		<element name="train" type="tns:train"></element>
+    		<element name="typewagon" type="tns:typewagon"></element>
+    	</sequence>
+    	<attribute name="id" type="int"></attribute>
+    </complexType>
+
+    <complexType name="canton">
+    	<sequence>
+    		<element name="capteur" type="tns:capteur"
+    			maxOccurs="unbounded">
+    		</element>
+    	</sequence>
+    	<attribute name="id" type="int"></attribute>
+    	<attribute name="longueur" type="int"></attribute>
+    	<attribute name="latitude" type="double"></attribute>
+    	<attribute name="longitude" type="double"></attribute>
+    </complexType>
+
+    <complexType name="train">
+    	<sequence>
+    		<element name="capteur" type="tns:capteur"
+    			maxOccurs="unbounded">
+    		</element>
+    		<element name="position" type="tns:canton"></element>
+    	</sequence>
+    	<attribute name="id" type="int"></attribute>
+    	<attribute name="nom" type="string"></attribute>
+    </complexType>
+
+    <complexType name="capteur">
+    	<attribute name="id" type="int"></attribute>
+    </complexType>
+
+    <complexType name="typewagon"></complexType>
+
+    <element name="MockInfoTrafic">
+    	<complexType>
+    		<sequence>
+    			<element name="ligne" type="tns:ligne" maxOccurs="unbounded"></element>
+    		</sequence>
+    	</complexType>
+    </element>
+
+    <element name="envoiInfoTraficToSI">
+    	<complexType>
+    		<sequence>
+    			<element name="listeLignes" type="tns:ligne" maxOccurs="unbounded"></element>
+    		</sequence>
+    	</complexType>
+    </element>
+
+    <element name="envoiEventMessageToSI">
+    	<complexType>
+    		<sequence>
+    			<element name="eventmessage" type="tns:EventMessage" maxOccurs="unbounded"></element>
+    		</sequence>
+    	</complexType>
+    </element>
+
+    <element name="envoiIncCritiqueMessageToSI">
+    	<complexType>
+    		<sequence>
+    			<element name="critiquemessage" type="tns:IncCritiqueMessage" maxOccurs="unbounded"></element>
+    		</sequence>
+    	</complexType>
+    </element>
+
+    <element name="envoiIncSimpleMessageToSI">
+    	<complexType>
+    		<sequence>
+    			<element name="simplemessage" type="tns:IncSimpleMessage" maxOccurs="unbounded"></element>
+    		</sequence>
+    	</complexType>
+    </element>
+</schema>

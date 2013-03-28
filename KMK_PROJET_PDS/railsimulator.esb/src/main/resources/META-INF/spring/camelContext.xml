@@ -19,10 +19,10 @@
 		Voir dans la classe ce qu'elle fait.
 		-->
 	<camelContext id="camelcontext" xmlns="http://camel.apache.org/schema/spring">
-    <routeBuilder ref="testOrchestration"/>
+    <routeBuilder ref="Orchestration"/>
 </camelContext>
 
 	<!-- Définition des beans -->
-	<bean id="testOrchestration" class="kamikaze.esb.testOrchestration.Orchestration" />
+	<bean id="Orchestration" class="kamikaze.esb.Orchestration.Orchestration" />
 	<!--bean id="testOrchestration" class="kamikaze.esb.bean.OrchestrerMessage" />-->
 </beans>

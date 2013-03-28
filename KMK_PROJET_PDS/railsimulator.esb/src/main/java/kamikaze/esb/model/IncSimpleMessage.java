@@ -8,8 +8,6 @@
 
 package kamikaze.esb.model;
 
-import java.util.ArrayList;
-import java.util.List;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
@@ -18,18 +16,17 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java class for wagon complex type.
+ * <p>Java class for IncSimpleMessage complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType name="wagon">
+ * &lt;complexType name="IncSimpleMessage">
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="capteur" type="{http://www.example.org/Event}capteur" maxOccurs="unbounded"/>
- *         &lt;element name="train" type="{http://www.example.org/Event}train"/>
- *         &lt;element name="typewagon" type="{http://www.example.org/Event}typewagon"/>
+ *         &lt;element name="type" type="{http://www.example.org/Event}IncidentSimple"/>
+ *         &lt;element name="location" type="{http://www.example.org/Event}Sujet"/>
  *       &lt;/sequence>
  *       &lt;attribute name="id" type="{http://www.w3.org/2001/XMLSchema}int" />
  *     &lt;/restriction>
@@ -40,97 +37,65 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "wagon", propOrder = {
-    "capteur",
-    "train",
-    "typewagon"
+@XmlType(name = "IncSimpleMessage", propOrder = {
+    "type",
+    "location"
 })
-public class Wagon {
+public class IncSimpleMessage {
 
     @XmlElement(required = true)
-    protected List<Capteur> capteur;
+    protected IncidentSimple type;
     @XmlElement(required = true)
-    protected Train train;
-    @XmlElement(required = true)
-    protected Typewagon typewagon;
+    protected Sujet location;
     @XmlAttribute
     protected Integer id;
 
     /**
-     * Gets the value of the capteur property.
-     * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the capteur property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getCapteur().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Capteur }
-     * 
-     * 
-     */
-    public List<Capteur> getCapteur() {
-        if (capteur == null) {
-            capteur = new ArrayList<Capteur>();
-        }
-        return this.capteur;
-    }
-
-    /**
-     * Gets the value of the train property.
+     * Gets the value of the type property.
      * 
      * @return
      *     possible object is
-     *     {@link Train }
+     *     {@link IncidentSimple }
      *     
      */
-    public Train getTrain() {
-        return train;
+    public IncidentSimple getType() {
+        return type;
     }
 
     /**
-     * Sets the value of the train property.
+     * Sets the value of the type property.
      * 
      * @param value
      *     allowed object is
-     *     {@link Train }
+     *     {@link IncidentSimple }
      *     
      */
-    public void setTrain(Train value) {
-        this.train = value;
+    public void setType(IncidentSimple value) {
+        this.type = value;
     }
 
     /**
-     * Gets the value of the typewagon property.
+     * Gets the value of the location property.
      * 
      * @return
      *     possible object is
-     *     {@link Typewagon }
+     *     {@link Sujet }
      *     
      */
-    public Typewagon getTypewagon() {
-        return typewagon;
+    public Sujet getLocation() {
+        return location;
     }
 
     /**
-     * Sets the value of the typewagon property.
+     * Sets the value of the location property.
      * 
      * @param value
      *     allowed object is
-     *     {@link Typewagon }
+     *     {@link Sujet }
      *     
      */
-    public void setTypewagon(Typewagon value) {
-        this.typewagon = value;
+    public void setLocation(Sujet value) {
+        this.location = value;
     }
 
     /**
