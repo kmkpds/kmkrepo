@@ -3,6 +3,7 @@ package beans;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -13,6 +14,10 @@ import javax.persistence.OneToMany;
 import java.util.List;
 
 
+/**
+ * @author Nytos
+ *
+ */
 @Entity
 @Table(name="zone")
 
@@ -31,7 +36,7 @@ public class Zone {
 	private Float surfaceZone;
 	@OneToMany(mappedBy="zone")
 	private List<Lieu> lieulist;
-	@OneToMany(mappedBy="zone")
+	@OneToMany(fetch=FetchType.EAGER,mappedBy="zone")
 	private List<Geolocalisation> geolocalisationlist;
 	@ManyToOne(
 		cascade={CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH}
