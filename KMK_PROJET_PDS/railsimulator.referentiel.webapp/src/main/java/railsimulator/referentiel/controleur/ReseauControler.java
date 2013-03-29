@@ -1,6 +1,8 @@
+
 package railsimulator.referentiel.controleur;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -14,26 +16,50 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import railsimulator.tools.Algo;
+import railsimulator.tools.AlgoCreationReseau;
 
+import dao.GeolocalisationDAO;
+import dao.LieuDAO;
 import dao.LigneDAO;
 import dao.ReseauDAO;
-import dao.ReseauDAO;
 import dao.StationDAO;
+import dao.ZoneDAO;
 
 
+import beans.Geolocalisation;
+import beans.Lieu;
+import beans.Reseau;
 import beans.Station;
+import beans.Zone;
 
 public class ReseauControler extends HttpServlet {
-
+	
 	private List<Station> listeStation;
+	private List<Reseau> listeReseau;
+	private List<Zone> listeZone;
 	private StationDAO station_dao = new StationDAO();
+	 
+	
+
+	
+	private Reseau reseau = new Reseau ();
+	private Zone zone = new Zone();
+	private Geolocalisation geolocalisation = new Geolocalisation() ;
+	private Lieu lieu = new Lieu();
 	private ReseauDAO reseau_dao = new ReseauDAO();
 	private LigneDAO ligne_dao = new LigneDAO();
+	private LieuDAO lieu_dao = new LieuDAO();
+	private ZoneDAO zone_dao = new ZoneDAO();
+	private GeolocalisationDAO geolocalisation_dao = new GeolocalisationDAO();
+	
+	
 	
 	public void doGet( HttpServletRequest request, HttpServletResponse response ) throws ServletException, IOException{
 
 
 		String action = request.getParameter("action");
+		
+	
 	
 		if(action.equals("visualisationReseau")){
 			
@@ -44,6 +70,23 @@ public class ReseauControler extends HttpServlet {
 			this.getServletContext().getRequestDispatcher( "/WEB-INF/visualisationReseau.jsp").forward( request, response );
 		}
 
+		
+		
+		 
+		if(action.equals("creerReseau")){
+			
+			listeReseau= reseau_dao.listerReseau();
+			request.logout();
+			request.setAttribute("listeReseau",listeReseau);
+			
+			this.getServletContext().getRequestDispatcher( "/WEB-INF/creeationReseau.jsp").forward( request, response );
+		}
+
+		if(action.equals("definirReseau")){
+			request.logout();
+			this.getServletContext().getRequestDispatcher( "/WEB-INF/geolocaliser.jsp").forward( request, response );
+		}
+		
 		
 		if(action.equals("algo")){
 			
@@ -106,6 +149,7 @@ public class ReseauControler extends HttpServlet {
 		}
 		
 		if(action.equals("purger")){
+	
 			
 			Session se = null;
 			se = HibernateUtils.getSession();
@@ -160,5 +204,140 @@ public class ReseauControler extends HttpServlet {
 		
 		
 	}
+	
+	
+	
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+
+		String action = request.getParameter("action");
+
+		if(action.equals("AjoutZone")){
+
+
+			// String latitude = request.getParameter("latitudeZone");
+
+
+			int nbrha = Integer.parseInt(request.getParameter("NbrHabt"));
+		
+			int nbr = Integer.parseInt(request.getParameter("NbrMaxStation"));
+		
+			float surfac = Float.parseFloat(request.getParameter("Surface"));
+			
+			int  idreseau = Integer.parseInt(request.getParameter("idReseau"));
+			
+			Double latitude = Double.parseDouble(request.getParameter("latitudeZone"));
+			Double longitude = Double.parseDouble(request.getParameter("longitudeZone"));
+			Double latitudeb = Double.parseDouble(request.getParameter("latitudeZoneB"));
+			Double longitudeb = Double.parseDouble(request.getParameter("longitudeZoneB"));
+			
+			
+			//Verification si une zone existe dans la base avec les meme geolocalisation
+			List<Zone>  listeZone = zone_dao.listerZone();
+			boolean isZoneExist = false;
+			for(int y=0;y<listeZone.size();y++){
+				Geolocalisation g1 = listeZone.get(y).getGeolocalisationlist().get(0);
+				Geolocalisation g2 = listeZone.get(y).getGeolocalisationlist().get(1);
+				if(g1.getLatitudeGeolocalisation() == latitude && g1.getLongitudeGeolocalisation() == longitude
+						&& g2.getLatitudeGeolocalisation() == latitudeb && g2.getLongitudeGeolocalisation() == longitudeb){
+					isZoneExist = true;
+					break;
+				}	
+			} //Fin
+			
+			
+			/*Remplissage du tableauGeolocalisation
+			List<Zone>  listeZone = zone_dao.listerZone();
+			List<double[]> tableauGeolocalisation = new ArrayList<double[]>();
+			for(int y=0;y<listeZone.size();y++){
+				Geolocalisation g1 = listeZone.get(y).getGeolocalisationlist().get(0);
+				Geolocalisation g2 = listeZone.get(y).getGeolocalisationlist().get(1);
+				//tableauGeolocalisation.add(new double[] {g1.getLatitudeGeolocalisation(), g2.getLatitudeGeolocalisation(), g1.getLongitudeGeolocalisation(), g2.getLongitudeGeolocalisation()});
+							
+			}
+			
+						
+		  /*	AlgoCreationReseau algoReseau = new AlgoCreationReseau();
+			boolean verifierDistanceZone = true;
+			if (tableauGeolocalisation.size()!=0){
+				verifierDistanceZone = algoReseau.getDistanceZone(latitude, latitudeb, longitude, longitudeb, tableauGeolocalisation);
+			}
+			
+			if(verifierDistanceZone == true){*/
+			
+			if(isZoneExist == false){
+			reseau=reseau_dao.getReseauByID(idreseau);
+			int idzone = zone_dao.createZonereturn(nbrha, nbr, surfac ,reseau);
+			
+			zone=zone_dao.getZoneByID(idzone);
+		
+			geolocalisation_dao.createGeolocalisation(latitude, longitude , zone);
+			geolocalisation_dao.createGeolocalisation(latitudeb, longitudeb, zone);
+			listeZone=zone_dao.listerZone();
+			listeReseau= reseau_dao.listerReseau();
+			
+			request.logout();
+			request.setAttribute("listeZone",listeZone);
+			request.setAttribute("listeReseau",listeReseau);
+			this.getServletContext().getRequestDispatcher("/WEB-INF/creeationReseau.jsp").forward( request, response );
+
+			}else{
+			
+				request.logout();
+				List<String> errorsMessage = new ArrayList<String>();
+				errorsMessage.add("Cette zone existe dËja");
+				request.setAttribute("errorsMessage",errorsMessage);
+				this.getServletContext().getRequestDispatcher("/WEB-INF/creeationReseau.jsp").forward( request, response );
+	
+		    }
+						
+			/*}else{
+				
+				System.out.println("Désolé, cette zone est trop proche d'une zone existance. Merci d'en créer une nouvelle.");
+			}*/
+		}
+		
+				
+		
+		if(action.equals("AjoutLieu")){
+			Double latitudelieu = Double.parseDouble(request.getParameter("latitudeLieu"));
+			Double longitudelieu = Double.parseDouble(request.getParameter("longitudeLieu"));	
+			String nomLieu = request.getParameter("nomLieu");
+	     	String typeLieu=request.getParameter("typeLieu");
+	     	int  idzone = Integer.parseInt(request.getParameter("idZone"));
+			zone=zone_dao.getZoneByID(idzone);
+		
+           lieu_dao.createlieu(latitudelieu, longitudelieu, nomLieu, typeLieu, zone);
+		}
+
+		if(action.equals("CreerReseau")){
+			String nomReseau = request.getParameter("reseau");	
+			reseau_dao.createReseau(nomReseau);
+			request.logout();
+			listeReseau= reseau_dao.listerReseau();
+			request.logout();
+			request.setAttribute("listeReseau",listeReseau);
+			this.getServletContext().getRequestDispatcher("/WEB-INF/creeationReseau.jsp").forward( request, response );
+
+		}
+	
+		if(action.equals("GenererReseau")){
+			
+			int idreseau = Integer.parseInt(request.getParameter("idReseau"));
+			reseau = reseau_dao.getReseauByID(idreseau);
+			AlgoCreationReseau algo = new AlgoCreationReseau();
+			Algo kruskal = new Algo();
+			algo.CreerReseau(reseau);
+			kruskal.stationToStation(algo.CreerReseau(reseau));
+			listeStation= station_dao.listerStation();
+
+			request.logout();
+			request.setAttribute("listeStation",listeStation);
+			this.getServletContext().getRequestDispatcher( "/WEB-INF/visualisationReseau.jsp").forward( request, response );
+		}
+	}	
+	
+	
+
 
 }

@@ -98,7 +98,7 @@ public class ReseauDAOTest extends TestCase {
 		
 	}
 	
-	/*public void testListerReseau(){
+	public void testListerReseau(){
 		
 		se = HibernateUtils.getSession();
 		Transaction t = se.beginTransaction(); 
@@ -147,7 +147,7 @@ public class ReseauDAOTest extends TestCase {
 		delete2.executeUpdate();
 		t3.commit();
 		se.close();
-	}*/
+	}
 	
 	
 	

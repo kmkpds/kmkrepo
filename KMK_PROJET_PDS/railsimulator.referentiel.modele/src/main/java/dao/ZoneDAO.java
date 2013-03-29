@@ -12,7 +12,7 @@ import beans.Zone;
 import beans.Lieu;
 
 
-public class ZoneDao {
+public class ZoneDAO {
 	
 	private Session se = null;
 	private List<Zone> listeZone;
@@ -20,7 +20,7 @@ public class ZoneDao {
 	
 	
 
-	public ZoneDao() {
+	public ZoneDAO() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
@@ -40,6 +40,26 @@ public class ZoneDao {
 		
 	     t.commit();
 	     se.close();
+	}
+	
+	public  int  createZonereturn(Integer nombreHabitantsParZone , Integer nombreMaxDeStationParZone ,Float surfaceZone , Reseau reseau ) {
+	      
+		 
+		 se = HibernateUtils.getSession();
+	     Transaction t = se.beginTransaction();
+	     Zone zone = new Zone();
+	     zone.setNombreHabitantsParZone(nombreHabitantsParZone);
+	     zone.setNombreMaxDeStationParZone(nombreMaxDeStationParZone);
+	     zone.setSurfaceZone(surfaceZone);
+	     zone.setReseau(reseau);
+	     
+		 int idZone = (Integer) se.save(zone);
+		
+	     t.commit();
+	     se.close();
+
+		return idZone;
+		
 	}
 	
 	public List<Zone> listerZone() {

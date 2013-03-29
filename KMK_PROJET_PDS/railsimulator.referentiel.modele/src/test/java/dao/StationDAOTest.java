@@ -15,7 +15,7 @@ import junit.framework.TestCase;
 public class StationDAOTest extends TestCase {
 	
 	/*
-	 * Test Unitaire de ligne DAO
+	 * Test Unitaire de station DAO
 	 */
 
 
@@ -35,7 +35,7 @@ public class StationDAOTest extends TestCase {
 		
 		
 		/*
-		 * Test de la méthode createLigne
+		 * Test de la méthode createStation
 		 */
 
 		public void testCreateStation(){

@@ -9,13 +9,13 @@ import beans.Zone;
 
 
 
-public class LieuDao {
+public class LieuDAO {
 
 	private Session se = null;
 	private List<Lieu> listeLieu;
 	private Lieu lieu;
 
-	public LieuDao() {
+	public LieuDAO() {
 		// TODO Auto-generated constructor stub
 	}
 

@@ -9,14 +9,14 @@ import beans.Zone;
 import beans.Geolocalisation;
 
 
-public class GeolocalisationDao {
+public class GeolocalisationDAO {
 
 	private Session se = null;
 	private List<Geolocalisation> listeGeolocalisation;
 	private Geolocalisation geolocalisation;
 
 
-	public GeolocalisationDao() {
+	public GeolocalisationDAO() {
 		// TODO Auto-generated constructor stub
 	}
 

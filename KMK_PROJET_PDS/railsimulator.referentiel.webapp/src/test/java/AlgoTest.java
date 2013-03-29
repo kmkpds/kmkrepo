@@ -9,7 +9,7 @@ public class AlgoTest extends TestCase {
 			                             {"0","652"},
 			                             {"652","0"},};
 	
-	private int[] tabDistance = {0,652,0,652};
+	private double[] tabDistance = {0,652,0,652};
 	
 	private int index;
 	
@@ -19,7 +19,7 @@ public class AlgoTest extends TestCase {
 	public void testGetMatriceIncidence(){
 
 		
-		int [][] matriceIncidence = algo.getMatriceIncidence(reseauMatrice);
+		double [][] matriceIncidence = algo.getMatriceIncidence(reseauMatrice);
 
         if(matriceIncidence[0][0]==0 && matriceIncidence[0][1]==652 && matriceIncidence[1][0]==652 && matriceIncidence[1][1 ]==0   ){
         	
@@ -29,7 +29,7 @@ public class AlgoTest extends TestCase {
 			test=false;
 
 		}
-		
+        assertTrue(test);
 
 	}
 	
@@ -64,7 +64,16 @@ public class AlgoTest extends TestCase {
 			test=false;
 
 		}
+        assertTrue(test);
        
+    }
+    
+    public void testStationTostation(){
+    	
+
+    	
+    	
+    	
     }
 
 }

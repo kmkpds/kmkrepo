@@ -17,17 +17,18 @@ public class Algo {
 	 * Création Matrice reseau incidence
 	 */
 
-	public int [][] getMatriceIncidence( String reseauMatrice[][]) {
+	public double [][] getMatriceIncidence( String reseauMatrice[][]) {
 		
 		
-		int [][] matriceIncidence = new int[reseauMatrice[0].length][reseauMatrice[0].length] ;
+		double [][] matriceIncidence = new double[reseauMatrice[0].length][reseauMatrice[0].length] ;
 		int ligne = 0;
 		
 		for(int i=1 ; i<= reseauMatrice[0].length ; i++) {
 			for(int j=0 ; j< reseauMatrice[0].length ; j++) {
 		        
-				matriceIncidence [ligne][j] = Integer.parseInt( reseauMatrice [i][j]);
-				
+			//	matriceIncidence [ligne][j] = Integer.parseInt( reseauMatrice [i][j]);
+				matriceIncidence [ligne][j] = Double.parseDouble( reseauMatrice [i][j]);
+
 		
 			}
 			
@@ -62,9 +63,9 @@ public class Algo {
 
 
 
-    public int getIndexMinPoids(int[] matrice) {
+    public int getIndexMinPoids(double[] matrice) {
         int n       = matrice.length;
-        int min     = Integer.MAX_VALUE;
+        double min     = Integer.MAX_VALUE;
         int index   = -1;
 
         for(int i=0 ; i<n ; i++) {
@@ -84,7 +85,7 @@ public class Algo {
     
 	public void stationToStation(String reseauMatrice[][]) {
 		
-		int matriceIncidence[][] = getMatriceIncidence(reseauMatrice);
+		double matriceIncidence[][] = getMatriceIncidence(reseauMatrice);
 		int nomStation[] =  getMatriceNomStation(reseauMatrice);
 	
 		
@@ -92,11 +93,13 @@ public class Algo {
 		 int n = matriceIncidence.length;
 
 		
-         int[] tabDistance = new int[n*n];
+         double[] tabDistance = new double[n*n];
          int index = -2;
          int row, col, rowListe, colListe, rowIndex, colIndex;
          boolean erreur;
 
+         
+         // array de stockage des arcs optimaux
          ArrayList<Integer> res = new ArrayList<Integer>();
 
 
@@ -161,7 +164,7 @@ public class Algo {
 		
 		
 		
-		// AFFICHAGE DU RESULTAT
+		//Enregistrement
         System.out.println("\n\n=== Kruscal : arbre couvrant minimal ===");
         for(int nb : res) {
             row = nb/n;

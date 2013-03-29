@@ -5,7 +5,6 @@ import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
-import beans.Canton;
 import beans.Ligne;
 import beans.Station;
 
@@ -34,6 +33,24 @@ public class StationDAO {
 	     se.close();
 	}
     
+    public  int createStationReturnId(String nomStation , String commentaireStation, double latitude, double longitude, Ligne ligne) {
+	      
+		 
+		 se = HibernateUtils.getSession();
+	     Transaction t = se.beginTransaction();
+	    
+	     
+	     station.setNomStation(nomStation);
+	     station.setCommentaireStation(commentaireStation);
+	     station.setLatitude(latitude);
+	     station.setLongitude(longitude);
+	     station.setLigne(ligne);
+	     int idStation = (Integer) se.save(station);		
+	     t.commit();
+	     se.close();
+	     return idStation;
+	}
+    
     public  void createStationToStation(Station station1, Station station2) {
 	      
      
@@ -42,16 +59,21 @@ public class StationDAO {
     	 Transaction tr=se.beginTransaction(); 
     	 
 		 List<Station> listStation = station1.getStationAller();
+       	     	
 		 listStation.add(station2);		
 		 List<Station> listStation2 = station2.getStationAller();
+		 
 		 listStation2.add(station1);
+	
 	
          station1.setStationAller(listStation);
     	 station2.setStationAller(listStation2);
-    
+    	 //station1.setStationRetour(listStation);
+    	// station2.setStationRetour(listStation2);
 
-	     se.update(station1);
-	     se.update(station2);
+	     se.merge(station1);
+	     se.merge(station2);
+	
 
     	 tr.commit();
     	 se.close();

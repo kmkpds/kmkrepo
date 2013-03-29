@@ -6,13 +6,11 @@ import org.hibernate.Transaction;
 import beans.Ligne;
 import beans.Reseau;
 
-
 public class LigneDAO {	
 	
 	private Session se = null;
 	private List<Ligne> listeLigne;
     private Ligne ligne;
-   
 
     
     
@@ -20,23 +18,32 @@ public class LigneDAO {
 	      
 		 
 		se = HibernateUtils.getSession();
-		
 	     Transaction t = se.beginTransaction();
 	     Ligne ligne = new Ligne();
 	     ligne.setNomLigne(nomLigne);
-	     ligne.setCommentaire(commentaireLigne);
+	     ligne.setCommentaire(commentaireLigne); 
 	     ligne.setReseau(reseau);
-	   
-	      
-	      
 	     se.save(ligne);
-		
 		
 	     t.commit();
 	     se.close();
 	}
 	
-	
+	public int createLigneReturnId(String nomLigne , String commentaireLigne, Reseau reseau){
+		 
+		se = HibernateUtils.getSession();
+	    Transaction t = se.beginTransaction();
+	    Ligne ligne = new Ligne();
+	    ligne.setNomLigne(nomLigne);
+	    ligne.setCommentaire(commentaireLigne); 
+	    ligne.setReseau(reseau);
+	    int idLigne = (Integer) se.save(ligne);
+			
+	     t.commit();
+	     se.close();
+
+		return idLigne;
+	}
 	public List<Ligne> listerLigne() {
     	se = HibernateUtils.getSession();
     	se.beginTransaction();  	 	
@@ -75,6 +82,7 @@ public class LigneDAO {
     	se.update(ligne);
     	tr.commit();
     	se.close();
+    	 
     }
 	
 	
