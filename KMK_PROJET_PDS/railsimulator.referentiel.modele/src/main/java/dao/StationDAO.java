@@ -71,8 +71,8 @@ public class StationDAO {
     	 //station1.setStationRetour(listStation);
     	// station2.setStationRetour(listStation2);
 
-	     se.merge(station1);
-	     se.merge(station2);
+	     se.update(station1);
+	     se.update(station2);
 	
 
     	 tr.commit();
