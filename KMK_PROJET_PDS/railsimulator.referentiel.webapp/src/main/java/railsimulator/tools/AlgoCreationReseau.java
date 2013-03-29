@@ -2,6 +2,7 @@ package railsimulator.tools;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
+
 import beans.Reseau;
 import beans.Geolocalisation;
 import beans.Zone;
@@ -212,16 +213,16 @@ public class AlgoCreationReseau {
 		distanceV = getDistancePol(LatMin, LatMax, LongMin, LongMin);
 		distanceH = getDistancePol(LatMin, LatMin, LongMin, LongMax);
 		double distLong = 0.0, distLat = 0.0;
-		//System.out.println("Distance entre les extrŽmitŽs ==> " + distanceExtremite);
+		//System.out.println("Distance entre les extrÅ½mitÅ½s ==> " + distanceExtremite);
 		if(nbStation == 1){
 			/* FORMAT DE PLACEMENT DES STATIONS
-			 * 	|-----------------------|
-			 *  |                 	 	|
-			 *  |		   S1			|	
-			 *  |						|
-			 *  |-----------------------|
+			  	|-----------------------|
+			   |                 	 	|
+			   |		   S1			|	
+			   |						|
+			   |-----------------------|
 			 */
-			System.out.println("CrŽation d'une station");
+			System.out.println("CrÅ½ation d'une station");
 			Lat = 0.0;
 			Long = 0.0; 
 			/*for(int j=0; j < geolocalisationlist.size(); j++){
@@ -241,26 +242,26 @@ public class AlgoCreationReseau {
 		else{
 			if(nbStation == 2){
 				/* FORMAT DE PLACEMENT DES STATIONS
-				 * 	|-----------------------|
-				 *  |                 S1 	|
-				 *  |						|	
-				 *  |	S2					|
-				 *  |-----------------------|
-				 *  <600 = 1 station
-				 *  600<= 1200 = aux extrŽmitŽs
-				 *  > 1200 = milieu des demi-diagonale
+				  	|-----------------------|
+				   |                 S1 	|
+				   |						|	
+				   |	S2					|
+				   |-----------------------|
+				   <600 = 1 station
+				   600<= 1200 = aux extrÅ½mitÅ½s
+				   > 1200 = milieu des demi-diagonale
 				 */
-				System.out.println("CrŽation de deux stations");
+				System.out.println("CrÅ½ation de deux stations");
 				if(distanceExtremite<6.0){
-					System.out.println("DŽsolŽ : La distance maximum possible entre deux points ne permet pas de placer plus d'une station sur cette zone");
-					System.out.println("Une seule station est crŽŽe pour cette zone");
+					System.out.println("DÅ½solÅ½ : La distance maximum possible entre deux points ne permet pas de placer plus d'une station sur cette zone");
+					System.out.println("Une seule station est crÅ½Å½e pour cette zone");
 					PlacerStation(zone, i, 1);
 				}
 				else{
 					if(distanceExtremite<=1.2){
 						geo1.setLatitudeGeolocalisation(LatMin);
 						geo1.setLongitudeGeolocalisation(LongMin);
-						name = "Station" +res.getNomReseau()+"_"+i+"_1/2";
+						name = "Station" + res.getNomReseau()+"_"+i+"_1/2";
 						CreerStation(geo1, name);
 						geo2.setLatitudeGeolocalisation(LatMax);
 						geo2.setLongitudeGeolocalisation(LongMax);
@@ -294,13 +295,13 @@ public class AlgoCreationReseau {
 					 *  | S1					|
 					 *  |-----------------------|
 					 *  <1200 = 1 station
-					 *  >=1200 et <2400 = S2 est au centre. S1 et S3 sont aux extrŽmitŽs
+					 *  >=1200 et <2400 = S2 est au centre. S1 et S3 sont aux extrÅ½mitÅ½s
 					 *  >= 2400 = S2 est au centre et S1 et S3 sont au milieu des demi-diagonale
 					 */
 					System.out.println("Placement de trois stations");
 					if(distanceExtremite<1.2){
-						System.out.println("DŽsolŽ : La distance maximum possible entre deux points ne permet pas de placer plus d'une station sur cette zone");
-						System.out.println("Une seule station est crŽŽe pour cette zone");
+						System.out.println("DÅ½solÅ½ : La distance maximum possible entre deux points ne permet pas de placer plus d'une station sur cette zone");
+						System.out.println("Une seule station est crÅ½Å½e pour cette zone");
 						PlacerStation(zone, i, 1);
 					}
 					else{
@@ -357,20 +358,20 @@ public class AlgoCreationReseau {
 				else{
 					if(nbStation == 4){
 						/* FORMAT DE PLACEMENT DES STATIONS
-						 * 	|-----------------------|
-						 *  | S1                 S2 |
-						 *  |		   				|	
-						 *  |						|
-						 *  | S3				 S4	|
-						 *  |-----------------------|
-						 *  Calcule des longueurs et largeurs du rectangle.
-						 *  Si longueur ou largeur infŽrieur ˆ 600 mtres --> on rappelle la mŽthode pour tenter de placer trois stations
-						 *  Si longueur et largeur supŽrieur ˆ 1200 mtres --> on calcule les positions en partant des extrŽmitŽs et en ajoutant/rŽduisant d'une quart de la longueur/largeur
-						 *  Sinon, on place les stations aux extrŽmitŽs
+						  	|-----------------------|
+						   | S1                 S2 |
+						   |		   				|	
+						   |						|
+						   | S3				 S4	|
+						   |-----------------------|
+						   Calcule des longueurs et largeurs du rectangle.
+						   Si longueur ou largeur infÅ½rieur Ë† 600 mÂ�tres --> on rappelle la mÅ½thode pour tenter de placer trois stations
+						   Si longueur et largeur supÅ½rieur Ë† 1200 mÂ�tres --> on calcule les positions en partant des extrÅ½mitÅ½s et en ajoutant/rÅ½duisant d'une quart de la longueur/largeur
+						   Sinon, on place les stations aux extrÅ½mitÅ½s
 						 */
 						System.out.println("Placement de quatre stations");
 						if(distanceH<6.0 | distanceV<6.0){
-							System.out.println("DŽsolŽ : La distance maximum possible entre deux points ne permet pas de placer 4 stations sur cette zone");
+							System.out.println("DÅ½solÅ½ : La distance maximum possible entre deux points ne permet pas de placer 4 stations sur cette zone");
 							System.out.println("Nous allons tenter de placer 3 stations");
 							PlacerStation(zone, i, 3);
 						}
@@ -418,16 +419,16 @@ public class AlgoCreationReseau {
 					else{
 						if(nbStation == 5){
 							/* FORMAT DE PLACEMENT DES STATIONS
-							 * 	|-----------------------|
-							 *  | S2                 S3 |
-							 *  |		   				|
-							 *  |		   S1			|
-							 *  |						|
-							 *  | S4				 S5	|
-							 *  |-----------------------|
-							 *  Les tests de placement de 3 et 4 stations sont appliquŽs : on vŽrifie les longueurs, largeurs et les diagonales.
-							 *  S1 est toujours au centre.
-							 *  Calcule sur base de carrŽ
+							  	|-----------------------|
+							   | S2                 S3 |
+							   |		   				|
+							   |		   S1			|
+							   |						|
+							   | S4				 S5	|
+							   |-----------------------|
+							   Les tests de placement de 3 et 4 stations sont appliquÅ½s : on vÅ½rifie les longueurs, largeurs et les diagonales.
+							   S1 est toujours au centre.
+							   Calcule sur base de carrÅ½
 							 */
 							System.out.println("Placement de cinq stations");
 							//double testDistance;
@@ -487,7 +488,7 @@ public class AlgoCreationReseau {
 								}
 							}
 							else{
-								System.out.println("Désolé : La distance maximum possible entre deux points ne permet pas de placer 5 stations sur cette zone");
+								System.out.println("DÃ©solÃ© : La distance maximum possible entre deux points ne permet pas de placer 5 stations sur cette zone");
 								System.out.println("Nous allons tenter de placer 4 stations");
 								PlacerStation(zone, i, 4);
 							}
@@ -507,7 +508,7 @@ public class AlgoCreationReseau {
 	/*
 	public double[] ModifierEmplacement(double latitude, double longitude, double lattest, double longtest, double latMax, double latMin, double longMax, double longMin){
 		double latTemp=0, longTemp=0;
-		double[] coordonnŽes = new double[2];
+		double[] coordonnÅ½es = new double[2];
 		if(latitude>lattest){
 			latTemp = latitude + 0.001;
 			if (latTemp <= latMax){
@@ -533,9 +534,9 @@ public class AlgoCreationReseau {
 				longitude = longTemp;
 			}
 		}
-		coordonnŽes[0] = latitude ;
-		coordonnŽes[1] = longitude;
-		return coordonnŽes;
+		coordonnÅ½es[0] = latitude ;
+		coordonnÅ½es[1] = longitude;
+		return coordonnÅ½es;
 	}
 	*/
 	/* === FIN DE LA MODIFICATION DE L'EMPLACEMENT === */
@@ -628,7 +629,7 @@ public class AlgoCreationReseau {
 	public boolean distancePointsMultiples(double lat1, double lat2, double lat3, double lat4, double long1, double long2 ,double long3 ,double long4) {
 		boolean check = true;
 		double distanceTmp;
-		//VŽrification entre les diffŽrents points des zones
+		//VÅ½rification entre les diffÅ½rents points des zones
 		distanceTmp = getDistancePol(lat1, lat3, long1, long3);
 		if (distanceTmp<0.6){
 			//System.out.println("1 - " + distanceTmp);
