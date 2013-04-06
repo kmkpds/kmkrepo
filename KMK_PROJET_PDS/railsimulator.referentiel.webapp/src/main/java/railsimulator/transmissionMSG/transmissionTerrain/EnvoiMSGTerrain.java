@@ -45,6 +45,7 @@ public class EnvoiMSGTerrain {
 		   new Producteur().ecrireMessage(messageXML);
 		  } catch (NamingException e) {
 		   e.printStackTrace();
+		   
 		  }		 
 	}
 }
