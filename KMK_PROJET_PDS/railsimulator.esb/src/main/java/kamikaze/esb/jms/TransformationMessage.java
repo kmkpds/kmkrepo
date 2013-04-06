@@ -7,12 +7,17 @@ import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.Marshaller;
 import javax.xml.validation.Schema;
 import javax.xml.validation.SchemaFactory;
-
 import org.xml.sax.SAXException;
-
 import java.io.File;
 import java.io.StringReader;
 import java.io.StringWriter;
+import org.apache.activemq.ActiveMQConnectionFactory;
+import javax.jms.ConnectionFactory;
+import javax.jms.Connection;
+import javax.jms.JMSException;
+
+import java.util.ResourceBundle;
+import javax.jms.Session;
 
 public class TransformationMessage {
 
@@ -24,21 +29,27 @@ public class TransformationMessage {
 	private Schema schema;
 	private String pathModel=null;
 	private String pathSchema=null;
+	ResourceBundle bundle  = ResourceBundle.getBundle("jndi");
+	
 	
 	public TransformationMessage(){
 		
 	}
 	
 	public TransformationMessage(String pathModel, String pathSchema){
-		this.pathModel = pathModel;
-		this.pathSchema = pathSchema;
-		init();
+		try {
+			this.pathModel = pathModel;
+			this.pathSchema = pathSchema;
+			init();
+		} catch (JMSException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 
-	public void init(){
+	public void init() throws JMSException{
 		try {
-
 			context = JAXBContext.newInstance(pathModel,this.getClass().getClassLoader());	
 				if (pathSchema == null){
 					march = context.createMarshaller();
