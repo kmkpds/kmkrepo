@@ -24,6 +24,12 @@
 		<mapping class="beans.Zone" />
 		<mapping class="beans.Lieu" />
 		<mapping class="beans.Geolocalisation" />
+		
+			<!-- Fichiers à mapper -->
+	<mapping class="beans.AnnonceVoyageur" />	
+		<mapping class="beans.Message" />
+		<mapping class="beans.Etape" />
+		<mapping class="beans.TypeAnnonce" />
 
 		<!-- Affiche les logs SQL -->
 		<!-- <property name="show_sql">true</property> -->

@@ -12,7 +12,11 @@
 		<servlet-name>ReseauControler</servlet-name>
 		<servlet-class>railsimulator.referentiel.controleur.ReseauControler</servlet-class>
 	</servlet>
-	
+		<!-- Transmission Terrain Controler -->
+	<servlet>
+		<servlet-name>TransmissionMessageTerrainControler</servlet-name>
+		<servlet-class>railsimulator.transmissionMSG.controleur.TransmissionMessageTerrainControler</servlet-class>
+	</servlet>
 	<servlet>
 		<servlet-name>VisualisationControler</servlet-name>
 		<servlet-class>railsimulator.visualisation.controleur.VisualisationControler</servlet-class>
@@ -33,5 +37,11 @@
 		<url-pattern>/visualiser</url-pattern>
 	</servlet-mapping>
 	
+
+	<!-- Mapping -->
+	<servlet-mapping>
+		<servlet-name>TransmissionMessageTerrainControler</servlet-name>
+		<url-pattern>/etape</url-pattern>
+	</servlet-mapping>
 	
 </web-app>

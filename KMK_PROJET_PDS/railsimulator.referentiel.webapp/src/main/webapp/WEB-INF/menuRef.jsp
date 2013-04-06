@@ -13,6 +13,9 @@
 		<li>
 			<a href="/kmk_ref_webapp/visualiser?action=visualiserTrafic">Visualisation Trafic</a>
 		</li>
+			<li>
+			<a href="/kmk_ref_webapp/etape?action=etape">Envoie de Message Au terrain</a>
+		</li>
 
 	</ul>
 </div>
