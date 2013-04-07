@@ -5,7 +5,7 @@ import javax.naming.NamingException;
 import javax.xml.bind.JAXBException;
 import org.apache.log4j.BasicConfigurator;
 import org.xml.sax.SAXException;
-import serialisationXML.XmlTransformer;
+import railsimulator.transmissionMSG.serialisationXML.XmlTransformer;
 import beans.AnnonceVoyageur;
 import communicationJMS.Producteur;
 
