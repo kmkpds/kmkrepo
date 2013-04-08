@@ -7,7 +7,7 @@ import org.apache.log4j.BasicConfigurator;
 import org.xml.sax.SAXException;
 import railsimulator.transmissionMSG.serialisationXML.XmlTransformer;
 import beans.AnnonceVoyageur;
-import communicationJMS.Producteur;
+import railsimulator.transmissionMSG.communicationJMS.Producteur;
 
 
 public class EnvoiMSGTerrain {
@@ -20,8 +20,7 @@ public class EnvoiMSGTerrain {
 	public void envoyerMessageAnnonceToESB(AnnonceVoyageur annonce) throws JMSException, JAXBException, SAXException{
 		  try {
 			 //creation d'un objet message de type annonceVoyageur
-			//  AnnonceVoyageur messageVoyageur = new AnnonceVoyageur();
-		
+			//  AnnonceVoyageur messageVoyageur = new AnnonceVoyageur();		
 			//Marshaller le message de type annonceVoyageur en XML
 			  XmlTransformer transforme = new XmlTransformer();
 			  String messageXML = transforme.transformeXML(annonce);
@@ -32,7 +31,7 @@ public class EnvoiMSGTerrain {
 		   e.printStackTrace();
 		  }		 
 	}
-
+	
 	public void envoyerMessage(Object object) throws JMSException, JAXBException, SAXException{
 		  try {
 			 //creation d'un objet message de type InstructionInfrastructure

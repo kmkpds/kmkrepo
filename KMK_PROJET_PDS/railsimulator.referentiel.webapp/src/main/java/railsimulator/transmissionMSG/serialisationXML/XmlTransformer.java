@@ -1,4 +1,5 @@
 package railsimulator.transmissionMSG.serialisationXML;
+
 import java.io.IOException;
 import java.io.StringWriter;
 import javax.xml.bind.JAXBContext;
