@@ -2,16 +2,16 @@
 <div id="RnoNav1Top" class="sc">
 	<ul>
 		<li class="on">
-			<a href="/kmk_ref_webapp/accueil?action=index">Accueil</a>
+			<a href="/RailSimulator/accueil?action=index">Accueil</a>
 		</li>
 		<li>
-			<a href="/kmk_ref_webapp/accueil?action=ref">Référentiel</a>
+			<a href="/RailSimulator/accueil?action=ref">Référentiel</a>
 		</li>
 		<li>
-			<a href="/kmk_ref_webapp/accueil?action=creationReseau">Création Réseau</a>
+			<a href="/RailSimulator/accueil?action=creationReseau">Création Réseau</a>
 		</li>
-				<li>
-			<a href="/kmk_ref_webapp/visualiser?action=visualiserTrafic">Visualisation Trafic</a>
+		<li>
+			<a href="/RailSimulator/accueil?action=creationHoraire">Création Horaire</a>
 		</li>
 	</ul>
 </div>

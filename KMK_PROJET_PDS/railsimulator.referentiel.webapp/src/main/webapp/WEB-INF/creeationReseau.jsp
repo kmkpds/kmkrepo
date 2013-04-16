@@ -31,24 +31,36 @@
 	var decimals = 8;
 	var arrayOfMarker = new Array();
 	var arrayOfIdsZone = new Array();
-	
-	window.onload = function() {	
-        //initialiser la google map
-		var myLatlng = new google.maps.LatLng(47.904, 1.907);
+	 var contentString = '<div id="content"><form action="#"><label for="nomLieu" width="240px">Nom Lieu : </label> '+
+	                      '<input id="nomLieu" type="text" name="nomLieu">' +
+	                      '<label for="TypeLieu" width="240px">Type Lieu : </label>'+
+	                      '<select id="typeLieu" name="typeLieu" width="240px">'+
+														'<option value="1">Centre ville</option>'+
+														'<option value="2">Lieux Touristiques</option>'+
+														'<option value="3">Lieux de Travail</option>'+
+														'<option value="4">Habitations</option>'+
+														'<option value="5">Lieux de commerce</option>'+
+												'</select>'+
+												'<button type="button" value="AjoutLieu" name="action" id="action">Ajouter Lieu</button></form>';
+	window.onload = function() {
+
+		var myLatlng = new google.maps.LatLng(47.389982, 0.688877);
 		var geocoder = new google.maps.Geocoder();
 		 map = new google.maps.Map(document.getElementById("map"), {
-			zoom : 13,
+			zoom : 10,
 			center : myLatlng,
 			mapTypeId : google.maps.MapTypeId.ROADMAP
 		});
-        //initialiser un marker
+
 		 marker = new google.maps.Marker({
 			draggable : true,
 			map : map
 		});
 		 
-		
-       //initialiser et rajouter les outils de marquage et de dessin de la map
+		 var infowindow = new google.maps.InfoWindow({
+	            content: contentString
+	        });	
+
 		var drawingManager = new google.maps.drawing.DrawingManager({
 			drawingMode : google.maps.drawing.OverlayType.MARKER,
 			drawingControl : true,
@@ -68,7 +80,8 @@
 			}
 		});
 		drawingManager.setMap(map);
-       // recuperer les coordonées du rectangle
+
+		//rajout 
 		google.maps.event
 				.addListener(
 						drawingManager,
@@ -113,8 +126,10 @@
 								
 
 							}
-							//récupere les coordonnées du marker
-							if (event.type == google.maps.drawing.OverlayType.MARKER) {								
+							if (event.type == google.maps.drawing.OverlayType.MARKER) {
+
+								//infowindow.open(map,event.overlay);
+								
 								var lat = event.overlay.getPosition().lat();
 								var lon = event.overlay.getPosition().lng();
 								document.getElementById('latLieu').value = lat;
@@ -125,7 +140,7 @@
 		
 		
 		/*
-		 * Modification de l'emplacement du marqueur
+		 * Drag & drop du marqueur
 		 */
 		google.maps.event
 				.addListener(
@@ -154,14 +169,11 @@
 		
 	};
 	
-	// Fonction qui permet de centrer la map et de geolocaliser la zone globale
-	
 	 function  geolocaliser() {
   
 		 var geocoder = new google.maps.Geocoder();
-		geocoder 
-		
-		         .geocode(
+		geocoder
+		      .geocode(
 						{
 							"address" : document.getElementById("addr").value
 						},
@@ -170,17 +182,54 @@
 							if (status == google.maps.GeocoderStatus.OK) {
 
 								document.getElementById("addr").value = data[0].formatted_address;
-								refreshMap(data[0].geometry.location) ;
+								refreshMap(data[0].geometry.location);
 
-								
-						}} );
-	 }
+								// Prépare la liste des suggestions
+								if (data.length > 1) {
+									var list = document
+											.getElementById("list");
+									while (list.hasChildNodes()) {
+										list.removeChild(list.firstChild);
+									}
+									for ( var i = 0; i < data.length; i++) {
+										var a = document.createElement("a");
+										a.setAttribute("href", "");
+										a.setAttribute("title",
+												data[i].formatted_address);
+										a.onclick = function() {
+											document.getElementById("addr").value = this
+													.getAttribute("title");
+											document.getElementById(
+													"search_frm").onsubmit(
+													false);
+											return false;
+										}
+										
+												a.appendChild(document
+														.createTextNode(data[i].formatted_address));
+
+										var li = document
+												.createElement("li");
+										li.appendChild(a);
+										list.appendChild(li);
+									}
+									document.getElementById("suggest").style.display = "block";
+								} else if (e !== false) { // passer FALSE au lieu d'un Event n'efface pas les suggestions
+									document.getElementById("suggest").style.display = "none";
+								}
+
+							} else {
+								alert("Erreur: " + status);
+							}
+						});
+		return false;
+	}
 
 	
 	
-		
-		 // Actualise l'affichage de la map
-		 
+		/*
+		 * Actualise l'affichage
+		 */
 		function refreshMap(point) {
 			var b = Math.pow(10, decimals);
 			document.getElementById("lat").value = Math.round(point.lat() * b)
@@ -192,7 +241,7 @@
 			marker.setTitle(point.lat() + ";" + point.lng());
 		}
 
-			// fonction qui verifie le nombre de station par zone
+			// fin rajout 
 
 		function verifierNbrStation(){
 				
@@ -215,7 +264,24 @@
 								
 			}
 	
+			
+		function validateReseau(form){
+			
+			var reseauValue = $("#reseau").val();
+			if(reseauValue == ""){
+				$("#reseau").val("");
+				$("#errors").append("<p style=\"color:red\">Le nom de réseau est obligatoire </p>");				
+				
+			}else{
+				
+				form.submit();
+			}
+			
+		}
 
+	
+	
+	
 	
 </script>
 
@@ -229,8 +295,10 @@
 				<div id="RnoGlobalLinksTop" class="sc">
 					<div>
 						<ul>
-							<li><a href="#">Manuel</a></li>
-							<li><a href="#">Demande d'évolution</a></li>
+							<li><a href="#">Manuel</a>
+							</li>
+							<li><a href="#">Demande d'évolution</a>
+							</li>
 						</ul>
 					</div>
 				</div> <!-- /Global Links Top --> <!-- Page Header -->
@@ -243,8 +311,7 @@
 					</h1>
 					<span> <img src="images/branding-coin.gif" alt="" width="31"
 						height="31" /> </span>
-				</div>
-			</td>
+				</div></td>
 		</tr>
 		<tr>
 			<td>
@@ -262,9 +329,12 @@
 								</div>
 
 								</left>
-								:
-							</div>
-						</td>
+
+
+
+
+
+							</div></td>
 						<td>
 
 							<div>
@@ -275,43 +345,37 @@
 								</div>
 								<form id="search_frm" action="#">
 									<fieldset>
-										<legend>Définir la Zone Globale </legend>
-										<label >Zone Globale:</label> <input
-											type="text" id="addr" name="addr" /> <input type="button"
-											value="Geolocaliser" onclick="geolocaliser()" id="action" />
+										<center> <input type="text" id="addr" name="addr" />
+										<input type="button" value="Geolocaliser"
+											onclick="geolocaliser()" id="action" /> </center>
 								</form>
 								<div id="coords">
-			
+									<!--<form id="reverse_frm" style="float: right;">-->
 									<form id="reverse_frm" style="">
-										<table>
-											<tr>
-												<td><label for="lat">latitude :</label></td>
-												<td><input id="lat" type="text" /></td>
-											</tr>
-											<tr>
-												<td><label for="lng">longitude :</label></td>
-												<td><input id="lng" type="text" /></td>
-											</tr>
+										<label for="lat">latitude :</label>
+										<input id="lat" type="text" />
+										<label for="lng">longitude :</label>
+										<input id="lng" type="text" />
 
 
-
-
-										</table>
 									</form>
+									<div id="suggest">
+										<h2>Suggestions</h2>
+										<ul id="list"></ul>
+									</div>
 								</div>
 								</fieldset>
 							</div>
 
 							<form name="f1" action="reseau" method="post">
 								<div>
-									<fieldset style="width: 370px">
-										<legend>Création Du Reseau </legend>
-										<label for="reseau" width="200px">Nom Reseau:</label> <input
-											id="reseau" type="text" name="reseau" />
-										<button type="submit" value="CreerReseau" name="action"
-											id="action" width="200px">Creer Reseau</button>
+								
+								<label for="reseau" width="200px">Nom Reseau:</label> <input
+										id="reseau" type="text" name="reseau" /><br />
+									<button type="submit" value="CreerReseau" name="action"
+										id="action" width="200px">Creer Reseau</button>
+									
 
-									</fieldset>
 								</div>
 							</form>
 
@@ -321,81 +385,66 @@
 									<fieldset style="width: 370px">
 										<legend>Paramétre Zone</legend>
 										<table>
-											<tr>
-												<td><label for="nomReseau" width="300px">Nom
-														Reseau:</label></td>
-												<td><select id="idReseau" name="idReseau">
-														<c:forEach items="${listeReseau}" var="list">
-															<option value="${list.idReseau}">${list.nomReseau}</option>
+										<tr>
+										<td>
+										<label for="nomReseau" width="300px">Nom Reseau:</label> 
+										</td>
+										<td>
+										<select
+											id="idReseau" name="idReseau">
+											<c:forEach items="${listeReseau}" var="list">
+												<option value="${list.idReseau}">${list.nomReseau}</option>
 
-														</c:forEach>
-												</select></td>
-											</tr>
-
-											<tr>
-												<td><label for="latzone" width="300px">Latitude
-														Zone:</label></td>
-												<td><input id="latzone" type="text" name="latitudeZone" />
-												</td>
-											</tr>
-											<tr>
-												<td><label for="lngzone" width="200px">Longitude
-														Zone:</label></td>
-												<td><input id="lngzone" type="text"
-													name="longitudeZone" /></td>
-											</tr>
-											<tr>
-												<td><label for="latzone1" width="200px">Latitude
-														ZoneB:</label>
-												</td>
-												<td><input id="latzone1" type="text"
-													name="latitudeZoneB" />
-												</td>
-											</tr>
-
-											<tr>
-												<td><label for="lngzone1" width="200px">Longitude
-														ZoneB:</label>
-												</td>
-												<td><input id="lngzone1" type="text"
-													name="longitudeZoneB">
-												</td>
-											</tr>
-											<tr>
-												<td><label for="Surface" width="310px">Surface
-														de la zone:</label>
-												</td>
-												<td><input id="Surface" type="text" name="Surface">
-												</td>
-											</tr>
-
-											<tr>
-												<td><label for="NbrMAxStation" width="350px">Nombre
-														de stations de la zone:</label>
-												</td>
-												<td><input id="NbrMAxStation" type="text"
-													name="NbrMaxStation" onblur="verifierNbrStation()">
-												</td>
-											</tr>
-											<tr>
-												<td><label for="NbrHabt" width="350px">Nombre
-														d'habitants de la zone :</label>
-												</td>
-												<td><input id="NbrHabt" type="text" name="NbrHabt" />
-												</td>
-											</tr>
-
-
-										</table>
-										<center>
-										<button type="submit" value="GenererReseau" name="action"
-									        id="action" width="200px">Generer Reseau</button>
-										<button type="submit" value="AjoutZone" name="action"
+											</c:forEach>
+										</select>
+										</td>
+										</tr>
+										
+										<tr>
+											<td><label for="latzone" width="300px">Latitude Zone:</label>
+											</td>
+											<td>
+											<input
+											id="latzone" type="text" name="latitudeZone" />
+											</td>
+										</tr>
+										<tr>
+										<td>
+										<label
+											for="lngzone" width="200px">Longitude Zone:</label>
+										</td>
+										<td>
+										<input
+											id="lngzone" type="text" name="longitudeZone" />
+										</td>
+										</tr>
+										<tr><td> <label
+											for="latzone1" width="200px">Latitude ZoneB:</label></td><td> <input
+											id="latzone1" type="text" name="latitudeZoneB" /></td></tr>
+											
+											<tr><td><label
+											for="lngzone1" width="200px">Longitude ZoneB:</label></td><td> <input
+											id="lngzone1" type="text" name="longitudeZoneB"></td></tr>
+											  <tr><td><label for="Surface" width="310px">Surface de la
+												zone:</label></td><td><input id="Surface" type="text" name="Surface"></td></tr>
+											 
+												<tr><td><label for="NbrMAxStation" width="350px">Nombre
+													de stations de la zone:</label></td><td><input id="NbrMAxStation"
+												type="text" name="NbrMaxStation"
+												onblur="verifierNbrStation()"></td></tr>
+												<tr><td><label for="NbrHabt"
+													width="350px">Nombre d'habitants de la zone :</label></td><td> <input
+													id="NbrHabt" type="text" name="NbrHabt" /></td></tr>
+												   
+										
+											</table>
+											<center>
+											<button type="submit" value="AjoutZone" name="action"
 											id="action" width="200px">Ajouter zone</button>
 										<button type="reset" value="ViderChampsZone"
 											name="ViderChampsZone" width="200px">Vider les
 											champs</button>
-										</center>
+											</center>
 									</fieldset>
 								</form>
 							</div>
@@ -405,69 +454,43 @@
 									<fieldset style="width: 300px">
 										<legend>Paramétre Lieu</legend>
 										<table>
-											<tr>
-												<td><label for="idZone" width="250px">Numéro de
-														la Zone:</label></td>
-												<td><select id="idZone" name="idZone">
-														<c:forEach items="${listeZone}" var="list">
-															<option value="${list.idZone}">${list.idZone}</option>
-														</c:forEach>
-												</select>
-												</td>
-											</tr>
-											<tr>
-												<td><label for="latLieu" width="250px">Latitude
-														Lieu : </label>
-												</td>
-												<td><input id="latLieu" type="text" name="latitudeLieu">
-												</td>
-											</tr>
-											<tr>
-												<td><label for="lngLieu" width="250px">Longitude
-														Lieu : </label>
-												</td>
-												<td><input id="lngLieu" type="text"
-													name="longitudeLieu">
-												</td>
-											</tr>
-											<tr>
-												<td><label for="nomLieu" width="250px">Nom Lieu
-														: </label>
-												</td>
-												<td><input id="nomLieu" type="text" name="nomLieu">
-												</td>
-											</tr>
-											<tr>
-												<td><label for="TypeLieu" width="250px">Type
-														Lieu : </label>
-												</td>
-												<td><SELECT id="typeLieu" name="typeLieu"
-													width="25.0px">
+										<tr><td><label for="idZone" width="250px">Numéro de la Zone:</label> </td><td><select
+											id="idZone" name="idZone">
+											<c:forEach items="${listeZone}" var="list">
+												<option value="${list.idZone}">${list.idZone}</option>
+											</c:forEach>
+										</select></td></tr>
+										 <label for="latLieu" width="250px">Latitude Lieu : </label> <input
+											id="latLieu" type="text" name="latitudeLieu"> <label
+											for="lngLieu" width="250px">Longitude Lieu : </label> <input
+											id="lngLieu" type="text" name="longitudeLieu"> <label
+												for="nomLieu" width="250px">Nom Lieu : </label> <input
+												id="nomLieu" type="text" name="nomLieu"> <label
+													for="TypeLieu" width="250px">Type Lieu : </label> <SELECT
+													id="typeLieu" name="typeLieu" width="25.0px">
 														<OPTION value="1">Centre ville</OPTION>
 														<OPTION value="2">Lieux Touristiques</OPTION>
 														<OPTION value="3">Lieux de Travail</OPTION>
 														<OPTION value="4">Habitations</OPTION>
 														<OPTION value="5">Lieux de commerce</OPTION>
 												</SELECT>
-												</td>
-											</tr>
-
-										</table>
-										<center>
-										<button type="submit" value="AjoutLieu" name="action"
-											id="action">Ajouter Lieu</button>
-										<button type="reset" value="ViderChampsLieu"
-											name="ViderChampsLieu" width="200px">Vider les
-											champs</button>
-										</center>
+</table>
+													<button type="submit" value="AjoutLieu" name="action"
+														id="action">Ajouter Lieu</button>
+													<button type="reset" value="ViderChampsLieu"
+														name="ViderChampsLieu" width="200px">Vider les
+														champs</button>
 									</fieldset>
 
 								</form>
-							</div> 
-						</td>
+							</div> <center>
+							<form>
+								<button type="submit" value="GenererReseau" name="action"
+									id="action" width="200px">Generer Reseau</button>
+							</center>
+							</form></td>
 					</tr>
-				</table>
-			</td>
+				</table></td>
 		</tr>
 	</table>
 	<!-- /Page Layout -->

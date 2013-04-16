@@ -2,21 +2,17 @@
 <div id="RnoNav1Top" class="sc">
 	<ul>
 		<li>
-			<a href="/kmk_ref_webapp/accueil?action=index">Accueil</a>
+			<a href="/RailSimulator/accueil?action=index">Accueil</a>
 		</li>
 		<li class="on">
-			<a href="/kmk_ref_webapp/accueil?action=ref">Référentiels</a>
+			<a href="/RailSimulator/accueil?action=ref">Référentiels</a>
 		</li>
 		<li>
-			<a href="/kmk_ref_webapp/accueil?action=creationReseau">Création Réseau</a>
+			<a href="/RailSimulator/accueil?action=creationReseau">Création Réseau</a>
 		</li>
 		<li>
-			<a href="/kmk_ref_webapp/visualiser?action=visualiserTrafic">Visualisation Trafic</a>
+			<a href="/RailSimulator/accueil?action=creationHoraire">Création Horaire</a>
 		</li>
-			<li>
-			<a href="/kmk_ref_webapp/etape?action=etape">Envoie de Message Au terrain</a>
-		</li>
-
 	</ul>
 </div>
 <!-- /Navigation Top Level 1 -->
@@ -28,13 +24,13 @@
 			<a href="#">Référentiel Infrastructure</a>
 			<ul>
 				<li>
-					<a href="/kmk_ref_webapp/ligne?action=refLigne">Référentiel Ligne</a>
+					<a href="/RailSimulator/ligne?action=refLigne">Référentiel Ligne</a>
 				</li>
 				<li>
-					<a href="/kmk_ref_webapp/canton?action=refCanton">Référentiel Canton</a>
+					<a href="/RailSimulator/canton?action=refCanton">Référentiel Canton</a>
 				</li>
 				<li>
-					<a href="/kmk_ref_webapp/station?action=refStation">Référentiel Station</a>
+					<a href="/RailSimulator/station?action=refStation">Référentiel Station</a>
 				</li>
 			</ul>
 		</li>

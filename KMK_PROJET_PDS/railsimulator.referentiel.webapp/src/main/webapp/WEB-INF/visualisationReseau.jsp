@@ -82,7 +82,7 @@
 		     	];
 		     	var ligne = new google.maps.Polyline({
 			        path: tabCoordonnees,
-			        strokeColor: "#4169E1",//ligne de couleur rouge
+			        strokeColor: "#4169E1",//ligne de couleur bleue
 			        strokeOpacity: 1.0,
 			        strokeWeight: 5
 		     	});

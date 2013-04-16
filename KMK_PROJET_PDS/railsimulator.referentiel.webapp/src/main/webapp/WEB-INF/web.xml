@@ -1,26 +1,40 @@
-<web-app xmlns="http://java.sun.com/xml/ns/javaee"
-      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-      xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
-      version="3.0"> 
-      
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app>
 	<servlet>
 		<servlet-name>AccueilControler</servlet-name>
-		<servlet-class>railsimulator.referentiel.controleur.AccueilControler</servlet-class>
+		<servlet-class>servlets.AccueilControler</servlet-class>
+	</servlet>
+
+	<servlet>
+		<servlet-name>LigneControler</servlet-name>
+		<servlet-class>servlets.LigneControler</servlet-class>
+	</servlet>
+	
+	<servlet>
+		<servlet-name>CantonControler</servlet-name>
+		<servlet-class>servlets.CantonControler</servlet-class>
+	</servlet>
+	
+	<servlet>
+		<servlet-name>StationControler</servlet-name>
+		<servlet-class>servlets.StationControler</servlet-class>
 	</servlet>
 	
 	<servlet>
 		<servlet-name>ReseauControler</servlet-name>
-		<servlet-class>railsimulator.referentiel.controleur.ReseauControler</servlet-class>
-	</servlet>
-		<!-- Transmission Terrain Controler -->
-	<servlet>
-		<servlet-name>TransmissionMessageTerrainControler</servlet-name>
-		<servlet-class>railsimulator.transmissionMSG.controleur.TransmissionMessageTerrainControler</servlet-class>
+		<servlet-class>servlets.ReseauControler</servlet-class>
 	</servlet>
 	<servlet>
-		<servlet-name>VisualisationControler</servlet-name>
-		<servlet-class>railsimulator.visualisation.controleur.VisualisationControler</servlet-class>
+		<servlet-name>HoraireControler</servlet-name>
+		<servlet-class>servlets.HoraireControler</servlet-class>
 	</servlet>
+
+
+	<servlet-mapping>
+		<servlet-name>LigneControler</servlet-name>
+		<url-pattern>/ligne</url-pattern>
+	</servlet-mapping>
+
 
 	<servlet-mapping>
 		<servlet-name>AccueilControler</servlet-name>
@@ -28,20 +42,21 @@
 	</servlet-mapping>
 	
 	<servlet-mapping>
+		<servlet-name>CantonControler</servlet-name>
+		<url-pattern>/canton</url-pattern>
+	</servlet-mapping>
+	
+	<servlet-mapping>
+		<servlet-name>StationControler</servlet-name>
+		<url-pattern>/station</url-pattern>
+	</servlet-mapping>
+	
+	<servlet-mapping>
 		<servlet-name>ReseauControler</servlet-name>
 		<url-pattern>/reseau</url-pattern>
 	</servlet-mapping>
-	
 	<servlet-mapping>
-		<servlet-name>VisualisationControler</servlet-name>
-		<url-pattern>/visualiser</url-pattern>
+		<servlet-name>HoraireControler</servlet-name>
+		<url-pattern>/horaire</url-pattern>
 	</servlet-mapping>
-	
-
-	<!-- Mapping -->
-	<servlet-mapping>
-		<servlet-name>TransmissionMessageTerrainControler</servlet-name>
-		<url-pattern>/etape</url-pattern>
-	</servlet-mapping>
-	
 </web-app>

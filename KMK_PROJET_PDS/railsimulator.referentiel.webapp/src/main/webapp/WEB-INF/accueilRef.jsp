@@ -8,7 +8,7 @@
 		<link rel="stylesheet" type="text/css" href="css/corp.css"  />
 		<link rel="alternate stylesheet" type="text/css" href="css/print.css" media="screen" title="Version imprimable" id="stylesheet-print" />
 		<link rel="author" title="Auteur" href="http://www.sqliagency.com/" />
-		<title>Creation reseau - Rail Simulator</title>
+		<title>Référentiels - Rail Simulator</title>
 		<script type="text/javascript" src="js/main.js"></script>
 	</head>
 	<body>
@@ -43,11 +43,9 @@
 						</span>
 					</div>
 					<!-- /Page Header --> 
-					<jsp:include page="menuCreationReseau.jsp"/> 
+					<jsp:include page="menuRef.jsp"/> 
 					<!-- Body Content -->
 					<div id="RnoBody">
-					
-					
 					</div>
 				</td>
 			</tr>
