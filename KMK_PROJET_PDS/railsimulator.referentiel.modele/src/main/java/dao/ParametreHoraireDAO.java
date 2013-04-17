@@ -15,14 +15,16 @@ public class ParametreHoraireDAO {
 	private Session se = null;
     private ParametreHoraire parametreHoraire;
     private List<ParametreHoraire> parametreHoraireList;
+    private Ligne ligne;
+    private LigneDAO ligneDAO;
     
-	public  void createParametreHoraire(int idLigne , String heurePremierTrainJO, String heurePremierTrainSamedi, String heurePremierTrainDimancheJF, String heureDernierTrainJO, String heureDernierTrainSamedi, String heureDernierTrainDimancheJF, int cadencementJO, int cadencementSamedi, int cadencementDimancheJF, String heuresPointeJO, String heuresPointeSamedi, String heuresPointeDimancheJF, String tempsStationnementJO, String tempsStationnementSamedi, String tempsStationnementDimancheJF, int vitesseMoyenne) {
+	public  void createParametreHoraire(int idLigne , String heurePremierTrainJO, String heurePremierTrainSamedi, String heurePremierTrainDimancheJF, String heureDernierTrainJO, String heureDernierTrainSamedi, String heureDernierTrainDimancheJF, String cadencementJO, String cadencementSamedi, String cadencementDimancheJF, String heuresPointeJO, String heuresPointeSamedi, String heuresPointeDimancheJF, String tempsStationnementJO, String tempsStationnementSamedi, String tempsStationnementDimancheJF, int vitesseMoyenne) {
 	      
-		 
+		 ligne = ligneDAO.getLigneByID(idLigne);
 		se = HibernateUtils.getSession();
 	     Transaction t = se.beginTransaction();
 	     parametreHoraire = new ParametreHoraire();
-	     parametreHoraire.setIdLigne(idLigne);
+	     parametreHoraire.setLigne(ligne);
 	     parametreHoraire.setHeurePremierTrainJO(heurePremierTrainJO);
 	     parametreHoraire.setHeurePremierTrainDimancheJF(heurePremierTrainDimancheJF);
 	     parametreHoraire.setHeurePremierTrainSamedi(heurePremierTrainSamedi);
@@ -45,13 +47,13 @@ public class ParametreHoraireDAO {
 	     se.close();
 	}
 
-	public  int createParametreHoraireReturnId(int idLigne , String heurePremierTrainJO, String heurePremierTrainSamedi, String heurePremierTrainDimancheJF, String heureDernierTrainJO, String heureDernierTrainSamedi, String heureDernierTrainDimancheJF, int cadencementJO, int cadencementSamedi, int cadencementDimancheJF, String heuresPointeJO, String heuresPointeSamedi, String heuresPointeDimancheJF, String tempsStationnementJO, String tempsStationnementSamedi, String tempsStationnementDimancheJF, int vitesseMoyenne) {
+	public  int createParametreHoraireReturnId(int idLigne , String heurePremierTrainJO, String heurePremierTrainSamedi, String heurePremierTrainDimancheJF, String heureDernierTrainJO, String heureDernierTrainSamedi, String heureDernierTrainDimancheJF, String cadencementJO, String cadencementSamedi, String cadencementDimancheJF, String heuresPointeJO, String heuresPointeSamedi, String heuresPointeDimancheJF, String tempsStationnementJO, String tempsStationnementSamedi, String tempsStationnementDimancheJF, int vitesseMoyenne) {
 	      
-		 
+		 ligne = ligneDAO.getLigneByID(idLigne);
 		se = HibernateUtils.getSession();
 	     Transaction t = se.beginTransaction();
 	     parametreHoraire = new ParametreHoraire();
-	     parametreHoraire.setIdLigne(idLigne);
+	     parametreHoraire.setLigne(ligne);
 	     parametreHoraire.setHeurePremierTrainJO(heurePremierTrainJO);
 	     parametreHoraire.setHeurePremierTrainDimancheJF(heurePremierTrainDimancheJF);
 	     parametreHoraire.setHeurePremierTrainSamedi(heurePremierTrainSamedi);

@@ -1,9 +1,12 @@
 package beans;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -13,8 +16,19 @@ public class ParametreHoraire {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name="idparametrehoraire")
 	private Integer idparametrehoraire ;
-	@Column(name="idLigne")
-	private Integer idLigne;
+	@ManyToOne(
+			cascade={CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH}
+	)
+	@JoinColumn(name="idLigne")
+	private Ligne ligne;
+	public Ligne getLigne() {
+		return ligne;
+	}
+	public void setLigne(Ligne ligne) {
+		this.ligne = ligne;
+	}
+	//@Column(name="idLigne")
+	//private Integer idLigne;
 	@Column(name="heurePremierTrainJO")
 	private String heurePremierTrainJO;
 	@Column(name="heurePremierTrainSamedi")
@@ -28,11 +42,11 @@ public class ParametreHoraire {
 	@Column(name="heureDernierTrainDimancheJF")
 	private String heureDernierTrainDimancheJF;
 	@Column(name="cadencementJO")
-	private Integer cadencementJO;
+	private String cadencementJO;
 	@Column(name="cadencementSamedi")
-	private Integer cadencementSamedi;
+	private String cadencementSamedi;
 	@Column(name="cadencementDimancheJF")
-	private Integer cadencementDimancheJF;
+	private String cadencementDimancheJF;
 	@Column(name="heuresPointeJO")
 	private String heuresPointeJO;
 	@Column(name="heuresPointeSamedi")
@@ -57,12 +71,12 @@ public class ParametreHoraire {
 	public void setIdparametrehoraire(Integer idparametrehoraire) {
 		this.idparametrehoraire = idparametrehoraire;
 	}
-	public Integer getIdLigne() {
+/*	public Integer getIdLigne() {
 		return idLigne;
 	}
 	public void setIdLigne(Integer idLigne) {
 		this.idLigne = idLigne;
-	}
+	}*/
 	public String getHeurePremierTrainJO() {
 		return heurePremierTrainJO;
 	}
@@ -99,23 +113,24 @@ public class ParametreHoraire {
 	public void setHeureDernierTrainDimancheJF(String heureDernierTrainDimancheJF) {
 		this.heureDernierTrainDimancheJF = heureDernierTrainDimancheJF;
 	}
-	public Integer getCadencementJO() {
+
+	public String getCadencementJO() {
 		return cadencementJO;
 	}
-	public void setCadencementJO(Integer cadencementJO) {
+	public void setCadencementJO(String cadencementJO) {
 		this.cadencementJO = cadencementJO;
 	}
-	public Integer getCadencementSamedi() {
+	public String getCadencementSamedi() {
 		return cadencementSamedi;
 	}
-	public void setCadencementSamedi(Integer cadencementSamedi) {
+	public void setCadencementSamedi(String cadencementSamedi) {
 		this.cadencementSamedi = cadencementSamedi;
 	}
-	public Integer getCadencementDimancheJF() {
+	public String getCadencementDimancheJF() {
 		return cadencementDimancheJF;
 	}
-	public void setCadencementDimancheJF(Integer cadencementDimancheJF) {
-		this.cadencementDimancheJF = cadencementDimancheJF;
+	public void setCadencementDimancheJF(String cadencementDimancheJF2) {
+		this.cadencementDimancheJF = cadencementDimancheJF2;
 	}
 	public String getHeuresPointeJO() {
 		return heuresPointeJO;
