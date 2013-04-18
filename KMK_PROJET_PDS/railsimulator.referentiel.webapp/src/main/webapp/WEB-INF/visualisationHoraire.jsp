@@ -62,7 +62,7 @@
 											</label> 
 										</td>
 										<td align="center">
-											<input type="text" readonly name="idLigne" id="idLigne" value="<c:out value="${Parametres.idLigne}"/>" />
+											<input type="text" readonly name="idLigne" id="idLigne" value="<c:out value="test ligne"/>" />
 										</td>
 									</tr>
 									<br>
