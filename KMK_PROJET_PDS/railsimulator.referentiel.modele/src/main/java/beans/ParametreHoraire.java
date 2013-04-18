@@ -22,7 +22,7 @@ public class ParametreHoraire {
 	@JoinColumn(name="idLigne")
 	private Ligne ligne;
 	public Ligne getLigne() {
-		return ligne;
+		return ligne; 
 	}
 	public void setLigne(Ligne ligne) {
 		this.ligne = ligne;

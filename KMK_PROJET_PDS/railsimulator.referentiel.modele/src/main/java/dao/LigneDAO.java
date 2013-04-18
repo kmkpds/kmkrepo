@@ -30,7 +30,6 @@ public class LigneDAO {
 	}
 	
 	public int createLigneReturnId(String nomLigne , String commentaireLigne, Reseau reseau){
-		 
 		se = HibernateUtils.getSession();
 	    Transaction t = se.beginTransaction();
 	    Ligne ligne = new Ligne();

@@ -14,6 +14,127 @@
 		<title>Creation Horaire - Rail Simulator</title>
 		<script type="text/javascript" src="js/main.js"></script>	
 		<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+		<script type="text/javascript">
+    		//initialisation des listbox de cadencement		
+    	  	function changeLB(value) {
+    	  		var vitesse = value;
+    	  		var cadencementMin = 12/vitesse;
+    	  		var lbMin = 0;
+    	  		var lbSec = 0;
+    	  		document.parametresHoraire.cadencementJOMin.options.length = 0; 
+	  			document.parametresHoraire.cadencementSamediMin.options.length = 0;
+	  			document.parametresHoraire.cadencementDimancheJFMin.options.length = 0;
+	  			document.parametresHoraire.cadencementJOSec.options.length = 0; 
+	  			document.parametresHoraire.cadencementSamediSec.options.length = 0;
+	  			document.parametresHoraire.cadencementDimancheJFSec.options.length = 0;
+    	  		if(cadencementMin>=1){
+    	  			lbMin = 1;	
+    	  		}
+    	  		if(cadencementMin>=2){
+    	  			lbMin = 2;	
+    	  		}
+    	  		if(cadencementMin>=3){
+    	  			lbMin = 3;	
+    	  		}
+    	  		if(cadencementMin>=4){
+    	  			lbMin = 4;	
+    	  		}
+    	  		if(cadencementMin>=5){
+    	  			lbMin = 5;	
+    	  		}
+    	  		if(cadencementMin>=6){
+    	  			lbMin = 6;	
+    	  		}
+    	  		if(cadencementMin>=7){
+    	  			lbMin = 7;	
+    	  		}
+    	  		if(cadencementMin>=8){
+    	  			lbMin = 8;	
+    	  		}
+    	  		if(cadencementMin>=9){
+    	  			lbMin = 9;	
+    	  		}
+    	  		var lbSecTmp = cadencementMin - lbMin;
+    	  		if (lbSecTmp>=0.25){
+    	  			//lbSec = 15;
+    	  			lbSec = 1;
+    	  		}
+    	  		if (lbSecTmp>=0.50){
+    	  			//lbSec = 30;
+    	  			lbSec = 2;
+    	  		}
+    	  		if (lbSecTmp>=0.75){
+    	  			//lbSec = 45;
+    	  			lbSec = 3;
+    	  		}
+    	  		var j = 0;
+    	  		for( var i=lbMin; i<=10; i++){
+    	  			document.parametresHoraire.cadencementJOMin[j] = new Option(i, j); 
+    	  			document.parametresHoraire.cadencementSamediMin[j] = new Option(i, j); 
+    	  			document.parametresHoraire.cadencementDimancheJFMin[j] = new Option(i, j);
+    	  			
+    	  			/*document.parametresHoraire.cadencementJOMin.options[i].text=i;
+    	  			document.parametresHoraire.cadencementJOMin.options[i].value=i;
+    	  			document.parametresHoraire.getElementById("cadencementSamediMin").options[i].text=i;
+    	  			document.parametresHoraire.getElementById("cadencementSamediMin").options[i].value=i;
+    	  			document.parametresHoraire.getElementById("cadencementDimancheJFMin").options[i].text=i;
+    	  			document.parametresHoraire.getElementById("cadencementDimancheJFMin").options[i].value=i;*/	
+    	  			j=j+1
+    	  		}
+    	  		var Seconde = ["0", "15", "30", "45"];
+    	  		j = 0;
+    	  		for( var i=lbSec; i<4; i++){
+    	  			document.parametresHoraire.cadencementJOSec[j] = new Option(Seconde[i], j); 
+    	  			document.parametresHoraire.cadencementSamediSec[j] = new Option(Seconde[i], j);  
+    	  			document.parametresHoraire.cadencementDimancheJFSec[j] =new Option(Seconde[i], j);
+    	  			j=j+1;
+    	  			/*document.parametresHoraire.cadencementJOMin.options[i].text=i;
+    	  			document.parametresHoraire.cadencementJOMin.options[i].value=i;
+    	  			document.parametresHoraire.getElementById("cadencementSamediMin").options[i].text=i;
+    	  			document.parametresHoraire.getElementById("cadencementSamediMin").options[i].value=i;
+    	  			document.parametresHoraire.getElementById("cadencementDimancheJFMin").options[i].text=i;
+    	  			document.parametresHoraire.getElementById("cadencementDimancheJFMin").options[i].value=i;*/	
+    	  		}
+    		}	
+    		
+    	  //initialisation des listbox de cadencement		
+    	  	function updateLB(value) {
+    	  		var Seconde = ["0", "15", "30", "45"];
+    	  		alert(value);
+				if(value=="cadencementJOMin"){
+					//ICI changer le reste :) 
+					alert(document.parametresHoraire.cadencementJOMin.option[0].value);
+					if (document.parametresHoraire.cadencementJOMin.value>document.parametresHoraire.cadencementJOMin.option[0].value){
+						document.parametresHoraire.cadencementJOSec.options.length = 0; 
+						j = 0;
+						for( var i=0; i<4; i++){
+		    	  			document.parametresHoraire.cadencementJOSec[j] = new Option(Seconde[i]); 
+		    	  			j=j+1;
+		    	  		}		
+					}
+				}
+				if(value=="cadencementSamediMin"){
+					if (document.parametresHoraire.cadencementSamediMin.value>document.parametresHoraire.cadencementSamediMin.option[0].value){	
+						document.parametresHoraire.cadencementSamediSec.options.length = 0;
+						j=0;
+						for( var i=0; i<4; i++){
+		    	  			document.parametresHoraire.cadencementSamediSec[j] = new Option(Seconde[i]);  
+		    	  			j=j+1;
+		    	  		}
+					}
+				}
+				if(value=="cadencementDimancheJFMin"){
+					if (document.parametresHoraire.cadencementDimancheJFMin.value>document.parametresHoraire.cadencementDimancheJFMin.option[0].value){
+						document.parametresHoraire.cadencementDimancheJFSec.options.length = 0;
+						j=0;
+						for( var i=0; i<4; i++){
+	    	  				document.parametresHoraire.cadencementDimancheJFSec[j] =new Option(Seconde[i]);
+	    	  				j=j+1;
+	    	  			}
+					}
+				}
+	  		}	
+    	</script>
 	</head>
 	<body>	
 		<!-- Page Layout -->
@@ -52,9 +173,9 @@
 					<br>
 					<div id="RnoBody ">
 						<center>
-						<form action="horaire" method="post">
+						<form name ="parametresHoraire" action="horaire" method="post">
 									<fieldset style="width: 700px">
-										<legend>Paramètre horaire</legend>
+										<legend>Paramètres horaire</legend>
 										<table>
 											<tr style="height:20px">
 												<td>
@@ -66,7 +187,6 @@
 													<select id="idLigne" name="idLigne" style="width:100px">
 														<c:forEach items="${listeLigne}" var="list">
 															<option value="${list.idLigne}">${list.nomLigne}</option>
-													
 														</c:forEach>
 													</select>
 												</td>
@@ -77,8 +197,8 @@
 													<label for="vitesseMoyenne" width="250px">Vitesse moyenne:</label> 
 												</td>
 												<td align ="center">
-													<select id="vitesseMoyenne" name="vitesseMoyenne" style="width:100px">
-														<c:forTokens var="entry" items="20;30;40;50;60;70;80;90;100;110;120;130;140" delims=";">
+													<select id="vitesseMoyenne" name="vitesseMoyenne" style="width:100px" onchange="changeLB(this.value)">
+														<c:forTokens var="entry" items="0;10;20;30;40;50;60;70;80;90;100;110;120;130;140" delims=";">
 															<option value="${entry}">  ${entry} km/h</option>
 														</c:forTokens>
 													</select>
@@ -176,42 +296,42 @@
 													Cadencement (minutes - secondes):</label> 
 												</td>
 												<td align="center">
-													<select id="CadencementJOMin" name="CadencementJOMin">
-														<c:forEach var="entry" begin="00" end="10">
+													<select id="cadencementJOMin" name="cadencementJOMin" onchange="updateLB('cadencementJOMin')">
+														<!-- <c:forEach var="entry" begin="00" end="10">
 															<option value="${entry}">  ${entry}</option>
-														</c:forEach>
+														</c:forEach>-->
 													</select>
-													<select id="CadencementJOSec" name="CadencementJOSec">
-														<option value="0">0</option>
+													<select id="cadencementJOSec" name="cadencementJOSec">
+														<!-- <option value="0">0</option>
 														<option value="15">15</option>
 														<option value="30">30</option>
-														<option value="45">45</option>
+														<option value="45">45</option>-->
 													</select>
 												</td>			
 												<td align="center">
-													<select id="CadencementSamediMin" name="CadencementSamediMin">
-														<c:forEach var="entry" begin="00" end="10">
+													<select id="cadencementSamediMin" name="cadencementSamediMin" onchange="updateLB('cadencementSamediMin')">
+														<!-- <c:forEach var="entry" begin="00" end="10">
 															<option value="${entry}">  ${entry}</option>
-														</c:forEach>
+														</c:forEach>-->
 													</select>
-													<select id="CadencementSamediSec" name="CadencementSamediSec">
-														<option value="0">0</option>
+													<select id="cadencementSamediSec" name="cadencementSamediSec">
+														<!-- <option value="0">0</option>
 														<option value="15">15</option>
 														<option value="30">30</option>
-														<option value="45">45</option>
+														<option value="45">45</option>-->
 													</select>
 												</td>
 												<td align="center">
-													<select id="CadencementDimancheJFMin" name="CadencementDimancheJFMin">
-														<c:forEach var="entry" begin="00" end="10">
+													<select id="cadencementDimancheJFMin" name="cadencementDimancheJFMin" onchange="updateLB('cadencementDimancheJFMin')">
+														<!-- <c:forEach var="entry" begin="00" end="10">
 															<option value="${entry}">  ${entry}</option>
-														</c:forEach>
+														</c:forEach>-->
 													</select>
-													<select id="CadencementDimancheJFSec" name="CadencementDimancheJFSec">
-														<option value="0">0</option>
+													<select id="cadencementDimancheJFSec" name="cadencementDimancheJFSec">
+														<!-- <option value="0">0</option>
 														<option value="15">15</option>
 														<option value="30">30</option>
-														<option value="45">45</option>
+														<option value="45">45</option>-->
 													</select>
 												</td>
 											</tr>
@@ -246,7 +366,7 @@
 												<td align="center">
 													<select id="tempsStationnementDimancheJFMin" name="tempsStationnementDimancheJFMin">
 														<c:forEach var="entry" begin="00" end="23">
-															<option value="  ${entry}, ">  ${entry}</option>
+															<option value="${entry}">  ${entry}</option>
 														</c:forEach>
 													</select>
 													<select id="tempsStationnementDimancheJFSec" name="tempsStationnementDimancheJFSec">
@@ -262,62 +382,62 @@
 												</td>
 												<td align="center">
 													<div style="width: 125px; height: 100px; overflow-y: scroll;">
-														<input type="checkbox" name="heuresPointeJO67" value="heuresPointeJO67"> 06:00 - 07:00<br>
-														<input type="checkbox" name="heuresPointeJO78" value="heuresPointeJO78"> 07:00 - 08:00<br>
-														<input type="checkbox" name="heuresPointeJO89" value="heuresPointeJO89"> 08:00 - 09:00<br>
-														<input type="checkbox" name="heuresPointeJO910" value="heuresPointeJO910"> 09:00 - 10:00<br>
-														<input type="checkbox" name="heuresPointeJO1011" value="heuresPointeJO1011"> 10:00 - 11:00<br>
-														<input type="checkbox" name="heuresPointeJO1112" value="heuresPointeJO1112"> 11:00 - 12:00<br>
-														<input type="checkbox" name="heuresPointeJO1213" value="heuresPointeJO1213"> 12:00 - 13:00<br>
-														<input type="checkbox" name="heuresPointeJO1314" value="heuresPointeJO1314"> 13:00 - 14:00<br>
-														<input type="checkbox" name="heuresPointeJO1415" value="heuresPointeJO1415"> 14:00 - 15:00<br>
-														<input type="checkbox" name="heuresPointeJO1516" value="heuresPointeJO1516"> 15:00 - 16:00<br>
-														<input type="checkbox" name="heuresPointeJO1617" value="heuresPointeJO1617"> 16:00 - 17:00<br>
-														<input type="checkbox" name="heuresPointeJO1718" value="heuresPointeJO1718"> 17:00 - 18:00<br>
-														<input type="checkbox" name="heuresPointeJO1819" value="heuresPointeJO1819"> 18:00 - 19:00<br>
-														<input type="checkbox" name="heuresPointeJO1920" value="heuresPointeJO1920"> 19:00 - 20:00<br>
-														<input type="checkbox" name="heuresPointeJO2021" value="heuresPointeJO2021"> 20:00 - 21:00<br>
-														<input type="checkbox" name="heuresPointeJO2122" value="heuresPointeJO2122"> 21:00 - 22:00<br>
+														<input type="checkbox" name="heuresPointeJO" value="heuresPointeJO67"> 06:00 - 07:00<br>
+														<input type="checkbox" name="heuresPointeJO" value="heuresPointeJO78"> 07:00 - 08:00<br>
+														<input type="checkbox" name="heuresPointeJO" value="heuresPointeJO89"> 08:00 - 09:00<br>
+														<input type="checkbox" name="heuresPointeJO" value="heuresPointeJO910"> 09:00 - 10:00<br>
+														<input type="checkbox" name="heuresPointeJO" value="heuresPointeJO1011"> 10:00 - 11:00<br>
+														<input type="checkbox" name="heuresPointeJO" value="heuresPointeJO1112"> 11:00 - 12:00<br>
+														<input type="checkbox" name="heuresPointeJO" value="heuresPointeJO1213"> 12:00 - 13:00<br>
+														<input type="checkbox" name="heuresPointeJO" value="heuresPointeJO1314"> 13:00 - 14:00<br>
+														<input type="checkbox" name="heuresPointeJO" value="heuresPointeJO1415"> 14:00 - 15:00<br>
+														<input type="checkbox" name="heuresPointeJO" value="heuresPointeJO1516"> 15:00 - 16:00<br>
+														<input type="checkbox" name="heuresPointeJO" value="heuresPointeJO1617"> 16:00 - 17:00<br>
+														<input type="checkbox" name="heuresPointeJO" value="heuresPointeJO1718"> 17:00 - 18:00<br>
+														<input type="checkbox" name="heuresPointeJO" value="heuresPointeJO1819"> 18:00 - 19:00<br>
+														<input type="checkbox" name="heuresPointeJO" value="heuresPointeJO1920"> 19:00 - 20:00<br>
+														<input type="checkbox" name="heuresPointeJO" value="heuresPointeJO2021"> 20:00 - 21:00<br>
+														<input type="checkbox" name="heuresPointeJO" value="heuresPointeJO2122"> 21:00 - 22:00<br>
 													</div>
 												</td>
 												<td align="center">
 													<div style="width: 125px; height: 100px; overflow-y: scroll;">
-														<input type="checkbox" name="heuresPointeSamedi67" value="heuresPointeSamedi67"> 06:00 - 07:00<br>
-														<input type="checkbox" name="heuresPointeSamedi78" value="heuresPointeSamedi78"> 07:00 - 08:00<br>
-														<input type="checkbox" name="heuresPointeSamedi89" value="heuresPointeSamedi89"> 08:00 - 09:00<br>
-														<input type="checkbox" name="heuresPointeSamedi910" value="heuresPointeSamedi910"> 09:00 - 10:00<br>
-														<input type="checkbox" name="heuresPointeSamedi1011" value="heuresPointeSamedi1011"> 10:00 - 11:00<br>
-														<input type="checkbox" name="heuresPointeSamedi1112" value="heuresPointeSamedi1112"> 11:00 - 12:00<br>
-														<input type="checkbox" name="heuresPointeSamedi1213" value="heuresPointeSamedi1213"> 12:00 - 13:00<br>
-														<input type="checkbox" name="heuresPointeSamedi1314" value="heuresPointeSamedi1314"> 13:00 - 14:00<br>
-														<input type="checkbox" name="heuresPointeSamedi1415" value="heuresPointeSamedi1415"> 14:00 - 15:00<br>
-														<input type="checkbox" name="heuresPointeSamedi1516" value="heuresPointeSamedi1516"> 15:00 - 16:00<br>
-														<input type="checkbox" name="heuresPointeSamedi1617" value="heuresPointeSamedi1617"> 16:00 - 17:00<br>
-														<input type="checkbox" name="heuresPointeSamedi1718" value="heuresPointeSamedi1718"> 17:00 - 18:00<br>
-														<input type="checkbox" name="heuresPointeSamedi1819" value="heuresPointeSamedi1819"> 18:00 - 19:00<br>
-														<input type="checkbox" name="heuresPointeSamedi1920" value="heuresPointeSamedi1920"> 19:00 - 20:00<br>
-														<input type="checkbox" name="heuresPointeSamedi2021" value="heuresPointeSamedi2021"> 20:00 - 21:00<br>
-														<input type="checkbox" name="heuresPointeSamedi2122" value="heuresPointeJO2122"> 21:00 - 22:00<br>
+														<input type="checkbox" name="heuresPointeSamedi" value="heuresPointeSamedi67"> 06:00 - 07:00<br>
+														<input type="checkbox" name="heuresPointeSamedi" value="heuresPointeSamedi78"> 07:00 - 08:00<br>
+														<input type="checkbox" name="heuresPointeSamedi" value="heuresPointeSamedi89"> 08:00 - 09:00<br>
+														<input type="checkbox" name="heuresPointeSamedi" value="heuresPointeSamedi910"> 09:00 - 10:00<br>
+														<input type="checkbox" name="heuresPointeSamedi" value="heuresPointeSamedi1011"> 10:00 - 11:00<br>
+														<input type="checkbox" name="heuresPointeSamedi" value="heuresPointeSamedi1112"> 11:00 - 12:00<br>
+														<input type="checkbox" name="heuresPointeSamedi" value="heuresPointeSamedi1213"> 12:00 - 13:00<br>
+														<input type="checkbox" name="heuresPointeSamedi" value="heuresPointeSamedi1314"> 13:00 - 14:00<br>
+														<input type="checkbox" name="heuresPointeSamedi" value="heuresPointeSamedi1415"> 14:00 - 15:00<br>
+														<input type="checkbox" name="heuresPointeSamedi" value="heuresPointeSamedi1516"> 15:00 - 16:00<br>
+														<input type="checkbox" name="heuresPointeSamedi" value="heuresPointeSamedi1617"> 16:00 - 17:00<br>
+														<input type="checkbox" name="heuresPointeSamedi" value="heuresPointeSamedi1718"> 17:00 - 18:00<br>
+														<input type="checkbox" name="heuresPointeSamedi" value="heuresPointeSamedi1819"> 18:00 - 19:00<br>
+														<input type="checkbox" name="heuresPointeSamedi" value="heuresPointeSamedi1920"> 19:00 - 20:00<br>
+														<input type="checkbox" name="heuresPointeSamedi" value="heuresPointeSamedi2021"> 20:00 - 21:00<br>
+														<input type="checkbox" name="heuresPointeSamedi" value="heuresPointeSamedi2122"> 21:00 - 22:00<br>
 													</div>
 												</td>
 												<td align="center">
-													 <div style="width: 125px; height: 100px; overflow-y: scroll;">
-														<input type="checkbox" name="heuresPointeDimancheJF67" value="heuresPointeDimancheJF67"> 06:00 - 07:00<br>
-														<input type="checkbox" name="heuresPointeDimancheJF78" value="heuresPointeDimancheJF78"> 07:00 - 08:00<br>
-														<input type="checkbox" name="heuresPointeDimancheJF89" value="heuresPointeDimancheJF89"> 08:00 - 09:00<br>
-														<input type="checkbox" name="heuresPointeDimancheJF910" value="heuresPointeDimancheJF910"> 09:00 - 10:00<br>
-														<input type="checkbox" name="heuresPointeDimancheJF1011" value="heuresPointeDimancheJF1011"> 10:00 - 11:00<br>
-														<input type="checkbox" name="heuresPointeDimancheJF1112" value="heuresPointeDimancheJF1112"> 11:00 - 12:00<br>
-														<input type="checkbox" name="heuresPointeDimancheJF1213" value="heuresPointeDimancheJF1213"> 12:00 - 13:00<br>
-														<input type="checkbox" name="heuresPointeDimancheJF1314" value="heuresPointeDimancheJF1314"> 13:00 - 14:00<br>
-														<input type="checkbox" name="heuresPointeDimancheJF1415" value="heuresPointeDimancheJF1415"> 14:00 - 15:00<br>
-														<input type="checkbox" name="heuresPointeDimancheJF1516" value="heuresPointeDimancheJF1516"> 15:00 - 16:00<br>
-														<input type="checkbox" name="heuresPointeDimancheJF1617" value="heuresPointeDimancheJF1617"> 16:00 - 17:00<br>
-														<input type="checkbox" name="heuresPointeDimancheJF1718" value="heuresPointeDimancheJF1718"> 17:00 - 18:00<br>
-														<input type="checkbox" name="heuresPointeDimancheJF1819" value="heuresPointeDimancheJF1819"> 18:00 - 19:00<br>
-														<input type="checkbox" name="heuresPointeDimancheJF1920" value="heuresPointeDimancheJF1920"> 19:00 - 20:00<br>
-														<input type="checkbox" name="heuresPointeDimancheJF2021" value="heuresPointeDimancheJF2021"> 20:00 - 21:00<br>
-														<input type="checkbox" name="heuresPointeDimancheJF2122" value="heuresPointeDimancheJF2122"> 21:00 - 22:00<br>
+													<div style="width: 125px; height: 100px; overflow-y: scroll;">
+														<input type="checkbox" name="heuresPointeDimancheJF" value="heuresPointeDimancheJF67"> 06:00 - 07:00<br>
+														<input type="checkbox" name="heuresPointeDimancheJF" value="heuresPointeDimancheJF78"> 07:00 - 08:00<br>
+														<input type="checkbox" name="heuresPointeDimancheJF" value="heuresPointeDimancheJF89"> 08:00 - 09:00<br>
+														<input type="checkbox" name="heuresPointeDimancheJF" value="heuresPointeDimancheJF910"> 09:00 - 10:00<br>
+														<input type="checkbox" name="heuresPointeDimancheJF" value="heuresPointeDimancheJF1011"> 10:00 - 11:00<br>
+														<input type="checkbox" name="heuresPointeDimancheJF" value="heuresPointeDimancheJF1112"> 11:00 - 12:00<br>
+														<input type="checkbox" name="heuresPointeDimancheJF" value="heuresPointeDimancheJF1213"> 12:00 - 13:00<br>
+														<input type="checkbox" name="heuresPointeDimancheJF" value="heuresPointeDimancheJF1314"> 13:00 - 14:00<br>
+														<input type="checkbox" name="heuresPointeDimancheJF" value="heuresPointeDimancheJF1415"> 14:00 - 15:00<br>
+														<input type="checkbox" name="heuresPointeDimancheJF" value="heuresPointeDimancheJF1516"> 15:00 - 16:00<br>
+														<input type="checkbox" name="heuresPointeDimancheJF" value="heuresPointeDimancheJF1617"> 16:00 - 17:00<br>
+														<input type="checkbox" name="heuresPointeDimancheJF" value="heuresPointeDimancheJF1718"> 17:00 - 18:00<br>
+														<input type="checkbox" name="heuresPointeDimancheJF" value="heuresPointeDimancheJF1819"> 18:00 - 19:00<br>
+														<input type="checkbox" name="heuresPointeDimancheJF" value="heuresPointeDimancheJF1920"> 19:00 - 20:00<br>
+														<input type="checkbox" name="heuresPointeDimancheJF" value="heuresPointeDimancheJF2021"> 20:00 - 21:00<br>
+														<input type="checkbox" name="heuresPointeDimancheJF" value="heuresPointeDimancheJF2122"> 21:00 - 22:00<br>
 													 </div>
 												</td>
 											</tr>

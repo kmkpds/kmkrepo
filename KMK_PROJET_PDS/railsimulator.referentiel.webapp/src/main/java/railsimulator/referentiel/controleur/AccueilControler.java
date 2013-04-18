@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import railsimulator.tools.Algo;
 
 public class AccueilControler extends HttpServlet {
 
@@ -18,6 +19,10 @@ public class AccueilControler extends HttpServlet {
 		if(action.equals("creationReseau")){
 			request.logout();
 			this.getServletContext().getRequestDispatcher( "/WEB-INF/accueilCreationReseau.jsp").forward( request, response );
+		}
+		if(action.equals("creationHoraire")){
+			request.logout();
+			this.getServletContext().getRequestDispatcher( "/WEB-INF/accueilCreationHoraire.jsp").forward( request, response );
 		}
 		
 		if(action.equals("ref")){
@@ -32,6 +37,8 @@ public class AccueilControler extends HttpServlet {
 			request.logout();
 			this.getServletContext().getRequestDispatcher( "/WEB-INF/accueil.jsp").forward( request, response );
 		}
+		
+		
 		
 	}
 

@@ -28,6 +28,9 @@
 				<li>
 					<a href="/RailSimulator/horaire?action=creerHoraire" >Créer Horaire</a>
 				</li>
+				<li>
+					<a href="/RailSimulator/horaire?action=visualiserHoraire.jsp" >Visualiser Horaire</a>
+				</li>
 			</ul>
 		</li>
 	</ul>	

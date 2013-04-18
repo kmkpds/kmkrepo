@@ -56,9 +56,9 @@ public class HoraireControler extends HttpServlet {
 		}
 		if(action.equals("genererGrilleHoraire")){
 			//Récupération idLigne
-			int idLigne = Integer.parseInt(request.getParameter("idLigne"));
+			int idLgn = Integer.parseInt(request.getParameter("idLigne"));
 			//ligne = ligneDAO.getLigneByID(idLigne);
-			ligne = ligneDAO.getLigneByID(idLigne);
+			ligne = ligneDAO.getLigneByID(idLgn);
 			parametreHoraire.setLigne(ligne);
 			
 			//Récupération vitesseMoyenne
@@ -320,11 +320,11 @@ public class HoraireControler extends HttpServlet {
 				}
 			}
 			parametreHoraire.setHeuresPointeDimancheJF(heuresPointeDimancheJFStr);
-			int idParametreHoraire =parametreHoraireDAO.createParametreHoraireReturnId(idLigne, HeurePTJO, HeurePTSamedi, HeurePTDimancheJF,  HeureDTJO, HeureDTSamedi, HeureDTDimancheJF, cadencementJO, cadencementSamedi, cadencementDimancheJF, heuresPointeJOStr, heuresPointeSamediStr, heuresPointeDimancheJFStr, tempsStationnementJO, tempsStationnementSamedi, tempsStationnementDimancheJF, vitesseMoyenne);
-			
+			int idParametreHoraire =parametreHoraireDAO.createParametreHoraireReturnId(ligne, HeurePTJO, HeurePTSamedi, HeurePTDimancheJF,  HeureDTJO, HeureDTSamedi, HeureDTDimancheJF, cadencementJO, cadencementSamedi, cadencementDimancheJF, heuresPointeJOStr, heuresPointeSamediStr, heuresPointeDimancheJFStr, tempsStationnementJO, tempsStationnementSamedi, tempsStationnementDimancheJF, vitesseMoyenne);
 			request.logout();
 			request.setAttribute("Parametres", parametreHoraire);
 			//request.setAttribute("listeLigne",ligneList);
+			System.out.println(idLgn);
 			this.getServletContext().getRequestDispatcher( "/WEB-INF/visualisationHoraire.jsp").forward( request, response );	
 		}
 		

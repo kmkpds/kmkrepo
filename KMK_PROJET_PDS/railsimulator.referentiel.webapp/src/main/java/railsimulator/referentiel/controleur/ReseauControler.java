@@ -1,5 +1,5 @@
-
 package railsimulator.referentiel.controleur;
+
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -58,8 +58,6 @@ public class ReseauControler extends HttpServlet {
 
 
 		String action = request.getParameter("action");
-		
-	
 	
 		if(action.equals("visualisationReseau")){
 			
@@ -327,8 +325,8 @@ public class ReseauControler extends HttpServlet {
 			reseau = reseau_dao.getReseauByID(idreseau);
 			AlgoCreationReseau algo = new AlgoCreationReseau();
 			Algo kruskal = new Algo();
-			algo.CreerReseau(reseau);
-			kruskal.stationToStation(algo.CreerReseau(reseau));
+			algo.creerReseau(reseau);
+			kruskal.stationToStation(algo.creerReseau(reseau));
 			listeStation= station_dao.listerStation();
 
 			request.logout();
