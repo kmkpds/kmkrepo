@@ -11,22 +11,26 @@
 		<link rel="alternate stylesheet" type="text/css" href="css/print.css"
 			media="screen" title="Version imprimable" id="stylesheet-print" />
 		<link rel="author" title="Auteur" href="http://www.sqliagency.com/" />
-		<title>Creation Horaire - Rail Simulator</title>
+		<title>Création Horaire - Rail Simulator</title>
 		<script type="text/javascript" src="js/main.js"></script>	
-		<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
 		<script type="text/javascript">
+			var lbMin = 0;
+  			var lbSec = 0;
     		//initialisation des listbox de cadencement		
     	  	function changeLB(value) {
     	  		var vitesse = value;
-    	  		var cadencementMin = 12/vitesse;
-    	  		var lbMin = 0;
-    	  		var lbSec = 0;
+    	  		// x km --> 60 
+    	  		// 0,2+0,105 --> y
+    	  		// y = (60*0,305)/vitesse
+    	  		var cadencementMin = (60*0.305)/vitesse;
     	  		document.parametresHoraire.cadencementJOMin.options.length = 0; 
 	  			document.parametresHoraire.cadencementSamediMin.options.length = 0;
 	  			document.parametresHoraire.cadencementDimancheJFMin.options.length = 0;
 	  			document.parametresHoraire.cadencementJOSec.options.length = 0; 
 	  			document.parametresHoraire.cadencementSamediSec.options.length = 0;
 	  			document.parametresHoraire.cadencementDimancheJFSec.options.length = 0;
+	  			lbMin = 0;
+	  			lbSec = 0;
     	  		if(cadencementMin>=1){
     	  			lbMin = 1;	
     	  		}
@@ -95,45 +99,141 @@
     	  			document.parametresHoraire.getElementById("cadencementDimancheJFMin").options[i].text=i;
     	  			document.parametresHoraire.getElementById("cadencementDimancheJFMin").options[i].value=i;*/	
     	  		}
+    	  		//document.parametresHoraire.action.style.display="block";
+    	  		//document.parametresHoraire.action.disabled = false;
+    	  		document.getElementById('msgSubmitButton').style.display = 'none';
     		}	
     		
     	  //initialisation des listbox de cadencement		
     	  	function updateLB(value) {
     	  		var Seconde = ["0", "15", "30", "45"];
-    	  		alert(value);
 				if(value=="cadencementJOMin"){
-					//ICI changer le reste :) 
-					alert(document.parametresHoraire.cadencementJOMin.option[0].value);
-					if (document.parametresHoraire.cadencementJOMin.value>document.parametresHoraire.cadencementJOMin.option[0].value){
-						document.parametresHoraire.cadencementJOSec.options.length = 0; 
+					var selectElmt = document.getElementById("cadencementJOMin");
+					var textselectionne = selectElmt.options[selectElmt.selectedIndex].text;
+					document.parametresHoraire.cadencementJOSec.options.length = 0; 
+					//if (document.parametresHoraire.cadencementJOMin.value>lbMin){
+					if (textselectionne>lbMin){
 						j = 0;
 						for( var i=0; i<4; i++){
 		    	  			document.parametresHoraire.cadencementJOSec[j] = new Option(Seconde[i]); 
 		    	  			j=j+1;
 		    	  		}		
+					}else{
+						j=0;
+						for( var i=lbSec; i<4; i++){
+		    	  			document.parametresHoraire.cadencementJOSec[j] = new Option(Seconde[i], j); 
+		    	  			j=j+1;
+		    	  		}		
 					}
 				}
 				if(value=="cadencementSamediMin"){
-					if (document.parametresHoraire.cadencementSamediMin.value>document.parametresHoraire.cadencementSamediMin.option[0].value){	
-						document.parametresHoraire.cadencementSamediSec.options.length = 0;
-						j=0;
+					var selectElmt = document.getElementById("cadencementSamediMin");
+					var textselectionne = selectElmt.options[selectElmt.selectedIndex].text;
+					document.parametresHoraire.cadencementSamediSec.options.length = 0;
+					if (textselectionne>lbMin){ 
+						j = 0;
 						for( var i=0; i<4; i++){
-		    	  			document.parametresHoraire.cadencementSamediSec[j] = new Option(Seconde[i]);  
+		    	  			document.parametresHoraire.cadencementSamediSec[j] = new Option(Seconde[i]); 
+		    	  			j=j+1;
+		    	  		}		
+					}
+					else{
+						j=0;
+						for( var i=lbSec; i<4; i++){
+		    	  			document.parametresHoraire.cadencementSamediSec[j] = new Option(Seconde[i], j);  
 		    	  			j=j+1;
 		    	  		}
 					}
 				}
 				if(value=="cadencementDimancheJFMin"){
-					if (document.parametresHoraire.cadencementDimancheJFMin.value>document.parametresHoraire.cadencementDimancheJFMin.option[0].value){
-						document.parametresHoraire.cadencementDimancheJFSec.options.length = 0;
-						j=0;
+					var selectElmt = document.getElementById("cadencementDimancheJFMin");
+					var textselectionne = selectElmt.options[selectElmt.selectedIndex].text;
+					document.parametresHoraire.cadencementDimancheJFSec.options.length = 0; 
+					if (textselectionne>lbMin){
+						j = 0;
 						for( var i=0; i<4; i++){
-	    	  				document.parametresHoraire.cadencementDimancheJFSec[j] =new Option(Seconde[i]);
-	    	  				j=j+1;
-	    	  			}
+		    	  			document.parametresHoraire.cadencementDimancheJFSec[j] = new Option(Seconde[i]); 
+		    	  			j=j+1;
+		    	  		}
+					}
+					else{
+						j=0;
+						for( var i=lbSec; i<4; i++){
+		    	  			document.parametresHoraire.cadencementDimancheJFSec[j] =new Option(Seconde[i], j);
+		    	  			j=j+1;
+		    	  		}
 					}
 				}
-	  		}	
+	  		}
+			function checkSubmit(){
+				compteurJO = 0;
+				compteurSamedi=0;
+				compteurDimancheJF=0;
+				compteurTempsStationnement = 0;
+				var check = new Boolean();
+				check=true;
+				msgAlert = "Attention !! \n";
+				av=document.getElementsByName("heuresPointeJO");
+				for (e=0;e<av.length;e++) {
+					if (av[e].checked==true) {
+						compteurJO = compteurJO +1;
+					}
+				 }
+				if (compteurJO==0){
+					msgAlert = msgAlert + "- heures de pointe jours ouvrés non renseignées \n";
+				}
+				
+				av=document.getElementsByName("heuresPointeSamedi");
+				for (e=0;e<av.length;e++) {
+					if (av[e].checked==true) {
+						compteurSamedi = compteurSamedi +1;
+					}
+				 }
+				if (compteurSamedi==0){
+					msgAlert = msgAlert + "- heures de pointe samedi non renseignées \n";
+				}
+				
+				av=document.getElementsByName("heuresPointeDimancheJF");
+				for (e=0;e<av.length;e++) {
+					if (av[e].checked==true) {
+						compteurDimancheJF = compteurDimancheJF +1;
+					}
+				 }
+				if (compteurDimancheJF==0){
+					msgAlert = msgAlert + "- heures de pointe dimanche et jours fériés non renseignées \n";
+				}
+				if(document.parametresHoraire.heurePTJO.value>document.parametresHoraire.heureDTJO.value ){
+					msgAlert = msgAlert + "- l'heure du premier train ne peut être supérieur à l'heure du dernier train (Jours ouvrés)\n";
+					check= false;
+				}
+				if(document.parametresHoraire.heurePTSamedi.value>document.parametresHoraire.heureDTSamedi.value ){
+					msgAlert = msgAlert + "- l'heure du premier train ne peut être supérieur à l'heure du dernier train (Samedi)\n";
+					check= false;
+				}
+				if(document.parametresHoraire.heurePTDimancheJF.value>document.parametresHoraire.heureDTDimancheJF.value ){
+					msgAlert = msgAlert + "- l'heure du premier train ne peut être supérieur à l'heure du dernier train (Dimanche et jours fériés)\n";
+					check= false;
+				}
+				if((document.parametresHoraire.heurePTJO.value==document.parametresHoraire.heureDTJO.value) && (document.parametresHoraire.minutePTJO.value >=document.parametresHoraire.minuteDTJO.value)){
+					msgAlert = msgAlert + "- l'heure du premier train ne peut être supérieur à l'heure du dernier train (Jours ouvrés)\n";
+					check= false;
+				}
+				if((document.parametresHoraire.heurePTSamedi.value==document.parametresHoraire.heureDTSamedi.value) && (document.parametresHoraire.minutePTSamedi.value >=document.parametresHoraire.minuteDTSamedi.value)){
+					msgAlert = msgAlert + "- l'heure du premier train ne peut être supérieur à l'heure du dernier train (Samedi)\n";
+					check= false;
+				}
+				if((document.parametresHoraire.heurePTDimancheJF.value==document.parametresHoraire.heureDTDimancheJF.value) && (document.parametresHoraire.minutePTDimancheJF.value >=document.parametresHoraire.minuteDTDimancheJF.value)){
+					msgAlert = msgAlert + "- l'heure du premier train ne peut être supérieur à l'heure du dernier train (Dimanche et jours fériés)\n";
+					check= false;
+				}
+				
+				if (document.parametresHoraire.vitesseMoyenne.value==0){
+					msgAlert = msgAlert + "- la vitesse moyenne n'a pas été saisie \n";
+				}
+				if (compteurDimancheJF==0 | compteurSamedi==0 | compteurJO==0 | compteurTempsStationnement !=0 |check==false |document.parametresHoraire.vitesseMoyenne.value==0){
+					alert(msgAlert);
+				}
+			}
     	</script>
 	</head>
 	<body>	
@@ -184,7 +284,7 @@
 													</label> 
 												</td>
 												<td align="center">
-													<select id="idLigne" name="idLigne" style="width:100px">
+													<select id="idLigne" name="idLigne" style="width:130px">
 														<c:forEach items="${listeLigne}" var="list">
 															<option value="${list.idLigne}">${list.nomLigne}</option>
 														</c:forEach>
@@ -197,7 +297,7 @@
 													<label for="vitesseMoyenne" width="250px">Vitesse moyenne:</label> 
 												</td>
 												<td align ="center">
-													<select id="vitesseMoyenne" name="vitesseMoyenne" style="width:100px" onchange="changeLB(this.value)">
+													<select id="vitesseMoyenne" name="vitesseMoyenne" style="width:130px" onchange="changeLB(this.value)">
 														<c:forTokens var="entry" items="0;10;20;30;40;50;60;70;80;90;100;110;120;130;140" delims=";">
 															<option value="${entry}">  ${entry} km/h</option>
 														</c:forTokens>
@@ -214,36 +314,36 @@
 											<tr style="height:20px">
 												<td>Heure du premier train (heures - minutes):</td>
 												<td align="center">
-													<select id="heurePTJO" name="heurePTJO">
+													<select id="heurePTJO" name="heurePTJO" style="width:45px">
 														<c:forEach var="entry" begin="00" end="23">
 															<option value="${entry}">  ${entry}</option>
 														</c:forEach>
 													</select>
-													<select id="minutePTJO" name="minutePTJO">
+													<select id="minutePTJO" name="minutePTJO" style="width:45px">
 														<c:forEach var="entry" begin="00" end="59">
 															<option value="${entry}">  ${entry}</option>
 														</c:forEach>
 													</select>
 												</td>			
 												<td align="center">
-													<select id="heurePTSamedi" name="heurePTSamedi">
+													<select id="heurePTSamedi" name="heurePTSamedi" style="width:45px">
 														<c:forEach var="entry" begin="00" end="23">
 															<option value="${entry}">  ${entry}</option>
 														</c:forEach>
 													</select>
-													<select id="minutePTSamedi" name="minutePTSamedi">
+													<select id="minutePTSamedi" name="minutePTSamedi" style="width:45px">
 														<c:forEach var="entry" begin="00" end="59">
 															<option value="${entry}">  ${entry}</option>
 														</c:forEach>
 													</select>
 												</td>
 												<td align="center">
-													<select id="heurePTDimancheJF" name="heurePTDimancheJF">
+													<select id="heurePTDimancheJF" name="heurePTDimancheJF" style="width:45px">
 														<c:forEach var="entry" begin="00" end="23">
 															<option value="${entry}">  ${entry}</option>
 														</c:forEach>
 													</select>
-													<select id="minutePTDimancheJF" name="minutePTDimancheJF">
+													<select id="minutePTDimancheJF" name="minutePTDimancheJF" style="width:45px">
 														<c:forEach var="entry" begin="00" end="59">
 															<option value="${entry}">  ${entry}</option>
 														</c:forEach>
@@ -255,36 +355,36 @@
 													Heure du dernier train (heures - minutes): 
 												</td>
 												<td align="center">
-													<select id="heureDTJO" name="heureDTJO">
+													<select id="heureDTJO" name="heureDTJO" style="width:45px">
 														<c:forEach var="entry" begin="00" end="23">
 															<option value="${entry}">  ${entry}</option>
 														</c:forEach>
 													</select>
-													<select id="minuteDTJO" name="minuteDTJO">
+													<select id="minuteDTJO" name="minuteDTJO" style="width:45px">
 														<c:forEach var="entry" begin="00" end="59">
 															<option value="${entry}">  ${entry}</option>
 														</c:forEach>
 													</select>
 												</td>			
 												<td align="center">
-													<select id="heureDTSamedi" name="heureDTSamedi">
+													<select id="heureDTSamedi" name="heureDTSamedi" style="width:45px">
 														<c:forEach var="entry" begin="00" end="23">
 															<option value="${entry}">  ${entry}</option>
 														</c:forEach>
 													</select>
-													<select id="minuteDTSamedi" name="minuteDTSamedi">
+													<select id="minuteDTSamedi" name="minuteDTSamedi" style="width:45px">
 														<c:forEach var="entry" begin="00" end="59">
 															<option value="${entry}">  ${entry}</option>
 														</c:forEach>
 													</select>
 												</td>
 												<td align="center">
-													<select id="heureDTDimancheJF" name="heureDTDimancheJF">
+													<select id="heureDTDimancheJF" name="heureDTDimancheJF" style="width:45px">
 														<c:forEach var="entry" begin="00" end="23">
 															<option value="${entry}">  ${entry}</option>
 														</c:forEach>
 													</select>
-													<select id="minuteDTDimancheJF" name="minuteDTDimancheJF">
+													<select id="minuteDTDimancheJF" name="minuteDTDimancheJF" style="width:45px">
 														<c:forEach var="entry" begin="00" end="59">
 															<option value="${entry}">  ${entry}</option>
 														</c:forEach>
@@ -296,12 +396,12 @@
 													Cadencement (minutes - secondes):</label> 
 												</td>
 												<td align="center">
-													<select id="cadencementJOMin" name="cadencementJOMin" onchange="updateLB('cadencementJOMin')">
+													<select id="cadencementJOMin" name="cadencementJOMin" onchange="updateLB('cadencementJOMin')" style="width:45px">
 														<!-- <c:forEach var="entry" begin="00" end="10">
 															<option value="${entry}">  ${entry}</option>
 														</c:forEach>-->
 													</select>
-													<select id="cadencementJOSec" name="cadencementJOSec">
+													<select id="cadencementJOSec" name="cadencementJOSec" style="width:45px">
 														<!-- <option value="0">0</option>
 														<option value="15">15</option>
 														<option value="30">30</option>
@@ -309,12 +409,12 @@
 													</select>
 												</td>			
 												<td align="center">
-													<select id="cadencementSamediMin" name="cadencementSamediMin" onchange="updateLB('cadencementSamediMin')">
+													<select id="cadencementSamediMin" name="cadencementSamediMin" onchange="updateLB('cadencementSamediMin')" style="width:45px">
 														<!-- <c:forEach var="entry" begin="00" end="10">
 															<option value="${entry}">  ${entry}</option>
 														</c:forEach>-->
 													</select>
-													<select id="cadencementSamediSec" name="cadencementSamediSec">
+													<select id="cadencementSamediSec" name="cadencementSamediSec" style="width:45px">
 														<!-- <option value="0">0</option>
 														<option value="15">15</option>
 														<option value="30">30</option>
@@ -322,12 +422,12 @@
 													</select>
 												</td>
 												<td align="center">
-													<select id="cadencementDimancheJFMin" name="cadencementDimancheJFMin" onchange="updateLB('cadencementDimancheJFMin')">
+													<select id="cadencementDimancheJFMin" name="cadencementDimancheJFMin" onchange="updateLB('cadencementDimancheJFMin')" style="width:45px">
 														<!-- <c:forEach var="entry" begin="00" end="10">
 															<option value="${entry}">  ${entry}</option>
 														</c:forEach>-->
 													</select>
-													<select id="cadencementDimancheJFSec" name="cadencementDimancheJFSec">
+													<select id="cadencementDimancheJFSec" name="cadencementDimancheJFSec" style="width:45px">
 														<!-- <option value="0">0</option>
 														<option value="15">15</option>
 														<option value="30">30</option>
@@ -340,36 +440,36 @@
 													Temps de stationnement (minutes - secondes) 
 												</td>
 												<td align="center">
-													<select id="tempsStationnementJOMin" name="tempsStationnementJOMin">
+													<select id="tempsStationnementJOMin" name="tempsStationnementJOMin" style="width:45px">
 														<c:forEach var="entry" begin="00" end="23">
 															<option value="${entry}">  ${entry}</option>
 														</c:forEach>
 													</select>
-													<select id="tempsStationnementJOSec" name="tempsStationnementJOSec">
+													<select id="tempsStationnementJOSec" name="tempsStationnementJOSec" style="width:45px">
 														<c:forEach var="entry" begin="00" end="59">
 															<option value="${entry}">  ${entry}</option>
 														</c:forEach>
 													</select>
 												</td>			
 												<td align="center">
-													<select id="tempsStationnementSamediMin" name="tempsStationnementSamediMin">
+													<select id="tempsStationnementSamediMin" name="tempsStationnementSamediMin" style="width:45px">
 														<c:forEach var="entry" begin="00" end="23">
 															<option value="${entry}">  ${entry}</option>
 														</c:forEach>
 													</select>
-													<select id="tempsStationnementSamediSec" name="tempsStationnementSamediSec">
+													<select id="tempsStationnementSamediSec" name="tempsStationnementSamediSec" style="width:45px">
 														<c:forEach var="entry" begin="00" end="59">
 															<option value="${entry}">  ${entry}</option>
 														</c:forEach>
 													</select>
 												</td>
 												<td align="center">
-													<select id="tempsStationnementDimancheJFMin" name="tempsStationnementDimancheJFMin">
+													<select id="tempsStationnementDimancheJFMin" name="tempsStationnementDimancheJFMin" style="width:45px">
 														<c:forEach var="entry" begin="00" end="23">
 															<option value="${entry}">  ${entry}</option>
 														</c:forEach>
 													</select>
-													<select id="tempsStationnementDimancheJFSec" name="tempsStationnementDimancheJFSec">
+													<select id="tempsStationnementDimancheJFSec" name="tempsStationnementDimancheJFSec" style="width:45px">
 														<c:forEach var="entry" begin="00" end="59">
 															<option value="${entry}">  ${entry}</option>
 														</c:forEach>
@@ -444,9 +544,10 @@
 										</table>
 										<br>
 										<center>
-											<button type="submit" value="genererGrilleHoraire" name="action" id="action" width="200px">
+											<button type="submit" value="genererGrilleHoraire" onclick="checkSubmit()" name="action" id="action"  width="200px">
 												Créer la grille horaire
 											</button>
+											<div id="msgSubmitButton">Merci de sélectionner une vitesse avant de pouvoir générer la grille horaire.</div>
 										</center>
 									</fieldset>
 								</form>
