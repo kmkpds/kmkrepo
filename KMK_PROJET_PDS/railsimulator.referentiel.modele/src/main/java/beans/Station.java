@@ -1,6 +1,8 @@
 package beans;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 
 import javax.persistence.CascadeType;
@@ -14,6 +16,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 
 import javax.persistence.Table;
@@ -35,15 +38,26 @@ public class Station {
 	private double latitude;
 	@Column(name="longitude")
 	private double longitude;	
-	
-	
+	@OneToMany(fetch=FetchType.EAGER,mappedBy="train")
+	private Set<TrainHoraireStation> TrainHoraireStationList = new HashSet<TrainHoraireStation>();
+
+
+	public Set<TrainHoraireStation> getTrainHoraireStationList() {
+		return TrainHoraireStationList;
+	}
+
+
+	public void setTrainHoraireStationList(
+			Set<TrainHoraireStation> trainHoraireStationList) {
+		TrainHoraireStationList = trainHoraireStationList;
+	}
+
+
 	@ManyToOne(
 			cascade={CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH}
 	)
 	@JoinColumn(name="ligne_idligne")
 	private Ligne ligne;
-	
-	
 	@ManyToMany(fetch = FetchType.EAGER,
 			cascade={CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
 	@JoinTable(name="station_has_station",

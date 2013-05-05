@@ -7,7 +7,7 @@
 	<session-factory>
 		<property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
 		<property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
-		<property name="hibernate.connection.url">jdbc:mysql://178.33.40.163:3306/kmk_test</property>
+		<property name="hibernate.connection.url">jdbc:mysql://192.168.0.251:3306/railsimulator</property>
 		<property name="hibernate.connection.username">admin</property>
 		<property name="hibernate.connection.password">admin</property>
 		
@@ -24,6 +24,17 @@
 		<mapping class="beans.Zone" />
 		<mapping class="beans.Lieu" />
 		<mapping class="beans.Geolocalisation" />
+		<mapping class="beans.AnnonceVoyageur" />	
+		<mapping class="beans.Message" />
+		<mapping class="beans.Etape" />
+		<mapping class="beans.TypeAnnonce" />
+		<mapping class="beans.BiFrequentationLigne" />
+		<mapping class="beans.BiLigne" />
+		<mapping class="beans.BiRecette" />
+		<mapping class="beans.Incident" />
+		<mapping class="beans.Procedure" />
+		<mapping class="beans.TypeIncident" />
+		<mapping class="beans.Action" />
 
 		<!-- Affiche les logs SQL -->
 		<!-- <property name="show_sql">true</property> -->

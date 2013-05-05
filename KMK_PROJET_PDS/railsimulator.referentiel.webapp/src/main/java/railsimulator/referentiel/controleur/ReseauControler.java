@@ -2,6 +2,7 @@
 package railsimulator.referentiel.controleur;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import org.hibernate.Query;
@@ -17,7 +18,9 @@ import javax.servlet.http.HttpServletResponse;
 
 import railsimulator.tools.Algo;
 import railsimulator.tools.AlgoCreationReseau;
+import railsimulator.tools.AlgoDivTroncCanton;
 
+import dao.CantonDAO;
 import dao.GeolocalisationDAO;
 import dao.LieuDAO;
 import dao.LigneDAO;
@@ -26,6 +29,7 @@ import dao.StationDAO;
 import dao.ZoneDAO;
 
 
+import beans.Canton;
 import beans.Geolocalisation;
 import beans.Lieu;
 import beans.Reseau;
@@ -38,10 +42,10 @@ public class ReseauControler extends HttpServlet {
 	private List<Reseau> listeReseau;
 	private List<Zone> listeZone;
 	private StationDAO station_dao = new StationDAO();
+	
+	private List<Canton> listeCanton;
+	private CantonDAO cantonDao = new CantonDAO();
 	 
-	
-
-	
 	private Reseau reseau = new Reseau ();
 	private Zone zone = new Zone();
 	private Geolocalisation geolocalisation = new Geolocalisation() ;
@@ -51,8 +55,7 @@ public class ReseauControler extends HttpServlet {
 	private LieuDAO lieu_dao = new LieuDAO();
 	private ZoneDAO zone_dao = new ZoneDAO();
 	private GeolocalisationDAO geolocalisation_dao = new GeolocalisationDAO();
-	
-	
+		
 	
 	public void doGet( HttpServletRequest request, HttpServletResponse response ) throws ServletException, IOException{
 
@@ -321,20 +324,40 @@ public class ReseauControler extends HttpServlet {
 
 		}
 	
-		if(action.equals("GenererReseau")){
-			
+				if(action.equals("GenererReseau")){
+				
+			System.out.println("GENERER RESEAU");
+try {
 			int idreseau = Integer.parseInt(request.getParameter("idReseau"));
 			reseau = reseau_dao.getReseauByID(idreseau);
 			AlgoCreationReseau algo = new AlgoCreationReseau();
 			Algo kruskal = new Algo();
-			algo.CreerReseau(reseau);
-			kruskal.stationToStation(algo.CreerReseau(reseau));
-			listeStation= station_dao.listerStation();
+			algo.creerReseau(reseau);
+			kruskal.stationToStation(algo.creerReseau(reseau));
+			
+			int[] stationList =kruskal.getMatriceNomStation(algo.creerReseau(reseau));
+			System.out.println("taille int[] stationList " +stationList.length);
+			List<Station> listeStationAffichage = station_dao.listerStationHasStationByListStation(stationList);//.listerStation();
 
+			listeStation=station_dao.listerStation();
+			
+			AlgoDivTroncCanton algodiv=new AlgoDivTroncCanton();
+
+			algodiv.decoupage(listeStationAffichage,stationList);//listeStation,stationList);
+
+			listeCanton=cantonDao.listerCantonParam(listeStationAffichage);//listeStation);
+			
 			request.logout();
-			request.setAttribute("listeStation",listeStation);
-			this.getServletContext().getRequestDispatcher( "/WEB-INF/visualisationReseau.jsp").forward( request, response );
+			request.setAttribute("listeStation",listeStation);//listeStationAffichage);
+			request.setAttribute("listeCanton",listeCanton);
+			this.getServletContext().getRequestDispatcher("/WEB-INF/visualisationReseau.jsp").forward( request, response );
+} catch (SQLException e) {
+	// TODO Auto-generated catch block
+	e.printStackTrace();
+}		
 		}
+		
+		
 	}	
 	
 	

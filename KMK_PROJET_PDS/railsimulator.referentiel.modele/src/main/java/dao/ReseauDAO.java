@@ -32,6 +32,18 @@ public class ReseauDAO {
 	    
 	}
 	
+	public int createReseauReturnId (String nomReseau){
+		
+		 se = HibernateUtils.getSession();
+	     Transaction t = se.beginTransaction();
+	     reseau.setNomReseau(nomReseau);
+	     int idReseau = (Integer) se.save(reseau);
+	     t.commit();
+	     se.close();
+	     return idReseau;
+	    
+	}
+	
 	
 	public Reseau getReseauByID(int id) {
     	se = HibernateUtils.getSession();

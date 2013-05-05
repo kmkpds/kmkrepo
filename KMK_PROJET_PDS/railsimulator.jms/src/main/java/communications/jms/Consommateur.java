@@ -24,7 +24,7 @@ public class Consommateur {
 		try {
 
 			//Identification du provider JMS
-			brokerURL = "tcp://" + ip + ":61616";
+			brokerURL = "tcp://" + ip;
 			//Factory de QueueConnections
 			connectionQueueFactory = (QueueConnectionFactory) new ActiveMQConnectionFactory(brokerURL);
 			//Création d'un objet Queueconnections

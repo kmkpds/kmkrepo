@@ -8,6 +8,7 @@ package beans;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -15,7 +16,10 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.OneToMany;
+
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 
 
@@ -35,9 +39,28 @@ public class Ligne  {
 	private String commentaire;
 	
 	@OneToMany(mappedBy="ligne")
-	private List<Station> stationlist;
-	
-	
+	//private List<Station> stationlist;
+	private Set<Station> stationlist = new HashSet<Station>();
+	@OneToMany(fetch=FetchType.EAGER,mappedBy="ligne")
+	//private List<ParametreHoraire> parametreHoraireList;
+	private Set<ParametreHoraire> parametreHoraireList = new HashSet<ParametreHoraire>();
+	@OneToMany(mappedBy="ligne")
+	private Set<Train> trainlist = new HashSet<Train>();
+	public Set<Train> getTrainlist() {
+		return trainlist;
+	}
+	public void setTrainlist(Set<Train> trainlist) {
+		this.trainlist = trainlist;
+	}
+
+	/*public List<ParametreHoraire> getParametreHoraireList() {
+		return parametreHoraireList;
+	}
+
+	public void setParametreHoraireList(List<ParametreHoraire> parametreHoraireList) {
+		this.parametreHoraireList = parametreHoraireList;
+	}*/
+
 	@ManyToOne(
 			cascade={CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH}
 	)
@@ -73,16 +96,32 @@ public class Ligne  {
 		this.commentaire = commentaire;
 	}
 
-	public List<Station> getStationlist() {
+	/*public List<Station> getStationlist() {
 		return stationlist;
 	}
 
 	public void setStationlist(List<Station> stationlist) {
 		this.stationlist = stationlist;
-	}
+	}*/
 
 	public Reseau getReseau() {
 		return reseau;
+	}
+
+	public Set<Station> getStationlist() {
+		return stationlist;
+	}
+
+	public void setStationlist(Set<Station> stationlist) {
+		this.stationlist = stationlist;
+	}
+
+	public Set<ParametreHoraire> getParametreHoraireList() {
+		return parametreHoraireList;
+	}
+
+	public void setParametreHoraireList(Set<ParametreHoraire> parametreHoraireList) {
+		this.parametreHoraireList = parametreHoraireList;
 	}
 
 	public void setReseau(Reseau reseau) {

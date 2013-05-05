@@ -156,7 +156,7 @@ public class AlgoCreationReseau {
 	/* === FIN JEU DE TEST === */
 	
 	/* === RECUPERATION DES INFORMATIONS RESEAU  === */
-	public String[][] CreerReseau(Reseau reseau){
+	public String[][] creerReseau(Reseau reseau){
 		res = reseau;
 		ligne.setCommentaire("Ligne de test");
 		ligne.setNomLigne("Ligne Test");

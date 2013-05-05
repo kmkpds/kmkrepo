@@ -1,9 +1,16 @@
 package dao;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.Iterator;
 import java.util.List;
 
+import org.hibernate.Query;
+import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+
+import com.mysql.jdbc.PreparedStatement;
 
 import beans.Ligne;
 import beans.Station;
@@ -120,6 +127,29 @@ public class StationDAO {
     	
         return listeStation;
     }
-    
+	 public List<Station> listerStationHasStationByListStation(int[] stationList) throws SQLException {
+	 se = HibernateUtils.getSession();
+	 Transaction t = se.beginTransaction();
+	 String listeStationStr="";
+	 
+	 
+		for(int i=0 ; i<=stationList.length-1 ; i++) {
+		
+				listeStationStr = listeStationStr+stationList[i] +",";
+				System.out.println("listerStationHasStationByListStation=" +stationList[i]);
+				
+		}//fin i
+		listeStationStr = listeStationStr.substring(0, listeStationStr.length()-1);
+		System.out.println("Resultat ==>"+	listeStationStr);
+
+	String sql ="select * from station_has_station where station_idstation1 in ("+listeStationStr+") or station_idstation2 in ("+listeStationStr+")";	
+	System.out.println("SQL==>" +sql);
+
+	listeStation=se.createSQLQuery(sql).list();
+	System.out.println("STATIONDAO******* taille LISTE STATION=" +listeStation.size());
+
+	 t.commit();
+	 return listeStation;
+	 }
     
 }

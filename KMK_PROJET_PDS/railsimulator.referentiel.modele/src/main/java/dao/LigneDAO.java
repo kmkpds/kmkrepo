@@ -15,8 +15,7 @@ public class LigneDAO {
     
     
 	public  void createLigne(String nomLigne , String commentaireLigne, Reseau reseau ) {
-	      
-		 
+	       
 		se = HibernateUtils.getSession();
 	     Transaction t = se.beginTransaction();
 	     Ligne ligne = new Ligne();
@@ -30,7 +29,6 @@ public class LigneDAO {
 	}
 	
 	public int createLigneReturnId(String nomLigne , String commentaireLigne, Reseau reseau){
-		 
 		se = HibernateUtils.getSession();
 	    Transaction t = se.beginTransaction();
 	    Ligne ligne = new Ligne();
@@ -48,9 +46,6 @@ public class LigneDAO {
     	se = HibernateUtils.getSession();
     	se.beginTransaction();  	 	
     	listeLigne = se.createQuery("from Ligne").list();
-    	
-    	
-    	
         return listeLigne;
     }
 	

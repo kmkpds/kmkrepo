@@ -20,17 +20,19 @@ public class AccueilControler extends HttpServlet {
 			this.getServletContext().getRequestDispatcher( "/WEB-INF/accueilCreationReseau.jsp").forward( request, response );
 		}
 		
-		if(action.equals("ref")){
-			//purger l'objet request
+	if(action.equals("bi")){
 			request.logout();
-			this.getServletContext().getRequestDispatcher("/WEB-INF/accueilRef.jsp").forward( request, response );
+			this.getServletContext().getRequestDispatcher( "/WEB-INF/accueilBi.jsp").forward( request, response );
 		}
-        
-
-
-		if(action.equals("index")){
+		
+	if(action.equals("workflow")){
+		request.logout();
+		this.getServletContext().getRequestDispatcher( "/WEB-INF/accueilWorkflow.jsp").forward( request, response );
+	}
+	
+	if(action.equals("creationHoraire")){
 			request.logout();
-			this.getServletContext().getRequestDispatcher( "/WEB-INF/accueil.jsp").forward( request, response );
+			this.getServletContext().getRequestDispatcher( "/WEB-INF/accueilCreationHoraire.jsp").forward( request, response );
 		}
 		
 	}

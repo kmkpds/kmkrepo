@@ -24,27 +24,25 @@ public class VisualisationControler extends HttpServlet {
 		String action = request.getParameter("action");
 		
 		if(action.equals("visualiserTrafic")){
-			
-			listeStation = station_dao.listerStation();
-
+			visualiserTrafic(request, response);
+		}
+		
+		if(action.equals("ajax")){
 			request.logout();
-			request.setAttribute("listeStation",listeStation);
-
-			//this.getServletContext().getRequestDispatcher("/WEB-INF/visualisationTrafic.jsp");
-			this.getServletContext().getRequestDispatcher( "/WEB-INF/testMxGraph.html");
+			this.getServletContext().getRequestDispatcher( "/WEB-INF/testAjax.jsp").forward( request, response );
 		}
 		
 	}	
 	
 	private void visualiserTrafic( HttpServletRequest request, HttpServletResponse response ) throws ServletException, IOException {
 		
-	    listeStation = station_dao.listerStation();
+		listeStation = station_dao.listerStation();
+
+		listeStation= station_dao.listerStation();
 
 		request.logout();
 		request.setAttribute("listeStation",listeStation);
-
-		this.getServletContext().getRequestDispatcher( "/WEB-INF/visualisationTrafic.jsp");
-		//this.getServletContext().getRequestDispatcher( "/WEB-INF/testMxGraph.html");
+		this.getServletContext().getRequestDispatcher( "/WEB-INF/visualisationTrafic.jsp").forward( request, response );
 	}
 	
 	
