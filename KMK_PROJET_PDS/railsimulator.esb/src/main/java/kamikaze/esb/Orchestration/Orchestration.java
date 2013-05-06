@@ -1,11 +1,10 @@
 package kamikaze.esb.Orchestration;
 
-import java.util.List; 
+
 import java.util.Map;
 import java.util.ResourceBundle;
 
 import kamikaze.esb.bean.OrchestrerMessage;
-
 import org.apache.camel.CamelContext;
 import org.apache.camel.Endpoint;
 import org.apache.camel.Exchange;
@@ -24,19 +23,23 @@ public class Orchestration extends RouteBuilder {
 
 	@Override
 	public void configure() throws Exception { 
-
-        from("activemq://BDF2ServiceMix")
-        .resequence(header("JMSPriority")).batch().timeout(3000).allowDuplicates().reverse()       
+		from(bundle.getString("BDF2ServiceMix"))
+		.to(bundle.getString("QueueReceive"))
+		.log("RTDG TO RTDRS recu");
+		
+        from(bundle.getString("QueueReceive"))
+        //.resequence(header("JMSPriority")).batch().timeout(3000).allowDuplicates().reverse()       
         .choice()
-        .when(body().contains("MockInfoTrafic"))
-        .bean(OrchestrerMessage.class).to(bundle.getString("SIInfoTrafic"))
+        .when(body().contains("ActionAckMessage"))
+        .bean(OrchestrerMessage.class).to(bundle.getString("SIActionAckMessage"))
         .when(body().contains("EventMessage"))
         .bean(OrchestrerMessage.class).to(bundle.getString("SIEventMessage"))
-        .when(body().contains("SimpleMessage"))
-        .bean(OrchestrerMessage.class).to(bundle.getString("SIIncSimpleMessage"))
-        .when(body().contains("CritiqueMessage"))
-        .bean(OrchestrerMessage.class).to(bundle.getString("SIIncCritiqueMessage"))
+        .when(body().contains("IncidentMessage"))
+        .bean(OrchestrerMessage.class).to(bundle.getString("SIIncidentMessage"))
+        .when(body().contains("ActionMessage"))
+        .bean(OrchestrerMessage.class).to(bundle.getString("SIActionMessage")) //mettre ServiceMix2B2F pr voir qu'on ecrit ds la file alors qu'ici elle consomme les messages en ecoute
         .otherwise().bean(OrchestrerMessage.class).to(bundle.getString("Autrequeue")); 
-
+       
+ 
 	}//fin configure
 }

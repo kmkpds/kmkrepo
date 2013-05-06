@@ -27,9 +27,9 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent>
  *     &lt;extension base="{http://model.facade.pds}Message">
  *       &lt;sequence>
- *         &lt;element name="eventType" type="{http://model.facade.pds}EventType"/>
+ *         &lt;element name="criticalEventType" type="{http://model.facade.pds}IncidentType"/>
  *       &lt;/sequence>
- *       &lt;attribute name="value" type="{http://www.w3.org/2001/XMLSchema}double" />
+ *       &lt;attribute name="UUID" use="required" type="{http://www.w3.org/2001/XMLSchema}string" />
  *     &lt;/extension>
  *   &lt;/complexContent>
  * &lt;/complexType>
@@ -39,78 +39,74 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "eventType"
+    "criticalEventType"
 })
-@XmlRootElement(name = "EventMessage")
-public class EventMessage
+@XmlRootElement(name = "IncidentMessage")
+public class IncidentMessage
     extends Message
     implements Serializable
 {
 
     private final static long serialVersionUID = 12343L;
     @XmlElement(required = true)
-    protected EventType eventType;
-    @XmlAttribute
-    protected Double value;
+    protected IncidentType criticalEventType;
+    @XmlAttribute(name = "UUID", required = true)
+    protected String uuid;
 
     /**
-     * Gets the value of the eventType property.
+     * Gets the value of the criticalEventType property.
      * 
      * @return
      *     possible object is
-     *     {@link EventType }
+     *     {@link IncidentType }
      *     
      */
-    public EventType getEventType() {
-        return eventType;
+    public IncidentType getCriticalEventType() {
+        return criticalEventType;
     }
 
     /**
-     * Sets the value of the eventType property.
+     * Sets the value of the criticalEventType property.
      * 
      * @param value
      *     allowed object is
-     *     {@link EventType }
+     *     {@link IncidentType }
      *     
      */
-    public void setEventType(EventType value) {
-        this.eventType = value;
+    public void setCriticalEventType(IncidentType value) {
+        this.criticalEventType = value;
     }
 
-    public boolean isSetEventType() {
-        return (this.eventType!= null);
+    public boolean isSetCriticalEventType() {
+        return (this.criticalEventType!= null);
     }
 
     /**
-     * Gets the value of the value property.
+     * Gets the value of the uuid property.
      * 
      * @return
      *     possible object is
-     *     {@link Double }
+     *     {@link String }
      *     
      */
-    public double getValue() {
-        return value;
+    public String getUUID() {
+        return uuid;
     }
 
     /**
-     * Sets the value of the value property.
+     * Sets the value of the uuid property.
      * 
      * @param value
      *     allowed object is
-     *     {@link Double }
+     *     {@link String }
      *     
      */
-    public void setValue(double value) {
-        this.value = value;
+    public void setUUID(String value) {
+        this.uuid = value;
     }
 
-    public boolean isSetValue() {
-        return (this.value!= null);
-    }
-
-    public void unsetValue() {
-        this.value = null;
+    public boolean isSetUUID() {
+        return (this.uuid!= null);
     }
 
 }

@@ -19,21 +19,19 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java class for Station complex type.
+ * <p>Java class for Car complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType name="Station">
+ * &lt;complexType name="Car">
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="subSections" type="{http://model.facade.pds}StationSubSection" maxOccurs="unbounded"/>
  *         &lt;element name="devices" type="{http://model.facade.pds}Device" maxOccurs="unbounded"/>
  *         &lt;element name="sensors" type="{http://model.facade.pds}Sensor" maxOccurs="unbounded"/>
  *       &lt;/sequence>
  *       &lt;attribute name="id" type="{http://www.w3.org/2001/XMLSchema}long" />
- *       &lt;attribute name="nom" type="{http://www.w3.org/2001/XMLSchema}string" />
  *     &lt;/restriction>
  *   &lt;/complexContent>
  * &lt;/complexType>
@@ -42,63 +40,21 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "Station", propOrder = {
-    "subSections",
+@XmlType(name = "Car", propOrder = {
     "devices",
     "sensors"
 })
-public class Station
+public class Car
     implements Serializable
 {
 
     private final static long serialVersionUID = 12343L;
-    @XmlElement(required = true)
-    protected List<StationSubSection> subSections;
     @XmlElement(required = true)
     protected List<Device> devices;
     @XmlElement(required = true)
     protected List<Sensor> sensors;
     @XmlAttribute
     protected Long id;
-    @XmlAttribute
-    protected String nom;
-
-    /**
-     * Gets the value of the subSections property.
-     * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the subSections property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getSubSections().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link StationSubSection }
-     * 
-     * 
-     */
-    public List<StationSubSection> getSubSections() {
-        if (subSections == null) {
-            subSections = new ArrayList<StationSubSection>();
-        }
-        return this.subSections;
-    }
-
-    public boolean isSetSubSections() {
-        return ((this.subSections!= null)&&(!this.subSections.isEmpty()));
-    }
-
-    public void unsetSubSections() {
-        this.subSections = null;
-    }
 
     /**
      * Gets the value of the devices property.
@@ -204,34 +160,6 @@ public class Station
 
     public void unsetId() {
         this.id = null;
-    }
-
-    /**
-     * Gets the value of the nom property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getNom() {
-        return nom;
-    }
-
-    /**
-     * Sets the value of the nom property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setNom(String value) {
-        this.nom = value;
-    }
-
-    public boolean isSetNom() {
-        return (this.nom!= null);
     }
 
 }

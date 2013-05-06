@@ -19,17 +19,16 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java class for Train complex type.
+ * <p>Java class for Section complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType name="Train">
+ * &lt;complexType name="Section">
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="cars" type="{http://model.facade.pds}Car" maxOccurs="4" minOccurs="2"/>
- *         &lt;element name="sensors" type="{http://model.facade.pds}Sensor" maxOccurs="unbounded"/>
+ *         &lt;element name="subSections" type="{http://model.facade.pds}SubSection" maxOccurs="unbounded"/>
  *       &lt;/sequence>
  *       &lt;attribute name="id" type="{http://www.w3.org/2001/XMLSchema}long" />
  *     &lt;/restriction>
@@ -40,94 +39,54 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "Train", propOrder = {
-    "cars",
-    "sensors"
+@XmlType(name = "Section", propOrder = {
+    "subSections"
 })
-public class Train
+public class Section
     implements Serializable
 {
 
     private final static long serialVersionUID = 12343L;
     @XmlElement(required = true)
-    protected List<Car> cars;
-    @XmlElement(required = true)
-    protected List<Sensor> sensors;
+    protected List<SubSection> subSections;
     @XmlAttribute
     protected Long id;
 
     /**
-     * Gets the value of the cars property.
+     * Gets the value of the subSections property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the cars property.
+     * This is why there is not a <CODE>set</CODE> method for the subSections property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getCars().add(newItem);
+     *    getSubSections().add(newItem);
      * </pre>
      * 
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
-     * {@link Car }
+     * {@link SubSection }
      * 
      * 
      */
-    public List<Car> getCars() {
-        if (cars == null) {
-            cars = new ArrayList<Car>();
+    public List<SubSection> getSubSections() {
+        if (subSections == null) {
+            subSections = new ArrayList<SubSection>();
         }
-        return this.cars;
+        return this.subSections;
     }
 
-    public boolean isSetCars() {
-        return ((this.cars!= null)&&(!this.cars.isEmpty()));
+    public boolean isSetSubSections() {
+        return ((this.subSections!= null)&&(!this.subSections.isEmpty()));
     }
 
-    public void unsetCars() {
-        this.cars = null;
-    }
-
-    /**
-     * Gets the value of the sensors property.
-     * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the sensors property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getSensors().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Sensor }
-     * 
-     * 
-     */
-    public List<Sensor> getSensors() {
-        if (sensors == null) {
-            sensors = new ArrayList<Sensor>();
-        }
-        return this.sensors;
-    }
-
-    public boolean isSetSensors() {
-        return ((this.sensors!= null)&&(!this.sensors.isEmpty()));
-    }
-
-    public void unsetSensors() {
-        this.sensors = null;
+    public void unsetSubSections() {
+        this.subSections = null;
     }
 
     /**

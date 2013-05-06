@@ -1,233 +1,311 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<schema xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.example.org/Event" xmlns:tns="http://www.example.org/Event" elementFormDefault="qualified">
+<schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:jaxb="http://java.sun.com/xml/ns/jaxb"
+	xmlns:xjc="http://java.sun.com/xml/ns/jaxb/xjc"
+	jaxb:extensionBindingPrefixes="xjc" jaxb:version="1.0"
+	targetNamespace="http://model.facade.pds" elementFormDefault="qualified"
+	xmlns:pds="http://model.facade.pds">
+
+	<annotation>
+		<appinfo>
+			<jaxb:globalBindings generateIsSetMethod="true">
+				<xjc:serializable uid="12343" />
+			</jaxb:globalBindings>
+		</appinfo>
+	</annotation>
+
+	
+	
+	<!-- Section du model concernant le reseau -->
 
 
+	<!-- Pour l'infrastructure -->
+
+	<!-- Porte de quai -->
+	<complexType name="Door">
+		<sequence>
+			<element name="sensors" type="pds:Sensor" minOccurs="1"
+				maxOccurs="unbounded" />
+		</sequence>
+		<attribute name="id" type="long" />
+	</complexType>
+
+	<!-- Quai -->
+	<complexType name="Platform">
+		<sequence>
+			<element name="doors" type="pds:Door" minOccurs="2"
+				maxOccurs="4" />
+			<element name="devices" type="pds:Device" minOccurs="1"
+				maxOccurs="unbounded" />
+			<element name="sensors" type="pds:Sensor" minOccurs="1"
+				maxOccurs="unbounded" />
+		</sequence>
+		<attribute name="id" type="long" />
+	</complexType>
+
+	<!-- Canton ou il y a une station -->
+	<complexType name="StationSubSection">
+		<complexContent>
+			<extension base="pds:SubSection">
+				<sequence>
+					<element name="platformBack" type="pds:Platform" minOccurs="1"
+						maxOccurs="1" />
+					<element name="platformGo" type="pds:Platform" minOccurs="1"
+						maxOccurs="1" />
+					<element name="devices" type="pds:Device" minOccurs="1"
+						maxOccurs="unbounded" />
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType>
+
+	<!-- Canton standard -->
+	<complexType name="StandardSubSection">
+		<complexContent>
+			<extension base="pds:SubSection"></extension>
+		</complexContent>
+	</complexType>
+
+	<!-- Rail -->
+	<complexType name="Rail">
+		<attribute name="id" type="long" />
+		<attribute name="x" type="int"></attribute>
+		<attribute name="y" type="int"></attribute>
+	</complexType>
+
+	<!-- Canton -->
+	<complexType name="SubSection" abstract="true">
+		<sequence>
+			<element name="railGo" type="pds:Rail" minOccurs="1"
+				maxOccurs="1" />
+			<element name="railBack" type="pds:Rail" minOccurs="1"
+				maxOccurs="1" />
+			<element name="sensors" type="pds:Sensor" minOccurs="1"
+				maxOccurs="unbounded" />
+		</sequence>
+		<attribute name="id" type="long" />
+	</complexType>
+
+	<!-- Troncon -->
+	<complexType name="Section">
+		<sequence>
+			<element name="subSections" type="pds:SubSection" minOccurs="1"
+				maxOccurs="unbounded" />
+		</sequence>
+		<attribute name="id" type="long" />
+	</complexType>
+
+	<!-- Ligne -->
+	<complexType name="Line">
+		<sequence>
+			<element name="sections" type="pds:Section" minOccurs="1"
+				maxOccurs="unbounded" />
+		</sequence>
+		<attribute name="id" type="long" />
+	</complexType>
+
+	<!-- Station -->
+	<complexType name="Station">
+		<sequence>
+			<element name="subSections" type="pds:StationSubSection"
+				minOccurs="1" maxOccurs="unbounded" />
+			<element name="devices" type="pds:Device" minOccurs="1"
+				maxOccurs="unbounded" />
+			<element name="sensors" type="pds:Sensor" minOccurs="1"
+				maxOccurs="unbounded" />
+		</sequence>
+		<attribute name="id" type="long" />
+		<attribute name="nom" type="string" />
+	</complexType>
+
+	<!-- Voiture -->
+	<complexType name="Car">
+		<sequence>
+			<element name="devices" type="pds:Device" minOccurs="1"
+				maxOccurs="unbounded" />
+			<element name="sensors" type="pds:Sensor" minOccurs="1"
+				maxOccurs="unbounded" />
+		</sequence>
+		<attribute name="id" type="long" />
+	</complexType>
+
+	<!-- Rame -->
+	<complexType name="Train">
+		<sequence>
+			<element name="cars" type="pds:Car" minOccurs="2" maxOccurs="4" />
+			<element name="sensors" type="pds:Sensor" minOccurs="1"
+				maxOccurs="unbounded" />
+		</sequence>
+		<attribute name="id" type="long" />
+	</complexType>
+
+	<!-- Infrastructure -->
+	<complexType name="Infrastructure">
+		<sequence>
+			<element name="lines" type="pds:Line" minOccurs="1"
+				maxOccurs="unbounded"></element>
+			<element name="stations" type="pds:Station" minOccurs="1"
+				maxOccurs="unbounded"></element>
+			<element name="trains" type="pds:Train" minOccurs="1"
+				maxOccurs="unbounded"></element>
+		</sequence>
+	</complexType>
+
+	<!-- Capteur -->
+	<complexType name="Sensor">
+		<sequence>
+			<element name="type" type="pds:EventType" minOccurs="1"
+				maxOccurs="1"></element>
+		</sequence>
+		<attribute name="id" type="long" />
+	</complexType>
+
+	<!-- Péripherique pour les annonces visuels ou sonores -->
+	<complexType name="Device">
+		<attribute name="id" type="long" />
+	</complexType>
+	
+	
+	<!-- Types énumérés pour les échanges avec ISIDIS -->
+
+	<simpleType name="EventType">
+		<restriction base="string">
+			<enumeration value="TEMPERATURE" />
+			<enumeration value="CO2" />
+			<enumeration value="PRESSION" />
+			<enumeration value="LOCATION" />
+			<enumeration value="BRAKE" />
+			<enumeration value="HUMIDITY" />
+			<enumeration value="VELOCITY" />
+			<enumeration value="OBSTACLE" />
+			<enumeration value="FREQUENTATION" />
+			<enumeration value="STATE" />
+			<enumeration value="ALARM_CALL" />
+			<enumeration value="NO_SIGNAL" />
+		</restriction>
+	</simpleType>
+
+	<simpleType name="IncidentType">
+		<restriction base="string">
+			<enumeration value="SOCIAL MOVEMENT" />
+			<enumeration value="SUSPECT_PACKAGE" />
+			<enumeration value="UNACTIVE_SENSOR" />
+			<enumeration value="LOCKED_DOOR" />
+			<enumeration value="SAFETY_DISTANCE" />
+			<enumeration value="ELECTRIC_FAILURE" />
+			<enumeration value="EMERGENCY_CALL" />
+			<enumeration value="EXCESSIVE_SPEED" />
+			<enumeration value="UNEXPECTED_STOP" />
+			<enumeration value="DEFAULT_EQUIPMENT" />
+			<enumeration value="COLLISION_RISK" />
+			<enumeration value="COLLISION" />
+			<enumeration value="BOMB_ALERT" />
+			<enumeration value="MISSED_STATION" />
+			<enumeration value="GAS_LEAK" />
+			<enumeration value="LOST_SYNCHRONISATION" />
+			<enumeration value="FIRE" />
+			<enumeration value="SNOW_STORM" />
+			<enumeration value="FLOOD" />
+			<enumeration value="PASSENGER_ACCIDENT" />
+			<enumeration value="FALLEN_PASSENGER" />
+			<enumeration value="OBSTACLE_IN_WAY" />
+			<enumeration value="PASSENGER_ACCIDENT" />
+			<enumeration value="SICK_PASSENGER" />
+			<enumeration value="ANORMAL_TEMPERATURE" />
+		</restriction>
+	</simpleType>
+
+	<simpleType name="locationType">
+		<restriction base="string">
+			<enumeration value="DOOR" />
+			<enumeration value="PLATFORM" />
+			<enumeration value="STATION_SUB_SECTION" />
+			<enumeration value="SUBSECTION" />
+			<enumeration value="STATION" />
+			<enumeration value="CAR" />
+			<enumeration value="TRAIN" />
+		</restriction>
+	</simpleType>
+
+	<!-- ComplexType pour localiser un evenement ou un incident -->
+	<complexType name="Location">
+		<sequence>
+			<element name="location" type="pds:locationType" minOccurs="0" />
+			<element name="locationId" type="int"></element>
+		</sequence>
+	</complexType>
+
+	
+	
+	
+	<!-- Contenu des messages JMS échangés avec le SI Terrain -->
 
 
-    <complexType name="IncSimpleMessage">
-    	<sequence>
-    		<element name="type" type="tns:IncidentSimple"></element>
-    		<element name="location" type="tns:Sujet"></element>
-    	</sequence>
-    	<attribute name="id" type="int"></attribute>
-    </complexType>
+	<!-- Messages relatifs à la remontée des informations du SI Terrain -->
 
+	<complexType name="Message" abstract="true">
+		<sequence>
+			<element name="id" type="long"></element>
+			<element name="startDate" type="date"></element>
+			<element name="location" type="pds:Location"></element>
+		</sequence>
+	</complexType>
 
+	<element name="EventMessage">
+		<complexType>
+			<complexContent>
+				<extension base="pds:Message">
+					<sequence>
+						<element name="eventType" type="pds:EventType" minOccurs="1"
+							maxOccurs="1" />
+					</sequence>
+					<attribute name="value" type="double" />
+				</extension>
+			</complexContent>
+		</complexType>
+	</element>
 
+	<element name="IncidentMessage">
+		<complexType>
+			<complexContent>
+				<extension base="pds:Message">
+					<sequence>
+						<element name="criticalEventType" type="pds:IncidentType"
+							minOccurs="1" maxOccurs="1"></element>
+					</sequence>
+					<attribute name="UUID" type="string" use="required" />
+				</extension>
+			</complexContent>
+		</complexType>
+	</element>
 
+	<element name="ActionMessage">
+		<complexType>
+			<complexContent>
+				<extension base="pds:Message">
+					<attribute name="code" type="string" />
+					<attribute name="UUID" type="string" use="required" />
+				</extension>
+			</complexContent>
+		</complexType>
+	</element>
 
+	<element name="ActionAckMessage">
+		<complexType>
+			<complexContent>
+				<extension base="pds:Message">
+					<attribute name="code" type="string" />
+					<attribute name="UUID" type="string" use="required" />
+				</extension>
+			</complexContent>
+		</complexType>
+	</element>
+	<element name="SendInfrastructure">
+		<complexType>
+			<sequence>
+				<element name="objet" type="pds:Infrastructure"
+					minOccurs="1" maxOccurs="1"></element>
+			</sequence>
+		</complexType>
+	</element>
 
-    <complexType name="EventMessage">
-    	<sequence>
-    		<element name="type" type="tns:EventType" maxOccurs="1"></element>
-    	</sequence>
-    	<attribute name="id" type="int"></attribute>
-    </complexType>
-
-
-    <complexType name="EventType">
-    	<sequence>
-    		<element name="libelleEventType" type="tns:LibelleEventType" maxOccurs="1"></element>
-    	</sequence>
-    </complexType>
-
-    <complexType name="IncidentSimple">
-    	<sequence>
-    		<element name="libelleIncidentSimple"
-    			type="tns:LibelleIncidentSimple">
-    		</element>
-    	</sequence>
-    	<attribute name="id" type="int"></attribute>
-    </complexType>
-
-    <complexType name="Sujet">
-    	<choice>
-    		<element name="ligne" type="tns:ligne"></element>
-    		<element name="wagon" type="tns:wagon"></element>
-    		<element name="canton" type="tns:canton"></element>
-    		<element name="station" type="tns:station"></element>
-    		<element name="troncon" type="tns:troncon"></element>
-    		<element name="train" type="tns:train"></element>
-    	</choice>
-
-    </complexType>
-
-    <complexType name="IncCritiqueMessage">
-    	<sequence>
-    		<element name="type" type="tns:IncidentCritique"></element>
-    		<element name="location" type="tns:Sujet"></element>
-    	</sequence>
-    	<attribute name="id" type="int"></attribute>
-    </complexType>
-
-    <complexType name="IncidentCritique">
-    	<sequence>
-    		<element name="libelleIncidentCritique"
-    			type="tns:LibelleIncidentCritique">
-    		</element>
-    	</sequence>
-    	<attribute name="id" type="int"></attribute>
-    	<attribute name="criticite" type="int"></attribute>
-    </complexType>
-
-
-
-
-    <complexType name="LibelleIncidentCritique">
-    	<attribute name="libelleIncidentCritique" type="string"></attribute>
-    	<attribute name="id" type="int"></attribute>
-    </complexType>
-
-    <complexType name="LibelleIncidentSimple">
-    	<attribute name="libelleIncidentSimple" type="string"></attribute>
-    	<attribute name="id" type="int"></attribute>
-    </complexType>
-
-    <complexType name="LibelleEventType">
-    	<attribute name="libelleEventType" type="string"></attribute>
-    	<attribute name="id" type="int"></attribute>
-    </complexType>
-
-
-    <element name="envoiEventMessage">
-    	<complexType>
-    		<sequence>
-    			<element name="eventmess" type="tns:EventMessage" maxOccurs="unbounded"></element>
-    		</sequence>
-    	</complexType>
-    </element>
-
-    <element name="envoiIncCritiqueMessage">
-    	<complexType>
-    		<sequence>
-    			<element name="critiquemessage" type="tns:IncCritiqueMessage" maxOccurs="unbounded"></element>
-    		</sequence>
-    	</complexType>
-    </element>
-
-    <element name="envoiIncSimpleMessage">
-    	<complexType>
-    		<sequence>
-    			<element name="simpleMessage" type="tns:IncSimpleMessage" maxOccurs="unbounded"></element>
-    		</sequence>
-    	</complexType>
-    </element>
-
-    <complexType name="ligne">
-    	<sequence>
-    		<element name="listeTrains" type="tns:train"
-    			maxOccurs="unbounded">
-    		</element>
-    		<element name="listeTroncons" type="tns:troncon" maxOccurs="unbounded"></element>
-    	</sequence>
-    	<attribute name="id" type="int"></attribute>
-    	<attribute name="nom" type="string"></attribute>
-    	<attribute name="heurePremierTrain" type="time"></attribute>
-    	<attribute name="heureDernierTrain" type="time"></attribute>
-    	<attribute name="capaciteCirculation" type="double"></attribute>
-    	<attribute name="nombreCanton" type="double"></attribute>
-    	<attribute name="kilometrageTotal" type="float"></attribute>
-    	<attribute name="commentaireLigne" type="string"></attribute>
-    	<attribute name="capaciteMaxDeVoyageur" type="double"></attribute>
-    </complexType>
-
-    <complexType name="troncon">
-    	<sequence>
-    		<element name="StationDepart" type="tns:station"></element>
-            <element name="StationArrivee" type="tns:station"></element>
-            <element name="listeCantons" type="tns:canton"
-    			maxOccurs="unbounded">
-    		</element>
-    	</sequence>
-    	<attribute name="id" type="int"></attribute>
-    	<attribute name="taille" type="float"></attribute>
-    </complexType>
-
-    <complexType name="station">
-    	<sequence>
-    		<element name="capteur" type="tns:capteur" maxOccurs="unbounded"></element>
-    	</sequence>
-    	<attribute name="id" type="int"></attribute>
-    	<attribute name="nom" type="string"></attribute>
-    </complexType>
-
-    <complexType name="wagon">
-    	<sequence>
-    		<element name="capteur" type="tns:capteur"
-    			maxOccurs="unbounded">
-    		</element>
-    		<element name="train" type="tns:train"></element>
-    		<element name="typewagon" type="tns:typewagon"></element>
-    	</sequence>
-    	<attribute name="id" type="int"></attribute>
-    </complexType>
-
-    <complexType name="canton">
-    	<sequence>
-    		<element name="capteur" type="tns:capteur"
-    			maxOccurs="unbounded">
-    		</element>
-    	</sequence>
-    	<attribute name="id" type="int"></attribute>
-    	<attribute name="longueur" type="int"></attribute>
-    	<attribute name="latitude" type="double"></attribute>
-    	<attribute name="longitude" type="double"></attribute>
-    </complexType>
-
-    <complexType name="train">
-    	<sequence>
-    		<element name="capteur" type="tns:capteur"
-    			maxOccurs="unbounded">
-    		</element>
-    		<element name="position" type="tns:canton"></element>
-    	</sequence>
-    	<attribute name="id" type="int"></attribute>
-    	<attribute name="nom" type="string"></attribute>
-    </complexType>
-
-    <complexType name="capteur">
-    	<attribute name="id" type="int"></attribute>
-    </complexType>
-
-    <complexType name="typewagon"></complexType>
-
-    <element name="MockInfoTrafic">
-    	<complexType>
-    		<sequence>
-    			<element name="ligne" type="tns:ligne" maxOccurs="unbounded"></element>
-    		</sequence>
-    	</complexType>
-    </element>
-
-    <element name="envoiInfoTraficToSI">
-    	<complexType>
-    		<sequence>
-    			<element name="listeLignes" type="tns:ligne" maxOccurs="unbounded"></element>
-    		</sequence>
-    	</complexType>
-    </element>
-
-    <element name="envoiEventMessageToSI">
-    	<complexType>
-    		<sequence>
-    			<element name="eventmessage" type="tns:EventMessage" maxOccurs="unbounded"></element>
-    		</sequence>
-    	</complexType>
-    </element>
-
-    <element name="envoiIncCritiqueMessageToSI">
-    	<complexType>
-    		<sequence>
-    			<element name="critiquemessage" type="tns:IncCritiqueMessage" maxOccurs="unbounded"></element>
-    		</sequence>
-    	</complexType>
-    </element>
-
-    <element name="envoiIncSimpleMessageToSI">
-    	<complexType>
-    		<sequence>
-    			<element name="simplemessage" type="tns:IncSimpleMessage" maxOccurs="unbounded"></element>
-    		</sequence>
-    	</complexType>
-    </element>
 </schema>

@@ -19,16 +19,15 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java class for Train complex type.
+ * <p>Java class for Door complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType name="Train">
+ * &lt;complexType name="Door">
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="cars" type="{http://model.facade.pds}Car" maxOccurs="4" minOccurs="2"/>
  *         &lt;element name="sensors" type="{http://model.facade.pds}Sensor" maxOccurs="unbounded"/>
  *       &lt;/sequence>
  *       &lt;attribute name="id" type="{http://www.w3.org/2001/XMLSchema}long" />
@@ -40,58 +39,18 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "Train", propOrder = {
-    "cars",
+@XmlType(name = "Door", propOrder = {
     "sensors"
 })
-public class Train
+public class Door
     implements Serializable
 {
 
     private final static long serialVersionUID = 12343L;
     @XmlElement(required = true)
-    protected List<Car> cars;
-    @XmlElement(required = true)
     protected List<Sensor> sensors;
     @XmlAttribute
     protected Long id;
-
-    /**
-     * Gets the value of the cars property.
-     * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the cars property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getCars().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Car }
-     * 
-     * 
-     */
-    public List<Car> getCars() {
-        if (cars == null) {
-            cars = new ArrayList<Car>();
-        }
-        return this.cars;
-    }
-
-    public boolean isSetCars() {
-        return ((this.cars!= null)&&(!this.cars.isEmpty()));
-    }
-
-    public void unsetCars() {
-        this.cars = null;
-    }
 
     /**
      * Gets the value of the sensors property.

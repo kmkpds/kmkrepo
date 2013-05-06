@@ -1,23 +1,27 @@
 package kamikaze.esb.jms;
 
+import javax.jms.JMSException;
 import javax.xml.XMLConstants;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.Marshaller;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.soap.Node;
 import javax.xml.validation.Schema;
 import javax.xml.validation.SchemaFactory;
+
+import org.w3c.dom.Document;
+import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 import java.io.File;
+import java.io.IOException;
 import java.io.StringReader;
 import java.io.StringWriter;
-import org.apache.activemq.ActiveMQConnectionFactory;
-import javax.jms.ConnectionFactory;
-import javax.jms.Connection;
-import javax.jms.JMSException;
-
 import java.util.ResourceBundle;
-import javax.jms.Session;
+
 
 public class TransformationMessage {
 
@@ -29,6 +33,7 @@ public class TransformationMessage {
 	private Schema schema;
 	private String pathModel=null;
 	private String pathSchema=null;
+
 	ResourceBundle bundle  = ResourceBundle.getBundle("jndi");
 	
 	
@@ -82,7 +87,7 @@ public class TransformationMessage {
 			march.marshal(o, sw);
 			return sw.getBuffer().toString();
 		} catch (JAXBException e) {
-			System.out.println("Erreur ds methode objetToXML() de TransformationMessage : " + e.toString());
+			System.out.println("Erreur JAXB ds methode objetToXML() de TransformationMessage : " + e.toString());
 			e.printStackTrace();
 		}
 		
@@ -93,12 +98,47 @@ public class TransformationMessage {
 		StringReader reader = new StringReader(xml);
 		Object result = null;
 		try {
-			result = unmarch.unmarshal(reader);
+			if(unmarch == null){
+				System.out.println("unmarch est nulle");	
+			}
+			else{
+				System.out.println("unmarch non null");
+				System.out.println("reader ==>"+xml);
+				
+				DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+				dbf.setNamespaceAware(true);
+				DocumentBuilder db = dbf.newDocumentBuilder();
+				Document doc = db.parse(new InputSource(reader));
+				Node n = (Node) doc.getDocumentElement().getFirstChild();
+				
+				
+				
+				result = unmarch.unmarshal(n);
+			}
+
+			if(result == null){
+				System.out.println("result est nulle");	
+			}
 		} catch (JAXBException e) {
 			System.out.println("Erreur ds methode xmlToObject() de TransformationMessage : " + e.toString());
+			e.printStackTrace();
+		} catch (SAXException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ParserConfigurationException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return result;
 	}
+	
+	public int random_priority(int min, int max){
+		   int range = (max - min) + 1;     
+		   return (int)(Math.random() * range) + min;
+		
+	}//fin random_priority
 	
 }// fin transformationmessage

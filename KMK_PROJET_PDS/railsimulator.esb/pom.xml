@@ -1,194 +1,289 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
-  <!--parent>
-        <groupId>esiag.isiad.kmk</groupId>
-        <artifactId>kmk-parent</artifactId>
-        <version>1.0</version>
-    </parent>-->
-    
-<properties>    
-  <bundle.symbolicName>kamikaze-bundle</bundle.symbolicName>
- <bundle.namespace>kamikaze</bundle.namespace>
- <commons.log>1.1</commons.log>
-  </properties>
-    
-  <modelVersion>4.0.0</modelVersion>
-  <!--  A CHANGER !!!! -->
-  <groupId>bidon</groupId>
-  <artifactId>railsimulator.esb</artifactId>
-    
-  <packaging>bundle</packaging>
-  <version>1.0.0-SNAPSHOT</version>
-	  <name>Kamikaze Osgi</name>
-  <url>http://www.myorganization.org</url>
-  <repositories>
-    <repository>
-      <id>release.fusesource.org</id>
-      <name>FuseSource Release Repository</name>
-      <url>http://repo.fusesource.com/nexus/content/repositories/releases</url>
-      <snapshots>
-        <enabled>false</enabled>
-      </snapshots>
-      <releases>
-        <enabled>true</enabled>
-      </releases>
-    </repository>
-    <repository>
-      <id>snapshot.fusesource.org</id>
-      <name>FuseSource Snapshot Repository</name>
-      <url>http://repo.fusesource.com/nexus/content/repositories/snapshots</url>
-      <snapshots>
-        <enabled>true</enabled>
-      </snapshots>
-      <releases>
-        <enabled>false</enabled>
-      </releases>
-    </repository>
-  </repositories>
+	<!--parent> <groupId>esiag.isiad.kmk</groupId> <artifactId>kmk-parent</artifactId> 
+		<version>1.0</version> </parent> -->
 
-  <pluginRepositories>
-    <pluginRepository>
-      <id>release.fusesource.org</id>
-      <name>FuseSource Release Repository</name>
-      <url>http://repo.fusesource.com/nexus/content/repositories/releases</url>
-      <snapshots>
-        <enabled>false</enabled>
-      </snapshots>
-      <releases>
-        <enabled>true</enabled>
-      </releases>
-    </pluginRepository>
-    <pluginRepository>
-      <id>snapshot.fusesource.org</id>
-      <name>FuseSource Snapshot Repository</name>
-      <url>http://repo.fusesource.com/nexus/content/repositories/snapshots</url>
-      <snapshots>
-        <enabled>true</enabled>
-      </snapshots>
-      <releases>
-        <enabled>false</enabled>
-      </releases>
-    </pluginRepository>  
-  </pluginRepositories>
+	<!-- properties -->
+	<properties>
+		<bundle.symbolicName>kamikaze-bundle</bundle.symbolicName>
+		<bundle.namespace>kamikaze</bundle.namespace>
+		<commons.log>1.1</commons.log>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+ 		<cxf.version>2.6.3</cxf.version> <!--2.5.0 -->
+		<log4j-version>1.2.16</log4j-version>
+		<slf4j-version>1.6.1</slf4j-version>
+		<camel-core-version>2.10.3</camel-core-version><!-- 2.10.2 -->
+	</properties>
 
-  <dependencies>
-  <dependency>
+
+	<modelVersion>4.0.0</modelVersion>
+	<!--  CHANGER bidon to edu.camel.activemq !!!! -->
+	<groupId>edu.camel.activemq</groupId>
+	<artifactId>railsimulator.esb</artifactId>
+	<packaging>bundle</packaging>
+	<version>1.0.0-SNAPSHOT</version>
+	<name>Kamikaze Osgi</name>
+	<url>http://www.myorganization.org</url>
+	
+	
+	<repositories>
+		<repository>
+			<id>release.fusesource.org</id>
+			<name>FuseSource Release Repository</name>
+			<url>http://repo.fusesource.com/nexus/content/repositories/releases</url>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+		</repository>
+		<repository>
+			<id>snapshot.fusesource.org</id>
+			<name>FuseSource Snapshot Repository</name>
+			<url>http://repo.fusesource.com/nexus/content/repositories/snapshots</url>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
+			<releases>
+				<enabled>false</enabled>
+			</releases>
+		</repository>
+	</repositories>
+
+	<pluginRepositories>
+		<pluginRepository>
+			<id>release.fusesource.org</id>
+			<name>FuseSource Release Repository</name>
+			<url>http://repo.fusesource.com/nexus/content/repositories/releases</url>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+		</pluginRepository>
+		<pluginRepository>
+			<id>snapshot.fusesource.org</id>
+			<name>FuseSource Snapshot Repository</name>
+			<url>http://repo.fusesource.com/nexus/content/repositories/snapshots</url>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
+			<releases>
+				<enabled>false</enabled>
+			</releases>
+		</pluginRepository>
+	</pluginRepositories>
+
+	<dependencies>
+			<dependency>
 			<groupId>org.apache.servicemix</groupId>
 			<artifactId>servicemix-common</artifactId>
-			<version>2011.02.1</version>
+			<version>2013.01</version>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.servicemix</groupId>
 			<artifactId>servicemix-shared</artifactId>
-			<version>2011.02.1</version>
+			<version>2013.01</version>
 		</dependency>
-    <dependency>
-      <groupId>org.apache.camel</groupId>
-      <artifactId>camel-core</artifactId>
-      <version>2.10.3</version>
-    </dependency>
-    <dependency>
-      <groupId>org.apache.camel</groupId>
-      <artifactId>camel-spring</artifactId>
-      <version>2.10.3</version>
-    </dependency>
-    <dependency>
-     <groupId>org.apache.activemq</groupId>
-     <artifactId>activemq-core</artifactId>
-     <version>5.7.0</version>
-   </dependency>
-   <dependency>
-     <groupId>org.apache.activemq</groupId>
-     <artifactId>activemq-camel</artifactId>
-     <version>5.7.0</version>
-   </dependency>
+		<dependency>
+			<groupId>org.apache.servicemix</groupId>
+			<artifactId>servicemix-bean</artifactId>
+			<version>2013.01</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.servicemix</groupId>
+			<artifactId>servicemix-camel</artifactId>
+			<version>2013.01</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.servicemix</groupId>
+			<artifactId>servicemix-jms</artifactId>
+			<version>2013.01</version>
+		</dependency>
+				<!-- Cxf -->
+		<dependency>
+			<groupId>org.apache.cxf</groupId>
+			<artifactId>cxf-rt-frontend-jaxrs</artifactId>
+			<version>${cxf.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.cxf</groupId>
+			<artifactId>cxf-rt-frontend-jaxws</artifactId>
+			<version>${cxf.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.cxf</groupId>
+			<artifactId>cxf-rt-transports-http</artifactId>
+			<version>${cxf.version}</version>
+		</dependency>
 
-    <!-- logging -->
-    <dependency>
-      <groupId>org.slf4j</groupId>
-      <artifactId>slf4j-api</artifactId>
-      <version>1.6.6</version>
-    </dependency>
-    <dependency>
-      <groupId>org.slf4j</groupId>
-      <artifactId>slf4j-log4j12</artifactId>
-      <version>1.6.6</version>
-    </dependency>
-    <dependency>
-      <groupId>log4j</groupId>
-      <artifactId>log4j</artifactId>
-      <version>1.2.17</version>
-    </dependency>
+		<dependency>
+			<groupId>org.apache.cxf</groupId>
+			<artifactId>cxf-rt-transports-http-jetty</artifactId>
+			<version>${cxf.version}</version>
+		</dependency>
+		<!-- ActiveMq -->
+		<dependency>
+			<groupId>org.apache.activemq</groupId>
+			<artifactId>activemq-spring</artifactId>
+			<version>5.7.0</version>
+		</dependency>
+            
+		<dependency>
+			<groupId>org.apache.activemq</groupId>
+			<artifactId>activemq-all</artifactId>
+			<version>5.7.0</version>
+		</dependency>
+            
+		<dependency>
+			<groupId>org.apache.activemq</groupId>
+			<artifactId>activemq-camel</artifactId>
+			<version>5.7.0</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.activemq</groupId>
+			<artifactId>activemq-pool</artifactId>
+			<version>5.7.0</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.activemq</groupId>
+			<artifactId>activemq-core</artifactId>
+			<version>5.7.0</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.camel</groupId>
+			<artifactId>camel-jms</artifactId>
+			<version>${camel-core-version}</version>
+			<!-- use the same version as your Camel core version -->
+		</dependency>
 
-    <!-- testing -->
-    <dependency>
-      <groupId>org.apache.camel</groupId>
-      <artifactId>camel-test-spring</artifactId>
-      <version>2.10.3</version>
-      <scope>test</scope>
-    </dependency>
+		<dependency>
+			<groupId>org.apache.camel</groupId>
+			<artifactId>camel-core</artifactId>
+			<version>${camel-core-version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.camel</groupId>
+			<artifactId>camel-spring</artifactId>
+			<version>${camel-core-version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.camel</groupId>
+			<artifactId>camel-cxf</artifactId>
+			<version>${camel-core-version}</version>  <!-- use the same version as your Camel core version -->
+		</dependency>
+		
+		<!-- logging -->
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<version>1.6.6</version>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-log4j12</artifactId>
+			<version>1.6.6</version>
+		</dependency>
+		<dependency>
+			<groupId>log4j</groupId>
+			<artifactId>log4j</artifactId>
+			<version>1.2.17</version>
+		</dependency>
 
-  </dependencies>
+		<!-- testing -->
+		<dependency>
+			<groupId>org.apache.camel</groupId>
+			<artifactId>camel-test-spring</artifactId>
+			<version>2.10.3</version>
+			<scope>test</scope>
+		</dependency>
 
-  <build>
-    <defaultGoal>install</defaultGoal>
+	</dependencies>
 
-    <plugins>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-compiler-plugin</artifactId>
-        <version>2.5.1</version>
-        <configuration>
-          <source>1.6</source>
-          <target>1.6</target>
-        </configuration>
-      </plugin>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-resources-plugin</artifactId>
-        <version>2.4.3</version>
-        <configuration>
-          <encoding>UTF-8</encoding>
-        </configuration>
-      </plugin>
+	<build>
+		<directory>target</directory>
+		<outputDirectory>target/classes</outputDirectory>
+		<testOutputDirectory>target/test-classes</testOutputDirectory>
+		<sourceDirectory>src/main/java</sourceDirectory>
+		<scriptSourceDirectory>src/main/scripts</scriptSourceDirectory>
+		<testSourceDirectory>src/test/java</testSourceDirectory>
+		<resources>
+			<resource>
+				<directory>src/main/resources</directory>
+			</resource>
+			<resource>
+				<directory>src/main/config</directory>
+			</resource>
+		</resources>
+		<testResources>
+			<testResource>
+				<directory>src/test/resources</directory>
+			</testResource>
+			<testResource>
+				<directory>src/test/config</directory>
+			</testResource>
+		</testResources>
+		<defaultGoal>install</defaultGoal>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>2.5.1</version>
+				<configuration>
+					<source>1.6</source>
+					<target>1.6</target>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-resources-plugin</artifactId>
+				<version>2.4.3</version>
+				<configuration>
+					<encoding>UTF-8</encoding>
+				</configuration>
+			</plugin>
 
-      <!-- allows the route to be ran via 'mvn camel:run' -->
-      <plugin>
-        <groupId>org.apache.camel</groupId>
-        <artifactId>camel-maven-plugin</artifactId>
-        <version>2.10.3</version>
-      </plugin>
-      <plugin>
- <groupId>org.ops4j</groupId>
- <artifactId>maven-pax-plugin</artifactId>
- <version>1.5</version>
- 
- </plugin>
-      
-      <plugin>
- <groupId>org.apache.felix</groupId>
-  <artifactId>maven-bundle-plugin</artifactId>
-  <extensions>true</extensions>
- <version>1.4.3</version>
- <configuration>
- <instructions>
-<Bundle-SymbolicName>${bundle.symbolicName}</Bundle-SymbolicName>
- <Bundle-Version>${project.version}</Bundle-Version>
- <Import-Package>*</Import-Package>
- <Export-Package>${bundle.namespace};version="${project.version}"</Export-Package>
-<Private-Package>${bundle.namespace}.*</Private-Package>
- <Include-Resource>src/main/resources</Include-Resource>
- </instructions>
- </configuration>
- </plugin>
-    </plugins>
-  </build>
+			<!-- allows the route to be ran via 'mvn camel:run' -->
+			<plugin>
+				<groupId>org.apache.camel</groupId>
+				<artifactId>camel-maven-plugin</artifactId>
+				<version>2.10.3</version>
+			</plugin>
+			<plugin>
+				<groupId>org.ops4j</groupId>
+				<artifactId>maven-pax-plugin</artifactId>
+				<version>1.5</version>
 
-  <parent>
-  	<groupId>esiag.isiad.kmk</groupId>
-  	<artifactId>kmk-parent</artifactId>
-  	<version>1.0</version>
-  	<relativePath>..</relativePath>
-  </parent>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.felix</groupId>
+				<artifactId>maven-bundle-plugin</artifactId>
+				<extensions>true</extensions>
+				<version>1.4.3</version>
+				<configuration>
+					<instructions>
+						<Bundle-SymbolicName>${bundle.symbolicName}</Bundle-SymbolicName>
+						<Bundle-Version>${project.version}</Bundle-Version>
+						<Import-Package>*</Import-Package>
+						<Export-Package>${bundle.namespace};version="${project.version}"</Export-Package>
+						<Private-Package>${bundle.namespace}.*</Private-Package>
+						<Include-Resource>src/main/resources</Include-Resource>
+					</instructions>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+	<parent>
+		<groupId>esiag.isiad.kmk</groupId>
+		<artifactId>kmk-parent</artifactId>
+		<version>1.0</version>
+		<relativePath>..</relativePath>
+	</parent>
 </project>
