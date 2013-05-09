@@ -69,12 +69,7 @@ public class HoraireControlerTest extends TestCase {
 		ligne = ligne_dao.getLigneByID(idLigne);
 		request = formCreerHoraire.getRequest();
 		
-		request.setParameter("heuresPointeJO",new String[]{"heuresPointeJO910"});
-		request.setParameter("heuresPointeSamedi",new String[]{"heuresPointeSamedi1011"});
-		request.setParameter("heuresPointeDimancheJF",new String[]{"heuresPointeDimancheJF67"});
-		
-		//request.setParameter("idLigne",String.valueOf(ligne.getIdLigne()));
-		request.setParameter("vitesseMoyenne","80");
+
 		request.setParameter("heurePTJO","1");
 		request.setParameter("minutePTJO","1");
 		request.setParameter("heurePTSamedi","2");
@@ -99,7 +94,10 @@ public class HoraireControlerTest extends TestCase {
 		request.setParameter("tempsStationnementSamediSec","11");
 		request.setParameter("tempsStationnementDimancheJFMin","12");
 		request.setParameter("tempsStationnementDimancheJFSec","12");
-		
+		request.setParameter("vitesseMoyenne","80");
+		request.setParameter("heuresPointeJO",new String[]{"heuresPointeJO0910","heuresPointeJO1011"});
+		request.setParameter("heuresPointeSamedi",new String[]{"heuresPointeSamedi1011"});
+//		request.setParameter("heuresPointeDimancheJF",new String[]{"heuresPointeDimancheJF0607"});
 		response = conversation.getResponse(request);
 		//nouvelle purge de la table Ligne & ParametreHoraire
 		se = HibernateUtils.getSession();

@@ -25,9 +25,15 @@ public class TrainHoraireStationDAO {
 		se = HibernateUtils.getSession();
 		Transaction t = se.beginTransaction();
 		TrainHoraireStation trainHoraireStation = new TrainHoraireStation();
-		trainHoraireStation.setHeureJO(heureJO);
-		trainHoraireStation.setHeureDimancheJF(heureDimancheJF);
-		trainHoraireStation.setHeureSamedi(heureSamedi);
+		if(heureJO!=""){
+			trainHoraireStation.setHeureJO(heureJO);
+		}
+		if(heureDimancheJF!=""){
+			trainHoraireStation.setHeureDimancheJF(heureDimancheJF);
+		}
+		if(heureSamedi!=""){
+			trainHoraireStation.setHeureSamedi(heureSamedi);
+		}
 		trainHoraireStation.setStation(station);
 		trainHoraireStation.setTrain(train);
 		se.save(trainHoraireStation);
@@ -41,9 +47,15 @@ public class TrainHoraireStationDAO {
 		se = HibernateUtils.getSession();
 		Transaction t = se.beginTransaction();
 		TrainHoraireStation trainHoraireStation = new TrainHoraireStation();
-		trainHoraireStation.setHeureJO(heureJO);
-		trainHoraireStation.setHeureDimancheJF(heureDimancheJF);
-		trainHoraireStation.setHeureSamedi(heureSamedi);
+		if(heureJO!=""){
+			trainHoraireStation.setHeureJO(heureJO);
+		}
+		if(heureDimancheJF!="null"){
+			trainHoraireStation.setHeureDimancheJF(heureDimancheJF);
+		}
+		if(heureSamedi!=""){
+			trainHoraireStation.setHeureSamedi(heureSamedi);
+		}
 		trainHoraireStation.setStation(station);
 		trainHoraireStation.setTrain(train);
 		se.save(trainHoraireStation);
