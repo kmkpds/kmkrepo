@@ -40,7 +40,7 @@ public class HoraireControlerTest extends TestCase {
 		//httpunit mock une servlet et servletrunner lance ce "mock"
 		WebConversation     conversation = new WebConversation();
 		HttpUnitOptions.setExceptionsThrownOnScriptError(false);
-		WebRequest  request = new GetMethodWebRequest( "http://localhost:8080/RailSimulator/horaire?action=creerHoraire");
+		WebRequest  request = new GetMethodWebRequest( "http://localhost:8080/RailSimulator/horaire?action=creerHoraireTest");
 		WebResponse  response = conversation.getResponse(request);
 		WebForm forms[] = response.getForms();
 		assertEquals( 1, forms.length);
@@ -54,7 +54,7 @@ public class HoraireControlerTest extends TestCase {
 		//constructeur de la servlet
 		WebConversation     conversation = new WebConversation();
 		HttpUnitOptions.setExceptionsThrownOnScriptError(false);
-		WebRequest  request = new GetMethodWebRequest( "http://localhost:8080/RailSimulator/horaire?action=creerHoraire");
+		WebRequest  request = new GetMethodWebRequest( "http://localhost:8080/RailSimulator/horaire?action=creerHoraireTest");
 		WebResponse  response = conversation.getResponse(request);
 		//récupère le formulaire
 		WebForm formCreerHoraire = response.getForms()[0];
@@ -68,8 +68,6 @@ public class HoraireControlerTest extends TestCase {
 		Ligne ligne = new Ligne();
 		ligne = ligne_dao.getLigneByID(idLigne);
 		request = formCreerHoraire.getRequest();
-		
-
 		request.setParameter("heurePTJO","1");
 		request.setParameter("minutePTJO","1");
 		request.setParameter("heurePTSamedi","2");
@@ -104,8 +102,12 @@ public class HoraireControlerTest extends TestCase {
 		Transaction t4 = se.beginTransaction();
 		Query delete4=se.createQuery("delete from ParametreHoraire");		
 		delete4.executeUpdate();
-		Query delete3=se.createQuery("delete from Ligne");		
+		Query delete1=se.createQuery("delete from TrainHoraireStation");		
+		delete1.executeUpdate();	
+		Query delete3=se.createQuery("delete from Train");		
 		delete3.executeUpdate();	
+		Query delete2=se.createQuery("delete from Ligne");		
+		delete2.executeUpdate();	
 		t4.commit();
 		se.close();
 		assertEquals(200, response.getResponseCode());	

@@ -58,6 +58,18 @@ public class HoraireControler extends HttpServlet {
 			request.setAttribute("listeLigne",ligneList);
 			this.getServletContext().getRequestDispatcher( "/WEB-INF/creationHoraire.jsp").forward( request, response );
 		}
+		if(action.equals("creerHoraireTest")){
+			List<Ligne> ligneList = ligneDAO.listerLigne();
+//			if (ligneList.size()==0){
+//				int idReseau = reseauDAO.createReseauReturnId("Test reseau");
+//				reseau = reseauDAO.getReseauByID(idReseau);
+//				ligneDAO.createLigne("Ligne Test", "test", reseau);
+//				ligneList = ligneDAO.listerLigne();
+//			}
+			request.logout();
+			request.setAttribute("listeLigne",ligneList);
+			this.getServletContext().getRequestDispatcher( "/WEB-INF/creationHoraireTest.jsp").forward( request, response );
+		}
 		if(action.equals("visualiserHoraire")){
 			int idLgn = ligneDAO.listerLigne().get(0).getIdLigne();
 			TrainHoraireStationDAO trainHoraireStationDAO = new TrainHoraireStationDAO();
@@ -522,7 +534,12 @@ public class HoraireControler extends HttpServlet {
 			request.logout();
 			request.setAttribute("listeLigne",ligneList);
 			this.getServletContext().getRequestDispatcher("/WEB-INF/creationHoraire.jsp").forward( request, response );
-	
+		}
+		if(action.equals("creerHoraireTest")){
+			List<Ligne> ligneList = ligneDAO.listerLigne();
+			request.logout();
+			request.setAttribute("listeLigne",ligneList);
+			this.getServletContext().getRequestDispatcher("/WEB-INF/creationHoraireTest.jsp").forward( request, response );
 		}
 		if(action.equals("testCreationHoraire")){
 			String checkJS = request.getParameter("msgCheckJS");

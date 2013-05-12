@@ -12,7 +12,7 @@
 	media="screen" title="Version imprimable" id="stylesheet-print" />
 <link rel="author" title="Auteur" href="http://www.sqliagency.com/" />
 <title>Création Horaire - Rail Simulator</title>
-<script type="text/javascript" src="js/CreationHoraireJavaScript.js"></script>
+<!-- <script type="text/javascript" src="js/CreationHoraireJavaScript.js"></script> -->
 <script type="text/javascript" src="js/main.js"></script>
 
 </head>
