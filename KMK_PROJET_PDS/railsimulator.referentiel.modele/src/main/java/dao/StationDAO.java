@@ -2,8 +2,10 @@ package dao;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 import org.hibernate.Query;
 import org.hibernate.SQLQuery;
@@ -20,6 +22,7 @@ public class StationDAO {
 	private Session se = null;
 	private List<Station> listeStation;
 	private Station station = new Station();
+   private Set<Ligne> listLigne=new HashSet<Ligne>();
 
     
     public  void createStation(String nomStation , String commentaireStation, double latitude, double longitude, Ligne ligne) {
@@ -33,6 +36,7 @@ public class StationDAO {
 	     station.setCommentaireStation(commentaireStation);
 	     station.setLatitude(latitude);
 	     station.setLongitude(longitude);
+	     //listLigne.add(ligne);
 	     station.setLigne(ligne);
     
 		 se.save(station);		
@@ -45,12 +49,12 @@ public class StationDAO {
 		 
 		 se = HibernateUtils.getSession();
 	     Transaction t = se.beginTransaction();
-	    
 	     
 	     station.setNomStation(nomStation);
 	     station.setCommentaireStation(commentaireStation);
 	     station.setLatitude(latitude);
 	     station.setLongitude(longitude);
+	     //listLigne.add(ligne);
 	     station.setLigne(ligne);
 	     int idStation = (Integer) se.save(station);		
 	     t.commit();
@@ -140,13 +144,12 @@ public class StationDAO {
 				
 		}//fin i
 		listeStationStr = listeStationStr.substring(0, listeStationStr.length()-1);
-		System.out.println("Resultat ==>"+	listeStationStr);
+		System.out.println("RŽsultat ==>"+	listeStationStr);
 
 	String sql ="select * from station_has_station where station_idstation1 in ("+listeStationStr+") or station_idstation2 in ("+listeStationStr+")";	
 	System.out.println("SQL==>" +sql);
 
 	listeStation=se.createSQLQuery(sql).list();
-	System.out.println("STATIONDAO******* taille LISTE STATION=" +listeStation.size());
 
 	 t.commit();
 	 return listeStation;

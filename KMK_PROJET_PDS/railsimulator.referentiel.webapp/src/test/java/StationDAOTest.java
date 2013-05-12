@@ -1,5 +1,8 @@
 
+import java.sql.SQLException;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -13,18 +16,13 @@ import junit.framework.TestCase;
 
 public class StationDAOTest extends TestCase {
 	
-	/*
-	 * Test Unitaire de station DAO
-	 */
-
-
 		private Session se = null;
 		
 	    Station station = new Station();
 		Station station2 = new Station();
 		private Ligne ligne = new Ligne();
 		private Reseau reseau = new Reseau();
-		
+		private Set<Ligne> listLigne=new HashSet<Ligne>();
 		private List<Station> listeStation;
 		
 		private StationDAO station_dao = new StationDAO();
@@ -33,9 +31,9 @@ public class StationDAOTest extends TestCase {
 		
 		
 		
-		/*
-		 * Test de la méthode createStation
-		 */
+	
+		 // Test de la méthode createStation
+
 
 		public void testCreateStation(){
 
@@ -43,9 +41,11 @@ public class StationDAOTest extends TestCase {
 			Transaction t = se.beginTransaction(); 
 			
 			//Purge de la table ligne & reseau & station base de donnée de test
+			Query delete7=se.createQuery("delete from Station");
 			Query delete=se.createQuery("delete from Station");
 			Query delete2=se.createQuery("delete from Ligne");	
 			Query delete3=se.createQuery("delete from Reseau");	
+			delete7.executeUpdate();
 			delete.executeUpdate();
 			delete2.executeUpdate();
 			delete3.executeUpdate();
@@ -78,9 +78,11 @@ public class StationDAOTest extends TestCase {
 
 			//nouvelle purge de la table Ligne & reseau & station
 			Transaction t4 = se.beginTransaction();
+			Query delete8=se.createQuery("delete from Station");
 			Query delete4=se.createQuery("delete from Station");
 			Query delete5=se.createQuery("delete from Ligne");	
 			Query delete6=se.createQuery("delete from Reseau");	
+			delete8.executeUpdate();
 			delete4.executeUpdate();
 			delete5.executeUpdate();
 			delete6.executeUpdate();
@@ -89,9 +91,7 @@ public class StationDAOTest extends TestCase {
 
 		}
 		
-		/*
-		 * Test de la méthode supprimerStation
-		 */
+		// Test de la méthode supprimerStation
 		public void testSupprimerStation(){
 
 
@@ -130,10 +130,11 @@ public class StationDAOTest extends TestCase {
 		     station.setCommentaireStation("Station Alpha");
 		     station.setLatitude(55.5);
 		     station.setLongitude(55.5);
+		     //listLigne.add(ligne);
 		     station.setLigne(ligne);
-			se.save(station);		
-		    t4.commit();
-		    se.flush();
+				se.save(station);		
+			    t4.commit();
+			    se.flush();
 
 			
 			//Récupération de l'identifiant nouvellement créer
@@ -166,10 +167,9 @@ public class StationDAOTest extends TestCase {
 
 		}
 		
-		
-		/*
-		 * Test de la méthode listerStation
-		 */
+
+		// Test de la méthode listerStation OK
+
 		 
 		public void testListerStation(){
 
@@ -208,14 +208,16 @@ public class StationDAOTest extends TestCase {
 		    station.setCommentaireStation("Station Alpha");
 		    station.setLatitude(55.5);
 		    station.setLongitude(55.5);
-		    station.setLigne(ligne);
+		     //listLigne.add(ligne);
+		     station.setLigne(ligne);
 			se.save(station);
 			
 			station2.setNomStation("Station Beta");
 			station2.setCommentaireStation("Station Beta");
 			station2.setLatitude(55.5);
 			station2.setLongitude(55.5);
-			station2.setLigne(ligne);
+		     //listLigne.add(ligne);
+		     station2.setLigne(ligne);
 			se.save(station2);
 		    t4.commit();
 		    se.flush();
@@ -258,9 +260,8 @@ public class StationDAOTest extends TestCase {
 
 		}
 		
-		/*
-		 * Test de la méthode getStationByID
-		 */
+
+		 // Test de la méthode getStationByID
 		
 		public void testGetStationByID(){
 
@@ -298,6 +299,7 @@ public class StationDAOTest extends TestCase {
 		     station.setCommentaireStation("Station Alpha");
 		     station.setLatitude(55.5);
 		     station.setLongitude(55.5);
+		    // listLigne.add(ligne);
 		     station.setLigne(ligne);
 			se.save(station);		
 		    t4.commit();
@@ -333,9 +335,8 @@ public class StationDAOTest extends TestCase {
 			se.close();
 		}
 		
-		/*
-		 * Test de la méthode ModifierStation
-		 */
+
+		// Test de la méthode ModifierStation
 		public void testModifierStation(){
 
 			se = HibernateUtils.getSession();
@@ -372,6 +373,7 @@ public class StationDAOTest extends TestCase {
 		     station.setCommentaireStation("Station Alpha");
 		     station.setLatitude(55.5);
 		     station.setLongitude(55.5);
+		     //listLigne.add(ligne);
 		     station.setLigne(ligne);
 			se.save(station);		
 		    t4.commit();
@@ -419,9 +421,8 @@ public class StationDAOTest extends TestCase {
 
 		}
 		
-		/*
-		 * Test de la méthode ModifierStation
-		 */
+
+		// Test de la méthode ModifierStation
 		public void testCreateStationToStation(){
 			
 			se = HibernateUtils.getSession();
@@ -511,5 +512,107 @@ public class StationDAOTest extends TestCase {
 		}
 		
 
+		// Test de la méthode listerStationHasStationByListStation
+		 
+		public void testlisterStationHasStationByListStation() throws SQLException{
+			 int stationList[] =  {1, 2};
+
+			se = HibernateUtils.getSession();
+			Transaction t = se.beginTransaction(); 
+			
+			Query delete2=se.createSQLQuery("delete from station_has_station");
+			Query delete3=se.createSQLQuery("delete from station");	
+			Query delete4=se.createSQLQuery("delete from parametrehoraire");	
+			Query delete5=se.createSQLQuery("delete from ligne");
+			Query delete12=se.createSQLQuery("delete from reseau");	
+			
+			
+			delete2.executeUpdate();
+			delete3.executeUpdate();
+			delete4.executeUpdate();
+			delete5.executeUpdate();
+			delete12.executeUpdate();
+			t.commit();
+			
+			//création d'un reseau test
+			Transaction t2 = se.beginTransaction();
+			reseau.setNomReseau("reseau 1");
+			se.save(reseau);		
+		    t2.commit();
+		    se.flush();
+		    
+			//création d'une ligne test
+			Transaction t3 = se.beginTransaction();
+			ligne.setNomLigne("Ligne 1");
+			ligne.setCommentaire("Ligne 1");
+			ligne.setReseau(reseau);
+			se.save(ligne);		
+		    t3.commit();
+		    se.flush();
+		    
+			//création d'une Station test
+			Transaction t4 = se.beginTransaction();
+		    station.setNomStation("Station Alpha2");
+		    station.setCommentaireStation("Station Alpha2");
+		    station.setLatitude(55.5);
+		    station.setLongitude(55.5);
+		    //listLigne.add(ligne);
+		    station.setLigne(ligne);
+			se.save(station);
+			
+			station2.setNomStation("Station Beta2");
+			station2.setCommentaireStation("Station Beta2");
+			station2.setLatitude(55.5);
+			station2.setLongitude(55.5);
+		    //listLigne.add(ligne);
+		    station2.setLigne(ligne);
+			se.save(station2);
+		    t4.commit();
+		    se.flush();
+	        
+			
+			//Récupération de la liste de ligne par la méthode listerLigne
+			listeStation= station_dao.listerStationHasStationByListStation(stationList);
+
+			//Vérification du nombre de résultat (2)
+			if (listeStation.size()==2){
+				//Vérification des données récupérées
+				if(listeStation.get(0).getNomStation().equals("Station Alpha2") && listeStation.get(0).getCommentaireStation().equals("Station Alpha2")
+						&& listeStation.get(0).getLatitude() == 55.5 && listeStation.get(0).getLongitude() == 55.5
+						&& listeStation.get(1).getNomStation().equals("Station Beta2") && listeStation.get(1).getCommentaireStation().equals("Station Beta2")
+						&& listeStation.get(1).getLatitude() == 55.5 && listeStation.get(1).getLongitude() == 55.5){
+					test=true; 
+				}
+				else{
+					test=false;
+				}
+			}
+			else{
+				test= false;
+			}
+
+
+			assertTrue(test); 
+
+			
+			//nouvelle purge de la table Ligne & reseau & station
+			Transaction t5 = se.beginTransaction();
+			Query delete6=se.createSQLQuery("delete from canton");
+			Query delete7=se.createSQLQuery("delete from station_has_station");
+			Query delete8=se.createSQLQuery("delete from station");	
+			Query delete9=se.createSQLQuery("delete from parametrehoraire");	
+			Query delete10=se.createSQLQuery("delete from ligne");	
+			Query delete11=se.createSQLQuery("delete from reseau");	
+			delete6.executeUpdate();
+			delete7.executeUpdate();
+			delete8.executeUpdate();
+			delete9.executeUpdate();
+			delete10.executeUpdate();
+			delete11.executeUpdate();
+			t5.commit();
+			se.close();
+
+		}
+		
 
 }

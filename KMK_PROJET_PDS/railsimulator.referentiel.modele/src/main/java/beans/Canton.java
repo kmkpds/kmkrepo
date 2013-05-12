@@ -29,17 +29,17 @@ import javax.persistence.Table;
 		private Integer idCanton ;
 		@Column(name="distance")
 		private double distance ;
-		@ManyToOne(fetch = FetchType.LAZY,cascade={CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH}
+		@ManyToOne(cascade={CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH}
 		)
-		@JoinColumn(name="station_station_idstation1")//@JoinColumn(name="station_has_station_station_idstation1") //station_idstation1
+		@JoinColumn(name="station_station_idstation1") //@JoinColumn(name="station_has_station_station_idstation1")
 		private Station station1; //ajouter by kate
 		
-		@ManyToOne(fetch = FetchType.LAZY,cascade={CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH}
+		@ManyToOne(cascade={CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH}
 		)
-		@JoinColumn(name="station_station_idstation2")//@JoinColumn(name="station_has_station_station_idstation2") //station_idstation2
+		@JoinColumn(name="station_station_idstation2")//@JoinColumn(name="station_has_station_station_idstation2") 
 		private Station station2; //ajouter by kate
 		
-		
+
 		public Integer getIdCanton() {
 			return idCanton;
 		}
@@ -64,9 +64,6 @@ import javax.persistence.Table;
 		public void setStation2(Station station2) {
 			this.station2 = station2;
 		}
-
-		
-		
 
 	
 }

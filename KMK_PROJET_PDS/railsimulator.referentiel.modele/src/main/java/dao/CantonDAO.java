@@ -1,7 +1,6 @@
 package dao;
 
 import java.util.List;
-
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
@@ -19,7 +18,7 @@ public class CantonDAO {
 		// TODO Auto-generated constructor stub
 	}
 	
-    public int createCantonParamStation(double distance,Station station1,Station station2) {
+    public int createCantonParamStation(int distance,Station station1,Station station2) {
 	   
 		 se = HibernateUtils.getSession();
 	     Transaction t = se.beginTransaction();
@@ -111,7 +110,7 @@ public class CantonDAO {
 		listeStationStr = listeStationStr.substring(0, listeStationStr.length()-2);
 		//listeStationStr = listeStationStr.substring(0, listeStationStr.length()-1);
 		//listeStationStr = listeStationStr + ")";
-
+System.out.println("requete cantondao" +listeStationStr);
 		
     	//listeCanton = se.createQuery("from Canton where station_has_station_station_idstation1="+listeStationStr+ " or station_has_station_station_idstation2= "+listeStationStr).list();
 		listeCanton = se.createQuery("from Canton "+listeStationStr).list();

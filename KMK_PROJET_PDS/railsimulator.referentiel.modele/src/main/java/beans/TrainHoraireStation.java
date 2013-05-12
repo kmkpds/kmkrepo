@@ -71,6 +71,6 @@ public class TrainHoraireStation {
 	public void setTrain(Train train) {
 		this.train = train;
 	}
-	
-	
+
+
 }

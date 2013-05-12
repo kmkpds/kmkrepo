@@ -1,9 +1,12 @@
 package railsimulator.tools;
 
 import java.util.ArrayList;
+import java.util.List;
 
+import beans.Reseau;
 import beans.Station;
 
+import dao.OptimisationCheminDAO;
 import dao.StationDAO;
 
 public class Algo {
@@ -11,16 +14,25 @@ public class Algo {
 	StationDAO station_dao = new StationDAO();
 	Station station1 = new Station();
 	Station station2 = new Station();
+	OptimisationCheminDAO optimisation_dao=new OptimisationCheminDAO();
+
+	public double[][] matriceIncidence, tabPoids;
+	public double[] tabAntecedents;
+	public int dep, arrivee;
+	//public String[] corressNom;
+	String matrice[][];
 	
+	 
 	
-	/*
-	 * Création Matrice reseau incidence
-	 */
+
+	 // Création Matrice reseau incidence
+
 
 	public double [][] getMatriceIncidence( String reseauMatrice[][]) {
 		
 		
 		double [][] matriceIncidence = new double[reseauMatrice[0].length][reseauMatrice[0].length] ;
+		
 		int ligne = 0;
 		
 		for(int i=1 ; i<= reseauMatrice[0].length ; i++) {
@@ -38,9 +50,8 @@ public class Algo {
 	}
 	
 	
-	/*
-	 * Création Matrice nomStation
-	 */
+
+	 // Création Matrice nomStation
 	
 	public int [] getMatriceNomStation( String reseauMatrice[][]) {
 	       
@@ -51,16 +62,13 @@ public class Algo {
 				 nomStation [j] = Integer.parseInt(reseauMatrice [0][j]);
 				
 			}		
-						
+		
 		return(nomStation);
 	}
 	
 	
 	
-	/*
-	 * récupération index de l'arc minimal
-	 */
-
+	// récupération index de l'arc minimal
 
 
     public int getIndexMinPoids(double[] matrice) {
@@ -79,18 +87,14 @@ public class Algo {
     }
 
     
-	/*
-	 * Création des tronçons
-	 */
+	// Création des troncons
+
     
 	public void stationToStation(String reseauMatrice[][]) {
 		
 		double matriceIncidence[][] = getMatriceIncidence(reseauMatrice);
 		int nomStation[] =  getMatriceNomStation(reseauMatrice);
-	
-		
-
-		 int n = matriceIncidence.length;
+		int n = matriceIncidence.length;
 
 		
          double[] tabDistance = new double[n*n];
@@ -158,12 +162,6 @@ public class Algo {
              }
          }
 
-
-
-
-		
-		
-		
 		//Enregistrement
         System.out.println("\n\n=== Kruscal : arbre couvrant minimal ===");
         for(int nb : res) {
@@ -174,22 +172,79 @@ public class Algo {
 			
 		    station_dao.createStationToStation(station1, station2);
             System.out.println("matrice["+row+"]["+col+"] - "+nomStation[row]+"->"+nomStation[col]);
+            
         }
         System.out.println("=== FIN Kruscal ===");
-    
-		
-		
-		
-		
-		
 	
-	}
+	
+	}//fin stationToStation
+//=============FIN KRUSKAL=======================
 
+//=============DEBUT DIJKSTRA====================
+//    === DEBUT DES FONCTIONS POUR DIJKSTRA === 
 
+    public void dijkstraKetsia(String[][] MatriceDistance){
+    	double[][] matPoid = new double[MatriceDistance.length-1][MatriceDistance.length-1];
+    	int nbColonnes = (matPoid.length*matPoid.length)-matPoid.length;
+    	String[][] matriceDijkstra = new String[nbColonnes][4];
+    	double valueMin, valueMinTMP;
+    	String chemin="";
+    	for(int i=0; i<matPoid.length;i++){
+    		for(int j=0; j<matPoid.length;j++){
+    			matPoid[i][j]=Double.parseDouble(MatriceDistance[i+1][j]);
+    		}
+    	}
+    	int  nomStation [] = new int[MatriceDistance[0].length];
+    	for(int j=0 ; j< MatriceDistance[0].length ; j++) {
+    		nomStation [j] = Integer.parseInt(MatriceDistance [0][j]);	
+		}
+    	int compteur = 0;
+    	StationDAO stationDAO = new StationDAO();
+    	for(int i=0; i<matPoid.length;i++){
+    		chemin = "";
+    		valueMin=0;
+    		for(int j=0; j<matPoid.length;j++){
+    			if(j!=i){
+    				valueMin = matPoid[i][j];
+    				chemin = stationDAO.getStationByID(nomStation[i]).getIdStation() +"-"+stationDAO.getStationByID(nomStation[i]).getNomStation() +" --> " +stationDAO.getStationByID(nomStation[j]).getIdStation() +"-"+stationDAO.getStationByID(nomStation[j]).getNomStation(); 
+    				for(int k=0; k<matPoid.length;k++){
+    					valueMinTMP = matPoid[i][k]+matPoid[k][j];
+    					if(valueMin>valueMinTMP){
+    						valueMin = valueMinTMP;
+    						chemin = stationDAO.getStationByID(nomStation[i]).getIdStation() +"-"+stationDAO.getStationByID(nomStation[i]).getNomStation() +" --> "+stationDAO.getStationByID(nomStation[k]).getIdStation() +"-"+stationDAO.getStationByID(nomStation[k]).getNomStation() +" --> "+stationDAO.getStationByID(nomStation[j]).getIdStation() +"-"+stationDAO.getStationByID(nomStation[j]).getNomStation();
+    					}	
+    				}
+    				matriceDijkstra[compteur][0]=String.valueOf(nomStation[i]);
+            		matriceDijkstra[compteur][1]=String.valueOf(nomStation[j]);
+            		matriceDijkstra[compteur][2]=String.valueOf(valueMin);
+            		matriceDijkstra[compteur][3]=chemin;
+            		compteur++;
+    			}
+    		}
+	
+    	}
+    	//creation
+    	for (int i =0; i<matriceDijkstra.length;i++){
+    		optimisation_dao.createOptimisationChemin(stationDAO.getStationByID(Integer.parseInt(matriceDijkstra[i][0])),stationDAO.getStationByID(Integer.parseInt(matriceDijkstra[i][1])),Double.parseDouble(matriceDijkstra[i][2]),matriceDijkstra[i][3]);
+    	}
+    	System.out.println("matPoid");
+    	for (int z =0; z<matPoid.length;z++){
+    		for (int p =0; p<matPoid.length;p++){
+    			System.out.print(matPoid[z][p]);
+    		}
+			System.out.println(" | ");
+			
+		}
+    	System.out.println("matriceDijkstra");
+		for (int z =0; z<matriceDijkstra.length;z++){
+			System.out.print(matriceDijkstra[z][0] + " | " + matriceDijkstra[z][1] + " | " + matriceDijkstra[z][2] + " | "+ matriceDijkstra[z][3]);
+			System.out.println(" | ");
+		}
+    	
+    }
+ 
 
-
-
-}
+}//Fin classe Algo
 
 
 

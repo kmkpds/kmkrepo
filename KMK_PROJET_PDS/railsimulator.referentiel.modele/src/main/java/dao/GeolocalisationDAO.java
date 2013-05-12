@@ -51,7 +51,7 @@ public class GeolocalisationDAO {
 		se = HibernateUtils.getSession();
 		se.beginTransaction(); 
 
-		geolocalisation= (Geolocalisation) se.createQuery("from Geolocalisation where idCanton="+id).uniqueResult();
+		geolocalisation= (Geolocalisation) se.createQuery("from Geolocalisation where idgeolocalisation="+id).uniqueResult();
 		se.close();
 
 		return geolocalisation;

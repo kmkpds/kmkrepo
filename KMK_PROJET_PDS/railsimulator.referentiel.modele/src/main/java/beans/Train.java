@@ -1,4 +1,5 @@
 package beans;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -15,18 +16,18 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-/**
- * @author Nytos
- *
- */
+
+
+
 @Entity
 @Table(name="train")
-public class Train {
+public class Train  {
+
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name="idtrain")
-	private Integer idTrain;
+	private Integer idtrain ;
 	@Column(name="nomtrain")
 	private String nomTrain;
 	@Column(name="latitudetrain")
@@ -35,18 +36,66 @@ public class Train {
 	private double longitudeTrain ;
 	@Column(name="etat")
 	private int etat;
+	@Column(name="prixtrain")
+	private Integer prixtrain ;
+	@Column(name="nombredewagon")
+	private Integer nombredewagon ;
+	@Column(name="vitesse")
+	private Integer vitesse ;
+	@Column(name="nombredeplacesa")
+	private Integer nombredeplacea ;
+	@Column(name="nombredeplacesd")
+	private Integer nombredeplaced ;
 	@ManyToOne(
 			cascade={CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH}
 	)
 	@JoinColumn(name="ligne_idligne")
 	private Ligne ligne;
+	
 	@OneToMany(fetch=FetchType.EAGER,mappedBy="train")
-		private Set<TrainHoraireStation> TrainHoraireStationList = new HashSet<TrainHoraireStation>();
-	public Integer getIdTrain() {
-		return idTrain;
+	private Set<TrainHoraireStation> TrainHoraireStationList = new HashSet<TrainHoraireStation>();
+	
+	public Integer getIdtrain() {
+		return idtrain;
 	}
-	public void setIdTrain(Integer idTrain) {
-		this.idTrain = idTrain;
+	public void setIdtrain(Integer idtrain) {
+		this.idtrain = idtrain;
+	}
+	public Integer getPrixtrain() {
+		return prixtrain;
+	}
+	public void setPrixtrain(Integer prixtrain) {
+		this.prixtrain = prixtrain;
+	}
+	public Integer getNombredewagon() {
+		return nombredewagon;
+	}
+	public void setNombredewagon(Integer nombredewagon) {
+		this.nombredewagon = nombredewagon;
+	}
+	public Integer getVitesse() {
+		return vitesse;
+	}
+	public void setVitesse(Integer vitesse) {
+		this.vitesse = vitesse;
+	}
+	public Integer getNombredeplacea() {
+		return nombredeplacea;
+	}
+	public void setNombredeplacea(Integer nombredeplacea) {
+		this.nombredeplacea = nombredeplacea;
+	}
+	public Integer getNombredeplaced() {
+		return nombredeplaced;
+	}
+	public void setNombredeplaced(Integer nombredeplaced) {
+		this.nombredeplaced = nombredeplaced;
+	}
+	public Ligne getLigne() {
+		return ligne;
+	}
+	public void setLigne(Ligne ligne) {
+		this.ligne = ligne;
 	}
 	public String getNomTrain() {
 		return nomTrain;
@@ -72,12 +121,6 @@ public class Train {
 	public void setEtat(int etat) {
 		this.etat = etat;
 	}
-	public Ligne getLigne() {
-		return ligne;
-	}
-	public void setLigne(Ligne ligne) {
-		this.ligne = ligne;
-	}
 	public Set<TrainHoraireStation> getTrainHoraireStationList() {
 		return TrainHoraireStationList;
 	}
@@ -85,5 +128,6 @@ public class Train {
 			Set<TrainHoraireStation> trainHoraireStationList) {
 		TrainHoraireStationList = trainHoraireStationList;
 	}
-
+	
+	
 }

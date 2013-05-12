@@ -32,17 +32,19 @@ public class ReseauDAO {
 	    
 	}
 	
-	public int createReseauReturnId (String nomReseau){
-		
+	public  int createReseauReturnId(String nomReseau) {
+	      
+		 
 		 se = HibernateUtils.getSession();
 	     Transaction t = se.beginTransaction();
+	    
 	     reseau.setNomReseau(nomReseau);
-	     int idReseau = (Integer) se.save(reseau);
+	     int idReseau = (Integer) se.save(reseau);		
 	     t.commit();
 	     se.close();
 	     return idReseau;
-	    
 	}
+   
 	
 	
 	public Reseau getReseauByID(int id) {
@@ -55,7 +57,7 @@ public class ReseauDAO {
 	public int getReseauByName(String name) {
     	se = HibernateUtils.getSession();
     	se.beginTransaction(); 
-    	reseau = (Reseau) se.createQuery("from Reseau where nomReseau="+name).uniqueResult();
+    	reseau = (Reseau) se.createQuery("from Reseau where nomReseau='"+name+"'").uniqueResult();
     	se.close();
     	return reseau.getIdReseau();
     }

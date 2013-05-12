@@ -17,10 +17,7 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-
-
 import javax.persistence.Table;
-
 
 
 @Entity
@@ -42,22 +39,14 @@ public class Station {
 	private Set<TrainHoraireStation> TrainHoraireStationList = new HashSet<TrainHoraireStation>();
 
 
-	public Set<TrainHoraireStation> getTrainHoraireStationList() {
-		return TrainHoraireStationList;
-	}
-
-
-	public void setTrainHoraireStationList(
-			Set<TrainHoraireStation> trainHoraireStationList) {
-		TrainHoraireStationList = trainHoraireStationList;
-	}
-
-
+   
 	@ManyToOne(
 			cascade={CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH}
 	)
 	@JoinColumn(name="ligne_idligne")
 	private Ligne ligne;
+	
+
 	@ManyToMany(fetch = FetchType.EAGER,
 			cascade={CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
 	@JoinTable(name="station_has_station",
@@ -74,6 +63,7 @@ public class Station {
 	 inverseJoinColumns=@JoinColumn(name="station_idstation1")
 	)
 	private List<Station> stationRetour;
+	
 
 
 	public Integer getIdStation() {
@@ -156,11 +146,17 @@ public class Station {
 	}
 
 
+	public Set<TrainHoraireStation> getTrainHoraireStationList() {
+		return TrainHoraireStationList;
+	}
+
+
+	public void setTrainHoraireStationList(
+			Set<TrainHoraireStation> trainHoraireStationList) {
+		TrainHoraireStationList = trainHoraireStationList;
+	}
 
 
 
-
-
-	
 
 }

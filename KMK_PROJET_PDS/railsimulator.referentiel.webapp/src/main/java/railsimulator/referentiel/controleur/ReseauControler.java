@@ -1,14 +1,15 @@
-
 package railsimulator.referentiel.controleur;
 
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import dao.HibernateUtils;
+
 
 
 import javax.servlet.ServletException;
@@ -27,25 +28,32 @@ import dao.LigneDAO;
 import dao.ReseauDAO;
 import dao.StationDAO;
 import dao.ZoneDAO;
+import dao.OptimisationCheminDAO;
 
 
 import beans.Canton;
 import beans.Geolocalisation;
 import beans.Lieu;
+import beans.Ligne;
 import beans.Reseau;
 import beans.Station;
 import beans.Zone;
+import beans.OptimisationChemin;
 
 public class ReseauControler extends HttpServlet {
 	
 	private List<Station> listeStation;
 	private List<Reseau> listeReseau;
 	private List<Zone> listeZone;
-	private StationDAO station_dao = new StationDAO();
-	
+	private List<Ligne> listeLignes;
 	private List<Canton> listeCanton;
-	private CantonDAO cantonDao = new CantonDAO();
+	private StationDAO station_dao = new StationDAO();
+	private CantonDAO canton_dao=new CantonDAO();
+	private OptimisationCheminDAO optimisationCheminDAO = new OptimisationCheminDAO();
 	 
+	
+
+	
 	private Reseau reseau = new Reseau ();
 	private Zone zone = new Zone();
 	private Geolocalisation geolocalisation = new Geolocalisation() ;
@@ -55,14 +63,15 @@ public class ReseauControler extends HttpServlet {
 	private LieuDAO lieu_dao = new LieuDAO();
 	private ZoneDAO zone_dao = new ZoneDAO();
 	private GeolocalisationDAO geolocalisation_dao = new GeolocalisationDAO();
-		
+	private Ligne ligne =new Ligne();
+	private List<OptimisationChemin> optimisationCheminList;
+	
+	
 	
 	public void doGet( HttpServletRequest request, HttpServletResponse response ) throws ServletException, IOException{
 
 
 		String action = request.getParameter("action");
-		
-	
 	
 		if(action.equals("visualisationReseau")){
 			
@@ -72,10 +81,14 @@ public class ReseauControler extends HttpServlet {
 			request.setAttribute("listeStation",listeStation);
 			this.getServletContext().getRequestDispatcher( "/WEB-INF/visualisationReseau.jsp").forward( request, response );
 		}
-
-		
-		
-		 
+		if(action.equals("optimisationChemin")){	
+			listeLignes= ligne_dao.listerLigne();
+			optimisationCheminList = optimisationCheminDAO.listOptimisationCheminByLigne(listeLignes.get(0).getIdLigne());
+			request.logout();
+			request.setAttribute("listeLignes",listeLignes);
+			request.setAttribute("optimisationCheminList",optimisationCheminList);
+			this.getServletContext().getRequestDispatcher( "/WEB-INF/optimisationChemin.jsp").forward( request, response );
+		} 
 		if(action.equals("creerReseau")){
 			
 			listeReseau= reseau_dao.listerReseau();
@@ -90,6 +103,7 @@ public class ReseauControler extends HttpServlet {
 			this.getServletContext().getRequestDispatcher( "/WEB-INF/geolocaliser.jsp").forward( request, response );
 		}
 		
+
 		
 		if(action.equals("algo")){
 			
@@ -157,15 +171,35 @@ public class ReseauControler extends HttpServlet {
 			Session se = null;
 			se = HibernateUtils.getSession();
 			
+			Transaction t10 = se.beginTransaction();
+			Query create10=se.createSQLQuery("delete from canton");
+			create10.executeUpdate();
+			t10.commit();
+			
+			Transaction t13 = se.beginTransaction();
+			Query create13=se.createSQLQuery("delete from optimisationchemin");
+			create13.executeUpdate();
+			t13.commit();
+			
 			Transaction t = se.beginTransaction();
 			Query create=se.createSQLQuery("delete from station_has_station");
 			create.executeUpdate();
 			t.commit();
-			
+
 			Transaction t8 = se.beginTransaction();
 			Query create8=se.createSQLQuery("delete from station");
 			create8.executeUpdate();
 			t8.commit();
+			
+			Transaction t9 = se.beginTransaction();
+			Query create9=se.createSQLQuery("delete from parametrehoraire");
+			create9.executeUpdate();
+			t9.commit();
+			
+			Transaction t11 = se.beginTransaction();
+			Query create11=se.createSQLQuery("delete from train");
+			create11.executeUpdate();
+			t11.commit();
 			
 			Transaction t2 = se.beginTransaction();
 			Query create2=se.createSQLQuery("delete from ligne");
@@ -215,6 +249,16 @@ public class ReseauControler extends HttpServlet {
 
 		String action = request.getParameter("action");
 
+		if(action.equals("optimisationChemin")){	
+			System.out.println("hello");
+			int  idLigne = Integer.parseInt(request.getParameter("idLigne"));
+			optimisationCheminList = optimisationCheminDAO.listOptimisationCheminByLigne(idLigne);
+			listeLignes= ligne_dao.listerLigne();
+			request.logout();
+			request.setAttribute("listeLignes",listeLignes);
+			request.setAttribute("optimisationCheminList",optimisationCheminList);
+			this.getServletContext().getRequestDispatcher( "/WEB-INF/optimisationChemin.jsp").forward( request, response );
+		} 
 		if(action.equals("AjoutZone")){
 
 
@@ -247,26 +291,7 @@ public class ReseauControler extends HttpServlet {
 					break;
 				}	
 			} //Fin
-			
-			
-			/*Remplissage du tableauGeolocalisation
-			List<Zone>  listeZone = zone_dao.listerZone();
-			List<double[]> tableauGeolocalisation = new ArrayList<double[]>();
-			for(int y=0;y<listeZone.size();y++){
-				Geolocalisation g1 = listeZone.get(y).getGeolocalisationlist().get(0);
-				Geolocalisation g2 = listeZone.get(y).getGeolocalisationlist().get(1);
-				//tableauGeolocalisation.add(new double[] {g1.getLatitudeGeolocalisation(), g2.getLatitudeGeolocalisation(), g1.getLongitudeGeolocalisation(), g2.getLongitudeGeolocalisation()});
-							
-			}
-			
-						
-		  /*	AlgoCreationReseau algoReseau = new AlgoCreationReseau();
-			boolean verifierDistanceZone = true;
-			if (tableauGeolocalisation.size()!=0){
-				verifierDistanceZone = algoReseau.getDistanceZone(latitude, latitudeb, longitude, longitudeb, tableauGeolocalisation);
-			}
-			
-			if(verifierDistanceZone == true){*/
+
 			
 			if(isZoneExist == false){
 			reseau=reseau_dao.getReseauByID(idreseau);
@@ -293,11 +318,7 @@ public class ReseauControler extends HttpServlet {
 				this.getServletContext().getRequestDispatcher("/WEB-INF/creeationReseau.jsp").forward( request, response );
 	
 		    }
-						
-			/*}else{
-				
-				System.out.println("DŽsolŽ, cette zone est trop proche d'une zone existance. Merci d'en crŽer une nouvelle.");
-			}*/
+
 		}
 		
 				
@@ -324,40 +345,56 @@ public class ReseauControler extends HttpServlet {
 
 		}
 	
-				if(action.equals("GenererReseau")){
-				
+		if(action.equals("GenererReseau")){
+			// original
+			//int idreseau = Integer.parseInt(request.getParameter("idReseau"));
+			//reseau = reseau_dao.getReseauByID(idreseau);
+			//AlgoCreationReseau algo = new AlgoCreationReseau();
+			//Algo kruskal = new Algo();
+			//algo.creerReseau(reseau);
+			//kruskal.stationToStation(algo.creerReseau(reseau));
+			//listeStation= station_dao.listerStation();
+
+			//request.logout();
+			//request.setAttribute("listeStation",listeStation);
+			//this.getServletContext().getRequestDispatcher( "/WEB-INF/visualisationReseau.jsp").forward( request, response ); */
 			System.out.println("GENERER RESEAU");
 try {
+			//ON RECUPERE LE RESEAU
 			int idreseau = Integer.parseInt(request.getParameter("idReseau"));
 			reseau = reseau_dao.getReseauByID(idreseau);
+			
+			//PLACE LES STATIONS DS LE RESEAU
 			AlgoCreationReseau algo = new AlgoCreationReseau();
 			Algo kruskal = new Algo();
-			algo.creerReseau(reseau);
-			kruskal.stationToStation(algo.creerReseau(reseau));
+			String[][] matriceStation = algo.creerReseau(reseau);
 			
-			int[] stationList =kruskal.getMatriceNomStation(algo.creerReseau(reseau));
-			System.out.println("taille int[] stationList " +stationList.length);
+			//ARBRE RECOUVRANT ARC OPTIMAUX
+			kruskal.stationToStation(matriceStation);
+			kruskal.dijkstraKetsia(matriceStation);
+			int[] stationList =kruskal.getMatriceNomStation(matriceStation);
+			
+			//SELECTIONNE LES TRONCONS CONCERNES
 			List<Station> listeStationAffichage = station_dao.listerStationHasStationByListStation(stationList);//.listerStation();
 
 			listeStation=station_dao.listerStation();
 			
+			//DECOUPAGE DES TRONCONS EN CANTONS
 			AlgoDivTroncCanton algodiv=new AlgoDivTroncCanton();
 
-			algodiv.decoupage(listeStationAffichage,stationList);//listeStation,stationList);
+			algodiv.decoupage(listeStationAffichage,stationList);
 
-			listeCanton=cantonDao.listerCantonParam(listeStationAffichage);//listeStation);
+			listeCanton=canton_dao.listerCantonParam(listeStationAffichage);//listeStation);
 			
 			request.logout();
-			request.setAttribute("listeStation",listeStation);//listeStationAffichage);
+			request.setAttribute("listeStation",listeStation);
 			request.setAttribute("listeCanton",listeCanton);
 			this.getServletContext().getRequestDispatcher("/WEB-INF/visualisationReseau.jsp").forward( request, response );
 } catch (SQLException e) {
 	// TODO Auto-generated catch block
 	e.printStackTrace();
 }		
-		}
-		
-		
+		}//fin action generer reseau
 	}	
 	
 	

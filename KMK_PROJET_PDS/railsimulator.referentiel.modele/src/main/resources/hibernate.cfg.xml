@@ -38,6 +38,10 @@
 		<mapping class="beans.Action" />
 		<mapping class="beans.ParametreHoraire" />
 		<mapping class="beans.TrainHoraireStation" />
+        <mapping class="beans.CoutFonctionnement" />
+        <mapping class="beans.OptimisationChemin" />
+        
+        
 
 		<!-- Affiche les logs SQL -->
 		<!-- <property name="show_sql">true</property> -->

@@ -1,10 +1,5 @@
 package beans;
 
-
-
-
-
-
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -37,35 +32,60 @@ public class Ligne  {
 	private String nomLigne;
 	@Column(name="commentaire")
 	private String commentaire;
+	@Column(name="longueur")
+	private Integer longueur;
+	@Column(name="nombredestation")
+	private Integer nombredestation;
+	@Column(name="dureemoyennetrajet")
+	private Integer dureemoyennetrajet;
+	@Column(name="nombredetrain")
+	private Integer nombredetrain;
+	@Column(name="nombrepassagers")
+	private Integer nombrepassagers;
+	@Column(name="prixdeplace")
+	private Double prixdeplace;
+	
 	
 	@OneToMany(mappedBy="ligne")
-	//private List<Station> stationlist;
 	private Set<Station> stationlist = new HashSet<Station>();
+	
 	@OneToMany(fetch=FetchType.EAGER,mappedBy="ligne")
-	//private List<ParametreHoraire> parametreHoraireList;
 	private Set<ParametreHoraire> parametreHoraireList = new HashSet<ParametreHoraire>();
-	@OneToMany(mappedBy="ligne")
+
+
+	@OneToMany(fetch = FetchType.EAGER,mappedBy="ligne")
 	private Set<Train> trainlist = new HashSet<Train>();
-	public Set<Train> getTrainlist() {
-		return trainlist;
-	}
-	public void setTrainlist(Set<Train> trainlist) {
-		this.trainlist = trainlist;
-	}
-
-	/*public List<ParametreHoraire> getParametreHoraireList() {
-		return parametreHoraireList;
-	}
-
-	public void setParametreHoraireList(List<ParametreHoraire> parametreHoraireList) {
-		this.parametreHoraireList = parametreHoraireList;
-	}*/
-
+	
+	
+	@OneToMany(fetch=FetchType.EAGER, mappedBy="ligne")	
+	private Set<CoutFonctionnement> CoutFonctionnementlist = new HashSet<CoutFonctionnement>();
+	
+	
 	@ManyToOne(
 			cascade={CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH}
 	)
 	@JoinColumn(name="reseau_idreseau")
 	private Reseau reseau;
+	
+	public Set<Train> getTrainlist() {
+		return trainlist;
+	}
+
+	public void setTrainlist(Set<Train> trainlist) {
+		this.trainlist = trainlist;
+	}
+
+	public Set<CoutFonctionnement> getCoutFonctionnementlist() {
+		return CoutFonctionnementlist;
+	}
+
+	public void setCoutFonctionnementlist(
+			Set<CoutFonctionnement> coutFonctionnementlist) {
+		CoutFonctionnementlist = coutFonctionnementlist;
+	}
+	
+
+	
 	
 	
 	public Ligne() {
@@ -96,14 +116,6 @@ public class Ligne  {
 		this.commentaire = commentaire;
 	}
 
-	/*public List<Station> getStationlist() {
-		return stationlist;
-	}
-
-	public void setStationlist(List<Station> stationlist) {
-		this.stationlist = stationlist;
-	}*/
-
 	public Reseau getReseau() {
 		return reseau;
 	}
@@ -126,6 +138,54 @@ public class Ligne  {
 
 	public void setReseau(Reseau reseau) {
 		this.reseau = reseau;
+	}
+
+	public Integer getLongueur() {
+		return longueur;
+	}
+
+	public void setLongueur(Integer longueur) {
+		this.longueur = longueur;
+	}
+
+	public Integer getNombredestation() {
+		return nombredestation;
+	}
+
+	public void setNombredestation(Integer nombredestation) {
+		this.nombredestation = nombredestation;
+	}
+
+	public Integer getDureemoyennetrajet() {
+		return dureemoyennetrajet;
+	}
+
+	public void setDureemoyennetrajet(Integer dureemoyennetrajet) {
+		this.dureemoyennetrajet = dureemoyennetrajet;
+	}
+
+	public Integer getNombredetrain() {
+		return nombredetrain;
+	}
+
+	public void setNombredetrain(Integer nombredetrain) {
+		this.nombredetrain = nombredetrain;
+	}
+
+	public Integer getNombrepassagers() {
+		return nombrepassagers;
+	}
+
+	public void setNombrepassagers(Integer nombrepassagers) {
+		this.nombrepassagers = nombrepassagers;
+	}
+
+	public Double getPrixdeplace() {
+		return prixdeplace;
+	}
+
+	public void setPrixdeplace(Double prixdeplace) {
+		this.prixdeplace = prixdeplace;
 	}
 
 	

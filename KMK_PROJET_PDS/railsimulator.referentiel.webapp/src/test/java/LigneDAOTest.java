@@ -1,4 +1,5 @@
 
+
 import java.util.List;
 
 import org.hibernate.Query;
@@ -9,13 +10,12 @@ import dao.HibernateUtils;
 import dao.LigneDAO;
 import beans.Ligne;
 import beans.Reseau;
+import beans.Station;
 
 
 import junit.framework.TestCase;
 
-/*
- * Test Unitaire de ligne DAO
- */
+
 
 public class LigneDAOTest extends TestCase {
 
@@ -25,7 +25,7 @@ public class LigneDAOTest extends TestCase {
 	private Ligne ligne = new Ligne();
 	private Ligne ligne2 = new Ligne();
 	private Reseau reseau = new Reseau();
-	
+	private Station station=new Station();
 	private List<Ligne> listeLigne;
 	
 	private LigneDAO ligne_dao = new LigneDAO();
@@ -36,9 +36,6 @@ public class LigneDAOTest extends TestCase {
 
 	
 	
-	/*
-	 * Test de la méthode createLigne
-	 */
 
 	public void testCreateLigne(){
 
@@ -80,9 +77,7 @@ public class LigneDAOTest extends TestCase {
 	}
 
 	
-	/*
-	 * Test de la méthode supprimerLigne
-	 */
+
 	public void testSupprimerLigne(){
 
 
@@ -140,10 +135,7 @@ public class LigneDAOTest extends TestCase {
 
 	
 	
-	/*
-	 * Test de la méthode listerLigne
-	 */
-	 
+
 	public void testListerLigne(){
 
 
@@ -213,10 +205,7 @@ public class LigneDAOTest extends TestCase {
 
 	
 	
-	/*
-	 * Test de la méthode getLigneByID
-	 */
-	
+
 	public void testGetLigneByID(){
 
 		se = HibernateUtils.getSession();
@@ -273,9 +262,6 @@ public class LigneDAOTest extends TestCase {
 	}
 	
 	
-	/*
-	 * Test de la méthode modifierLigne
-	 */
 
 	public void testModifierLigne(){
 
@@ -341,5 +327,9 @@ public class LigneDAOTest extends TestCase {
 		se.close();
 
 	}
+	
+	
+   
+   
  
 }

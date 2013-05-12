@@ -33,12 +33,14 @@ public class ZoneDAOTest  extends TestCase {
 
 		se = HibernateUtils.getSession();
 		Transaction t = se.beginTransaction(); 
-
-
+		
+		Query delete5=se.createQuery("delete from Geolocalisation");
 		Query delete=se.createQuery("delete from Zone");
-		Query delete2=se.createQuery("delete from Reseau");		
+		Query delete2=se.createQuery("delete from Reseau");	
+		
+		delete5.executeUpdate();
 		delete.executeUpdate();
-		delete2.executeUpdate();
+		//delete2.executeUpdate();
 		t.commit();
 
 		//création d'un reseau test
@@ -58,11 +60,14 @@ public class ZoneDAOTest  extends TestCase {
 		assertEquals("1",requete.uniqueResult().toString()); 
 
 		//nouvelle purge de la table Ligne & reseau
-		Transaction t3 = se.beginTransaction();
+		Transaction t3 = se.beginTransaction();		
+		
+		Query delete6=se.createQuery("delete from Geolocalisation");		
+		delete6.executeUpdate();
 		Query delete3=se.createQuery("delete from Zone");		
 		delete3.executeUpdate();
 		Query delete4=se.createQuery("delete from Reseau");		
-		delete4.executeUpdate();
+		//delete4.executeUpdate();
 		t3.commit();
 		se.close();
 
@@ -76,9 +81,9 @@ public class ZoneDAOTest  extends TestCase {
 		
 		//Purge de la table  reseau base de donnée de test
 		Query delete=se.createQuery("delete from Zone");
-		Query delete2=se.createQuery("delete from Reseau");		
+		//Query delete2=se.createQuery("delete from Reseau");		
 		delete.executeUpdate();
-		delete2.executeUpdate();
+		//delete2.executeUpdate();
 		t.commit();
 		
 		//création d'un reseau test
@@ -132,7 +137,7 @@ public class ZoneDAOTest  extends TestCase {
 		Query delete3=se.createQuery("delete from Zone");		
 		Query delete4=se.createQuery("delete from Reseau");		
 		delete3.executeUpdate();
-		delete4.executeUpdate();		
+		//delete4.executeUpdate();		
 		t4.commit();
 		se.close();
 
@@ -148,7 +153,7 @@ public class ZoneDAOTest  extends TestCase {
 		Query delete=se.createQuery("delete from Zone");
 		Query delete2=se.createQuery("delete from Reseau");		
 		delete.executeUpdate();
-		delete2.executeUpdate();
+		//delete2.executeUpdate();
 		t.commit();
 		
 		//création d'un reseau test
@@ -190,11 +195,12 @@ public class ZoneDAOTest  extends TestCase {
 		Query delete3=se.createQuery("delete from Zone");		
 		Query delete4=se.createQuery("delete from Reseau");		
 		delete3.executeUpdate();
-		delete4.executeUpdate();		
+		//delete4.executeUpdate();		
 		t4.commit();
 		se.close();
 	}
 	
+
 
 
 }

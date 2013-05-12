@@ -66,6 +66,7 @@ public class ZoneDAO {
     	se = HibernateUtils.getSession();
     	se.beginTransaction();  	 	
     	listeZone = se.createQuery("from Zone").list();
+    	
         return listeZone;
     }
 	

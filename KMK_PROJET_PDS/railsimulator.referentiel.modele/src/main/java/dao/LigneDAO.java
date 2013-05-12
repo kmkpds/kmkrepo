@@ -11,11 +11,13 @@ public class LigneDAO {
 	private Session se = null;
 	private List<Ligne> listeLigne;
     private Ligne ligne;
-
-    
+    //rajout
+    private int idLigne;
+   
     
 	public  void createLigne(String nomLigne , String commentaireLigne, Reseau reseau ) {
-	       
+	      
+		 
 		se = HibernateUtils.getSession();
 	     Transaction t = se.beginTransaction();
 	     Ligne ligne = new Ligne();
@@ -46,8 +48,21 @@ public class LigneDAO {
     	se = HibernateUtils.getSession();
     	se.beginTransaction();  	 	
     	listeLigne = se.createQuery("from Ligne").list();
+
+ 
+    	
         return listeLigne;
     }
+	
+	
+	
+	public int getIdLigne(Ligne l){
+		se = HibernateUtils.getSession();
+		se.beginTransaction();
+		 idLigne = (Integer) se.createQuery("from Ligne where idLigne="+l.getIdLigne()).uniqueResult();
+		 return idLigne;
+	}
+
 	
 	public Ligne getLigneByID(int id) {
     	se = HibernateUtils.getSession();
