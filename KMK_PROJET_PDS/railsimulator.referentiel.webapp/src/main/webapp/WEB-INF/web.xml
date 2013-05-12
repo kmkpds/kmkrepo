@@ -48,6 +48,11 @@
 		<servlet-name>VisuIncidentsControleur</servlet-name>
 		<servlet-class>railsimulator.visualisation.VisuIncidentsControleur</servlet-class>
 	</servlet>
+	
+	<servlet>
+		<servlet-name>DWHControler</servlet-name>
+		<servlet-class>railsimulator.DWHControler.DWHControler</servlet-class>
+	</servlet>
 
 	<servlet-mapping>
 		<servlet-name>AccueilControler</servlet-name>
@@ -91,5 +96,8 @@
 		<servlet-name>VisuIncidentsControleur</servlet-name>
 		<url-pattern>/visualiser</url-pattern>
 	</servlet-mapping>
+	    <servlet-name>DWHControler</servlet-name>
+    <url-pattern>/demo</url-pattern>
+  </servlet-mapping>
 	
 </web-app>
