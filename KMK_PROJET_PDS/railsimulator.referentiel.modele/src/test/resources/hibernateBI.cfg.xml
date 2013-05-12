@@ -3,11 +3,15 @@
      "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
     "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
 	
-<hibernate-configuration>
+	<hibernate-configuration>
 	<session-factory>
 		<property name="hibernate.dialect">org.hibernate.dialect.SQLServerDialect</property>
-		<property name="hibernate.connection.driver_class">com.microsoft.sqlserver.jdbc.SQLServerDriver</property>
-		<property name="hibernate.connection.url">jdbc:sqlserver://178.33.40.163:1436;databaseName=KMKDWH;SelectMethod=cursor</property>
+		
+	<!-- <property name="hibernate.connection.driver_class">com.microsoft.sqlserver.jdbc.SQLServerDriver</property>
+	<property name="hibernate.connection.url">jdbc:sqlserver://178.33.40.163:1436;databaseName=KMKDWH;SelectMethod=cursor</property>
+		-->
+		<property name="hibernate.connection.driver_class">net.sourceforge.jtds.jdbc.Driver</property>
+		<property name="hibernate.connection.url">jdbc:jtds:sqlserver://178.33.40.163:1436;databaseName=KMKDWH;SelectMethod=cursor</property>
 		<property name="hibernate.connection.username">sa</property>
 		<property name="hibernate.connection.password">KMKbdd94700</property>
 		

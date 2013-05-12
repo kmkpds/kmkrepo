@@ -63,12 +63,19 @@ xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xs
 			<scope>compile</scope>
 		</dependency>
 		
+
 		<dependency>
-		    <groupId>com.microsoft.sqlserver</groupId>
-		    <artifactId>sqljdbc4</artifactId>
-   			<version>4.0</version>
+			<groupId>net.sourceforge.jtds</groupId>
+			<artifactId>jtds</artifactId>
+			<version>1.3.0</version>
 		</dependency>
 		
+		  <dependency>
+        <groupId>org.hibernate</groupId>
+        <artifactId>hibernate-annotations</artifactId>
+        <version>3.0alpha3</version>
+      </dependency>
+      
 	</dependencies>
 
 	<build>
@@ -91,10 +98,7 @@ xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xs
 		        <configuration>
 		          <testFailureIgnore>true</testFailureIgnore>
 		        </configuration>
-		      </plugin>
-			
+		      </plugin>			
 		</plugins>
-		
 	</build>
-  
 </project>
