@@ -14,9 +14,9 @@ public class Mock2Action2EnCours extends TimerTask{
 		
 		try{
 			
-		    action = action_dao.getActionByID(5);
+		    action = action_dao.getActionByID(10);
 		    
-		    action.setDateDebut("2013-05-06 18:06:50");
+		    action.setDateDebut("2013-05-06 17:25:13");
 		    action.setStatut("En cours");
 			
 		    action_dao.modifierAction(action);

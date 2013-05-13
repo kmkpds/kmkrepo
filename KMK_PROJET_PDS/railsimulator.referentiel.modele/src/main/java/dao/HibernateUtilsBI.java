@@ -6,27 +6,27 @@ import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
 import org.hibernate.service.ServiceRegistryBuilder;
-
+ 
 public class HibernateUtilsBI {
-
-	private static SessionFactory sessionFactoryBI;
+	
+	private static SessionFactory sessionFactory;
 	private static ServiceRegistry serviceRegistry;
  
-	static {
-		try {
-			Configuration configuration = new Configuration();
+    // Crée une unique instance de la SessionFactory à partir de hibernate.cfg.xml
+    static {
+        try {
+        	Configuration configuration = new Configuration();
             configuration.configure("/hibernateBI.cfg.xml");
             serviceRegistry = new ServiceRegistryBuilder().applySettings(configuration.getProperties()).buildServiceRegistry();        
-            sessionFactoryBI = configuration.buildSessionFactory(serviceRegistry);
-		
-	
-		} catch (HibernateException ex) {
-			throw new RuntimeException("Exception building SessionFactory: " + ex.getMessage(), ex);
-		}
-	}
-
-	public static Session getSessionBI() throws HibernateException {
-		 return sessionFactoryBI.openSession();
-	
-	}
+            sessionFactory = configuration.buildSessionFactory(serviceRegistry);
+        } catch (HibernateException ex) {
+        	
+            throw new RuntimeException("Problème de configuration : " + ex.getMessage(), ex);
+        }
+    }
+ 
+    // Renvoie une session Hibernate
+    public static Session getSessionBI() throws HibernateException {
+        return sessionFactory.openSession();
+    }
 }

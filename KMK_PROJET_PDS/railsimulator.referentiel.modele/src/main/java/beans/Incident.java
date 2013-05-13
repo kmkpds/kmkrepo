@@ -22,7 +22,6 @@ import javax.persistence.Table;
 public class Incident {
 	
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name="idincident")
 	private Integer idIncident;
 	@Column(name="description")

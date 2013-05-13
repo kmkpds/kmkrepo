@@ -14,9 +14,9 @@ public class Mock2Action1Termine extends TimerTask{
 		
 		try{
 			
-		    action = action_dao.getActionByID(4);
+		    action = action_dao.getActionByID(9);
 		    
-		    action.setDateFin("2013-05-06 18:05:31");
+		    action.setDateFin("2013-05-06 17:22:31");
 		    action.setStatut("Termine");
 			
 		    action_dao.modifierAction(action);

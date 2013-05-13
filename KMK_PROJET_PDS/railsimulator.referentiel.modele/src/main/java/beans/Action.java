@@ -16,7 +16,6 @@ public class Action {
 	
 	
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name="idactionintervention")
 	private Integer idActionIntervention;
 	@Column(name="libelleactionintervention")

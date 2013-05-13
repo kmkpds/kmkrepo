@@ -36,8 +36,10 @@ public class MockIncident2 extends TimerTask{
 		    se.flush();
 		    
 		    //Création des actions pour cette procédure
-		    action_dao.createActionReturnId(4, "Arrêt du train", "2013-05-06 18:00:10", 5, 2013, null, "En cours", procedure);
-		    action_dao.createActionReturnId(5, "Appeler agents", null, 0, 0, null, "En attente", procedure);
+		    action_dao.createActionReturnId(9, "Ralentir les trains", "2013-05-06 17:22:10", 5, 2013, null, "En cours", procedure);
+		    action_dao.createActionReturnId(10, "Avertir d'un problème météorologique", null, 0, 0, null, "En attente", procedure);
+		    action_dao.createActionReturnId(11, "Message panneau 'informer perturbation'", null, 0, 0, null, "En attente", procedure);
+		    action_dao.createActionReturnId(12, "Informer su la perturbation du traffic", null, 0, 0, null, "En attente", procedure);
 		    se.flush();
 		    
 	        //Création du 2ème typeincident

@@ -17,14 +17,11 @@ import beans.EventDWH;
 import beans.FrequentationLigneDWH;
 import beans.IncidentDWH;
 import beans.RecetteDWH;
-import communication.jms.dwh.ConsommateurDWH;
-import communication.jms.dwh.ListenerDWH;
-import communication.jms.dwh.ProducteurDWH;
+import communication.jms.dwh.*;
 import dao.EventDWHDAO;
 import dao.FrequentationLigneDWHDAO;
 import dao.IncidentDWHDAO;
 import dao.RecetteDWHDAO;
-import communication.jms.dwh.XmlTransformer;
 
 
 public class DWHControler extends HttpServlet {
@@ -46,16 +43,12 @@ public class DWHControler extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)	throws ServletException, IOException {
     	
     	String action = request.getParameter("action");
-    	//Lancement de Demo avec le bouton lancer
+    
     	if(action.equals("lancer")){
-    		//recupere le nombre de seconde choisi
 			int  id = Integer.parseInt(request.getParameter("seconde"));
-			//Recupere l'objet souhaite
 			String object =request.getParameter("object");
-			//nom de la file BI DWH
 			String nomQueue = "BI_DWH" ;
 			ConsommateurDWH consomme = new ConsommateurDWH("localhost", nomQueue);
-			//lancer le listener
 			MessageListener listener = new ListenerDWH();
 			consomme.lancer(listener);// lancer la lecture des messages		
 			
@@ -63,12 +56,10 @@ public class DWHControler extends HttpServlet {
 				//lancer la production des messages
 				if(object.equals("frequentation") || object.equals("incident")|| object.equals("recette")
 						|| object.equals("event")){
-					//compteur de message creee 
 					 cpt = envoyerPlusieursMessage(id,object);	
 					 confirmation = +cpt+" messages envoyes : " ;
 				}
 				else 
-					//message d'erreur
 				confirmation = "frequentation ou incident ou event ou recette: "+cpt+" (message envoye)";
 			} catch (JMSException e) {e.printStackTrace();} 
 				catch (JAXBException e) {e.printStackTrace();}
@@ -83,49 +74,40 @@ public class DWHControler extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		String action = request.getParameter("action");
-		// affichage de la page demo
+
 		if(action.equals("demo")){
 			this.getServletContext().getRequestDispatcher( "/WEB-INF/prodconsomDemo.jsp").forward( request, response );		
 		}
 	}
-	//Envoyer les messages par timer
+
 	public static int envoyerPlusieursMessage(int seconde,String object) throws JMSException, JAXBException, SAXException{
 		int cpt =0;
 		String messageXML ;
 				try {
 					long start = System.currentTimeMillis();
-					// timer
 					while( System.currentTimeMillis() < ( start + (1000 * +seconde))) {
-						//si c est frequentation
-						if(object.equals("frequentation")){		
-							//genere l objet en  random
+						if(object.equals("frequentation")){							
 						  frequentation = getObjectFrequentation();						 	
 						  	dao_frequentation.insertFrequentation(frequentation);						 	
 						 	messageXML = transforme.transformeXML(frequentation);
 						 	producteur.ecrireMessage(messageXML);		
 						   cpt ++ ;
 						}	
-						//si c est incident
 						if(object.equals("incident")){
-							//genere l objet en  random
 							incident = getObjectIncident();
 							dao_incident.insertIncident(incident);
 							messageXML = transforme.transformeXML(incident);
 						 	producteur.ecrireMessage(messageXML);			
 						   cpt ++ ;
 						}	
-						//si c esr event
 						if(object.equals("event")){
-							//genere l objet en  random
 							event = getObjectEvent();
 							dao_event.insertEvent(event);
 							messageXML = transforme.transformeXML(event);
 						 	producteur.ecrireMessage(messageXML);			
 						   cpt ++ ;
 						}
-						//si c est recette
 						if(object.equals("recette")){
-							//genere l objet en  random
 							recette = getObjectRecette();
 							dao_recette.insertRecette(recette);
 							messageXML = transforme.transformeXML(recette);

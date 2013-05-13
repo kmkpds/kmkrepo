@@ -2,25 +2,25 @@
 <div id="RnoNav1Top" class="sc">
 	<ul>
 		<li>
-			<a href="/RailSimulator/accueil?action=index">Accueil</a>
+			<a href="/kmk_ref_webapp/accueil?action=index">Accueil</a>
 		</li>
 		<li class="on">
-			<a href="/RailSimulator/accueil?action=creationReseau">CrÈation RÈseau</a>
+			<a href="/kmk_ref_webapp/accueil?action=creationReseau">CrÈation RÈseau</a>
 		</li>
 		<li>
-			<a href="/RailSimulator/accueil?action=creationHoraire">CrÈation Horaire</a>
+			<a href="/kmk_ref_webapp/accueil?action=creationHoraire">CrÈation Horaire</a>
 		</li>
 		<li>
-			<a href="/RailSimulator/visualisation?action=visualiserTrafic">Visualisation Trafic</a>
+			<a href="/kmk_ref_webapp/visualisation?action=visualiserTrafic">Visualisation Trafic</a>
 		</li>
 		<li>
-			<a href="/RailSimulator/accueil?action=workflow">Workflow</a>
+			<a href="/kmk_ref_webapp/accueil?action=workflow">Workflow</a>
 		</li>
 		<li>
-			<a href="/RailSimulator/accueil?action=bi">Business Intelligence</a>
+			<a href="/kmk_ref_webapp/accueil?action=bi">Business Intelligence</a>
 		</li>
 		<li>
-			<a href="/RailSimulator/optimisation?action=optimisationParc">Optimisation Du Parc Ferroviaire </a>
+			<a href="/kmk_ref_webapp/optimisation?action=optimisationParc">Optimisation Du Parc Ferroviaire </a>
 		</li>
 	</ul>
 </div>
@@ -35,13 +35,13 @@
 			<a href="#">Création Reseau</a>
 			<ul>
 			<li>
-					<a href="/RailSimulator/reseau?action=creerReseau" >Créer Reseau</a>
+					<a href="/kmk_ref_webapp/reseau?action=creerReseau" >Créer Reseau</a>
 				</li>
 				<li>
-					<a href="/RailSimulator/reseau?action=visualisationReseau">Visualisation Reseau</a>
+					<a href="/kmk_ref_webapp/reseau?action=visualisationReseau">Visualisation Reseau</a>
 				</li>
 				<li>
-					<a href="/RailSimulator/reseau?action=optimisationChemin">Visualisation les plus courts chemins </a>
+					<a href="/kmk_ref_webapp/reseau?action=optimisationChemin">Visualisation les plus courts chemins </a>
 				</li>
 
 			</ul>
