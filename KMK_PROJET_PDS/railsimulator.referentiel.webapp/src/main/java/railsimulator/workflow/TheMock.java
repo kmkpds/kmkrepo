@@ -1,4 +1,4 @@
-package railsimulator.workflow.mock;
+package railsimulator.workflow;
 
 import java.io.IOException;
 
@@ -12,6 +12,17 @@ import java.util.Timer;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+
+import railsimulator.workflow.mock.Mock1Action1Termine;
+import railsimulator.workflow.mock.Mock1Action2EnCours;
+import railsimulator.workflow.mock.Mock1Action2Termine;
+import railsimulator.workflow.mock.Mock1Action3EnCours;
+import railsimulator.workflow.mock.Mock1Action3Termine;
+import railsimulator.workflow.mock.Mock2Action1Termine;
+import railsimulator.workflow.mock.Mock2Action2EnCours;
+import railsimulator.workflow.mock.Mock2Action2Termine;
+import railsimulator.workflow.mock.MockIncident1;
+import railsimulator.workflow.mock.MockIncident2;
 
 import dao.HibernateUtils;
 

@@ -34,6 +34,11 @@ public class AccueilControler extends HttpServlet {
 			request.logout();
 			this.getServletContext().getRequestDispatcher( "/WEB-INF/accueilCreationHoraire.jsp").forward( request, response );
 		}
+	
+	if(action.equals("index")){
+		request.logout();
+		this.getServletContext().getRequestDispatcher( "/accueil.jsp").forward( request, response );
+	}
 		
 	}
 

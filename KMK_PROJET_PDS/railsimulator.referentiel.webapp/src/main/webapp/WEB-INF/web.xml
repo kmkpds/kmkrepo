@@ -55,8 +55,23 @@
 	</servlet>
 	
 	<servlet>
+		<servlet-name>AjaxControler</servlet-name>
+		<servlet-class>railsimulator.workflow</servlet-class>
+	</servlet>
+	
+	<servlet>
+		<servlet-name>WorkflowControler</servlet-name>
+		<servlet-class>railsimulator.workflow</servlet-class>
+	</servlet>
+	
+	<servlet>
+		<servlet-name>OptimisationControler</servlet-name>
+		<servlet-class>railsimulator.bi</servlet-class>
+	</servlet>
+	
+	<servlet>
 		<servlet-name>TheMock</servlet-name>
-		<servlet-class>railsimulator.workflow.mock</servlet-class>
+		<servlet-class>railsimulator.workflow</servlet-class>
 	</servlet>
 
 	<servlet-mapping>
@@ -104,8 +119,22 @@
 	    <servlet-name>DWHControler</servlet-name>
     	<url-pattern>/demo</url-pattern>
   	</servlet-mapping>
+	
+	<servlet-mapping>
+		<servlet-name>WorkflowControler</servlet-name>
+		<url-pattern>/workflow</url-pattern>
+	</servlet-mapping>
+	
+	<servlet-mapping>
+		<servlet-name>AjaxControler</servlet-name>
+		<url-pattern>/ajax</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>OptimisationControler</servlet-name>
+		<url-pattern>/optimisation</url-pattern>
+	</servlet-mapping>
   
-  <servlet-mapping>
+	<servlet-mapping>
 		<servlet-name>TheMock</servlet-name>
 		<url-pattern>/themock</url-pattern>
 	</servlet-mapping>
