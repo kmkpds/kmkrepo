@@ -27,7 +27,7 @@ public class Train  {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name="idtrain")
-	private Integer idtrain ;
+	private Integer idTrain ;
 	@Column(name="nomtrain")
 	private String nomTrain;
 	@Column(name="latitudetrain")
@@ -37,7 +37,7 @@ public class Train  {
 	@Column(name="etat")
 	private int etat;
 	@Column(name="prixtrain")
-	private Integer prixtrain ;
+	private Integer prixTrain ;
 	@Column(name="nombredewagon")
 	private Integer nombredewagon ;
 	@Column(name="vitesse")
@@ -56,16 +56,16 @@ public class Train  {
 	private Set<TrainHoraireStation> TrainHoraireStationList = new HashSet<TrainHoraireStation>();
 	
 	public Integer getIdTrain() {
-		return idtrain;
+		return idTrain;
 	}
 	public void setIdTrain(Integer idtrain) {
-		this.idtrain = idtrain;
+		this.idTrain = idtrain;
 	}
 	public Integer getPrixtrain() {
-		return prixtrain;
+		return prixTrain;
 	}
 	public void setPrixtrain(Integer prixtrain) {
-		this.prixtrain = prixtrain;
+		this.prixTrain = prixtrain;
 	}
 	public Integer getNombredewagon() {
 		return nombredewagon;

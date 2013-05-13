@@ -9,7 +9,7 @@
 		<link rel="stylesheet" type="text/css" href="css/corp.css" />
 		<link rel="alternate stylesheet" type="text/css" href="css/print.css" media="screen" title="Version imprimable" id="stylesheet-print" />
 		<link rel="author" title="Auteur" href="http://www.sqliagency.com/" />
-		<title>Créer Canton - Rail Simulator</title>
+		<title>Nombre incidents</title>
 		<script type="text/javascript" src="js/main.js"></script>
 	</head>
 	<body>
@@ -46,7 +46,7 @@
 						<div id="RnoMainContent" class="sc">
 							<!-- Page Title -->
 							<h2 id="RnoPageTitle">
-								</a>Sélection Ligne
+								</a>Sélection Paramètre(s)
 							</h2>
 							<!-- /Page Title -->
 							<!-- Vertical Steps Layout -->
@@ -54,7 +54,7 @@
 								<!-- Steps -->
 								<ol id="RnoVertSteps">
 									<li class="RnoStepsCurrent">
-										<p class="RSI1">Sélection Ligne</p>
+										<p class="RSI1">Sélection Paramètre(s)</p>
 									</li>
 									<li>
 										<p class="RSI2">Visualisation Répartition Usager</p>
@@ -66,16 +66,16 @@
 									<!-- Bordered Workspace -->
 									<div id="RnoWorkspace" style="min-height: 350px;">
 										<!-- Vertical Steps Right Title -->
-										<p class="RnoVertStepsTitle">select Ligne</p>
+										<p class="RnoVertStepsTitle">Nombre Incidents</p>
 										<!-- /Vertical Steps Right Title -->
 										<!-- Section -->
 										<div class="RnoSectionFree">
 											<form action="bi" method="post" class="RnoForm">
-												<h3 class="RnoSectionTitle">Sélection Ligne</h3>
+												<h3 class="RnoSectionTitle">Sélection Paramètre(s)</h3>
 												<div class="RnoSectionContent RnoSpacers">
 													<div class="sc">
 														<div class="RnofLeft">
-															<p>Sélection Ligne</p>
+															<p>Sélection</p>
 															<table class="RnoFieldsValuesTable">
 
 																

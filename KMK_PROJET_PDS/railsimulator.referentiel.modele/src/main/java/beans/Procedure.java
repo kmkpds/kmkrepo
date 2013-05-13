@@ -28,7 +28,7 @@ public class Procedure {
 	private String libelleProcedure;
 	
 	
-	@OneToMany(mappedBy="procedureAction")
+	@OneToMany(mappedBy="procedureAction",fetch=FetchType.EAGER)
 	private List<Action> listeAction;
 	
 

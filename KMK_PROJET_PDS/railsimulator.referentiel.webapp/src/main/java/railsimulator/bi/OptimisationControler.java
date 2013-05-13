@@ -24,11 +24,17 @@ import dao.LigneDAO;
 public class OptimisationControler extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
+	/**
+	 * @see HttpServlet#HttpServlet()
+	 */
 	public OptimisationControler() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String action = request.getParameter("action");
 		HttpSession session = request.getSession();
@@ -114,7 +120,7 @@ public class OptimisationControler extends HttpServlet {
 			double coutMaintenance = Double.parseDouble(session.getAttribute("coutMaintenance").toString());
 			double prixplace = Double.parseDouble(session.getAttribute("prixplace").toString());
 			
-			DecimalFormat df = new DecimalFormat ( ) ; 
+			DecimalFormat df = new DecimalFormat(); 
 			df.setMaximumFractionDigits(2); 
 			df.setMinimumFractionDigits(2);
 			df.setGroupingUsed(false);
@@ -193,6 +199,9 @@ public class OptimisationControler extends HttpServlet {
 
 	}
 
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 	}

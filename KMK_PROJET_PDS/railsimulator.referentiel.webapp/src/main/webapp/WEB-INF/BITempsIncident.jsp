@@ -9,7 +9,7 @@
 		<meta http-equiv="Content-Style-Type" content="text/css" />
 		<link rel="stylesheet" type="text/css" href="css/corp.css"  />
 		<link rel="alternate stylesheet" type="text/css" href="css/print.css" media="screen" title="Version imprimable" id="stylesheet-print" />
-		<title>Accueil - Rail Simulator</title>
+		<title>Gestion Incidents</title>
 		<script type="text/javascript" src="js/main.js"></script>
 	    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
         <script src="js/highcharts.js"></script>
@@ -18,110 +18,98 @@
 		$(function () {
 	        $('#container').highcharts({
 	            chart: {
-	                type: 'column'
+	                type: 'bar'
 	            },
 	            title: {
-	                text: 'Stacked column chart'
+	                text: 'Gestion des Incidents'
+	            },
+	            subtitle: {
+	                text: ' '
 	            },
 	            xAxis: {
-	                categories: [
-	                    'Mouvement social',
-	                    'Paquet suspect',
-	                    'Sensor inactif',
-	                    'Porte bloquée',
-	                    'Distance de sécurité',
-	                    'Echec électrique',
-	                    'Appel en urgence',
-	                    'Vitesse excessive',
-	                    'Vitesse excessive',
-	                    'Arrêt momentané',
-	                    'Défaut équipement',
-	                    'Risque de collision',
-	                    'Collision',
-	                    'Alerte à la bombe',
-	                    'Station manquée',
-	                    'Fuite de gaz',
-	                    'Synchronization perdue',
-	                    'Feu',
-	                    'Tempête de neige',
-	                    'Inondation',
-	                    'Accident voyageur',
-	                    'Voyageur tombé',
-	                    'Obstacle sur le chemin',
-	                    'Voyageur malade',
-	                    'Température anormale'
-	                ],
-	                labels: {
-	                    rotation: -45,
-	                    align: 'right',
-	                    style: {
-	                        fontSize: '13px',
-	                        fontFamily: 'Verdana, sans-serif'
-	                    }
+	            	 categories: [
+	      	                    'Mouvement social',
+	      	                    'Paquet suspect',
+	      	                    'Sensor inactif',
+	      	                    'Porte bloquée',
+	      	                    'Distance de sécurité',
+	      	                    'Echec électrique',
+	      	                    'Appel en urgence',
+	      	                    'Vitesse excessive',
+	      	                    'Vitesse excessive',
+	      	                    'Arrêt momentané',
+	      	                    'Défaut équipement',
+	      	                    'Risque de collision',
+	      	                    'Collision',
+	      	                    'Alerte à la bombe',
+	      	                    'Station manquée',
+	      	                    'Fuite de gaz',
+	      	                    'Synchronization perdue',
+	      	                    'Feu',
+	      	                    'Tempête de neige',
+	      	                    'Inondation',
+	      	                    'Accident voyageur',
+	      	                    'Voyageur tombé',
+	      	                    'Obstacle sur le chemin',
+	      	                    'Voyageur malade',
+	      	                    'Température anormale'
+	      	                ],
+	                title: {
+	                    text: null
 	                }
 	            },
 	            yAxis: {
 	                min: 0,
 	                title: {
-	                    text: 'Total fruit consumption'
+	                    text: 'Temps (Seconde)',
+	                    align: 'high'
 	                },
-	                stackLabels: {
-	                    enabled: true,
-	                    style: {
-	                        fontWeight: 'bold',
-	                        color: (Highcharts.theme && Highcharts.theme.textColor) || 'gray'
+	                labels: {
+	                    overflow: 'justify'
+	                }
+	            },
+	            tooltip: {
+	                valueSuffix: ' Minute '
+	            },
+	            plotOptions: {
+	                bar: {
+	                    dataLabels: {
+	                        enabled: true
 	                    }
 	                }
 	            },
 	            legend: {
+	                layout: 'vertical',
 	                align: 'right',
-	                x: -100,
 	                verticalAlign: 'top',
-	                y: 20,
+	                x: -100,
+	                y: 100,
 	                floating: true,
-	                backgroundColor: (Highcharts.theme && Highcharts.theme.legendBackgroundColorSolid) || 'white',
-	                borderColor: '#CCC',
 	                borderWidth: 1,
-	                shadow: false
+	                backgroundColor: '#FFFFFF',
+	                shadow: true
 	            },
-	            tooltip: {
-	                formatter: function() {
-	                	var cpt=this.y;
-	                    return '<b>'+ this.x +'</b><br/>'+
-	                        this.series.name +': '+ cpt +'<br/>';
-	                }
-	            },
-	            plotOptions: {
-	                column: {
-	                    stacking: 'normal',
-	                    dataLabels: {
-	                        enabled: false,
-	                        color: (Highcharts.theme && Highcharts.theme.dataLabelsColor) || 'white'
-	                    }
-	                }
+	            credits: {
+	                enabled: false
 	            },
 	            series: [{
 	                name: 'Temps Max',
 	                data: [<c:forEach var="max" items="${listeTempsMaxIncident}" >
-	                       <c:set var="max" value="${fn:split(max, ':')}"/>	
-                           <c:out value="${max[0]}"/>,
-			               </c:forEach>]
+	                <c:out value="${max}/60"/>,
+			           </c:forEach>]
 	            }, {
 	                name: 'Temps Moyen',
-	                data: [<c:forEach var="max" items="${listeTempsMaxIncident}" >
-                    <c:set var="max" value="${fn:split(max, ':')}"/>	
-                    <c:out value="${max[0]}"/>,
-		               </c:forEach>]
-	            }, {
+	                data: [<c:forEach var="moyen" items="${listeTempsMoyenIncident}" >
+	                <c:out value="${moyen}/60"/>,
+			           </c:forEach>]
+	            },  {
 	                name: 'Temps Min',
-	                data: [<c:forEach var="max" items="${listeTempsMaxIncident}" >
-                    <c:set var="max" value="${fn:split(max, ':')}"/>	
-                    <c:out value="${max[0]}"/>,
-		               </c:forEach>]
+	                data: [<c:forEach var="min" items="${listeTempsMinIncident}" >
+	                <c:out value="${min}/60"/>,
+			           </c:forEach>]
 	            }]
 	        });
 	    });
-	    
 	    
 		</script>
 		
@@ -164,7 +152,7 @@
 					<!-- Body Content -->
 					<div id="RnoBody">
 					
-					<div id="container" style="min-width: 400px; height: 400px; margin: 0 auto"></div>
+					<div id="container" style="min-width: 400px; height: 1100px; margin: 0 auto"></div>
 				
 					</div>
 				</td>

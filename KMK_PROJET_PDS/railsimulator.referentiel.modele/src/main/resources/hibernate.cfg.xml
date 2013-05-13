@@ -32,6 +32,8 @@
 		<mapping class="beans.BiFrequentationLigne" />
 		<mapping class="beans.BiLigne" />
 		<mapping class="beans.BiRecette" />
+		<mapping class="beans.BiSatisfaction" />
+		<mapping class="beans.BiObjectif" />
 		<mapping class="beans.Incident" />
 		<mapping class="beans.Procedure" />
 		<mapping class="beans.TypeIncident" />

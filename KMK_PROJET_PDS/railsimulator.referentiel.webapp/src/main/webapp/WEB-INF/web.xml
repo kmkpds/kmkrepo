@@ -53,6 +53,11 @@
 		<servlet-name>DWHControler</servlet-name>
 		<servlet-class>railsimulator.DWHControler.DWHControler</servlet-class>
 	</servlet>
+	
+	<servlet>
+		<servlet-name>TheMock</servlet-name>
+		<servlet-class>railsimulator.workflow.mock</servlet-class>
+	</servlet>
 
 	<servlet-mapping>
 		<servlet-name>AccueilControler</servlet-name>
@@ -99,5 +104,10 @@
 	    <servlet-name>DWHControler</servlet-name>
     <url-pattern>/demo</url-pattern>
   </servlet-mapping>
+  
+  <servlet-mapping>
+		<servlet-name>TheMock</servlet-name>
+		<url-pattern>/themock</url-pattern>
+	</servlet-mapping>
 	
 </web-app>

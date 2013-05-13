@@ -1,3 +1,5 @@
+
+
 import java.io.IOException;
 
 import org.xml.sax.SAXException;
@@ -75,6 +77,82 @@ public class TestOptimisation extends TestCase {
 	}
 
 	
+	public void testModifierDoGetHttpServletRequestHttpServletResponse() throws IOException, SAXException {
+
+		//test recuperation données 
+		
+		WebConversation     conversation = new WebConversation();
+		HttpUnitOptions.setExceptionsThrownOnScriptError(false);
+		WebRequest  request = new GetMethodWebRequest( "http://localhost:8080/RailSimulator/optimisation?idLigne=13&frequence=frequenceSamedi&action=Afficher");
+		
+		WebResponse  response = conversation.getResponse(request);
+
+        WebForm formModifier = response.getForms()[1];
+		//verification si bien form modifier 
+		assertEquals("form1", formModifier.getName());
+        
+        //on récupère httpRequest
+		request = formModifier.getRequest();
+	
+		//on envoie dans la requete les parametres
+		request.setParameter( "frequenceLigne", "10" );
+		request.setParameter( "idLigne", "13" );
+		request.setParameter( "longueurLigne", "60" );
+		request.setParameter( "nombreLigne", "10" );
+		request.setParameter( "duréeTrajet", "30" );
+		request.setParameter( "nombreTrain", "6" );
+		request.setParameter( "nombrePassagers", "500000" );
+		request.setParameter( "nombreWagon", "5" );
+		request.setParameter( "vitesseTrain", "50" );
+		request.setParameter( "nombrePlacesa", "400" );
+		request.setParameter( "nombrePlacesd", "270" );
+		request.setParameter( "nombrePlaces", "670");
+	
+
+			
+        //on envoie la requete avec les parametres du formulaire et on récupère la reponse
+		response = conversation.getResponse(request);
+
+		
+		assertEquals(200, response.getResponseCode());
+
+		
+
+	}
+	
+	
+	public void testCalculCoutDoGetHttpServletRequestHttpServletResponse() throws IOException, SAXException {
+
+        //test recuperation données 
+		
+		WebConversation conversation = new WebConversation();
+		HttpUnitOptions.setExceptionsThrownOnScriptError(false);
+		WebRequest  request = new GetMethodWebRequest( "http://localhost:8080/RailSimulator/optimisation?action=OK");
+		
+		WebResponse  response = conversation.getResponse(request);
+
+		request.setParameter( "NouvelleFrequence", "5");
+		request.setParameter( "longueurLigne", "670");
+		request.setParameter( "vitesseTrain", "670");
+		request.setParameter( "prixtrain", "670");
+		request.setParameter( "nbrTrain", "670");
+		request.setParameter( "tarificationdedeplacement", "670");
+		request.setParameter( "Consommationenergie", "670");
+		request.setParameter( "freq", "670");
+		request.setParameter( "nbVoyageurAncien", "670");
+		request.setParameter( "coutMaintenance", "670");
+		request.setParameter( "prixplace", "670");
+	
+			
+        //on envoie la requete avec les parametres du formulaire et on récupère la reponse
+		response = conversation.getResponse(request);
+		
+			
+		assertEquals(200, response.getResponseCode());
+		
+
+	}
+
 
 
 

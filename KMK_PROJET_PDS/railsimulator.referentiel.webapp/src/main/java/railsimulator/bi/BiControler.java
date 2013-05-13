@@ -15,12 +15,16 @@ import javax.servlet.http.HttpServletResponse;
 
 import beans.BiFrequentationLigne;
 import beans.BiLigne;
+import beans.BiObjectif;
 import beans.BiRecette;
+import beans.BiSatisfaction;
 
 import dao.BiFrequentationLigneDAO;
 import dao.BiIncidentDAO;
 import dao.BiLigneDAO;
+import dao.BiObjectifDAO;
 import dao.BiRecetteDAO;
+import dao.BiSatisfactionDAO;
 
 
 public class BiControler extends HttpServlet{
@@ -30,12 +34,16 @@ public class BiControler extends HttpServlet{
 	private BiFrequentationLigneDAO frequentation_dao = new BiFrequentationLigneDAO();
 	private BiRecetteDAO recette_dao = new BiRecetteDAO();
 	private BiIncidentDAO incident_dao = new BiIncidentDAO();
+	private BiSatisfactionDAO satisfaction_dao = new BiSatisfactionDAO();
+	private BiObjectifDAO objectif_dao = new BiObjectifDAO();
 
 	private BiLigne biLigne = new BiLigne();
+	private BiObjectif objectif = new BiObjectif();
 	private List<BiLigne> listeLigne;
 	private List<String> listeAnne;
 	private List<BiFrequentationLigne> freqListe;
 	private List<BiRecette> recetteListe;
+	private List<BiSatisfaction> satisfactionListe;
 
 
 	public void doGet( HttpServletRequest request, HttpServletResponse response ) throws ServletException, IOException{
@@ -71,7 +79,17 @@ public class BiControler extends HttpServlet{
 			request.setAttribute("listeLigne",listeLigne);
 			request.setAttribute("listeAnne",listeAnne);
 
-			this.getServletContext().getRequestDispatcher( "/WEB-INF/selectFrequentationUsager2.jsp").forward( request, response );
+			this.getServletContext().getRequestDispatcher( "/WEB-INF/selectFrequentationUsagerPourcentage.jsp").forward( request, response );
+		}
+		
+		
+		if(action.equals("abo")){
+
+			listeAnne = objectif_dao.getObjectifAnnee();
+			request.logout();
+			request.setAttribute("listeAnne",listeAnne);
+
+			this.getServletContext().getRequestDispatcher( "/WEB-INF/selectObjectifAbo.jsp").forward( request, response );
 		}
 		// Fin Section Frequence
 
@@ -92,6 +110,15 @@ public class BiControler extends HttpServlet{
 			request.setAttribute("listeAnne",listeAnne);
 
 			this.getServletContext().getRequestDispatcher( "/WEB-INF/selectRepartitionCout.jsp").forward( request, response );
+		}
+		
+		if(action.equals("objCA")){
+
+			listeAnne = objectif_dao.getObjectifAnnee();
+			request.logout();
+			request.setAttribute("listeAnne",listeAnne);
+
+			this.getServletContext().getRequestDispatcher( "/WEB-INF/selectObjectifCa.jsp").forward( request, response );
 		}
 		// Fin Section CA
 
@@ -116,7 +143,19 @@ public class BiControler extends HttpServlet{
 			this.getServletContext().getRequestDispatcher( "/WEB-INF/selectTempsIncident.jsp").forward( request, response );
 
 		}
+		
+
 		// Fin Section Incident
+		
+		
+		if(action.equals("evoSatisfaction")){
+
+			listeLigne = ligne_dao.listerLigne();
+			request.logout();
+			request.setAttribute("listeLigne",listeLigne);		
+			this.getServletContext().getRequestDispatcher( "/WEB-INF/selectEvoSatisfaction.jsp").forward( request, response );
+
+		}
 
 	}
 
@@ -256,10 +295,39 @@ public class BiControler extends HttpServlet{
 			request.setAttribute("tauxAutre",tauxAutre);
 
 
-			this.getServletContext().getRequestDispatcher( "/WEB-INF/BIfrequentationUsager2.jsp").forward( request, response );
+			this.getServletContext().getRequestDispatcher( "/WEB-INF/BIfrequentationUsagerPourcentage.jsp").forward( request, response );
 		}
 		// FIN Cammembert Taux d'usager par ligne et par type Mensuelle 
-
+		
+		// objectif abo frequentation
+		if(action.equals("Valider Objectif")){
+			int  annee = Integer.parseInt(request.getParameter("date"));
+			String abo = request.getParameter("abo");
+			if(abo.equals("jeune")){
+				objectif = objectif_dao.getObjectif(annee);
+				
+				request.logout();
+				request.setAttribute("obj",objectif);
+				this.getServletContext().getRequestDispatcher( "/WEB-INF/BIobjectifAboEtudiant.jsp").forward( request, response );
+			}else if(abo.equals("senior")){
+				
+				objectif = objectif_dao.getObjectif(annee);
+				
+				request.logout();
+				request.setAttribute("obj",objectif);
+				this.getServletContext().getRequestDispatcher( "/WEB-INF/BIobjectifAboSalarie.jsp").forward( request, response );
+			}
+			else {
+				objectif = objectif_dao.getObjectif(annee);
+				
+				request.logout();
+				request.setAttribute("obj",objectif);
+				this.getServletContext().getRequestDispatcher( "/WEB-INF/BIobjectifAboRetraite.jsp").forward( request, response );
+				
+			}
+			
+		}
+		//FIN objectif abo frequentation
 
 		// Fin Thème Fréquence
 
@@ -272,7 +340,6 @@ public class BiControler extends HttpServlet{
 			int  id = Integer.parseInt(request.getParameter("idLigne"));
 
 			recetteListe = (List<BiRecette>) recette_dao.getCaByLigne(id);
-			System.out.println(recetteListe.get(0).getCa());
 			request.logout();
 			request.setAttribute("recetteListe",recetteListe);
 			this.getServletContext().getRequestDispatcher( "/WEB-INF/BIcaLigne.jsp").forward( request, response );
@@ -337,6 +404,22 @@ public class BiControler extends HttpServlet{
 		}
 
 		// Fin Histogramme repartiton Cout fixe / Cout variable
+		
+		
+		// objectif CA
+				if(action.equals("Valider Objectif CA")){
+					int  annee = Integer.parseInt(request.getParameter("date"));
+				
+				
+						objectif = objectif_dao.getObjectif(annee);
+						
+						request.logout();
+						request.setAttribute("obj",objectif);
+						this.getServletContext().getRequestDispatcher( "/WEB-INF/BIobjectifCa.jsp").forward( request, response );
+			
+					
+				}
+				//FIN objectif abo frequentation
 		// FIN Thème Recette
 
 
@@ -360,7 +443,7 @@ public class BiControler extends HttpServlet{
 			request.logout();
 			request.setAttribute("listeNbIncident",listeNbIncident);
 			request.setAttribute("annee",annee);
-			this.getServletContext().getRequestDispatcher( "/WEB-INF/BInbIncidentLigneAnnuelle.jsp").forward( request, response );
+			this.getServletContext().getRequestDispatcher( "/WEB-INF/BInbIncidentLigne.jsp").forward( request, response );
 
 		}
 
@@ -377,16 +460,15 @@ public class BiControler extends HttpServlet{
 			for (int i=1; i<25; i++) {
 
 				listeTempsMoyenIncident.add(incident_dao.getTempsMoyenIncident(i,annee,idligne,affichage).toString());	
-				System.out.println("moyen:");
-				System.out.println(listeTempsMoyenIncident.get(i-1));
-                listeTempsMaxIncident.add(incident_dao.getTempsMoyenIncident(i,annee,idligne,affichage).toString());	
-                System.out.println("max:");
-                System.out.println(listeTempsMaxIncident.get(i-1));
-                listeTempsMinIncident.add(incident_dao.getTempsMoyenIncident(i,annee,idligne,affichage).toString());	
-                System.out.println("min:");
-                System.out.println(listeTempsMinIncident.get(i-1));
+				
+                listeTempsMaxIncident.add(incident_dao.getTempsMaxIncident(i,annee,idligne,affichage).toString());	
+               
+                listeTempsMinIncident.add(incident_dao.getTempsMinIncident(i,annee,idligne,affichage).toString());	
+               
 			}
-
+            System.out.println(listeTempsMoyenIncident.get(2));
+            System.out.println(listeTempsMaxIncident.get(2));
+            System.out.println(listeTempsMinIncident.get(2));
 			request.logout();
 			request.setAttribute("listeTempsMoyenIncident",listeTempsMoyenIncident);
 			request.setAttribute("listeTempsMaxIncident",listeTempsMaxIncident);
@@ -395,6 +477,18 @@ public class BiControler extends HttpServlet{
 
 		}
 		//FIN Thème incident
+		
+		
+		if(action.equals("Valider Evo Satisfaction")){
+
+			int  id = Integer.parseInt(request.getParameter("idLigne"));
+
+			satisfactionListe = (List<BiSatisfaction>) satisfaction_dao.getSatisfactionByLigne(id);
+			
+			request.logout();
+			request.setAttribute("satisfactionListe",satisfactionListe);
+			this.getServletContext().getRequestDispatcher( "/WEB-INF/BIEvoSatisfaction.jsp").forward( request, response );
+		}
 	}
 
 

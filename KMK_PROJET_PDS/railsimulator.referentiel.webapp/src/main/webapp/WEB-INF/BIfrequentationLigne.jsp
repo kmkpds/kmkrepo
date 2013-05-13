@@ -9,7 +9,7 @@
 		<meta http-equiv="Content-Style-Type" content="text/css" />
 		<link rel="stylesheet" type="text/css" href="css/corp.css"  />
 		<link rel="alternate stylesheet" type="text/css" href="css/print.css" media="screen" title="Version imprimable" id="stylesheet-print" />
-		<title>Accueil - Rail Simulator</title>
+		<title>Frequentation Ligne </title>
 		<script type="text/javascript" src="js/main.js"></script>
 		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
 <script src="js/highstock.js"></script>

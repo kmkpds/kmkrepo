@@ -55,25 +55,25 @@ $(function () {
                 }
             },
             series: [{
-                name: 'Imagin R',
+                name: 'Carte Jeune',
                 data: [<c:forEach var="etudiant" items="${freqEtudiant}" >
                        <c:out value="${etudiant}"/>,
 				       </c:forEach> ]
     
             }, {
-                name: 'navigo',
+                name: 'Senior',
                 data: [<c:forEach var="salarie" items="${freqSalarie}" >
                        <c:out value="${salarie}"/>,
 			           </c:forEach> ]
     
             }, {
-                name: 'carte vermeille',
+                name: 'Senior ++',
                 data: [<c:forEach var="retraite" items="${freqRetraite}" >
                 	   <c:out value="${retraite}"/>,
 		               </c:forEach> ]
     
             }, {
-                name: 'sans abonnement',
+                name: 'Sans Abonnement',
                 data: [<c:forEach var="autre" items="${freqAutre}" >
          	           <c:out value="${autre}"/>,
 	                   </c:forEach> ]

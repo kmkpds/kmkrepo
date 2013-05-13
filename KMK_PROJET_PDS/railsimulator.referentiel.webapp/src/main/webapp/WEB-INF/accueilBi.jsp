@@ -45,7 +45,7 @@
 					<!-- Navigation Top Level 1 --><jsp:include page="menuBi.jsp"/> <!-- /Navigation Top Level 1 -->
 					<!-- Body Content -->
 					<div id="RnoBody">
-						coucou
+						
 					</div>
 				</td>
 			</tr>

@@ -116,6 +116,14 @@ public class Ligne  {
 		this.commentaire = commentaire;
 	}
 
+	/*public List<Station> getStationlist() {
+		return stationlist;
+	}
+
+	public void setStationlist(List<Station> stationlist) {
+		this.stationlist = stationlist;
+	}*/
+
 	public Reseau getReseau() {
 		return reseau;
 	}

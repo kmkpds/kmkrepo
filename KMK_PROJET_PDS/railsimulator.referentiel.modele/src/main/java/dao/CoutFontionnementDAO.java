@@ -22,7 +22,6 @@ public class CoutFontionnementDAO {
     	se.beginTransaction(); 
     	
     	coutfonctionnement = (CoutFonctionnement) se.createQuery("from coutfonctionnement where idLigne="+id).uniqueResult();
-    	
     	 se.close();
     	
         return coutfonctionnement;
