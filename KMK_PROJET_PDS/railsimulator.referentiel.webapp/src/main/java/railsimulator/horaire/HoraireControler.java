@@ -7,7 +7,7 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 
-import tools.AlgoCreationHoraire;
+import railsimulator.tools.AlgoCreationHoraire;
 import dao.HibernateUtils;
 
 import javax.servlet.ServletException;
