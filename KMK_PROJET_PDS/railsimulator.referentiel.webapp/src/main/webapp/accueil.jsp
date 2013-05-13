@@ -32,13 +32,13 @@
 					<!-- Page Header -->
 					<div id="RnoBranding" class="sc"> 
 						<a href="#">
-							<img src="/images/logos/kmk-rail.jpg" id="RnoLogo" alt="Kamikaze" width="63" height="63"/>
+							<img src="images/logos/kmk-rail.jpg" id="RnoLogo" alt="Kamikaze" width="63" height="63"/>
 						</a>
 						<h1 id="RnoApplicationName">
-							<img src="/images/header/kmk-header.jpg" alt="KAMIKAZE PROJECT - Rail Simulator"/>
+							<img src="images/header/kmk-header.jpg" alt="KAMIKAZE PROJECT - Rail Simulator"/>
 						</h1>
 						<span>
-							<img src="/images/branding-coin.gif" alt="" width="31" height="31"/>
+							<img src="images/branding-coin.gif" alt="" width="31" height="31"/>
 						</span>
 					</div>
 					<!-- /Page Header -->
@@ -48,7 +48,7 @@
 						<!-- Middle Content -->
 						<div id="RnoMainContent"  style="min-height:500px;" class="sc">
 							<center>
-								<img src="/images/logos/kmk_ref_webapp_img.jpg" width="1000" height="600"/>
+								<img src="images/logos/kmk_ref_webapp_img.jpg" width="1000" height="600"/>
 							</center>
 						</div>
 						<!-- Page Footer -->

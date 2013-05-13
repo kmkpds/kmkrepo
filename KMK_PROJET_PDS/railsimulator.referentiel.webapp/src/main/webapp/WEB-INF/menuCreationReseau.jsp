@@ -4,24 +4,16 @@
 		<li>
 			<a href="/kmk_ref_webapp/accueil?action=index">Accueil</a>
 		</li>
-		<li class="on">
-			<a href="/kmk_ref_webapp/accueil?action=creationReseau">CrÈation RÈseau</a>
-		</li>
 		<li>
-			<a href="/kmk_ref_webapp/accueil?action=creationHoraire">CrÈation Horaire</a>
+			<a href="/kmk_ref_webapp/accueil?action=ref">Référentiels</a>
+		</li>
+		<li class="on">
+			<a href="/kmk_ref_webapp/accueil?action=creationReseau">Création Réseau</a>
 		</li>
 		<li>
 			<a href="/kmk_ref_webapp/visualisation?action=visualiserTrafic">Visualisation Trafic</a>
 		</li>
-		<li>
-			<a href="/kmk_ref_webapp/accueil?action=workflow">Workflow</a>
-		</li>
-		<li>
-			<a href="/kmk_ref_webapp/accueil?action=bi">Business Intelligence</a>
-		</li>
-		<li>
-			<a href="/kmk_ref_webapp/optimisation?action=optimisationParc">Optimisation Du Parc Ferroviaire </a>
-		</li>
+
 	</ul>
 </div>
 <!-- /Navigation Top Level 1 -->
@@ -35,13 +27,17 @@
 			<a href="#">Création Reseau</a>
 			<ul>
 			<li>
+					<a href="/kmk_ref_webapp/reseau?action=test">test</a>
+				</li>
+			<li>
+			<li>
+					<a href="/kmk_ref_webapp/reseau?action=definirReseau">Definir la Zone</a>
+				</li>
+			<li>
 					<a href="/kmk_ref_webapp/reseau?action=creerReseau" >Créer Reseau</a>
 				</li>
 				<li>
 					<a href="/kmk_ref_webapp/reseau?action=visualisationReseau">Visualisation Reseau</a>
-				</li>
-				<li>
-					<a href="/kmk_ref_webapp/reseau?action=optimisationChemin">Visualisation les plus courts chemins </a>
 				</li>
 
 			</ul>
