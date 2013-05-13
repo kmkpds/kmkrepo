@@ -39,11 +39,11 @@ public class MockIncident2 extends TimerTask{
 		    action_dao.createActionReturnId(9, "Ralentir les trains", "2013-05-06 17:22:10", 5, 2013, null, "En cours", procedure);
 		    action_dao.createActionReturnId(10, "Avertir d'un problème météorologique", null, 0, 0, null, "En attente", procedure);
 		    action_dao.createActionReturnId(11, "Message panneau 'informer perturbation'", null, 0, 0, null, "En attente", procedure);
-		    action_dao.createActionReturnId(12, "Informer su la perturbation du traffic", null, 0, 0, null, "En attente", procedure);
+		    action_dao.createActionReturnId(12, "Informer sur la perturbation du traffic", null, 0, 0, null, "En attente", procedure);
 		    se.flush();
 		    
 	        //Création du 2ème typeincident
-		    int idtype = 2;//Colis suspect
+		    int idtype = 18;//Chute de neige
 			typeIncident = typeincident_dao.getTypeIncidentByID(idtype);
 		    se.flush();
 		    

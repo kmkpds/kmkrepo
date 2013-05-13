@@ -73,6 +73,16 @@
 		<servlet-name>TheMock</servlet-name>
 		<servlet-class>railsimulator.workflow.TheMock</servlet-class>
 	</servlet>
+	
+	<servlet>
+		<servlet-name>ProcedureControler</servlet-name>
+		<servlet-class>railsimulator.procedure.ProcedureControler</servlet-class>
+	</servlet>
+	
+	<servlet>
+		<servlet-name>DetailIncidentServlet</servlet-name>
+		<servlet-class>railsimulator.procedure.DetailIncidentServlet</servlet-class>
+	</servlet>
 
 	<servlet-mapping>
 		<servlet-name>AccueilControler</servlet-name>
@@ -137,6 +147,16 @@
 	<servlet-mapping>
 		<servlet-name>TheMock</servlet-name>
 		<url-pattern>/themock</url-pattern>
+	</servlet-mapping>
+	
+	<servlet-mapping>
+		<servlet-name>DetailIncidentServlet</servlet-name>
+		<url-pattern>/voirDetailIncident</url-pattern>
+	</servlet-mapping>
+
+	<servlet-mapping>
+		<servlet-name>ProcedureControler</servlet-name>
+		<url-pattern>/procedure</url-pattern>
 	</servlet-mapping>
 	
 </web-app>

@@ -48,7 +48,7 @@
 						<!-- Middle Content -->
 						<div id="RnoMainContent"  style="min-height:500px;" class="sc">
 							<center>
-								<img src="images/logos/kmk_ref_webapp_img.jpg" width="1000" height="600"/>
+								<img src="images/logos/railsimulator_img.jpg" width="1000" height="600"/>
 							</center>
 						</div>
 						<!-- Page Footer -->
