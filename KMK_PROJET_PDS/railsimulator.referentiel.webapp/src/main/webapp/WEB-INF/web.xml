@@ -90,8 +90,6 @@
 		<url-pattern>/testMax</url-pattern>
 	</servlet-mapping>
 	
-	
-	<!-- Mapping -->
 	<servlet-mapping>
 		<servlet-name>TransmissionMessageTerrainControler</servlet-name>
 		<url-pattern>/etape</url-pattern>
@@ -101,9 +99,11 @@
 		<servlet-name>VisuIncidentsControleur</servlet-name>
 		<url-pattern>/visualiser</url-pattern>
 	</servlet-mapping>
+	
+	<servlet-mapping>
 	    <servlet-name>DWHControler</servlet-name>
-    <url-pattern>/demo</url-pattern>
-  </servlet-mapping>
+    	<url-pattern>/demo</url-pattern>
+  	</servlet-mapping>
   
   <servlet-mapping>
 		<servlet-name>TheMock</servlet-name>
