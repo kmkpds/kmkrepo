@@ -20,14 +20,11 @@
 			<a href="/kmk_ref_webapp/accueil?action=bi">Business Intelligence</a>
 		</li>
 		<li>
-			<a href="/kmk_ref_webapp/optimisation?action=optimisationParc">Optimisation Du Parc Ferroviaire </a>
+			<a href="/kmk_ref_webapp/optimisation?action=optimisationParc">Optimisation</a>
 		</li>
 				
 		<li>
 			<a href="/kmk_ref_webapp/demo?action=demo">Alimentation DataWarehouse</a>
-		</li>
-		<li>
-			<a href="178.33.40.163:1001/kmk_ref_webapp/demo?action=demo">DWH - Prod</a>
 		</li>
 		
 	</ul>

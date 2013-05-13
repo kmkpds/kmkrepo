@@ -1,5 +1,4 @@
 package railsimulator.horaire;
-
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -30,7 +29,6 @@ import beans.Reseau;
 import beans.Train;
 import beans.TrainHoraireStation;
 import beans.Station;
-
 
 public class HoraireControler extends HttpServlet {
 	private ParametreHoraire parametreHoraire = new ParametreHoraire();
@@ -481,6 +479,11 @@ public class HoraireControler extends HttpServlet {
 			Query create5=se.createSQLQuery("delete from trainhorairestation");
 			create5.executeUpdate();
 			t5.commit();
+			
+			Transaction t11 = se.beginTransaction();
+			Query create11=se.createSQLQuery("delete from optimisationchemin");
+			create11.executeUpdate();
+			t11.commit();
 			
 			Transaction t10 = se.beginTransaction();
 			Query create10=se.createSQLQuery("delete from train");

@@ -3,6 +3,8 @@ package railsimulator.bi;
 import java.io.IOException;
 import java.sql.ResultSet;
 import java.text.DecimalFormat;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -108,14 +110,17 @@ public class OptimisationControler extends HttpServlet {
 		if(action.equals("OK")){
 		
 			//2
-			double frequence = Double.parseDouble(request.getParameter("NouvelleFrequence"));
+			String time = request.getParameter("NouvelleFrequence");
+			time = time.substring(3, 5);			
+	        
+			double frequence = Double.parseDouble(time);
 			double longueurLigne= Double.parseDouble(session.getAttribute("longueurLigne").toString());
 			double vitesseTrain= Double.parseDouble(session.getAttribute("vitesseTrain").toString());
 			int   prixtrain =Integer.parseInt(session.getAttribute("prixtrain").toString());
 			int   nbtrain =Integer.parseInt(session.getAttribute("nbrTrain").toString());
 			double tarificationdedeplacement =Double.parseDouble(session.getAttribute("tarificationdedeplacement").toString());
 			double Consommationenergie = Double.parseDouble(session.getAttribute("Consommationenergie").toString());
-			int  freq = Integer.parseInt(session.getAttribute("freq").toString());
+			//int  freq = Integer.parseInt(session.getAttribute("freq").toString());
 			int nbVoyagAncien = Integer.parseInt(session.getAttribute("nbVoyageurAncien").toString());
 			double coutMaintenance = Double.parseDouble(session.getAttribute("coutMaintenance").toString());
 			double prixplace = Double.parseDouble(session.getAttribute("prixplace").toString());
