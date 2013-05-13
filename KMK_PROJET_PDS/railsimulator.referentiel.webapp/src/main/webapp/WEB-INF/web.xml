@@ -56,22 +56,22 @@
 	
 	<servlet>
 		<servlet-name>AjaxControler</servlet-name>
-		<servlet-class>railsimulator.workflow</servlet-class>
+		<servlet-class>railsimulator.workflow.AjaxControler</servlet-class>
 	</servlet>
 	
 	<servlet>
 		<servlet-name>WorkflowControler</servlet-name>
-		<servlet-class>railsimulator.workflow</servlet-class>
+		<servlet-class>railsimulator.workflow.WorkflowControler</servlet-class>
 	</servlet>
 	
 	<servlet>
 		<servlet-name>OptimisationControler</servlet-name>
-		<servlet-class>railsimulator.bi</servlet-class>
+		<servlet-class>railsimulator.bi.OptimisationControler</servlet-class>
 	</servlet>
 	
 	<servlet>
 		<servlet-name>TheMock</servlet-name>
-		<servlet-class>railsimulator.workflow</servlet-class>
+		<servlet-class>railsimulator.workflow.TheMock</servlet-class>
 	</servlet>
 
 	<servlet-mapping>
