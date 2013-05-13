@@ -55,10 +55,10 @@ public class Train  {
 	@OneToMany(fetch=FetchType.EAGER,mappedBy="train")
 	private Set<TrainHoraireStation> TrainHoraireStationList = new HashSet<TrainHoraireStation>();
 	
-	public Integer getIdtrain() {
+	public Integer getIdTrain() {
 		return idtrain;
 	}
-	public void setIdtrain(Integer idtrain) {
+	public void setIdTrain(Integer idtrain) {
 		this.idtrain = idtrain;
 	}
 	public Integer getPrixtrain() {
