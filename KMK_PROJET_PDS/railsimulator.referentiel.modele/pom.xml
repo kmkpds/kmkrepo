@@ -34,12 +34,6 @@ xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xs
 			<artifactId>mysql-connector-java</artifactId>
 			<version>5.1.6</version>
 		</dependency>
-            
-        <dependency>
-			<groupId>net.sourceforge.jtds</groupId>
-		    <artifactId>jtds</artifactId>
-		    <version>1.2.5</version>
-		</dependency>
         
 		<dependency>
 			<groupId>org.apache.geronimo.specs</groupId>
@@ -74,8 +68,14 @@ xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xs
 			<groupId>net.sourceforge.jtds</groupId>
 			<artifactId>jtds</artifactId>
 			<version>1.3.0</version>
+			<exclusions>
+				<exclusion>
+					<groupId>org.hibernate</groupId>
+					<artifactId>hibernate-annotations-3.0aplha3</artifactId>    
+				</exclusion>
+			</exclusions>
 		</dependency>
-      
+
 	</dependencies>
 
 	<build>

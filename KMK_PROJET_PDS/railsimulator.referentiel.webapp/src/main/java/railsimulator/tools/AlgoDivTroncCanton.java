@@ -23,14 +23,11 @@ public class AlgoDivTroncCanton {
 
 		double distance=0;
         
-		System.out.println("avant for stationlist");
-		System.out.println("taille listeStation= " +listeStation.size());
 		for(int i=0;i<stationList.length;i++){
-            System.out.println("dans stationlist et avant listestation");
 
         
 			for(int y=0;y<listeStation.size()-1;y++){
-				System.out.println("ds listestation");
+
 				Station station1 = station_dao.getStationByID(listeStation.get(y).getIdStation());
 				Station station2 = station_dao.getStationByID(listeStation.get(y+1).getIdStation()); 
 				
@@ -41,18 +38,17 @@ public class AlgoDivTroncCanton {
 				double longS2=station2.getLongitude();
 				double latS2=station2.getLatitude();
 				
-				System.out.println("ancienne lat1=>" +latS1+ "lat2=>" +latS2);
 
 				
 				distance= getDistancePol(latS1,latS2,longS1 , longS2);
-				System.out.println("distance==" +distance);
+				
 
 				Double nbCantons= distance/200;
 				
 				int modulo=(int) (nbCantons%200);
 				System.out.println("modulo==>" +modulo);
 				if (modulo !=0){
-					System.out.println("nbCantons.intValue()" +nbCantons.intValue());
+					
 					System.out.println(nbCantons);
 					for (int j = 0; j < nbCantons.intValue(); j++) {
 						if (j==nbCantons.intValue()-1){
@@ -61,7 +57,6 @@ public class AlgoDivTroncCanton {
 						else
 						{
 						    int idcanton=canton_dao.createCantonParamStation(200,station1,station2);
-						    System.out.println("idcanton ds else ==" +idcanton);
 						}
 						
 					} //fin boucle nbCantons
@@ -70,8 +65,7 @@ public class AlgoDivTroncCanton {
 				else{
 					for (int j = 0; j < nbCantons.intValue(); j++) {
 					
-						    int idcanton=canton_dao.createCantonParamStation(200,station1,station2);
-						    System.out.println("idcanton ds elsemodulo ==" +idcanton);					
+						    int idcanton=canton_dao.createCantonParamStation(200,station1,station2);				
 					} //fin boucle nbCantons
 					
 				}//fin else
