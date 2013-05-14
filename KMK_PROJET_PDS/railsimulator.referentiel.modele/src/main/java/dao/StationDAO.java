@@ -115,9 +115,9 @@ public class StationDAO {
     	//station = (Station) se.get(Station.class, id);
     	//se.getTransaction().commit();
 
-    	Object obj = se.createQuery("from Station where idStation="+id).uniqueResult();
-        logger.info(obj.getClass());
-    	station = (Station) obj;//se.createQuery("from Station where idStation="+id).uniqueResult();
+    	//Object obj = se.createQuery("from Station where idStation="+id).uniqueResult();
+        //logger.info(obj.getClass());
+    	station = (Station) se.createQuery("from Station where idStation="+id).uniqueResult();
     	se.close();
     	
         //return station;

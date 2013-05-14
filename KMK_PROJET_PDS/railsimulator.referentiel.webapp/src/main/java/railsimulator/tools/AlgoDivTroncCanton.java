@@ -32,7 +32,7 @@ public class AlgoDivTroncCanton {
 			for(int y=0;y<listeStation.size()-1;y++){
 				
 				
-                logger.info("i : " + y+ "y : " + listeStation.get(y).getIdStation() + "  y+1 : "+ listeStation.get(y+1).getIdStation()); 
+                System.out.println("i : " + y+ "y : " + listeStation.get(y).getIdStation() + "  y+1 : "+ listeStation.get(y+1).getIdStation()); 
 				Station station1 = station_dao.getStationByID(listeStation.get(y).getIdStation());
 				Station station2 = station_dao.getStationByID(listeStation.get(y+1).getIdStation()); 
 				
