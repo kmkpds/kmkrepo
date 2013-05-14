@@ -2,6 +2,9 @@ package railsimulator.tools;
 
 
 import java.util.List;
+
+import org.apache.log4j.Logger;
+
 import dao.CantonDAO;
 import dao.StationDAO;
 import beans.Station;
@@ -12,7 +15,7 @@ public class AlgoDivTroncCanton {
 	private CantonDAO canton_dao=new CantonDAO();
 	private StationDAO station_dao=new StationDAO();
 
-	
+	private static Logger logger = Logger.getLogger(AlgoDivTroncCanton.class);
 	
 	public AlgoDivTroncCanton() {
         
@@ -27,7 +30,9 @@ public class AlgoDivTroncCanton {
 
         
 			for(int y=0;y<listeStation.size()-1;y++){
-
+				
+				
+                logger.info("i : " + y+ "y : " + listeStation.get(y).getIdStation() + "  y+1 : "+ listeStation.get(y+1).getIdStation()); 
 				Station station1 = station_dao.getStationByID(listeStation.get(y).getIdStation());
 				Station station2 = station_dao.getStationByID(listeStation.get(y+1).getIdStation()); 
 				

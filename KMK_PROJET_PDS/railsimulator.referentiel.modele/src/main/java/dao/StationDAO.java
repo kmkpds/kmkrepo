@@ -7,10 +7,12 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
+import org.apache.log4j.Logger;
 import org.hibernate.Query;
 import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+
 
 import com.mysql.jdbc.PreparedStatement;
 
@@ -24,6 +26,7 @@ public class StationDAO {
 	private Station station = new Station();
     private Set<Ligne> listLigne=new HashSet<Ligne>();
 
+	private static Logger logger = Logger.getLogger(StationDAO.class);
     
     public  void createStation(String nomStation , String commentaireStation, double latitude, double longitude, Ligne ligne) {
 	      
@@ -111,7 +114,10 @@ public class StationDAO {
     	
     	//station = (Station) se.get(Station.class, id);
     	//se.getTransaction().commit();
-    	station = (Station) se.createQuery("from Station where idStation="+id).uniqueResult();
+
+    	Object obj = se.createQuery("from Station where idStation="+id).uniqueResult();
+        logger.info(obj.getClass());
+    	station = (Station) obj;//se.createQuery("from Station where idStation="+id).uniqueResult();
     	se.close();
     	
         //return station;
