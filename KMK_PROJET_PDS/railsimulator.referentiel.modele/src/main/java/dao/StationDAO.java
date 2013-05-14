@@ -106,7 +106,7 @@ public class StationDAO {
     	se = HibernateUtils.getSession();
     	se.beginTransaction(); 
     	
-    	station = (Station) se.createQuery("from Station where id=?").setParameter(0, id).uniqueResult();
+    	station = (Station) se.createQuery("from station where id=?").setParameter(0, id).uniqueResult();
 
     	
     	//station = (Station) se.get(Station.class, id);
