@@ -77,7 +77,7 @@ public class TrainDAO {
     	se = HibernateUtils.getSession();
     	se.beginTransaction(); 
     	
-    	train = (Train) se.createQuery("from Train where ligne_idligne="+id).uniqueResult();
+    	train = (Train) se.createQuery("from Train where idTrain="+id).uniqueResult();
     	 se.close();
     	
         return train;
