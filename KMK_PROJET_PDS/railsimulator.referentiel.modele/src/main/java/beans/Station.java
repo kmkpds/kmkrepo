@@ -23,6 +23,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name="station")
 public class Station {	
+
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name="idstation" )
@@ -64,6 +65,10 @@ public class Station {
 	)
 	private List<Station> stationRetour;
 	
+	public Station() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 
 
 	public Integer getIdStation() {
