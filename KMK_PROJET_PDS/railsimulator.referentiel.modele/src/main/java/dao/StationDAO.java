@@ -162,7 +162,7 @@ public class StationDAO {
 	System.out.println("SQL==>" +sql);
 
 	listeStation=se.createSQLQuery(sql).list();
-
+	System.out.println(listeStation.get(0).getIdStation().toString());
 	 t.commit();
 	 return listeStation;
 	 }
