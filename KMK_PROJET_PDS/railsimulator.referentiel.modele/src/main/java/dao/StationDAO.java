@@ -22,7 +22,7 @@ public class StationDAO {
 	private Session se = null;
 	private List<Station> listeStation;
 	private Station station = new Station();
-   private Set<Ligne> listLigne=new HashSet<Ligne>();
+    private Set<Ligne> listLigne=new HashSet<Ligne>();
 
     
     public  void createStation(String nomStation , String commentaireStation, double latitude, double longitude, Ligne ligne) {
@@ -106,11 +106,15 @@ public class StationDAO {
     	se = HibernateUtils.getSession();
     	se.beginTransaction(); 
     	
-    	station = (Station) se.get(Station.class, id);
-    	se.getTransaction().commit();
+    	station = (Station) se.createQuery("from Station where id=?").setParameter(0, id).uniqueResult();
+
+    	
+    	//station = (Station) se.get(Station.class, id);
+    	//se.getTransaction().commit();
     	//station = (Station) se.createQuery("from Station where idStation="+id).uniqueResult();
     	se.close();
     	
+        //return station;
         return station;
     }
 	
