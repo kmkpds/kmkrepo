@@ -1,3 +1,4 @@
+
 package railsimulator.referentiel.controleur;
 
 import java.io.IOException;
@@ -291,7 +292,26 @@ public class ReseauControler extends HttpServlet {
 					break;
 				}	
 			} //Fin
-
+			
+			
+			/*Remplissage du tableauGeolocalisation
+			List<Zone>  listeZone = zone_dao.listerZone();
+			List<double[]> tableauGeolocalisation = new ArrayList<double[]>();
+			for(int y=0;y<listeZone.size();y++){
+				Geolocalisation g1 = listeZone.get(y).getGeolocalisationlist().get(0);
+				Geolocalisation g2 = listeZone.get(y).getGeolocalisationlist().get(1);
+				//tableauGeolocalisation.add(new double[] {g1.getLatitudeGeolocalisation(), g2.getLatitudeGeolocalisation(), g1.getLongitudeGeolocalisation(), g2.getLongitudeGeolocalisation()});
+							
+			}
+			
+						
+		  /*	AlgoCreationReseau algoReseau = new AlgoCreationReseau();
+			boolean verifierDistanceZone = true;
+			if (tableauGeolocalisation.size()!=0){
+				verifierDistanceZone = algoReseau.getDistanceZone(latitude, latitudeb, longitude, longitudeb, tableauGeolocalisation);
+			}
+			
+			if(verifierDistanceZone == true){*/
 			
 			if(isZoneExist == false){
 			reseau=reseau_dao.getReseauByID(idreseau);
@@ -318,7 +338,11 @@ public class ReseauControler extends HttpServlet {
 				this.getServletContext().getRequestDispatcher("/WEB-INF/creeationReseau.jsp").forward( request, response );
 	
 		    }
-
+						
+			/*}else{
+				
+				System.out.println("DŽsolŽ, cette zone est trop proche d'une zone existance. Merci d'en crŽer une nouvelle.");
+			}*/
 		}
 		
 				
@@ -346,18 +370,18 @@ public class ReseauControler extends HttpServlet {
 		}
 	
 		if(action.equals("GenererReseau")){
-			// original
-			//int idreseau = Integer.parseInt(request.getParameter("idReseau"));
-			//reseau = reseau_dao.getReseauByID(idreseau);
-			//AlgoCreationReseau algo = new AlgoCreationReseau();
-			//Algo kruskal = new Algo();
-			//algo.creerReseau(reseau);
-			//kruskal.stationToStation(algo.creerReseau(reseau));
-			//listeStation= station_dao.listerStation();
+			/* original
+			int idreseau = Integer.parseInt(request.getParameter("idReseau"));
+			reseau = reseau_dao.getReseauByID(idreseau);
+			AlgoCreationReseau algo = new AlgoCreationReseau();
+			Algo kruskal = new Algo();
+			algo.creerReseau(reseau);
+			kruskal.stationToStation(algo.creerReseau(reseau));
+			listeStation= station_dao.listerStation();
 
-			//request.logout();
-			//request.setAttribute("listeStation",listeStation);
-			//this.getServletContext().getRequestDispatcher( "/WEB-INF/visualisationReseau.jsp").forward( request, response ); */
+			request.logout();
+			request.setAttribute("listeStation",listeStation);
+			this.getServletContext().getRequestDispatcher( "/WEB-INF/visualisationReseau.jsp").forward( request, response ); */
 			System.out.println("GENERER RESEAU");
 try {
 			//ON RECUPERE LE RESEAU
@@ -373,19 +397,22 @@ try {
 			kruskal.stationToStation(matriceStation);
 			kruskal.dijkstraKetsia(matriceStation);
 			int[] stationList =kruskal.getMatriceNomStation(matriceStation);
-			
-			//SELECTIONNE LES TRONCONS CONCERNES
-			List<Station> listeStationAffichage = station_dao.listerStationHasStationByListStation(stationList);//.listerStation();
 
+			//SELECTIONNE LES TRONCONS CONCERNES
+//			List<Station> listeStationAffichage = station_dao.listerStationHasStationByListStation(stationList);//.listerStation();
+//			List<Integer> listeStationAffichage = station_dao.listerStationHasStationByListStation(stationList);//.listerStation();
+			int[][] listeStationAffichage =station_dao.listerStationHasStationByListStation(stationList);
 			listeStation=station_dao.listerStation();
-			
+
 			//DECOUPAGE DES TRONCONS EN CANTONS
 			AlgoDivTroncCanton algodiv=new AlgoDivTroncCanton();
 
+//			algodiv.decoupage(listeStationAffichage,stationList);
 			algodiv.decoupage(listeStationAffichage,stationList);
-
 			listeCanton=canton_dao.listerCantonParam(listeStationAffichage);//listeStation);
-			
+
+			//int[][] listeLigneStation=ligne_dao.listerLigneStation(listeStation,idligne);
+
 			request.logout();
 			request.setAttribute("listeStation",listeStation);
 			request.setAttribute("listeCanton",listeCanton);

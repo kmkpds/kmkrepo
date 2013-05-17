@@ -1,9 +1,7 @@
-package railsimulator.tools;
+package tools;
 
 
 import java.util.List;
-
-import org.apache.log4j.Logger;
 
 import dao.CantonDAO;
 import dao.StationDAO;
@@ -15,27 +13,31 @@ public class AlgoDivTroncCanton {
 	private CantonDAO canton_dao=new CantonDAO();
 	private StationDAO station_dao=new StationDAO();
 
-	private static Logger logger = Logger.getLogger(AlgoDivTroncCanton.class);
+	//private static Logger logger = Logger.getLogger(AlgoDivTroncCanton.class);
 	
 	public AlgoDivTroncCanton() {
         
 	}
 	
-	public void decoupage(List<Station> listeStation,int[] stationList) {
+	public void decoupage(int[][] listeStation,int[] stationList) {
         
-
+		System.out.println("1");
 		double distance=0;
         
 		for(int i=0;i<stationList.length;i++){
-
+System.out.println("2");
         
-			for(int y=0;y<listeStation.size()-1;y++){
+			for(int y=0;y<listeStation.length-1;y++){
 				
+				System.out.println("3");
+//                System.out.println("i : " + y+ "y : " + listeStation.get(y).getIdStation() + "  y+1 : "+ listeStation.get(y+1).getIdStation()); 
+//				Station station1 = station_dao.getStationByID(listeStation.get(y).getIdStation());
+//				Station station2 = station_dao.getStationByID(listeStation.get(y+1).getIdStation()); 
+				System.out.println("i : " + y+ "y : " + listeStation[y][0]+ "  y+1 : "+ listeStation[y][1]); 
+				Station station1 = station_dao.getStationByID(listeStation[y][0]);
+				Station station2 = station_dao.getStationByID(listeStation[y][1]); 
 				
-                System.out.println("i : " + y+ "y : " + listeStation.get(y).getIdStation() + "  y+1 : "+ listeStation.get(y+1).getIdStation()); 
-				Station station1 = station_dao.getStationByID(listeStation.get(y).getIdStation());
-				Station station2 = station_dao.getStationByID(listeStation.get(y+1).getIdStation()); 
-				
+				System.out.println("4");
 				//System.out.println("station1 " +station1.getIdStation() + "station2 " +station2.getIdStation());
 				double longS1= station1.getLongitude();
 				double latS1=station1.getLatitude();

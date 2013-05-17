@@ -1,16 +1,19 @@
 package dao;
 
-
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
+import java.util.ArrayList;
 
 import org.hibernate.Query;
+import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
+import com.mysql.jdbc.PreparedStatement;
 
 import beans.Ligne;
 import beans.Station;
@@ -20,6 +23,7 @@ public class StationDAO {
 	private Session se = null;
 	private List<Station> listeStation;
 	private Station station = new Station();
+	private Set<Ligne> listLigne = new HashSet<Ligne>();
 
 	public void createStation(String nomStation, String commentaireStation,
 			double latitude, double longitude, Ligne ligne) {
@@ -31,6 +35,7 @@ public class StationDAO {
 		station.setCommentaireStation(commentaireStation);
 		station.setLatitude(latitude);
 		station.setLongitude(longitude);
+		// listLigne.add(ligne);
 		station.setLigne(ligne);
 
 		se.save(station);
@@ -49,6 +54,7 @@ public class StationDAO {
 		station.setCommentaireStation(commentaireStation);
 		station.setLatitude(latitude);
 		station.setLongitude(longitude);
+		// listLigne.add(ligne);
 		station.setLigne(ligne);
 		int idStation = (Integer) se.save(station);
 		t.commit();
@@ -73,8 +79,8 @@ public class StationDAO {
 		// station1.setStationRetour(listStation);
 		// station2.setStationRetour(listStation2);
 
-		se.update(station1); // update pr plateforme
-		se.update(station2);
+		se.merge(station1); // update pr plateforme
+		se.merge(station2);
 
 		tr.commit();
 		se.close();
@@ -121,7 +127,7 @@ public class StationDAO {
 		return listeStation;
 	}
 
-	public List<Station> listerStationHasStationByListStation(int[] stationList)
+	public int[][] listerStationHasStationByListStation(int[] stationList)
 			throws SQLException {
 		se = HibernateUtils.getSession();
 		String listeStationStr = "";
@@ -129,22 +135,37 @@ public class StationDAO {
 		for (int i = 0; i <= stationList.length - 1; i++) {
 
 			listeStationStr = listeStationStr + stationList[i] + ",";
-			System.out.println("listerStationHasStationByListStation="
-					+ stationList[i]);
+			//System.out.println("listerStationHasStationByListStation=" + stationList[i]);
 
 		}// fin i
 		listeStationStr = listeStationStr.substring(0,
 				listeStationStr.length() - 1);
 
-		String sql = "select * from station_has_station where station_idstation1 in ("
+		String sql = "select station_idstation1 from station_has_station where station_idstation1 in ("
 				+ listeStationStr
 				+ ") or station_idstation2 in ("
 				+ listeStationStr + ")";
 
 		Query query = se.createSQLQuery(sql);
-		List<Station> listeStation = query.list();
+		//List<Station> listeStation = query.list();
+		List<Integer> listeStation = query.list();
+		sql = "select station_idstation2 from station_has_station where station_idstation1 in ("
+				+ listeStationStr
+				+ ") or station_idstation2 in ("
+				+ listeStationStr + ")";
 
-		return (listeStation);
+		query = se.createSQLQuery(sql);
+		//List<Station> listeStation = query.list();
+		List<Integer> listeStation2 = query.list();
+		int[][] Tableau = new int[listeStation.size()][2];
+		for (int i=0; i<listeStation.size();i++){
+			Tableau[i][0]=listeStation.get(i);
+			Tableau[i][1]=listeStation2.get(i);
+		}
+		for (int j=0; j<Tableau.length; j++){
+			System.out.println(Tableau[j][0]+"| "+ Tableau[j][1]);
+		}
+		return (Tableau);
 	}
 
 }

@@ -1,6 +1,7 @@
 package dao;
 
 import java.util.List;
+
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
@@ -99,20 +100,15 @@ public class CantonDAO {
     	    	
         return listeCanton;
     }
-	public List<Canton> listerCantonParam(List<Station> listeStation) {
+	public List<Canton> listerCantonParam(int[][] listeStationAffichage) {
     	se = HibernateUtils.getSession();
     	se.beginTransaction();  	 	
 		String listeStationStr="where ";
-		for(int i=0; i<listeStation.size();i++){
-			//listeStationStr = listeStationStr + listeStation.get(i).getIdStation() +",";
-			listeStationStr = listeStationStr + " station_station_idstation1="+listeStation.get(i).getIdStation() +" or station_station_idstation2= "+listeStation.get(i).getIdStation()+" or";
+		for(int i=0; i<listeStationAffichage.length-1;i++){
+			listeStationStr = listeStationStr + " station_station_idstation1="+listeStationAffichage[i][0] +" or station_station_idstation2= "+listeStationAffichage[i][1]+" or";
 		}
 		listeStationStr = listeStationStr.substring(0, listeStationStr.length()-2);
-		//listeStationStr = listeStationStr.substring(0, listeStationStr.length()-1);
-		//listeStationStr = listeStationStr + ")";
 System.out.println("requete cantondao" +listeStationStr);
-		
-    	//listeCanton = se.createQuery("from Canton where station_has_station_station_idstation1="+listeStationStr+ " or station_has_station_station_idstation2= "+listeStationStr).list();
 		listeCanton = se.createQuery("from Canton "+listeStationStr).list();
    	  	
         return listeCanton;
