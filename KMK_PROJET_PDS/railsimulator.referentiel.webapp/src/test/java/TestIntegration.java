@@ -9,9 +9,9 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
-import tools.Algo;
-import tools.AlgoCreationReseau;
-import tools.AlgoDivTroncCanton;
+import railsimulator.tools.Algo;
+import railsimulator.tools.AlgoCreationReseau;
+import railsimulator.tools.AlgoDivTroncCanton;
 
 import dao.CantonDAO;
 import dao.GeolocalisationDAO;

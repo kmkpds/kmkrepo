@@ -18,7 +18,7 @@ import beans.Canton;
 import beans.Ligne;
 import beans.Reseau;
 import beans.Station;
-import tools.AlgoDivTroncCanton;
+import railsimulator.tools.AlgoDivTroncCanton;
 import junit.framework.TestCase;
 
 public class AlgoDivTroncCantonTest extends TestCase {
