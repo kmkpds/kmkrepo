@@ -395,7 +395,8 @@ try {
 			
 			//ARBRE RECOUVRANT ARC OPTIMAUX
 			kruskal.stationToStation(matriceStation);
-			kruskal.dijkstraKetsia(matriceStation);
+			kruskal.dijkstra(matriceStation,reseau);
+			
 			int[] stationList =kruskal.getMatriceNomStation(matriceStation);
 
 			//SELECTIONNE LES TRONCONS CONCERNES

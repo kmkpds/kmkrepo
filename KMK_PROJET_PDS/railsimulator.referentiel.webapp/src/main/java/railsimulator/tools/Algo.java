@@ -6,6 +6,7 @@ import java.util.List;
 import beans.Reseau;
 import beans.Station;
 
+import dao.LigneDAO;
 import dao.OptimisationCheminDAO;
 import dao.StationDAO;
 
@@ -14,6 +15,7 @@ public class Algo {
 	StationDAO station_dao = new StationDAO();
 	Station station1 = new Station();
 	Station station2 = new Station();
+	LigneDAO ligne_dao = new LigneDAO();
 	OptimisationCheminDAO optimisation_dao=new OptimisationCheminDAO();
 
 	public double[][] matriceIncidence, tabPoids;
@@ -24,9 +26,10 @@ public class Algo {
 	
 	 
 	
-
-	 // CrÈation Matrice reseau incidence
-
+	
+	/*
+	 * CrÈation Matrice reseau incidence
+	 */
 
 	public double [][] getMatriceIncidence( String reseauMatrice[][]) {
 		
@@ -50,8 +53,9 @@ public class Algo {
 	}
 	
 	
-
-	 // CrÈation Matrice nomStation
+	/*
+	 * CrÈation Matrice nomStation
+	 */
 	
 	public int [] getMatriceNomStation( String reseauMatrice[][]) {
 	       
@@ -68,7 +72,10 @@ public class Algo {
 	
 	
 	
-	// rÈcupÈration index de l'arc minimal
+	/*
+	 * rÈcupÈration index de l'arc minimal
+	 */
+
 
 
     public int getIndexMinPoids(double[] matrice) {
@@ -87,8 +94,9 @@ public class Algo {
     }
 
     
-	// CrÈation des tronçcons
-
+	/*
+	 * CrÈation des tronçons
+	 */
     
 	public void stationToStation(String reseauMatrice[][]) {
 		
@@ -183,7 +191,7 @@ public class Algo {
 //=============DEBUT DIJKSTRA====================
 //    === DEBUT DES FONCTIONS POUR DIJKSTRA === 
 
-    public void dijkstraKetsia(String[][] MatriceDistance){
+    public void dijkstra(String[][] MatriceDistance,Reseau reseau){
     	double[][] matPoid = new double[MatriceDistance.length-1][MatriceDistance.length-1];
     	int nbColonnes = (matPoid.length*matPoid.length)-matPoid.length;
     	String[][] matriceDijkstra = new String[nbColonnes][4];
@@ -226,6 +234,7 @@ public class Algo {
     	//creation
     	for (int i =0; i<matriceDijkstra.length;i++){
     		optimisation_dao.createOptimisationChemin(stationDAO.getStationByID(Integer.parseInt(matriceDijkstra[i][0])),stationDAO.getStationByID(Integer.parseInt(matriceDijkstra[i][1])),Double.parseDouble(matriceDijkstra[i][2]),matriceDijkstra[i][3]);
+			ligne_dao.createLigne(null, null, reseau);
     	}
     	System.out.println("matPoid");
     	for (int z =0; z<matPoid.length;z++){
@@ -241,8 +250,7 @@ public class Algo {
 			System.out.println(" | ");
 		}
     	
-    }
- 
+    }//fin Dijkstra
 
 }//Fin classe Algo
 
