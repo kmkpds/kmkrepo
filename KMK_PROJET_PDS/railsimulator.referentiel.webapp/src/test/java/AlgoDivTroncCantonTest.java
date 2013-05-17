@@ -1,3 +1,5 @@
+
+
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -16,7 +18,7 @@ import beans.Canton;
 import beans.Ligne;
 import beans.Reseau;
 import beans.Station;
-import railsimulator.tools.AlgoDivTroncCanton;
+import tools.AlgoDivTroncCanton;
 import junit.framework.TestCase;
 
 public class AlgoDivTroncCantonTest extends TestCase {
@@ -24,7 +26,7 @@ public class AlgoDivTroncCantonTest extends TestCase {
 	private Session se = null;
 	private AlgoDivTroncCanton algo = new AlgoDivTroncCanton();
 	private int stationList[] = { 1, 2 };
-	private List<Station> listeStation = new ArrayList<Station>();
+	private int[][] listeStation;
 	private StationDAO station_dao = new StationDAO();
 	private boolean test;
 	private double testResult;
@@ -105,16 +107,15 @@ public class AlgoDivTroncCantonTest extends TestCase {
 
 		// System.out.println("STATION1= " +station1.getIdStation()+
 		// " STATION2= "+station2.getIdStation());
-		for (Station iterable_element : listeStation) {
-			System.out
-					.println("listestation" + iterable_element.getIdStation());
+		for (int[] iterable_element : listeStation) {
+			System.out.println("listestation" + iterable_element);
 		}
 
 		for (int j = 0; j <= stationList.length - 1; j++) {
 			System.out.println("stationList" + stationList[j]);
 		}
 
-		System.out.println("taille listestation " + listeStation.size()
+		System.out.println("taille listestation " + listeStation.length
 				+ "taille station list" + this.stationList.length);
 		algo.decoupage(listeStation, stationList);
 

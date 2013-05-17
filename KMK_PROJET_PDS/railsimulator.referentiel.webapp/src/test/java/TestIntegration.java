@@ -9,9 +9,9 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
-import railsimulator.tools.Algo;
-import railsimulator.tools.AlgoCreationReseau;
-import railsimulator.tools.AlgoDivTroncCanton;
+import tools.Algo;
+import tools.AlgoCreationReseau;
+import tools.AlgoDivTroncCanton;
 
 import dao.CantonDAO;
 import dao.GeolocalisationDAO;
@@ -138,7 +138,7 @@ public class TestIntegration extends TestCase {
 		int[] stationList =kruskal.getMatriceNomStation(algo.creerReseau(reseau));
 		System.out.println("taille int[] stationList " +stationList.length);
 
-		List<Station> listeStationAffichage;
+		int[][]  listeStationAffichage;
 		try {
 			listeStationAffichage = station_dao.listerStationHasStationByListStation(stationList);
 		//.listerStation();
