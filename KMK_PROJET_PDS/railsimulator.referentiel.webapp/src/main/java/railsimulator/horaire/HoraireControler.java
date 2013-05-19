@@ -480,6 +480,11 @@ public class HoraireControler extends HttpServlet {
 			create5.executeUpdate();
 			t5.commit();
 			
+			Transaction t11 = se.beginTransaction();
+			Query create11=se.createSQLQuery("delete from optimisationchemin");
+			create11.executeUpdate();
+			t11.commit();
+			
 			Transaction t10 = se.beginTransaction();
 			Query create10=se.createSQLQuery("delete from train");
 			create10.executeUpdate();
