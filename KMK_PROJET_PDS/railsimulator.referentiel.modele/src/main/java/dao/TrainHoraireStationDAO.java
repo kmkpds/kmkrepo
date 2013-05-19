@@ -4,10 +4,12 @@ import java.util.List;
 
 import javax.persistence.Column;
 
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 import beans.Geolocalisation;
+import beans.ParametreHoraire;
 import beans.Train;
 import beans.Station;
 import beans.TrainHoraireStation;
@@ -16,6 +18,7 @@ public class TrainHoraireStationDAO {
 	private Session se = null;
 	private TrainHoraireStation trainHoraireStation;
 	private List<TrainHoraireStation> listetrainHoraireStation;
+	private ParametreHoraire parametreHoraire;
 	public TrainHoraireStationDAO() {
 		// TODO Auto-generated constructor stub
 	}
@@ -74,7 +77,7 @@ public class TrainHoraireStationDAO {
 
 		return trainHoraireStation;
 	}
-	
+		
 	public List<TrainHoraireStation> listTrainHoraireStationById() {
 		se = HibernateUtils.getSession();
 		se.beginTransaction();  	 	
@@ -87,5 +90,16 @@ public class TrainHoraireStationDAO {
 		se.beginTransaction();  
 		listetrainHoraireStation = se.createQuery("from TrainHoraireStation where train_idtrain in"+ trainList).list();
 		return listetrainHoraireStation;
+	}
+	
+	public int deleteAllTrainHoraireStation(){
+		Session se = null;
+		se = HibernateUtils.getSession();
+		Transaction t9 = se.beginTransaction();
+		Query create9=se.createSQLQuery("delete from trainhorairestation");
+		create9.executeUpdate();
+		t9.commit();
+		return 1;
+			
 	}
 }
