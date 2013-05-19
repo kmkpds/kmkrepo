@@ -184,17 +184,19 @@ function checkSubmit() {
 		msgAlert = msgAlert
 				+ "- heures de pointe dimanche et jours f\351ri\351s non renseign\351es \n";
 	}
-	if (document.parametresHoraire.heurePTJO.value > document.parametresHoraire.heureDTJO.value) {
+	if (parseInt(document.parametresHoraire.heurePTJO.value) > parseInt(document.parametresHoraire.heureDTJO.value)) {
+		alert(document.parametresHoraire.heurePTJO.value);
+		alert(document.parametresHoraire.heureDTJO.value);
 		msgAlert = msgAlert
 				+ "- l'heure du premier train ne peut \352tre sup\351rieur \340 l'heure du dernier train (Jours ouvr\351s)\n";
 		check = false;
 	}
-	if (document.parametresHoraire.heurePTSamedi.value > document.parametresHoraire.heureDTSamedi.value) {
+	if (parseInt(document.parametresHoraire.heurePTSamedi.value) >parseInt(document.parametresHoraire.heureDTSamedi.value)) {
 		msgAlert = msgAlert
 				+ "- l'heure du premier train ne peut \352tre sup\351rieur \340 l'heure du dernier train (Samedi)\n";
 		check = false;
 	}
-	if (document.parametresHoraire.heurePTDimancheJF.value > document.parametresHoraire.heureDTDimancheJF.value) {
+	if (parseInt(document.parametresHoraire.heurePTDimancheJF.value) > parseInt(document.parametresHoraire.heureDTDimancheJF.value)) {
 		msgAlert = msgAlert
 				+ "- l'heure du premier train ne peut \352tre sup\351rieur \340 l'heure du dernier train (Dimanche et jours f\351ri\351s)\n";
 		check = false;

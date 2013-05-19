@@ -31,6 +31,7 @@ function test(){
 }
 
 function initField(){
+	deselectionHeuresPointes();
 	//initialisation des champs du formulaire
 	document.parametresHoraire.vitesseMoyenne.value="20";
 	document.parametresHoraire.heurePTJO.value="1";
@@ -113,3 +114,159 @@ function testCheckSubmit(i){
 	}
 	initField();
 }
+function deselectionHeuresPointes(){
+	document.parametresHoraire.heuresPointeJO[0].checked=false;
+	document.parametresHoraire.heuresPointeJO[1].checked=false;
+	document.parametresHoraire.heuresPointeJO[2].checked=false;
+	document.parametresHoraire.heuresPointeJO[3].checked=false;
+	document.parametresHoraire.heuresPointeJO[4].checked=false;
+	document.parametresHoraire.heuresPointeJO[5].checked=false;
+	document.parametresHoraire.heuresPointeJO[6].checked=false;
+	document.parametresHoraire.heuresPointeJO[7].checked=false;
+	document.parametresHoraire.heuresPointeJO[8].checked=false;
+	document.parametresHoraire.heuresPointeJO[9].checked=false;
+	document.parametresHoraire.heuresPointeJO[10].checked=false;
+	document.parametresHoraire.heuresPointeJO[11].checked=false;
+	document.parametresHoraire.heuresPointeJO[12].checked=false;
+	document.parametresHoraire.heuresPointeJO[13].checked=false;
+	document.parametresHoraire.heuresPointeJO[14].checked=false;
+	document.parametresHoraire.heuresPointeJO[15].checked=false;
+	document.parametresHoraire.heuresPointeSamedi[0].checked=false;
+	document.parametresHoraire.heuresPointeSamedi[1].checked=false;
+	document.parametresHoraire.heuresPointeSamedi[2].checked=false;
+	document.parametresHoraire.heuresPointeSamedi[3].checked=false;
+	document.parametresHoraire.heuresPointeSamedi[4].checked=false;
+	document.parametresHoraire.heuresPointeSamedi[5].checked=false;
+	document.parametresHoraire.heuresPointeSamedi[6].checked=false;
+	document.parametresHoraire.heuresPointeSamedi[7].checked=false;
+	document.parametresHoraire.heuresPointeSamedi[8].checked=false;
+	document.parametresHoraire.heuresPointeSamedi[9].checked=false;
+	document.parametresHoraire.heuresPointeSamedi[10].checked=false;
+	document.parametresHoraire.heuresPointeSamedi[11].checked=false;
+	document.parametresHoraire.heuresPointeSamedi[12].checked=false;
+	document.parametresHoraire.heuresPointeSamedi[13].checked=false;
+	document.parametresHoraire.heuresPointeSamedi[14].checked=false;
+	document.parametresHoraire.heuresPointeSamedi[15].checked=false;
+	document.parametresHoraire.heuresPointeDimancheJF[0].checked=false;
+	document.parametresHoraire.heuresPointeDimancheJF[1].checked=false;
+	document.parametresHoraire.heuresPointeDimancheJF[2].checked=false;
+	document.parametresHoraire.heuresPointeDimancheJF[3].checked=false;
+	document.parametresHoraire.heuresPointeDimancheJF[4].checked=false;
+	document.parametresHoraire.heuresPointeDimancheJF[5].checked=false;
+	document.parametresHoraire.heuresPointeDimancheJF[6].checked=false;
+	document.parametresHoraire.heuresPointeDimancheJF[7].checked=false;
+	document.parametresHoraire.heuresPointeDimancheJF[8].checked=false;
+	document.parametresHoraire.heuresPointeDimancheJF[9].checked=false;
+	document.parametresHoraire.heuresPointeDimancheJF[10].checked=false;
+	document.parametresHoraire.heuresPointeDimancheJF[11].checked=false;
+	document.parametresHoraire.heuresPointeDimancheJF[12].checked=false;
+	document.parametresHoraire.heuresPointeDimancheJF[13].checked=false;
+	document.parametresHoraire.heuresPointeDimancheJF[14].checked=false;
+	document.parametresHoraire.heuresPointeDimancheJF[15].checked=false;
+}
+function testIntegration(choix){
+	if(choix==1){
+		deselectionHeuresPointes();
+		initField();
+		alert("Vous allez \352tre redirig\351 vers une nouvelle page. Celle-ci vous indiquera si le test d'int\351gration c'est bien d\351roul\351 ou non.");
+
+	}
+	else{
+		//VŽrification tableau jours ouvrŽs
+		tableauJO = document.getElementById("tableauHoraireJOTab");
+		checkJO = true;
+//		tableauJOtd = tableauJO.getElementsByTagName('td');
+//		alert("1==> "+tableauJO.rows.length);
+//		alert("2 ==>" +tableauJO.rows[0].cells.length);
+//		for(i=1; i<tableauJO.rows.length;i++){
+//			for(j=1; j<tableauJO.rows[0].cells.length;j++){
+//				alert(tableauJO.rows[i].cells[j].innerHTML);
+//			}
+//		}
+		if(tableauJO.rows[1].cells[1].innerHTML!="01:01:00" |
+				tableauJO.rows[1].cells[2].innerHTML!="01:01:00" |
+				tableauJO.rows[1].cells[3].innerHTML!="01:01:00"|
+				tableauJO.rows[2].cells[1].innerHTML!="01:10:34" |
+				tableauJO.rows[2].cells[2].innerHTML!="01:10:34" |
+				tableauJO.rows[2].cells[3].innerHTML!="01:10:34"|
+				tableauJO.rows[3].cells[1].innerHTML!="01:22:31" |
+				tableauJO.rows[3].cells[2].innerHTML!="01:22:31" |
+				tableauJO.rows[3].cells[3].innerHTML!="01:22:31"|
+				tableauJO.rows[4].cells[1].innerHTML!="01:40:27" |
+				tableauJO.rows[4].cells[2].innerHTML!="01:40:27" |
+				tableauJO.rows[4].cells[3].innerHTML!="01:40:27"|
+				tableauJO.rows[5].cells[1].innerHTML!="02:00:20" |
+				tableauJO.rows[5].cells[2].innerHTML!="02:00:20" |
+				tableauJO.rows[5].cells[3].innerHTML!="02:00:20"){
+			checkJO=false;
+		}
+		if(checkJO){
+			alert("Les valeurs r\351cup\351r\351es pour les jours ouvr\351s sont correctes");
+		}
+		else{
+			alert("Les valeurs r\351cup\351r\351es pour les jours ouvr\351s sont incorrectes");
+		}
+		//VŽrification tableau samedi
+		tableauSamedi = document.getElementById("tableauHoraireSamediTab");
+		checkSamedi = true;
+		if(tableauSamedi.rows[1].cells[1].innerHTML!="02:02:00" |
+				tableauSamedi.rows[1].cells[2].innerHTML!="02:02:00" |
+				tableauSamedi.rows[1].cells[3].innerHTML!="02:02:00"|
+				tableauSamedi.rows[2].cells[1].innerHTML!="02:11:34" |
+				tableauSamedi.rows[2].cells[2].innerHTML!="02:11:34" |
+				tableauSamedi.rows[2].cells[3].innerHTML!="02:11:34"|
+				tableauSamedi.rows[3].cells[1].innerHTML!="02:23:31" |
+				tableauSamedi.rows[3].cells[2].innerHTML!="02:23:31" |
+				tableauSamedi.rows[3].cells[3].innerHTML!="02:23:31"|
+				tableauSamedi.rows[4].cells[1].innerHTML!="02:41:27" |
+				tableauSamedi.rows[4].cells[2].innerHTML!="02:41:27" |
+				tableauSamedi.rows[4].cells[3].innerHTML!="02:41:27"|
+				tableauSamedi.rows[5].cells[1].innerHTML!="03:01:20" |
+				tableauSamedi.rows[5].cells[2].innerHTML!="03:01:20" |
+				tableauSamedi.rows[5].cells[3].innerHTML!="03:01:20"){
+			checkSamedi=false;
+		}
+		if(checkSamedi){
+			alert("Les valeurs r\351cup\351r\351es pour le samedi sont correctes");
+		}
+		else{
+			alert("Les valeurs r\351cup\351r\351es pour le samedi sont incorrectes");
+		}
+		
+		//VŽrification tableau dimanche et jours fŽriŽs
+		tableauDimanche = document.getElementById("tableauHoraireDimancheJFTab");
+		checkDimancheJF = true;
+		if(tableauDimanche.rows[1].cells[1].innerHTML!="03:03:00" |
+				tableauDimanche.rows[1].cells[2].innerHTML!="03:03:00" |
+				tableauDimanche.rows[1].cells[3].innerHTML!="03:03:00"|
+				tableauDimanche.rows[2].cells[1].innerHTML!="03:12:34" |
+				tableauDimanche.rows[2].cells[2].innerHTML!="03:12:34" |
+				tableauDimanche.rows[2].cells[3].innerHTML!="03:12:34"|
+				tableauDimanche.rows[3].cells[1].innerHTML!="03:24:31" |
+				tableauDimanche.rows[3].cells[2].innerHTML!="03:24:31" |
+				tableauDimanche.rows[3].cells[3].innerHTML!="03:24:31"|
+				tableauDimanche.rows[4].cells[1].innerHTML!="03:42:27" |
+				tableauDimanche.rows[4].cells[2].innerHTML!="03:42:27" |
+				tableauDimanche.rows[4].cells[3].innerHTML!="03:42:27"|
+				tableauDimanche.rows[5].cells[1].innerHTML!="04:02:20" |
+				tableauDimanche.rows[5].cells[2].innerHTML!="04:02:20" |
+				tableauDimanche.rows[5].cells[3].innerHTML!="04:02:20"){
+			checkDimancheJF=false;
+		}
+		if(checkDimancheJF){
+			alert("Les valeurs r\351cup\351r\351es pour le dimanche et les jours f\351ri\351s sont correctes");
+		}
+		else{
+			alert("Les valeurs r\351cup\351r\351es pour le dimanche et les jours f\351ri\351s sont incorrectes");
+		}
+		
+		if(checkJO && checkSamedi && checkDimancheJF){
+			alert("Le test d'int\351gration s'est bien d\351roul\351")
+		}
+		else{
+			alert("Le test d'int\351gration ne s'est pas bien d\351roul\351")
+		}
+	}
+}
+
+
