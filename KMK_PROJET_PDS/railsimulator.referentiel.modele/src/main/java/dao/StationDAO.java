@@ -24,7 +24,16 @@ public class StationDAO {
 	private List<Station> listeStation;
 	private Station station = new Station();
 	private Set<Ligne> listLigne = new HashSet<Ligne>();
-
+	private List<Station> listeStationByLigne;
+	
+	public List<Station> listerStationByLigne(int idligne) {
+    	se = HibernateUtils.getSession();
+    	se.beginTransaction();  	 	
+    	listeStationByLigne = se.createQuery("from Station where ligne_idligne="+idligne).list();
+    
+        return listeStationByLigne;
+    }
+	
 	public void createStation(String nomStation, String commentaireStation,
 			double latitude, double longitude, Ligne ligne) {
 
