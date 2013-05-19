@@ -109,11 +109,10 @@ public class TransformationMessage {
 				dbf.setNamespaceAware(true);
 				DocumentBuilder db = dbf.newDocumentBuilder();
 				Document doc = db.parse(new InputSource(reader));
-				Node n = (Node) doc.getDocumentElement().getFirstChild();
+				//Node n = (Node) doc.getDocumentElement().getFirstChild();
+		
 				
-				
-				
-				result = unmarch.unmarshal(n);
+				result = unmarch.unmarshal(doc.getDocumentElement().getFirstChild().getNextSibling());
 			}
 
 			if(result == null){
