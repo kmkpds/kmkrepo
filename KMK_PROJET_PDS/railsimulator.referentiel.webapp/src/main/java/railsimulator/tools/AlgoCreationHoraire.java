@@ -109,7 +109,8 @@ public class AlgoCreationHoraire {
 	private String tempsCadencementString;
 
 	private Calendar dateCalendarCadencement;
-
+	private Calendar dateCalendarCadencementSamedi;
+	private Calendar dateCalendarCadencementDimanche;
 	private Calendar dateCalendarSamedi;
 
 	private Calendar dateCalendarDimanche;
@@ -228,6 +229,8 @@ public class AlgoCreationHoraire {
 		for (int j = 0; j < listeStationLigne.size() - 1; j++) {
 
 			String tempsArret = param.getTempsStationnementJO();
+			String tempsArretSamedi = param.getTempsStationnementSamedi();
+			String tempsArretDimanche = param.getTempsStationnementDimancheJF();
 
 			String splitTempsArret[] = tempsArret.split(":");
 
@@ -239,9 +242,9 @@ public class AlgoCreationHoraire {
 
 
 			tabHorairesDimancheJF.add(ajoutTemps(tabHorairesDimancheJF.get(j),
-					listeDistanceStation2a2.get(j), tempsArret));
+					listeDistanceStation2a2.get(j), tempsArretDimanche));
 			tabHorairesDimancheJFReverse.add(ajoutTemps(tabHorairesDimancheJFReverse.get(j),
-					listeDistanceStation2a2Reverse.get(j), tempsArret));
+					listeDistanceStation2a2Reverse.get(j), tempsArretDimanche));
 
 			tabHoraires.add(ajoutTemps(tabHoraires.get(j),
 					listeDistanceStation2a2.get(j), tempsArret));
@@ -249,9 +252,9 @@ public class AlgoCreationHoraire {
 					listeDistanceStation2a2Reverse.get(j), tempsArret));
 
 			tabHorairesSamedi.add(ajoutTemps(tabHorairesSamedi.get(j),
-					listeDistanceStation2a2.get(j), tempsArret));
+					listeDistanceStation2a2.get(j), tempsArretSamedi));
 			tabHorairesSamediReverse.add(ajoutTemps(tabHorairesSamediReverse.get(j),
-					listeDistanceStation2a2Reverse.get(j), tempsArret));
+					listeDistanceStation2a2Reverse.get(j), tempsArretSamedi));
 
 
 //			 System.out.println("tabhoraire Dimanche // Reverse = "+tabHorairesDimancheJF.get(j)+" // "+tabHorairesDimancheJFReverse.get(j));
@@ -277,12 +280,6 @@ public class AlgoCreationHoraire {
 		int secCadencement = Integer.parseInt(splitCadencement1[2]);
 
 		dateCalendarCadencement = Calendar.getInstance();
-//		dateCalendarCadencement.set(Calendar.HOUR_OF_DAY, 0);
-//
-//		dateCalendarCadencement.set(Calendar.MINUTE, 0);
-//
-//		dateCalendarCadencement.set(Calendar.SECOND, 0);
-//		dateCalendarCadencement.set (Calendar.MILLISECOND,0); 
 
 		dateCalendarCadencement.set(Calendar.HOUR_OF_DAY, heureCadencement);
 
@@ -294,8 +291,53 @@ public class AlgoCreationHoraire {
 
 		String stringHeurePlusCadencement = dateFormat
 				.format(dateCalendarCadencement.getTime());
+		String tempsCadencementStringSamedi = param.getCadencementSamedi();
 
+			String splitCadencementSamedi[] = tempsCadencementStringSamedi.split(":");
 
+			int heureCadencementSamedi = Integer.parseInt(splitCadencementSamedi[0]);
+
+			int minCadencementSamedi = Integer.parseInt(splitCadencementSamedi[1]);
+
+			int secCadencementSamedi = Integer.parseInt(splitCadencementSamedi[2]);
+
+			dateCalendarCadencementSamedi = Calendar.getInstance();
+
+			dateCalendarCadencementSamedi.set(Calendar.HOUR_OF_DAY, heureCadencementSamedi);
+
+			dateCalendarCadencementSamedi.set(Calendar.MINUTE, minCadencementSamedi);
+
+			dateCalendarCadencementSamedi.set(Calendar.SECOND, secCadencementSamedi);
+
+			dateFormat = new SimpleDateFormat("HH:mm:ss");
+
+			String stringHeurePlusCadencementSamedi = dateFormat
+					.format(dateCalendarCadencementSamedi.getTime());
+		
+		
+		String tempsCadencementStringDimanche = param.getCadencementDimancheJF();
+
+		String splitCadencementDimanche[] = tempsCadencementStringDimanche.split(":");
+
+		int heureCadencementDimanche = Integer.parseInt(splitCadencementDimanche[0]);
+
+		int minCadencementDimanche = Integer.parseInt(splitCadencementDimanche[1]);
+
+		int secCadencementDimanche = Integer.parseInt(splitCadencementDimanche[2]);
+
+		dateCalendarCadencementDimanche = Calendar.getInstance();
+
+		dateCalendarCadencementDimanche.set(Calendar.HOUR_OF_DAY, heureCadencementDimanche);
+
+		dateCalendarCadencementDimanche.set(Calendar.MINUTE, minCadencementDimanche);
+
+		dateCalendarCadencementDimanche.set(Calendar.SECOND, secCadencementDimanche);
+
+		dateFormat = new SimpleDateFormat("HH:mm:ss");
+
+		String stringHeurePlusCadencementDimanche = dateFormat
+				.format(dateCalendarCadencementDimanche.getTime());
+		
 		for (int i = 0; i < listeTrain.size(); i++) {
 				
 				//System.out.println((int) Math.round((listeTrain.size()/2)));
@@ -402,11 +444,11 @@ public class AlgoCreationHoraire {
 					dateCalendarSamedi.set(Calendar.SECOND,
 							secHeureTrain1Samedi);
 
-					dateCalendarSamedi.add(Calendar.HOUR_OF_DAY,heureCadencement * i);
+					dateCalendarSamedi.add(Calendar.HOUR_OF_DAY,heureCadencementSamedi * i);
 
-					dateCalendarSamedi.add(Calendar.MINUTE, minCadencement * i);
+					dateCalendarSamedi.add(Calendar.MINUTE, minCadencementSamedi * i);
 
-					dateCalendarSamedi.add(Calendar.SECOND, secCadencement * i);
+					dateCalendarSamedi.add(Calendar.SECOND, secCadencementSamedi * i);
 
 					dateFormat = new SimpleDateFormat("HH:mm:ss");
 
@@ -422,13 +464,13 @@ public class AlgoCreationHoraire {
 					dateCalendarDimanche
 							.set(Calendar.SECOND, secTrain1Dimanche);
 
-					dateCalendarDimanche.add(Calendar.HOUR_OF_DAY,heureCadencement
+					dateCalendarDimanche.add(Calendar.HOUR_OF_DAY,heureCadencementDimanche
 							* i);
 
-					dateCalendarDimanche.add(Calendar.MINUTE, minCadencement
+					dateCalendarDimanche.add(Calendar.MINUTE, minCadencementDimanche
 							* i);
 
-					dateCalendarDimanche.add(Calendar.SECOND, secCadencement
+					dateCalendarDimanche.add(Calendar.SECOND, secCadencementDimanche
 							* i);
 
 					dateFormat = new SimpleDateFormat("HH:mm:ss");
@@ -537,11 +579,11 @@ public class AlgoCreationHoraire {
 								dateCalendarSamedi.set(Calendar.SECOND,
 										secHeureTrain1Samedi);
 
-								dateCalendarSamedi.add(Calendar.HOUR_OF_DAY, heureCadencement * i);
+								dateCalendarSamedi.add(Calendar.HOUR_OF_DAY, heureCadencementSamedi * i);
 
-								dateCalendarSamedi.add(Calendar.MINUTE, minCadencement * i);
+								dateCalendarSamedi.add(Calendar.MINUTE, minCadencementSamedi * i);
 
-								dateCalendarSamedi.add(Calendar.SECOND, secCadencement * i);
+								dateCalendarSamedi.add(Calendar.SECOND, secCadencementSamedi * i);
 
 								dateFormat = new SimpleDateFormat("HH:mm:ss");
 
@@ -557,13 +599,13 @@ public class AlgoCreationHoraire {
 								dateCalendarDimanche
 										.set(Calendar.SECOND, secTrain1Dimanche);
 
-								dateCalendarDimanche.add(Calendar.HOUR_OF_DAY,heureCadencement
+								dateCalendarDimanche.add(Calendar.HOUR_OF_DAY,heureCadencementDimanche
 										* i);
 
-								dateCalendarDimanche.add(Calendar.MINUTE, minCadencement
+								dateCalendarDimanche.add(Calendar.MINUTE, minCadencementDimanche
 										* i);
 
-								dateCalendarDimanche.add(Calendar.SECOND, secCadencement
+								dateCalendarDimanche.add(Calendar.SECOND, secCadencementDimanche
 										* i);
 
 								dateFormat = new SimpleDateFormat("HH:mm:ss");
