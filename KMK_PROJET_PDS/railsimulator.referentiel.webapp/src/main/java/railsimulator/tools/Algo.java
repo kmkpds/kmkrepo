@@ -3,6 +3,7 @@ package railsimulator.tools;
 import java.util.ArrayList;
 import java.util.List;
 
+import beans.Ligne;
 import beans.Reseau;
 import beans.Station;
 
@@ -16,6 +17,7 @@ public class Algo {
 	Station station1 = new Station();
 	Station station2 = new Station();
 	LigneDAO ligne_dao = new LigneDAO();
+	Ligne ligne=new Ligne();
 	OptimisationCheminDAO optimisation_dao=new OptimisationCheminDAO();
 
 	public double[][] matriceIncidence, tabPoids;
@@ -234,7 +236,19 @@ public class Algo {
     	//creation
     	for (int i =0; i<matriceDijkstra.length;i++){
     		optimisation_dao.createOptimisationChemin(stationDAO.getStationByID(Integer.parseInt(matriceDijkstra[i][0])),stationDAO.getStationByID(Integer.parseInt(matriceDijkstra[i][1])),Double.parseDouble(matriceDijkstra[i][2]),matriceDijkstra[i][3]);
-			ligne_dao.createLigne(null, null, reseau);
+    		/*
+    		String nomLigne="Ligne "+i;
+    		//int idligne=ligne_dao.createLigneReturnId(nomLigne, null, reseau);
+    		station1=stationDAO.getStationByID(Integer.parseInt(matriceDijkstra[i][0]));
+    		station2=stationDAO.getStationByID(Integer.parseInt(matriceDijkstra[i][1]));
+    		System.out.println("algo=>dijkstra=>idligne set" +ligne.getIdLigne());
+//    		ligne.setIdLigne(idligne);//ligne_dao.modifierLigne(ligne);
+    		System.out.println("algo=>dijkstra=>idligneapres set" +ligne.getIdLigne());
+//    		station1.setLigne(ligne);
+//    		station2.setLigne(ligne);
+//    		stationDAO.modifierStation(station1);
+//    		stationDAO.modifierStation(station2);
+    		System.out.println("algo=>dijkstra=>station1" +station1.getLigne().getIdLigne()+ "station2" +station2.getLigne().getIdLigne());*/
     	}
     	System.out.println("matPoid");
     	for (int z =0; z<matPoid.length;z++){

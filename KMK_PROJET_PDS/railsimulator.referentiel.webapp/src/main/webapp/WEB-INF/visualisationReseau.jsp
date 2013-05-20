@@ -32,7 +32,7 @@
 	function initialize() {
 		//coordonnées de la ville Orléans		
 		var myLatlng = new google.maps.LatLng(47.904, 1.907);
-
+		
 		var mapOptions = {
 			zoom : 13,
 			center : myLatlng,
@@ -51,6 +51,7 @@
 		var nom = '<c:out value="${station.nomStation}"/>';
 
 		var gare = new google.maps.LatLng(latitude, longitude);
+		
 
 		/* Personnalisation d'icone */
 		var icone = new google.maps.MarkerImage("images/icones/icone_bleu.png");
@@ -61,40 +62,60 @@
 			position : gare,
 			map : map,
 			icon : icone,//Attribution de l'icône personnalisée
-			title : nom
+			title : nom,
 		});
 		marqueur.setMap(map);
 
 		</c:forEach>
-
+		var countLigne=0;
 		//Création: Tracé d'une ligne entre les stations
 		/*Récupération des données des stations*/
 		<c:forEach items="${listeStation}" var="station">
-		var latitudeStationDepart = '<c:out value="${station.latitude}"/>';
-		var longitudeStationDepart = '<c:out value="${station.longitude}"/>';
-
-		<c:forEach items="${station.stationAller}" var="stationAller">
-		var latitudeStationArrive = '<c:out value="${stationAller.latitude}"/>';
-		var longitudeStationArrive = '<c:out value="${stationAller.longitude}"/>';
-
-		//on crée un tableau de coordonnées pour la création d'une ligne
-		var tabCoordonnees = [
-				// new google.maps.LatLng(latitude,longitude)
-				new google.maps.LatLng(latitudeStationDepart,
-						longitudeStationDepart),
-				new google.maps.LatLng(latitudeStationArrive,
-						longitudeStationArrive) ];
-		var ligne = new google.maps.Polyline({
-			path : tabCoordonnees,
-			strokeColor : "#4169E1",//ligne de couleur bleue
-			strokeOpacity : 1.0,
-			strokeWeight : 5
-		});
-
-		ligne.setMap(map);
+			
+			var nbLigne=0;
+			<c:forEach items="${listeLignes}" var="ligne">
+				<c:if test="${ligne.idLigne == station.ligne.idLigne}">
+				//countLigne pr savoir où on en est ds la listeLigne	
+				countLigne=nbLigne;
+				</c:if>
+				nbLigne++;
+			</c:forEach>
+			var couleurLigne;
+			var tableauCouleur = ["a69d86", "440700", "20391e", "8256a4", "025076", "794044", "025076", "78724d", "d6b6e6", "790ead", "5cb8ff", "fbff00", "b8ff5c", "3ca9d0", "1eb486", "3ca9d0", "794044", "fe6f5e", "404679", "93c572", "981b1e", "53868b", "00513d", "e2fffe"];
+			if(tableauCouleur.length<countLigne){
+				couleurLigne="a69d86";
+			}
+			else{
+				couleurLigne=tableauCouleur[countLigne];
+			}
+			var latitudeStationDepart = '<c:out value="${station.latitude}"/>';
+			var longitudeStationDepart = '<c:out value="${station.longitude}"/>';
+			//var idLigne = '<c:out value="${station.ligne.idLigne}"/>';
+	
+			<c:forEach items="${station.stationAller}" var="stationAller">
+				var latitudeStationArrive = '<c:out value="${stationAller.latitude}"/>';
+				var longitudeStationArrive = '<c:out value="${stationAller.longitude}"/>';
+		
+				//on crée un tableau de coordonnées pour la création d'une ligne
+				var tabCoordonnees = [
+						// new google.maps.LatLng(latitude,longitude)
+						new google.maps.LatLng(latitudeStationDepart,
+								longitudeStationDepart),
+						new google.maps.LatLng(latitudeStationArrive,
+								longitudeStationArrive) ];
+				
+				var ligne = new google.maps.Polyline({
+					path : tabCoordonnees,
+					strokeColor : "#" + couleurLigne, 
+					strokeOpacity : 1.0,
+					strokeWeight : 5,
+					//zIndex:idLigne
+				});
+				ligne.setMap(map);
+	
+			</c:forEach>		
 		</c:forEach>
-
-		</c:forEach>
+		
 
 	}
 	
@@ -171,15 +192,16 @@
 											<td>${station.latitude}</td>
 											<td>${station.longitude}</td>
 										</tr>
-										<tr name=${station.idStation} style="display: none;">
+										<tr name=${station.idStation } style="display: none;">
 											<th><a href="#">IdCanton</a></th>
 											<th><a href="#">Distance</a></th>
 											<th><a href="#">Station1</a></th>
 											<th><a href="#">Station2</a></th>
 										</tr>
 										<c:forEach items="${listeCanton}" var="canton">
-											<c:if test="${canton.station1.idStation == station.idStation}">
-												<tr name=${station.idStation} style="display: none;">
+											<c:if
+												test="${canton.station1.idStation == station.idStation}">
+												<tr name=${station.idStation } style="display: none;">
 													<td><c:out value="${canton.idCanton}"></c:out></td>
 													<td><c:out value="${canton.distance}"></c:out></td>
 													<td><c:out value="${canton.station1.idStation}"></c:out></td>
@@ -192,9 +214,9 @@
 							</div>
 						</div>
 					</div>
-<!-- 					<h3 class="RnoSectionTitle"> -->
-<!-- 						<span></span>Liste des Cantons -->
-<!-- 					</h3> -->
+					<!-- 					<h3 class="RnoSectionTitle"> -->
+					<!-- 						<span></span>Liste des Cantons -->
+					<!-- 					</h3> -->
 					<!-- 					<div class="RnoSectionContent"> -->
 					<!-- 						<div class="RnoDataTable"> -->
 					<!-- 							<table> -->

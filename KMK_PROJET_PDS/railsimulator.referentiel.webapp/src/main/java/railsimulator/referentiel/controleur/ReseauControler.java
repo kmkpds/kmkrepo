@@ -84,7 +84,11 @@ public class ReseauControler extends HttpServlet {
 		}
 		if(action.equals("optimisationChemin")){	
 			listeLignes= ligne_dao.listerLigne();
-			optimisationCheminList = optimisationCheminDAO.listOptimisationCheminByLigne(listeLignes.get(0).getIdLigne());
+			for (int i = 0; i < listeLignes.size(); i++) {
+				//System.out.println("listeLignes.get(0).getIdLigne()" +listeLignes.get(0).getIdLigne());
+				optimisationCheminList = optimisationCheminDAO.listOptimisationCheminByLigne(listeLignes.get(i).getIdLigne());				
+			}
+			
 			request.logout();
 			request.setAttribute("listeLignes",listeLignes);
 			request.setAttribute("optimisationCheminList",optimisationCheminList);
@@ -251,13 +255,16 @@ public class ReseauControler extends HttpServlet {
 		String action = request.getParameter("action");
 
 		if(action.equals("optimisationChemin")){	
-			System.out.println("hello");
+			
 			int  idLigne = Integer.parseInt(request.getParameter("idLigne"));
+			System.out.println("idLigne=" +idLigne);
 			optimisationCheminList = optimisationCheminDAO.listOptimisationCheminByLigne(idLigne);
 			listeLignes= ligne_dao.listerLigne();
+			listeStation=station_dao.listerStation();
 			request.logout();
 			request.setAttribute("listeLignes",listeLignes);
 			request.setAttribute("optimisationCheminList",optimisationCheminList);
+			request.setAttribute("listeStation",listeStation);
 			this.getServletContext().getRequestDispatcher( "/WEB-INF/optimisationChemin.jsp").forward( request, response );
 		} 
 		if(action.equals("AjoutZone")){
@@ -414,9 +421,11 @@ try {
 
 			//int[][] listeLigneStation=ligne_dao.listerLigneStation(listeStation,idligne);
 
+			listeLignes= ligne_dao.listerLigne();
 			request.logout();
 			request.setAttribute("listeStation",listeStation);
 			request.setAttribute("listeCanton",listeCanton);
+			request.setAttribute("listeLignes",listeLignes);
 			this.getServletContext().getRequestDispatcher("/WEB-INF/visualisationReseau.jsp").forward( request, response );
 } catch (SQLException e) {
 	// TODO Auto-generated catch block
