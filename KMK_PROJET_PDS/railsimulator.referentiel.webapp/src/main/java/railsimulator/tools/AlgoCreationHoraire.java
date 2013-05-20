@@ -486,12 +486,19 @@ public class AlgoCreationHoraire {
 				}
 
 			}}
-				else if (i>=(int) Math.round((listeTrain.size()/2)) && i<listeTrain.size()) {
+				 if (i>=(int) Math.round((listeTrain.size()/2)) && i<listeTrain.size()) {
+					int nbTrainSur2 = (int) Math.round((listeTrain.size()/2));
+//					System.out.println("nbtrain/2 "+nbTrainSur2);
+//					System.out.println(listeTrain.size()-nbTrainSur2);
+//					System.out.println("i ="+i);
+					int cptd = i-nbTrainSur2;
+				//	System.out.println("CPTD = "+cptd);
 					
 					//System.out.println("AJOUT REVERSE");
 					
 
 					for (int e = 0; e < tabHorairesReverse.size(); e++) {
+						int cptReverse = 1;
 							dateCalendar = Calendar.getInstance();
 							dateCalendar.set (Calendar.HOUR_OF_DAY,0);
 							dateCalendar.set (Calendar.MINUTE,0);
@@ -552,7 +559,7 @@ public class AlgoCreationHoraire {
 
 							}
 
-							if (i > (int) Math.round((listeTrain.size()/2)) ) {
+							if (i > (int) Math.round((listeTrain.size()/2)) && i<listeTrain.size() ) {
 
 								dateCalendar.set(Calendar.HOUR_OF_DAY, heureTrain1);
 
@@ -560,11 +567,11 @@ public class AlgoCreationHoraire {
 
 								dateCalendar.set(Calendar.SECOND, secHeureTrain1);
 
-								dateCalendar.add(Calendar.HOUR_OF_DAY,heureCadencement * i);
+								dateCalendar.add(Calendar.HOUR_OF_DAY,heureCadencement * cptd);
 
-								dateCalendar.add(Calendar.MINUTE, minCadencement * i);
+								dateCalendar.add(Calendar.MINUTE, minCadencement * cptd);
 
-								dateCalendar.add(Calendar.SECOND, secCadencement * i);
+								dateCalendar.add(Calendar.SECOND, secCadencement * cptd);
 
 								dateFormat = new SimpleDateFormat("HH:mm:ss");
 
@@ -579,11 +586,11 @@ public class AlgoCreationHoraire {
 								dateCalendarSamedi.set(Calendar.SECOND,
 										secHeureTrain1Samedi);
 
-								dateCalendarSamedi.add(Calendar.HOUR_OF_DAY, heureCadencementSamedi * i);
+								dateCalendarSamedi.add(Calendar.HOUR_OF_DAY, heureCadencementSamedi * cptd);
 
-								dateCalendarSamedi.add(Calendar.MINUTE, minCadencementSamedi * i);
+								dateCalendarSamedi.add(Calendar.MINUTE, minCadencementSamedi * cptd);
 
-								dateCalendarSamedi.add(Calendar.SECOND, secCadencementSamedi * i);
+								dateCalendarSamedi.add(Calendar.SECOND, secCadencementSamedi * cptd);
 
 								dateFormat = new SimpleDateFormat("HH:mm:ss");
 
@@ -600,13 +607,13 @@ public class AlgoCreationHoraire {
 										.set(Calendar.SECOND, secTrain1Dimanche);
 
 								dateCalendarDimanche.add(Calendar.HOUR_OF_DAY,heureCadencementDimanche
-										* i);
+										* cptd);
 
 								dateCalendarDimanche.add(Calendar.MINUTE, minCadencementDimanche
-										* i);
+										* cptd);
 
 								dateCalendarDimanche.add(Calendar.SECOND, secCadencementDimanche
-										* i);
+										* cptd);
 
 								dateFormat = new SimpleDateFormat("HH:mm:ss");
 
@@ -618,9 +625,13 @@ public class AlgoCreationHoraire {
 												heureAvantSamedi, heureAvantDimanche,
 												listeStationLigneReverse.get(e), listeTrain.get(i));
 
+								
 							}
+							cptReverse++;
+							System.out.println("Compteur reverse "+cptReverse);
 				}
-				}
+				
+					}
 
 			
 
