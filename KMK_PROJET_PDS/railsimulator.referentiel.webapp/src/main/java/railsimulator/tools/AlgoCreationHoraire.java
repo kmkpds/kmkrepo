@@ -119,9 +119,13 @@ public class AlgoCreationHoraire {
 
 		trainhorairestationdao = new TrainHoraireStationDAO();
 
-		int i = trainhorairestationdao.deleteAllTrainHoraireStation();
+		param = new ParametreHoraire();
 
-		// //System.out.println(i);
+		paramDAO = new ParametreHoraireDAO();
+
+		param = paramDAO.getParametreHoraireByID(idParam);
+
+		int i = trainhorairestationdao.deleteAllTrainHoraireStationByLigne(param.getLigne().getIdLigne());
 
 		int go = horaireTrainListStation(idParam);
 		
