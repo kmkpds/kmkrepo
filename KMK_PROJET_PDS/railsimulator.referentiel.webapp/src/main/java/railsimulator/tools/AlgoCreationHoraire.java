@@ -1,4 +1,4 @@
-package railsimulator.tools;
+package tools;
 
 import java.sql.Date;
 
@@ -118,7 +118,6 @@ public class AlgoCreationHoraire {
 	public AlgoCreationHoraire(int idParam) {
 
 		trainhorairestationdao = new TrainHoraireStationDAO();
-
 		param = new ParametreHoraire();
 
 		paramDAO = new ParametreHoraireDAO();
@@ -126,6 +125,8 @@ public class AlgoCreationHoraire {
 		param = paramDAO.getParametreHoraireByID(idParam);
 
 		int i = trainhorairestationdao.deleteAllTrainHoraireStationByLigne(param.getLigne().getIdLigne());
+
+		// //System.out.println(i);
 
 		int go = horaireTrainListStation(idParam);
 		
@@ -276,12 +277,12 @@ public class AlgoCreationHoraire {
 		int secCadencement = Integer.parseInt(splitCadencement1[2]);
 
 		dateCalendarCadencement = Calendar.getInstance();
-		dateCalendarCadencement.set(Calendar.HOUR_OF_DAY, 0);
-
-		dateCalendarCadencement.set(Calendar.MINUTE, 0);
-
-		dateCalendarCadencement.set(Calendar.SECOND, 0);
-		dateCalendarCadencement.set (Calendar.MILLISECOND,0);
+//		dateCalendarCadencement.set(Calendar.HOUR_OF_DAY, 0);
+//
+//		dateCalendarCadencement.set(Calendar.MINUTE, 0);
+//
+//		dateCalendarCadencement.set(Calendar.SECOND, 0);
+//		dateCalendarCadencement.set (Calendar.MILLISECOND,0); 
 
 		dateCalendarCadencement.set(Calendar.HOUR_OF_DAY, heureCadencement);
 
@@ -379,6 +380,7 @@ public class AlgoCreationHoraire {
 					dateCalendar.set(Calendar.SECOND, secHeureTrain1);
 
 					dateCalendar.add(Calendar.HOUR_OF_DAY,heureCadencement * i);
+					System.out.println("heure cadencement "+heureCadencement);
 
 					dateCalendar.add(Calendar.MINUTE, minCadencement * i);
 
