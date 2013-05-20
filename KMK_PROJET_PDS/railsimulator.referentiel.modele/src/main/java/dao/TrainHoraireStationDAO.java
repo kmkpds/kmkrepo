@@ -92,11 +92,11 @@ public class TrainHoraireStationDAO {
 		return listetrainHoraireStation;
 	}
 	
-	public int deleteAllTrainHoraireStation(){
+	public int deleteAllTrainHoraireStationByLigne(int idLigne){
 		Session se = null;
 		se = HibernateUtils.getSession();
 		Transaction t9 = se.beginTransaction();
-		Query create9=se.createSQLQuery("delete from trainhorairestation");
+		Query create9=se.createSQLQuery("DELETE FROM trainhorairestation WHERE `train_idtrain` in (SELECT idtrain from train where ligne_idligne="+idLigne+");");
 		create9.executeUpdate();
 		t9.commit();
 		return 1;
