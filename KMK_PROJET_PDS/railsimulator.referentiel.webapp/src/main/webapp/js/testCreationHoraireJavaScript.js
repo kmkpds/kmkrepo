@@ -191,19 +191,19 @@ function testIntegration(choix){
 //		}
 		if(tableauJO.rows[1].cells[1].innerHTML!="01:01:00" |
 				tableauJO.rows[1].cells[2].innerHTML!="02:00:20" |
-				tableauJO.rows[1].cells[3].innerHTML!="02:02:20"|
+				tableauJO.rows[1].cells[3].innerHTML!="02:01:20"|
 				tableauJO.rows[2].cells[1].innerHTML!="01:10:34" |
 				tableauJO.rows[2].cells[2].innerHTML!="01:50:46" |
-				tableauJO.rows[2].cells[3].innerHTML!="01:52:46"|
+				tableauJO.rows[2].cells[3].innerHTML!="01:51:46"|
 				tableauJO.rows[3].cells[1].innerHTML!="01:22:31" |
 				tableauJO.rows[3].cells[2].innerHTML!="01:38:49" |
-				tableauJO.rows[3].cells[3].innerHTML!="01:40:49"|
+				tableauJO.rows[3].cells[3].innerHTML!="01:39:49"|
 				tableauJO.rows[4].cells[1].innerHTML!="01:40:27" |
 				tableauJO.rows[4].cells[2].innerHTML!="01:20:53" |
-				tableauJO.rows[4].cells[3].innerHTML!="01:22:53"|
+				tableauJO.rows[4].cells[3].innerHTML!="01:21:53"|
 				tableauJO.rows[5].cells[1].innerHTML!="02:00:20" |
 				tableauJO.rows[5].cells[2].innerHTML!="01:01:00" |
-				tableauJO.rows[5].cells[3].innerHTML!="01:03:00"){
+				tableauJO.rows[5].cells[3].innerHTML!="01:02:00"){
 			checkJO=false;
 		}
 		if(checkJO){
@@ -217,19 +217,19 @@ function testIntegration(choix){
 		checkSamedi = true;
 		if(tableauSamedi.rows[1].cells[1].innerHTML!="02:02:00" |
 				tableauSamedi.rows[1].cells[2].innerHTML!="03:05:24" |
-				tableauSamedi.rows[1].cells[3].innerHTML!="03:07:24"|
+				tableauSamedi.rows[1].cells[3].innerHTML!="03:06:24"|
 				tableauSamedi.rows[2].cells[1].innerHTML!="02:12:35" |
 				tableauSamedi.rows[2].cells[2].innerHTML!="02:54:49" |
-				tableauSamedi.rows[2].cells[3].innerHTML!="02:56:49"|
+				tableauSamedi.rows[2].cells[3].innerHTML!="02:55:49"|
 				tableauSamedi.rows[3].cells[1].innerHTML!="02:25:33" |
 				tableauSamedi.rows[3].cells[2].innerHTML!="02:41:51" |
-				tableauSamedi.rows[3].cells[3].innerHTML!="02:43:51"|
+				tableauSamedi.rows[3].cells[3].innerHTML!="02:42:51"|
 				tableauSamedi.rows[4].cells[1].innerHTML!="02:44:30" |
 				tableauSamedi.rows[4].cells[2].innerHTML!="02:22:54" |
-				tableauSamedi.rows[4].cells[3].innerHTML!="02:24:54"|
+				tableauSamedi.rows[4].cells[3].innerHTML!="02:23:54"|
 				tableauSamedi.rows[5].cells[1].innerHTML!="03:05:24" |
 				tableauSamedi.rows[5].cells[2].innerHTML!="02:02:00" |
-				tableauSamedi.rows[5].cells[3].innerHTML!="02:04:00"){
+				tableauSamedi.rows[5].cells[3].innerHTML!="02:03:00"){
 			checkSamedi=false;
 		}
 		if(checkSamedi){
@@ -244,19 +244,19 @@ function testIntegration(choix){
 		checkDimancheJF = true;
 		if(tableauDimanche.rows[1].cells[1].innerHTML!="03:03:00" |
 				tableauDimanche.rows[1].cells[2].innerHTML!="04:10:28" |
-				tableauDimanche.rows[1].cells[3].innerHTML!="04:12:28"|
+				tableauDimanche.rows[1].cells[3].innerHTML!="04:11:28"|
 				tableauDimanche.rows[2].cells[1].innerHTML!="03:14:36" |
 				tableauDimanche.rows[2].cells[2].innerHTML!="03:58:52" |
-				tableauDimanche.rows[2].cells[3].innerHTML!="04:00:52"|
+				tableauDimanche.rows[2].cells[3].innerHTML!="03:59:52"|
 				tableauDimanche.rows[3].cells[1].innerHTML!="03:28:35" |
 				tableauDimanche.rows[3].cells[2].innerHTML!="03:44:53" |
-				tableauDimanche.rows[3].cells[3].innerHTML!="03:46:53"|
+				tableauDimanche.rows[3].cells[3].innerHTML!="03:45:53"|
 				tableauDimanche.rows[4].cells[1].innerHTML!="03:48:33" |
 				tableauDimanche.rows[4].cells[2].innerHTML!="03:24:55" |
-				tableauDimanche.rows[4].cells[3].innerHTML!="03:26:55"|
+				tableauDimanche.rows[4].cells[3].innerHTML!="03:25:55"|
 				tableauDimanche.rows[5].cells[1].innerHTML!="04:10:28" |
 				tableauDimanche.rows[5].cells[2].innerHTML!="03:03:00" |
-				tableauDimanche.rows[5].cells[3].innerHTML!="03:05:00"){
+				tableauDimanche.rows[5].cells[3].innerHTML!="03:04:00"){
 			checkDimancheJF=false;
 		}
 		if(checkDimancheJF){
