@@ -117,6 +117,9 @@ public class AlgoCreationHoraire {
 	private Calendar dateCalendarDimanche;
 	private boolean checkTempsArret;
 
+	public AlgoCreationHoraire(){
+		
+	}
 	public AlgoCreationHoraire(int idParam) {
 
 		trainhorairestationdao = new TrainHoraireStationDAO();
