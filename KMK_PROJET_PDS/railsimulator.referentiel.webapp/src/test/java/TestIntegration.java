@@ -1,6 +1,5 @@
-
-
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -36,6 +35,10 @@ public class TestIntegration extends TestCase {
 	Set<Ligne> lignelist=new HashSet<Ligne>();
 	StationDAO station_dao=new StationDAO();
 	CantonDAO canton_dao=new CantonDAO();
+    Station station1 = new Station();
+	Station station2 = new Station();
+	Ligne ligne = new Ligne();
+	Canton canton=new Canton();
 	boolean test=false;
 
 	public TestIntegration (){
@@ -98,6 +101,19 @@ public class TestIntegration extends TestCase {
 		create7.executeUpdate();
 		t7.commit();
 		
+		Transaction t21 = se.beginTransaction();
+		Query create21 = se
+				.createSQLQuery("insert into reseau (idreseau, nomreseau) values(1, 'reseau 1')");
+		create.executeUpdate();
+		t21.commit();
+		
+		Transaction t22 = se.beginTransaction();
+		Query create22 = se
+				.createSQLQuery("insert into zone (idzone,nombrehabitants,nombrestations,surface,reseau_idreseau) values(1,14567,3,11068700,1)");
+		create.executeUpdate();
+		t22.commit();
+		
+		se.flush();
 		
 
 		System.out.println("fin sup de la base purger");
@@ -109,19 +125,19 @@ public class TestIntegration extends TestCase {
 		int nbr = 3;
 		float surfac=(float) 8247384.6139979595;
 		//creer reseau
-		int  idreseau =reseau_dao.createReseauReturnId("reseau 1");
+		//int  idreseau =reseau_dao.createReseauReturnId("reseau 1");
 		List<Reseau> listeReseau = reseau_dao.listerReseau();
-		System.out.println("idreseau" +idreseau);
+		//System.out.println("idreseau" +idreseau);
 		Double latitude = 47.92278444035086;
 		Double longitude =1.9217491149902344;
 		Double latitudeb = 47.903109595807585;
 		Double longitudeb = 1.8712806701660156;
 
 		List<Zone>  listeZone = zone_dao.listerZone();
-		reseau=reseau_dao.getReseauByID(idreseau);
-		int idzone = zone_dao.createZonereturn(nbrha, nbr, surfac ,reseau);
-		System.out.println("idzone" +idzone);
-		Zone zone = zone_dao.getZoneByID(idzone);
+		reseau=reseau_dao.getReseauByID(1);
+		//int idzone = zone_dao.createZonereturn(nbrha, nbr, surfac ,reseau);
+		//System.out.println("idzone" +idzone);
+		Zone zone = zone_dao.getZoneByID(1);
 	
 		GeolocalisationDAO geolocalisation_dao=new GeolocalisationDAO();
 		geolocalisation_dao.createGeolocalisation(latitude, longitude , zone);
@@ -129,31 +145,85 @@ public class TestIntegration extends TestCase {
 		listeZone=zone_dao.listerZone();
 		listeReseau= reseau_dao.listerReseau();
 		
-		reseau = reseau_dao.getReseauByID(idreseau);
+		
 		AlgoCreationReseau algo = new AlgoCreationReseau();
 		Algo kruskal = new Algo();
-		algo.creerReseau(reseau);
-		kruskal.stationToStation(algo.creerReseau(reseau));
+		String[][] matriceStation = algo.creerReseau(reseau);
+		kruskal.stationToStation(matriceStation);
+		kruskal.dijkstra(matriceStation,reseau);
 		
-		int[] stationList =kruskal.getMatriceNomStation(algo.creerReseau(reseau));
+		int[] stationList =kruskal.getMatriceNomStation(matriceStation);
 		System.out.println("taille int[] stationList " +stationList.length);
 
 		int[][]  listeStationAffichage;
 		try {
 			listeStationAffichage = station_dao.listerStationHasStationByListStation(stationList);
-		//.listerStation();
+	
+			Transaction t24 = se.beginTransaction();
+			ligne.setNomLigne("Ligne 1");
+			ligne.setCommentaire("Ligne 1");
+			ligne.setReseau(reseau);
+			se.save(ligne);		
+		    t24.commit();
+		    se.flush();
+		    
+			//création d'une Station test
+			Transaction t23 = se.beginTransaction();
+		    station1.setNomStation("Station Alpha");
+		    station1.setCommentaireStation("Station Alpha");
+		    station1.setLatitude(55.5);
+		    station1.setLongitude(55.5);
+		     station1.setLigne(ligne);
+			se.save(station1);
+			
+			station2.setNomStation("Station Beta");
+			station2.setCommentaireStation("Station Beta");
+			station2.setLatitude(55.5);
+			station2.setLongitude(55.5);
+		     station2.setLigne(ligne);
+			se.save(station2);
+		    t23.commit();
+		    se.flush();
+		    
+			Transaction t25 = se.beginTransaction();
+		     canton.setDistance(200);
+		     canton.setStation1(station1);
+		     canton.setStation2(station2);	     
+			se.save(canton);	
+		    t25.commit();
+		    se.flush();
+		    
+		List<Station> listeStation = new ArrayList<Station>();
+		    listeStation.add(station1);
+		    listeStation.add(station2);
+		listeStation = station_dao.listerStation();
 
-		List<Station> listeStation = station_dao.listerStation();
-		
+				
 		AlgoDivTroncCanton algodiv=new AlgoDivTroncCanton();
 
 		algodiv.decoupage(listeStationAffichage,stationList);
 
 		List<Canton> listeCanton = canton_dao.listerCantonParam(listeStationAffichage);
 		
+		int idreseau=1;
+		int idzone=1;
+		String Nomstation=listeStation.get(0).getNomStation();
+		double distanceCanton=listeCanton.get(0).getDistance();
+	
+		
+//		listeReseau.get(idreseau);
+//		listeZone.get(idzone);
+//		listeStation.get(idstation);
+//		listeCanton.get(idcanton);
+		
 		if((listeReseau!=null) && (listeZone!=null) && (listeCanton!=null) && (listeStation!=null)){
-			test=true;
-		}
+			if((idreseau==1) && (idzone==1) &&(Nomstation.equals("Station Alpha")) && (distanceCanton==200)){
+				test=true;
+			}
+			else {
+				test=false;
+			}
+		}//fin if !=null
 		else{
 			test=false;
 		}

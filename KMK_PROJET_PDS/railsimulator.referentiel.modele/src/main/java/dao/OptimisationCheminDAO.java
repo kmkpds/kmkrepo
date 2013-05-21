@@ -15,7 +15,7 @@ import dao.StationDAO;
 
 public class OptimisationCheminDAO {
 	private Session se = null;
-	//private List<Canton> listeCanton;
+	private List<OptimisationChemin> listeOpt;
 	private OptimisationChemin optimisationChemin=new OptimisationChemin();
 	
 	public OptimisationCheminDAO() {
@@ -63,5 +63,15 @@ public class OptimisationCheminDAO {
 		se.close();
 		return listeOptimisationChemin;
 	}
+    
+	public List<OptimisationChemin> listerOptimisation() {
+    	se = HibernateUtils.getSession();
+    	se.beginTransaction();  	 	
+    	listeOpt = se.createQuery("from OptimisationChemin").list();
+    	
+    	
+    	
+        return listeOpt;
+    }
     
 }//fin OptimisationCheminDAO
