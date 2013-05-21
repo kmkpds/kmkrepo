@@ -96,6 +96,7 @@ public class AlgoCreationHoraire {
 	private Calendar dateCalendar;
 
 	private Calendar dateCalendar2;
+	private Calendar dateCalendar3;
 
 	private List<String> tabHoraires;
 	private List<String> tabHorairesReverse;
@@ -128,10 +129,16 @@ public class AlgoCreationHoraire {
 		int i = trainhorairestationdao.deleteAllTrainHoraireStationByLigne(param.getLigne().getIdLigne());
 
 		// //System.out.println(i);
-
+		if(param.getVitesseMoyenne()<200 && checkTempsArret()==true){
 		int go = horaireTrainListStation(idParam);
+		}
+		else{
+			System.out.println("probleme temps arret");
+			System.out.println("Vitesse moyenne trop ŽlŽvŽe!");
+			
+		}
 		
-		checkTempsArret();
+		
 
 	}
 
@@ -659,9 +666,6 @@ public class AlgoCreationHoraire {
 
 		String s;
 		
-		//System.out.println("Fct Ajout temps:");
-		//System.out.println("heure entree "+heureAvant);
-
 		String splitTempsArret[] = tempsArret.split(":");
 
 		String splitHeureTrain1[] = heureAvant.split(":");
@@ -680,9 +684,7 @@ public class AlgoCreationHoraire {
 
 		int tempsParcoursrounded = (int) Math.round(tempsParcours);
 
-
 		dateCalendar = Calendar.getInstance();
-		//dateCalendar.set (Calendar.AM_PM, Calendar.AM);
 		dateCalendar.set (Calendar.HOUR_OF_DAY,0);
 		dateCalendar.set (Calendar.MINUTE,0);
 		dateCalendar.set (Calendar.SECOND,0);
@@ -758,7 +760,90 @@ public class AlgoCreationHoraire {
 	
 	public boolean checkTempsArret(){
 		checkTempsArret=false;
-		//System.out.println(this.param.getTempsStationnementJO());
+		String heureDebut = this.param.getHeurePremierTrainJO();
+		String heureFin = this.param.getHeureDernierTrainJO();
+		String tempsArretJO = this.param.getTempsStationnementJO();
+		
+		String splitTempsArret[] = tempsArretJO.split(":");
+
+		int heureTempsArret = Integer.parseInt(splitTempsArret[0]);
+
+		int minHeureTempsArret = Integer.parseInt(splitTempsArret[1]);
+
+		int secTempsArret = Integer.parseInt(splitTempsArret[2]);
+		dateCalendar3 = Calendar.getInstance();
+		dateCalendar3.set (Calendar.HOUR_OF_DAY,0);
+		dateCalendar3.set (Calendar.MINUTE,0);
+		dateCalendar3.set (Calendar.SECOND,0);
+		dateCalendar3.set (Calendar.MILLISECOND,0);
+		dateCalendar3.set(Calendar.HOUR_OF_DAY,heureTempsArret);
+		
+		dateCalendar3.set(Calendar.MINUTE, minHeureTempsArret);
+
+		dateCalendar3.set(Calendar.SECOND, secTempsArret);
+		Calendar dateCalendartemp = Calendar.getInstance();
+		dateCalendartemp.set (Calendar.HOUR_OF_DAY,0);
+		dateCalendartemp.set (Calendar.MINUTE,0);
+		dateCalendartemp.set (Calendar.SECOND,0);
+		dateCalendartemp.set (Calendar.MILLISECOND,0);
+		
+		long temp = (dateCalendar3.getTimeInMillis()-dateCalendartemp.getTimeInMillis());
+		System.out.println("temp "+temp);
+		//System.out.println(dateCalendar3.getTimeInMillis());
+	
+		String splitHeureTrainDebut[] = heureDebut.split(":");
+
+		int heureDeb = Integer.parseInt(splitHeureTrainDebut[0]);
+
+		int minHeureDeb = Integer.parseInt(splitHeureTrainDebut[1]);
+
+		int secDeb = Integer.parseInt(splitHeureTrainDebut[2]);
+		dateCalendar = Calendar.getInstance();
+		dateCalendar.set (Calendar.HOUR_OF_DAY,0);
+		dateCalendar.set (Calendar.MINUTE,0);
+		dateCalendar.set (Calendar.SECOND,0);
+		dateCalendar.set (Calendar.MILLISECOND,0);
+		dateCalendar.set(Calendar.HOUR_OF_DAY,heureDeb);
+		
+		dateCalendar.set(Calendar.MINUTE, minHeureDeb);
+
+		dateCalendar.set(Calendar.SECOND, secDeb);
+		System.out.println(dateCalendar.getTime());
+		
+		String splitHeureTrainFin[] = heureFin.split(":");
+
+		int intheureFin = Integer.parseInt(splitHeureTrainFin[0]);
+
+		int minHeureFin = Integer.parseInt(splitHeureTrainFin[1]);
+
+		int secFin = Integer.parseInt(splitHeureTrainFin[2]);
+		dateCalendar2 = Calendar.getInstance();
+		dateCalendar2.set (Calendar.HOUR_OF_DAY,0);
+		dateCalendar2.set (Calendar.MINUTE,0);
+		dateCalendar2.set (Calendar.SECOND,0);
+		dateCalendar2.set (Calendar.MILLISECOND,0);
+		dateCalendar2.set(Calendar.HOUR_OF_DAY,intheureFin);
+		
+		dateCalendar2.set(Calendar.MINUTE, minHeureFin);
+
+		dateCalendar2.set(Calendar.SECOND, secFin);
+		
+System.out.println(dateCalendar2.getTime());
+System.out.println((dateCalendar2.getTimeInMillis()-dateCalendar.getTimeInMillis()));
+		//System.out.println(this.param.getTempsStationnementJO());/ (1000 * 60 * 60) % 24
+long tot = ((dateCalendar2.getTimeInMillis()-dateCalendar.getTimeInMillis()));
+System.out.println("tot "+tot);
+long tests= tot-temp;
+System.out.println("tests "+tests);
+if(tests>0){
+	checkTempsArret = true;
+}
+if(tests<0){
+	System.out.println("Temps d'arret superieur au temps d'activitŽ de la ligne");
+	checkTempsArret = false;
+	
+	
+}
 		
 		
 		return checkTempsArret;
