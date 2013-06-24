@@ -66,7 +66,7 @@ public class StationDAOTest extends TestCase {
 		    se.flush();
 
 			//Création d'une station par la methode createStation
-			station_dao.createStation("station Alpha", "station Alpha",55.5,55.5,ligne);
+			station_dao.createStation("station Alpha", "station Alpha",55.5,55.5,null,ligne);
 	 
 			//Test visant a vérifier la bonne insertion
 			Query requete = se.createQuery("select count(*) from Station where nomStation='station Alpha' and commentaireStation='station Alpha' and latitude=55.5 and longitude=55.5");
@@ -449,9 +449,9 @@ public class StationDAOTest extends TestCase {
 		  
 		    
 			//Création d'une station par la methode createStation
-			station_dao.createStation("station Alpha", "station Alpha",55.5,55.5,ligne);
+			station_dao.createStation("station Alpha", "station Alpha",55.5,55.5,null,ligne);
 			//Création d'une station par la methode createStation
-			station_dao.createStation("station Beta", "station Beta",55.5,55.5,ligne);
+			station_dao.createStation("station Beta", "station Beta",55.5,55.5,null,ligne);
 			
 		
 			
