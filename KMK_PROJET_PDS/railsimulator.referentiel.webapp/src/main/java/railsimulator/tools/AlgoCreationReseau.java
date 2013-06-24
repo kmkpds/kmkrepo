@@ -617,7 +617,7 @@ public class AlgoCreationReseau {
 		s.setLatitude(geo.getLatitudeGeolocalisation());
 		s.setLongitude(geo.getLongitudeGeolocalisation());
 		s.setNomStation(name);	
-		s.setIdStation(station_dao.createStationReturnId(s.getNomStation(), null, s.getLatitude(), s.getLongitude(), ligne)); 
+		s.setIdStation(station_dao.createStationReturnId(s.getNomStation(), null, s.getLatitude(), s.getLongitude(),null, ligne)); 
 		stationList.add(s);
 	}
 	// === FIN DE CREATION DE LA STATION  ===
