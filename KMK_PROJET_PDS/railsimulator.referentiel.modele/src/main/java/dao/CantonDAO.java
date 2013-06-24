@@ -2,6 +2,7 @@ package dao;
 
 import java.util.List;
 
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
@@ -113,5 +114,15 @@ System.out.println("requete cantondao" +listeStationStr);
    	  	
         return listeCanton;
     }
-	
+	public int listerCantonCount(Canton canton) {
+		int result=0;
+		se = HibernateUtils.getSession();
+		Query query = se.createSQLQuery(
+				"SELECT count(*) FROM train WHERE canton_idcanton= ?")
+				.setParameter(0, canton.getIdCanton());	        
+		 result =   ((Number)query.uniqueResult()).intValue();
+        return result;
+        
+        
+    }
 }

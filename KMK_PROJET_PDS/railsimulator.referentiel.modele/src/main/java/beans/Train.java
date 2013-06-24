@@ -37,11 +37,13 @@ public class Train  {
 	@Column(name="etat")
 	private int etat;
 	@Column(name="prixtrain")
-	private Integer prixTrain ;
+	private Integer prixtrain ;
 	@Column(name="nombredewagon")
 	private Integer nombredewagon ;
 	@Column(name="vitesse")
 	private Integer vitesse ;
+	@Column(name="sens")
+	private String sens ;
 	@Column(name="nombredeplacesa")
 	private Integer nombredeplacea ;
 	@Column(name="nombredeplacesd")
@@ -55,6 +57,25 @@ public class Train  {
 	@OneToMany(fetch=FetchType.EAGER,mappedBy="train")
 	private Set<TrainHoraireStation> TrainHoraireStationList = new HashSet<TrainHoraireStation>();
 	
+	//ajout VisuTrain
+	@OneToMany(fetch=FetchType.EAGER,mappedBy="train")
+	private Set<Wagon> listWagon = new HashSet<Wagon>();
+	
+	@ManyToOne(
+			cascade={CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH}
+	)
+	@JoinColumn(name="canton_idcanton")
+	private Canton canton;
+	
+	
+	@ManyToOne(
+			cascade={CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH}
+	)
+	@JoinColumn(name="rail_idrail")
+	private Rail rail;
+	
+	
+	
 	public Integer getIdTrain() {
 		return idTrain;
 	}
@@ -62,10 +83,10 @@ public class Train  {
 		this.idTrain = idtrain;
 	}
 	public Integer getPrixtrain() {
-		return prixTrain;
+		return prixtrain;
 	}
 	public void setPrixtrain(Integer prixtrain) {
-		this.prixTrain = prixtrain;
+		this.prixtrain = prixtrain;
 	}
 	public Integer getNombredewagon() {
 		return nombredewagon;
@@ -78,6 +99,12 @@ public class Train  {
 	}
 	public void setVitesse(Integer vitesse) {
 		this.vitesse = vitesse;
+	}
+	public String getSens() {
+		return sens;
+	}
+	public void setSens(String sens) {
+		this.sens = sens;
 	}
 	public Integer getNombredeplacea() {
 		return nombredeplacea;
@@ -127,6 +154,24 @@ public class Train  {
 	public void setTrainHoraireStationList(
 			Set<TrainHoraireStation> trainHoraireStationList) {
 		TrainHoraireStationList = trainHoraireStationList;
+	}
+	public Set<Wagon> getListWagon() {
+		return listWagon;
+	}
+	public void setListWagon(Set<Wagon> listWagon) {
+		this.listWagon = listWagon;
+	}
+	public Canton getCanton() {
+		return canton;
+	}
+	public void setCanton(Canton canton) {
+		this.canton = canton;
+	}
+	public Rail getRail() {
+		return rail;
+	}
+	public void setRail(Rail rail) {
+		this.rail = rail;
 	}
 	
 	

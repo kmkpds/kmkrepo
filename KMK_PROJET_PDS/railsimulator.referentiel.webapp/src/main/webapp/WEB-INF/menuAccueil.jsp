@@ -26,6 +26,9 @@
 		<li>
 			<a href="/kmk_ref_webapp/demo?action=demo">Alimentation DataWarehouse</a>
 		</li>
+		<li>
+			<a href="/kmk_ref_webapp/train?action=visualiserTrain">Visualiser Train</a>
+		</li>
 		
 	</ul>
 </div>

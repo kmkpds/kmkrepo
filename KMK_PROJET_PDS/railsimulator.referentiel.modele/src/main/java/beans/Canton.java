@@ -1,6 +1,8 @@
 package beans;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -39,6 +41,10 @@ import javax.persistence.Table;
 		@JoinColumn(name="station_station_idstation2")//@JoinColumn(name="station_has_station_station_idstation2") 
 		private Station station2; //ajouter by kate
 		
+		//ajout visuTrain
+		@OneToMany(fetch = FetchType.EAGER,mappedBy="canton")
+		private Set<Train> trainlist = new HashSet<Train>();
+		
 
 		public Integer getIdCanton() {
 			return idCanton;
@@ -63,6 +69,12 @@ import javax.persistence.Table;
 		}
 		public void setStation2(Station station2) {
 			this.station2 = station2;
+		}
+		public Set<Train> getTrainlist() {
+			return trainlist;
+		}
+		public void setTrainlist(Set<Train> trainlist) {
+			this.trainlist = trainlist;
 		}
 
 	

@@ -1,140 +1,143 @@
-<web-app xmlns="http://java.sun.com/xml/ns/javaee"
-      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-      xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
-      version="3.0"> 
-      
-      
-    <welcome-file-list>
-        <welcome-file>accueil.jsp</welcome-file>
-    </welcome-file-list>
-     
+<web-app xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+	version="3.0">
+
+
+	<welcome-file-list>
+		<welcome-file>accueil.jsp</welcome-file>
+	</welcome-file-list>
+
 	<servlet>
 		<servlet-name>AccueilControler</servlet-name>
 		<servlet-class>railsimulator.referentiel.controleur.AccueilControler</servlet-class>
 	</servlet>
-	
+
 	<servlet>
 		<servlet-name>ReseauControler</servlet-name>
 		<servlet-class>railsimulator.referentiel.controleur.ReseauControler</servlet-class>
 	</servlet>
-	
-		<!-- Transmission Terrain Controler -->
+
+	<!-- Transmission Terrain Controler -->
 	<servlet>
 		<servlet-name>TransmissionMessageTerrainControler</servlet-name>
 		<servlet-class>railsimulator.transmissionMSG.controleur.TransmissionMessageTerrainControler</servlet-class>
 	</servlet>
-	
+
 	<servlet>
 		<servlet-name>VisualisationControler</servlet-name>
 		<servlet-class>railsimulator.visualisation.controleur.VisualisationControler</servlet-class>
 	</servlet>
-	
+
 	<servlet>
 		<servlet-name>BiControler</servlet-name>
 		<servlet-class>railsimulator.bi.BiControler</servlet-class>
 	</servlet>
-	
+
 	<servlet>
 		<servlet-name>HoraireControler</servlet-name>
 		<servlet-class>railsimulator.horaire.HoraireControler</servlet-class>
 	</servlet>
-	
+
 	<servlet>
 		<servlet-name>testMaxime</servlet-name>
 		<servlet-class>railsimulator.horaire.testMaxime</servlet-class>
 	</servlet>
-	
+
 	<servlet>
 		<servlet-name>VisuIncidentsControleur</servlet-name>
 		<servlet-class>railsimulator.visualisation.VisuIncidentsControleur</servlet-class>
 	</servlet>
-	
+
 	<servlet>
 		<servlet-name>DWHControler</servlet-name>
 		<servlet-class>railsimulator.DWHControler.DWHControler</servlet-class>
 	</servlet>
-	
+
 	<servlet>
 		<servlet-name>AjaxControler</servlet-name>
 		<servlet-class>railsimulator.workflow.AjaxControler</servlet-class>
 	</servlet>
-	
+
 	<servlet>
 		<servlet-name>WorkflowControler</servlet-name>
 		<servlet-class>railsimulator.workflow.WorkflowControler</servlet-class>
 	</servlet>
-	
+
 	<servlet>
 		<servlet-name>OptimisationControler</servlet-name>
 		<servlet-class>railsimulator.bi.OptimisationControler</servlet-class>
 	</servlet>
-	
+
 	<servlet>
 		<servlet-name>TheMock</servlet-name>
 		<servlet-class>railsimulator.workflow.TheMock</servlet-class>
 	</servlet>
-	
+
 	<servlet>
 		<servlet-name>ProcedureControler</servlet-name>
 		<servlet-class>railsimulator.procedure.ProcedureControler</servlet-class>
 	</servlet>
-	
+
 	<servlet>
 		<servlet-name>DetailIncidentServlet</servlet-name>
 		<servlet-class>railsimulator.procedure.DetailIncidentServlet</servlet-class>
 	</servlet>
 
+	<servlet>
+		<servlet-name>TrainControler</servlet-name>
+		<servlet-class>railsimulator.train.TrainControler</servlet-class>
+	</servlet>
 	<servlet-mapping>
 		<servlet-name>AccueilControler</servlet-name>
 		<url-pattern>/accueil</url-pattern>
 	</servlet-mapping>
-	
+
 	<servlet-mapping>
 		<servlet-name>ReseauControler</servlet-name>
 		<url-pattern>/reseau</url-pattern>
 	</servlet-mapping>
-	
+
 	<servlet-mapping>
 		<servlet-name>VisualisationControler</servlet-name>
 		<url-pattern>/visualisation</url-pattern>
 	</servlet-mapping>
-	
+
 	<servlet-mapping>
 		<servlet-name>BiControler</servlet-name>
 		<url-pattern>/bi</url-pattern>
 	</servlet-mapping>
-	
+
 
 	<servlet-mapping>
 		<servlet-name>HoraireControler</servlet-name>
 		<url-pattern>/horaire</url-pattern>
 	</servlet-mapping>
-	
+
 	<servlet-mapping>
 		<servlet-name>testMaxime</servlet-name>
 		<url-pattern>/testMax</url-pattern>
 	</servlet-mapping>
-	
+
 	<servlet-mapping>
 		<servlet-name>TransmissionMessageTerrainControler</servlet-name>
 		<url-pattern>/etape</url-pattern>
 	</servlet-mapping>
-	
+
 	<servlet-mapping>
 		<servlet-name>VisuIncidentsControleur</servlet-name>
 		<url-pattern>/visualiser</url-pattern>
 	</servlet-mapping>
-	
+
 	<servlet-mapping>
-	    <servlet-name>DWHControler</servlet-name>
-    	<url-pattern>/demo</url-pattern>
-  	</servlet-mapping>
-	
+		<servlet-name>DWHControler</servlet-name>
+		<url-pattern>/demo</url-pattern>
+	</servlet-mapping>
+
 	<servlet-mapping>
 		<servlet-name>WorkflowControler</servlet-name>
 		<url-pattern>/workflow</url-pattern>
 	</servlet-mapping>
-	
+
 	<servlet-mapping>
 		<servlet-name>AjaxControler</servlet-name>
 		<url-pattern>/ajax</url-pattern>
@@ -143,20 +146,25 @@
 		<servlet-name>OptimisationControler</servlet-name>
 		<url-pattern>/optimisation</url-pattern>
 	</servlet-mapping>
-  
+
 	<servlet-mapping>
 		<servlet-name>TheMock</servlet-name>
 		<url-pattern>/themock</url-pattern>
 	</servlet-mapping>
-	
+
 	<servlet-mapping>
 		<servlet-name>DetailIncidentServlet</servlet-name>
 		<url-pattern>/voirDetailIncident</url-pattern>
 	</servlet-mapping>
 
 	<servlet-mapping>
+		<servlet-name>TrainControler</servlet-name>
+		<url-pattern>/train</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
 		<servlet-name>ProcedureControler</servlet-name>
 		<url-pattern>/procedure</url-pattern>
 	</servlet-mapping>
-	
+
+
 </web-app>

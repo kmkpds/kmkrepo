@@ -41,7 +41,11 @@
 		<mapping class="beans.ParametreHoraire" />
 		<mapping class="beans.TrainHoraireStation" />
         <mapping class="beans.CoutFonctionnement" />
-        <mapping class="beans.OptimisationChemin" />
+        <mapping class="beans.OptimisationChemin" />        
+        <mapping class="beans.Porte" />
+        <mapping class="beans.Frein" />
+        <mapping class="beans.Wagon" />
+        <mapping class="beans.Rail" />
         
         
 

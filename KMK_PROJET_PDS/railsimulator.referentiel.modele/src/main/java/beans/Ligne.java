@@ -46,7 +46,7 @@ public class Ligne  {
 	private Double prixdeplace;
 	
 	
-	@OneToMany(mappedBy="ligne")
+	@OneToMany(fetch=FetchType.EAGER,mappedBy="ligne")
 	private Set<Station> stationlist = new HashSet<Station>();
 	
 	@OneToMany(fetch=FetchType.EAGER,mappedBy="ligne")

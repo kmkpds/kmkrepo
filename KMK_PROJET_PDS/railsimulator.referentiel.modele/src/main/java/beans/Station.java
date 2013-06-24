@@ -17,13 +17,17 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+
+
 import javax.persistence.Table;
+
+import org.hibernate.annotations.CollectionOfElements;
+
 
 
 @Entity
 @Table(name="station")
 public class Station {	
-
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name="idstation" )
@@ -36,6 +40,8 @@ public class Station {
 	private double latitude;
 	@Column(name="longitude")
 	private double longitude;	
+	@Column(name="nombrepassagers")
+	private Integer nombrepassagers;	
 	@OneToMany(fetch=FetchType.EAGER,mappedBy="train")
 	private Set<TrainHoraireStation> TrainHoraireStationList = new HashSet<TrainHoraireStation>();
 
@@ -65,10 +71,6 @@ public class Station {
 	)
 	private List<Station> stationRetour;
 	
-	public Station() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
 
 
 	public Integer getIdStation() {
@@ -118,6 +120,16 @@ public class Station {
 
 	public void setLongitude(double longitude) {
 		this.longitude = longitude;
+	}
+
+
+	public Integer getNombrepassagers() {
+		return nombrepassagers;
+	}
+
+
+	public void setNombrepassagers(Integer nombrepassagers) {
+		this.nombrepassagers = nombrepassagers;
 	}
 
 
