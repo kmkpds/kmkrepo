@@ -13,16 +13,7 @@
 	media="screen" title="Version imprimable" id="stylesheet-print" />
 <link rel="author" title="Auteur" href="http://www.sqliagency.com/" />
 <title>Visualisation Par Station - Rail Simulator</title>
-<script type="text/javascript">
-var auto_refresh = setInterval(
-		function ()
-		{
-  		 $('#RnoSectionContent').load('ajax');
-		}, 2000); 
 
-		</script>
-
-</script>
 </head>
 <body>
 	<form action="train" method="get" class="RnoForm" name="formAfficher">

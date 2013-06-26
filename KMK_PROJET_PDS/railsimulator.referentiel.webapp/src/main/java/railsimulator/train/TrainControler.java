@@ -35,30 +35,53 @@ import dao.WagonDAO;
 
 public class TrainControler extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private static Map<List<Train>, Boolean> map = new  HashMap<List<Train>, Boolean>();
 
 	public TrainControler() {
 		super();
-		// regarde si la map a été initialisée
-		//si non tu ajoutes les trains -> map.put(trains, false)>
-		// verifie si map est nulle: si oui on l'initialise a false
 	}
 
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+	
 
-		HttpSession session = request.getSession();
 		String action = request.getParameter("action");
+		LigneDAO ligneDAO=new LigneDAO();
+		ReseauDAO reseauDAO = new ReseauDAO();
+		
+		if(action.equals("TestJavaScriptCode")){
+			String idLigne = request.getParameter("idLigne");
+			ligneDAO.getLigneByID(Integer.parseInt(idLigne));
+			List<Ligne> ligneList = ligneDAO.listerLigne();
+			if (ligneList.size()==0){
+				int idReseau = reseauDAO.createReseauReturnId("Test reseau");
+				Reseau reseau = reseauDAO.getReseauByID(idReseau);
+				ligneDAO.createLigne("Ligne Test", "test", reseau);
+				ligneList = ligneDAO.listerLigne();
+			}
+			
+			List<Station> listeStation = new StationDAO().listerStation();
+			List<Train> listeTrain = new TrainDAO().listerTrain();
+		
+			request.logout();
+			request.setAttribute("listeLigne", ligneList);
+			request.setAttribute("listeStation", listeStation);
+			request.setAttribute("listeTrain", listeTrain);
+			
 
+			this.getServletContext().getRequestDispatcher( "/WEB-INF/testVisuTrain.jsp").forward( request, response );
+
+		}
 
 	}
 
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		
 		String action = request.getParameter("action");
-		HttpSession session = request.getSession();
+		LigneDAO ligneDAO=new LigneDAO();
+		ReseauDAO reseauDAO = new ReseauDAO();
+		
+		//HttpSession session = request.getSession();
 		if (action.equals("purger")) {
 
 			Session se = null;
@@ -207,10 +230,9 @@ public class TrainControler extends HttpServlet {
 			
 			//2 creation ligne
 			LigneDAO ligne_dao = new LigneDAO();
-			int idligne = ligne_dao.createLigneReturnId("ligne 1", " ",
-					reseau);
+			int idligne = ligne_dao.createLigneReturnId("ligne 1", "Ligne1",reseau);
 			ligne = ligne_dao.getLigneByID(idligne);
-			int idligne2 =ligne_dao.createLigneReturnId("ligne 2", " ", reseau);
+			int idligne2 =ligne_dao.createLigneReturnId("ligne 2", "Ligne2", reseau);
 			ligne2 = ligne_dao.getLigneByID(idligne2);
 
 			CantonDAO canton_dao = new CantonDAO();
@@ -540,23 +562,7 @@ public class TrainControler extends HttpServlet {
 			List<Ligne> listeLigne = new LigneDAO().listerLigne();
 			List<Station> listeStation = new StationDAO().listerStation();
 			List<Train> listeTrain = new TrainDAO().listerTrain();
-			
-			//test session
-//			if (session == null) {
-//				System.out.println("session null");
-//				request.logout();
-//
-//			}// fin if
-//			else {
-//				System.out.println("session non null");
-//				List<String> errorsMessage = new ArrayList<String>();
-//				errorsMessage.add("Utilisateur deja connecté");
-//				request.setAttribute("errorsMessage", errorsMessage);
-//
-//			}// fin else
-			//List<Train> listeTrainByLigne = new TrainDAO().listerTrainByLigne(listeLigne.get(0).getIdLigne());
-			//List<Station> listeStationByLigne = new StationDAO().listerStationByLigne(listeLigne.get(0).getIdLigne());
-			
+		
 			request.setAttribute("listeLigne", listeLigne);
 			request.setAttribute("listeStation", listeStation);
 			request.setAttribute("listeTrain", listeTrain);
@@ -683,6 +689,58 @@ public class TrainControler extends HttpServlet {
 		}//fin deconnexion
 		
 
-	}
+		if(action.equals("TestJavaScriptCode")){
+			
+			List<Ligne> ligneList = ligneDAO.listerLigne();
+			if (ligneList.size()==0){
+				int idReseau = reseauDAO.createReseauReturnId("Test reseau");
+				Reseau reseau = reseauDAO.getReseauByID(idReseau);
+				ligneDAO.createLigne("Ligne Test", "test", reseau);
+				ligneList = ligneDAO.listerLigne();
+			}
+			
+			List<Station> listeStation = new StationDAO().listerStation();
+			List<Train> listeTrain = new TrainDAO().listerTrain();
+		
+			request.logout();
+			request.setAttribute("listeLigne", ligneList);
+			request.setAttribute("listeStation", listeStation);
+			request.setAttribute("listeTrain", listeTrain);
+			
+
+			this.getServletContext().getRequestDispatcher( "/WEB-INF/testVisuTrain.jsp").forward( request, response );
+
+		}
+
+		if(action.equals("testIntegration")){
+			
+			String idLigne = request.getParameter("idLigne");
+			String idTrain = request.getParameter("idTrain");
+	
+			
+			
+			List<Train> listeTrainByLigne = new TrainDAO().listerTrainByLigne(Integer.parseInt(idLigne));
+			List<Wagon> listeWagon=new WagonDAO().listerWagonByIdTrain(Integer.parseInt(idTrain));
+			List<Porte> listePortes=new PorteDAO().listerPorte();
+			List<Frein> listeFreins=new FreinDAO().listerFrein();
+			List<TrainHoraireStation> listeTrainHoraireStation=new TrainHoraireStationDAO().listTrainHoraireStationById();
+			
+			
+			Bloquer.lock(idTrain);
+			
+			request.logout();
+			request.setAttribute("listeTrainByLigne", listeTrainByLigne);
+			request.setAttribute("idTrain", idTrain);
+			request.setAttribute("listeWagon", listeWagon);
+			request.setAttribute("listePortes", listePortes);
+			request.setAttribute("listeFreins", listeFreins);
+			request.setAttribute("listeTrainHoraireStation", listeTrainHoraireStation);
+			
+			this.getServletContext().getRequestDispatcher( "/WEB-INF/visuParTrainTest.jsp").forward( request, response );
+
+		}
+
+
+	}//fin Get
 
 }

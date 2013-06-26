@@ -119,10 +119,6 @@
 									</c:forEach>
 									
 							</select></td>
-							<!--  <th><input type="submit" name="action" id="action"
-								value="Visualisationparstation" /></th>
-								<th><input type="submit" name="action" id="action"
-								value="Visualisationpartrain" /></th>-->
 								<th><button type="submit" value="VisualisationParStation"
 										name="action" id="action"
 										width="200px">Visualisation par station</button>
