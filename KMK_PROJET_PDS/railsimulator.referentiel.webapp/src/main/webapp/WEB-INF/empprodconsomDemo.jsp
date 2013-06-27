@@ -60,7 +60,7 @@
 									<div class="RnoDataTable">
 										<table>
 											<tr class="RnoMainHeader">
-												<th>Badgee en Seconde</th>											
+												<th>Systeme de badgage</th>											
 							
 												<th><input type="submit" name="action" id="action" value="lancer" /></th>
 												<th>${confirmation}</th>								

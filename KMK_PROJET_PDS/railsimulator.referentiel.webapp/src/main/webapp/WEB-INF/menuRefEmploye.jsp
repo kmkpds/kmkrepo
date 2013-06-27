@@ -1,15 +1,28 @@
 <!-- Navigation Top Level 1 -->
 <div id="RnoNav1Top" class="sc">
-	<ul>
+<ul>
 		<li>
-			<a href="/RailSimulator/accueil?action=index">Accueil</a>
+			<a href="/kmk_ref_webapp/accueil?action=index">Accueil</a>
+		</li>
+		<li>
+			<a href="/kmk_ref_webapp/accueil?action=creationReseau">Création Réseau</a>
+		</li>
+		<li>
+			<a href="/kmk_ref_webapp/accueil?action=creationHoraire">Création Horaire</a>
+		</li>
+		<li>
+			<a href="/kmk_ref_webapp/visualisation?action=visualiserTrafic">Visualisation Trafic</a>
 		</li>
 		<li class="on">
-			<a href="/RailSimulator/accueil?action=ref">Gestion du personnel</a>
+			<a href="/RailSimulator/afficherEmploye?action=Afemp">Gestion du personnel</a>
 		</li>
-		<!--<li><a href="#">Menu 3</a></li> -->
-		<!--<li><a href="#">Menu 4</a></li> -->
-		<!--<li><a href="#">Menu 5</a></li> -->
+		<li>
+			<a href="/kmk_ref_webapp/accueil?action=bi">Business Intelligence</a>
+		</li>
+		<li>
+			<a href="/kmk_ref_webapp/optimisation?action=optimisationParc">Optimisation Du Parc Ferroviaire </a>
+		</li>
+	
 	</ul>
 </div>
 <!-- /Navigation Top Level 1 -->
@@ -53,7 +66,17 @@
 		
 		</li>
 		
+		<li>
+			<a href="#"> Demo </a>
+			<ul>
+				<li>
+					<a href="/GestionPerso/demo?action=demo">Lancer le mock</a>
+				</li>
+			
+			</ul>
 		
+		</li>
+	
 	</ul>
 </div>
 <!-- /Navigation Top Level 2 -->
