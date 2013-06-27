@@ -39,6 +39,8 @@ public class AccueilControler extends HttpServlet {
 		request.logout();
 		this.getServletContext().getRequestDispatcher( "/accueil.jsp").forward( request, response );
 	}
+	
+
 		
 	}
 
