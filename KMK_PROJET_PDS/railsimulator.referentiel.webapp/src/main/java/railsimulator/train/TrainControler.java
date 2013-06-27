@@ -714,10 +714,15 @@ public class TrainControler extends HttpServlet {
 
 		if(action.equals("testIntegration")){
 			
+			//String idLigne=request.getParameter("idLigne").indexOf(1); //resulat _1faux
+			//String idTrain=request.getParameter("idTrain").valueOf(1);
+			//int idLigne = request.getParameter("idLigne").codePointAt(1);
+			//String[] idLigne = request.getParameterValues("idLigne");
 			String idLigne = request.getParameter("idLigne");
 			String idTrain = request.getParameter("idTrain");
-	
-			
+System.out.println("idLigne" +idLigne);
+//System.out.println("idLigne2" +idLigne2);
+System.out.println("idTrain" +idTrain);
 			
 			List<Train> listeTrainByLigne = new TrainDAO().listerTrainByLigne(Integer.parseInt(idLigne));
 			List<Wagon> listeWagon=new WagonDAO().listerWagonByIdTrain(Integer.parseInt(idTrain));
@@ -739,7 +744,29 @@ public class TrainControler extends HttpServlet {
 			this.getServletContext().getRequestDispatcher( "/WEB-INF/visuParTrainTest.jsp").forward( request, response );
 
 		}
+		
+		if (action.equals("deconnexionTrainTest")){
+			String idTrain = request.getParameter("idTrain");
+			
+			Bloquer.unlock(idTrain);
+			
 
+			List<Ligne> listeLigne = new LigneDAO().listerLigne();
+			List<Station> listeStation = new StationDAO().listerStation();
+			List<Train> listeTrain = new TrainDAO().listerTrain();
+			
+			request.setAttribute("listeLigne", listeLigne);
+			request.setAttribute("listeStation", listeStation);
+			request.setAttribute("listeTrain", listeTrain);
+			request.logout();
+			this.getServletContext()
+					.getRequestDispatcher("/WEB-INF/testVisuTrain.jsp")
+					.forward(request, response);
+		
+			
+		}//fin deconnexionTrain
+
+		
 
 	}//fin Get
 
