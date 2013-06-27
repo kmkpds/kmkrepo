@@ -87,6 +87,12 @@
 		<servlet-name>TrainControler</servlet-name>
 		<servlet-class>railsimulator.train.TrainControler</servlet-class>
 	</servlet>
+	
+	<servlet>
+		<servlet-name>MockBiControler</servlet-name>
+		<servlet-class>railsimulator.mockBi.MockBiControler</servlet-class>
+	</servlet>
+	
 	<servlet-mapping>
 		<servlet-name>AccueilControler</servlet-name>
 		<url-pattern>/accueil</url-pattern>
@@ -164,6 +170,10 @@
 	<servlet-mapping>
 		<servlet-name>ProcedureControler</servlet-name>
 		<url-pattern>/procedure</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>MockBiControler</servlet-name>
+		<url-pattern>/mockBi</url-pattern>
 	</servlet-mapping>
 
 
