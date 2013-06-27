@@ -5,7 +5,7 @@ import javax.naming.NamingException;
 
 import org.apache.activemq.ActiveMQConnection;
 import org.apache.activemq.ActiveMQConnectionFactory;
-import org.apache.log4j.BasicConfigurator;
+
 
 
 public class Producteur {
@@ -28,7 +28,7 @@ public class Producteur {
 	 //envoyer un messsage à l'ESB
 	 public void ecrireMessage(String messageXML) throws JMSException, NamingException {
 
-	 BasicConfigurator.configure();
+//	 BasicConfigurator.configure();
 	 // Obtention de connexion JMS e partir du serveur
 	  ConnectionFactory connectionFactory = new ActiveMQConnectionFactory(url);
 	  Connection connection = connectionFactory.createConnection();
