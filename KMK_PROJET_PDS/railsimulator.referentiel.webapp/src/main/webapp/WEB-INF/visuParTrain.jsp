@@ -119,7 +119,7 @@
 										<td >Porte fermée</td>
 									</c:if>
 									<c:if test="${porte.statut == 1}">
-										<td >Porte ouverte</td>
+										<td bgcolor="red">Porte ouverte</td>
 									</c:if>
 									</c:if>
 								</tr>
