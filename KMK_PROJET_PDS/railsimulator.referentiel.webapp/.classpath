@@ -7,7 +7,7 @@
   <classpathentry kind="var" path="M2_REPO/javax/xml/stream/stax-api/1.0-2/stax-api-1.0-2.jar"/>
   <classpathentry kind="var" path="M2_REPO/javax/activation/activation/1.1/activation-1.1.jar"/>
   <classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-  <classpathentry kind="src" path="/railsimulator.referentiel.modele"/>
+  <classpathentry kind="var" path="M2_REPO/esiag/isiad/kmk/railsimulator.referentiel.modele/0.0.1-SNAPSHOT/railsimulator.referentiel.modele-0.0.1-SNAPSHOT.jar"/>
   <classpathentry kind="var" path="M2_REPO/mysql/mysql-connector-java/5.1.6/mysql-connector-java-5.1.6.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/apache/geronimo/specs/geronimo-jta_1.1_spec/1.1.1/geronimo-jta_1.1_spec-1.1.1.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/slf4j/slf4j-api/1.7.2/slf4j-api-1.7.2.jar"/>
@@ -21,9 +21,8 @@
   <classpathentry kind="var" path="M2_REPO/dom4j/dom4j/1.6.1/dom4j-1.6.1.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/hibernate/javax/persistence/hibernate-jpa-2.0-api/1.0.1.Final/hibernate-jpa-2.0-api-1.0.1.Final.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/hibernate/common/hibernate-commons-annotations/4.0.1.Final/hibernate-commons-annotations-4.0.1.Final.jar"/>
-  <classpathentry kind="var" path="M2_REPO/net/sourceforge/jtds/jtds/1.3.0/jtds-1.3.0.jar"/>
-  <classpathentry kind="var" path="M2_REPO/org/hibernate/hibernate-annotations/3.0alpha3/hibernate-annotations-3.0alpha3.jar"/>
-  <classpathentry kind="src" path="/railsimulator.jms"/>
+  <classpathentry kind="var" path="M2_REPO/net/sourceforge/jtds/jtds/1.2/jtds-1.2.jar"/>
+  <classpathentry kind="var" path="M2_REPO/esiag/isiad/kmk/railsimulator.jms/0.0.1-SNAPSHOT/railsimulator.jms-0.0.1-SNAPSHOT.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/apache/geronimo/specs/geronimo-jms_1.1_spec/1.1.1/geronimo-jms_1.1_spec-1.1.1.jar"/>
   <classpathentry kind="var" path="M2_REPO/com/sun/xml/bind/jaxb-impl/2.2/jaxb-impl-2.2.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/apache/activemq/activemq-core/5.7.0/activemq-core-5.7.0.jar"/>
