@@ -161,7 +161,7 @@
 
 	<servlet-mapping>
 		<servlet-name>DWHControler</servlet-name>
-		<url-pattern>/demo</url-pattern>
+		<url-pattern>/demos</url-pattern>
 	</servlet-mapping>
 
 	<servlet-mapping>

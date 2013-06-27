@@ -28,7 +28,7 @@ public class Producteur {
 	 //envoyer un messsage à l'ESB
 	 public void ecrireMessage(String messageXML) throws JMSException, NamingException {
 
-//	 BasicConfigurator.configure();
+
 	 // Obtention de connexion JMS e partir du serveur
 	  ConnectionFactory connectionFactory = new ActiveMQConnectionFactory(url);
 	  Connection connection = connectionFactory.createConnection();

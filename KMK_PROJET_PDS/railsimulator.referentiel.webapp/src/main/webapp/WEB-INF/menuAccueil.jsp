@@ -30,7 +30,7 @@
 			<a href="/kmk_ref_webapp/train?action=visualiserTrain">Visualiser Train</a>
 		</li>
 		<li>
-			<a href="/kmk_ref_webapp/afficherEmploye?action=Afemp">Gestion du personnel</a>
+			<a href="/kmk_ref_webapp/afficherEmploye?action=Afemp"> Gestion du personnel  </a>
 		</li>
 	
 	</ul>
