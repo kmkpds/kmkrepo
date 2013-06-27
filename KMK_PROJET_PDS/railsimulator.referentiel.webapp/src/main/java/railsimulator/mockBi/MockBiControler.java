@@ -70,7 +70,7 @@ public class MockBiControler extends HttpServlet {
 		
 		FrequentationBiDAO freqDao = new FrequentationBiDAO();
 		
-		for(long i=1;i<=500;i++){
+		for(long i=1;i<=2;i++){
 			
 			Calendar dateFreq;
 			dateFreq = genererDate();
