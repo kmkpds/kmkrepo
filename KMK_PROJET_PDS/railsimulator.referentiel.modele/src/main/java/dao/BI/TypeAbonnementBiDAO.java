@@ -16,7 +16,7 @@ public class TypeAbonnementBiDAO {
 	public List<TypeAbonnementBI> listerTypeAbo(){
 		se = HibernateUtils.getSession();
     	se.beginTransaction();  	 	
-    	listeTypeAbo = se.createQuery("from TypeAbonnementBi").list();
+    	listeTypeAbo = se.createQuery("from TypeAbonnementBI").list();
     	
         return listeTypeAbo;
 	}

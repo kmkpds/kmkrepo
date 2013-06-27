@@ -1,29 +1,23 @@
 package beans.BI;
 
+import java.util.Calendar;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
-import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.Table;
 
-import net.sourceforge.jtds.jdbc.DateTime;
-
-@Entity
-@Table(name="frequentation")
 public class FrequentationBI {
-	
-
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name="idfrequentation" )
 	private Integer idFreqBi;
 	
 	@Column(name="datefrequentation")
-	private DateTime dateFreq;
+	private Calendar dateFreq;
 	
 	@ManyToOne(
 			cascade={CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH}
@@ -43,7 +37,7 @@ public class FrequentationBI {
 	@JoinColumn(name="abonnementfrequentation")
 	private TypeAbonnementBI typeAboFreq;
 	
-	public FrequentationBI(DateTime dateFreq, StationBI stationFreq,
+	public FrequentationBI(Calendar dateFreq, StationBI stationFreq,
 			LigneBI ligneFreq, TypeAbonnementBI typeAboFreq) {
 		super();
 		this.dateFreq = dateFreq;
@@ -51,5 +45,7 @@ public class FrequentationBI {
 		this.ligneFreq = ligneFreq;
 		this.typeAboFreq = typeAboFreq;
 	}
+
+
 
 }

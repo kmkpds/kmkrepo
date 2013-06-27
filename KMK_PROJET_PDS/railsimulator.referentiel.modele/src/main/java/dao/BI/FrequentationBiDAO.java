@@ -1,13 +1,12 @@
 package dao.BI;
 
+import java.util.Calendar;
 import java.util.List;
 
 import net.sourceforge.jtds.jdbc.DateTime;
 
 import org.hibernate.Session;
 import org.hibernate.Transaction;
-
-import dao.HibernateUtils;
 
 import beans.Ligne;
 import beans.Reseau;
@@ -22,10 +21,10 @@ public class FrequentationBiDAO {
 	private List<FrequentationBiDAO> listeFreq;
     private FrequentationBI freq;
    
-    public  void createFreq(DateTime dateFreq, StationBI stationFreq, LigneBI ligneFreq, TypeAbonnementBI typeFreq) {
+    public  void createFreq(Calendar dateFreq, StationBI stationFreq, LigneBI ligneFreq, TypeAbonnementBI typeFreq) {
 	      
 		 
-		se = HibernateUtils.getSession();
+		se = HibernateUtilsBiAuto.getSession();
 	     Transaction t = se.beginTransaction();
 	     freq = new FrequentationBI(dateFreq, stationFreq, ligneFreq, typeFreq);
 	     se.save(freq);
