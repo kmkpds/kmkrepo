@@ -93,6 +93,31 @@
 		<servlet-class>railsimulator.mockBi.MockBiControler</servlet-class>
 	</servlet>
 	
+	<!-- gestion du personnel  -->
+	<servlet>
+		<servlet-name>EmployeControler</servlet-name>
+		<servlet-class>railsimulator.gestionperso.EmployeControler</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>TacheControler</servlet-name>
+		<servlet-class>railsimulator.gestionperso.TacheControler</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>AfEmployeControler</servlet-name>
+		<servlet-class>railsimulator.gestionperso.AfEmployeControler</servlet-class>
+	</servlet>
+	
+	<servlet>
+		<servlet-name>SiteControler</servlet-name>
+		<servlet-class>railsimulator.gestionperso.SiteControler</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>FactHoraireControler</servlet-name>
+		<servlet-class>railsimulator.gestionperso.FactHoraireControler</servlet-class>
+	</servlet>
+	
+
+	
 	<servlet-mapping>
 		<servlet-name>AccueilControler</servlet-name>
 		<url-pattern>/accueil</url-pattern>
@@ -175,6 +200,35 @@
 		<servlet-name>MockBiControler</servlet-name>
 		<url-pattern>/mockBi</url-pattern>
 	</servlet-mapping>
+	
+	<!-- gestion perso servlet mapping -->
+	
+	<servlet-mapping>
+		<servlet-name>EmployeControler</servlet-name>
+		<url-pattern>/employe</url-pattern>
+	</servlet-mapping>
+	
+	<servlet-mapping>
+		<servlet-name>TacheControler</servlet-name>
+		<url-pattern>/tache</url-pattern>
+	</servlet-mapping>
+	
+	<servlet-mapping>
+		<servlet-name>AfEmployeControler</servlet-name>
+		<url-pattern>/afficherEmploye</url-pattern>
+	</servlet-mapping>
+	
+	<servlet-mapping>
+		<servlet-name>SiteControler</servlet-name>
+		<url-pattern>/site</url-pattern>
+	</servlet-mapping>
+	
+	<servlet-mapping>
+		<servlet-name>FactHoraireControler</servlet-name>
+		<url-pattern>/demo</url-pattern>
+	</servlet-mapping>
+	
+	
 
 
 </web-app>
