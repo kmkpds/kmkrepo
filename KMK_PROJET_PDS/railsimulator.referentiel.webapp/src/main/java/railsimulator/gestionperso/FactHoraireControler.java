@@ -14,10 +14,10 @@ import javax.servlet.http.HttpServletResponse;
 import javax.xml.bind.JAXBException;
 import beans.FactHoraire;
 import org.xml.sax.SAXException;
-import communicationJMS.Consommateur;
-import communicationJMS.Listener;
-import communicationJMS.Producteur;
-import communicationJMS.XmlTransformer;
+import communication.jms.perso.Consommateur;
+import communication.jms.perso.Listener;
+import communication.jms.perso.Producteur;
+import communication.jms.perso.XmlTransformer;
 import dao.FactHoraireDAO;
 
 
