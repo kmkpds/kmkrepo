@@ -30,7 +30,7 @@ public class Mock1Emp2Absent extends TimerTask{
 				String  heured = null, heuref=null;
 			
 				idemp= 2;
-				dateh = "2013-07-01";
+				//dateh = "2013-07-01";
 				heured="00:00:00";
 				heuref="00:00:00";
 		

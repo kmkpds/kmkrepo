@@ -23,7 +23,7 @@ public class Mock2Emp4SortieAHeure  extends TimerTask {
 		String  heured = null, heuref=null;
 		
 				idemp= 4;
-				dateh ="2013-07-01";
+				//dateh ="2013-07-01";
 				heured="05:00:00";
 				heuref="12:00:00";
 		

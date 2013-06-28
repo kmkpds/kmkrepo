@@ -12,7 +12,8 @@ List <Employe > listeEmploye=( List<Employe>)request.getAttribute("listeEmploye"
 
 Map <Integer,HoraireP > mapHoraireP=(Map <Integer,HoraireP>)request.getAttribute("mapHoraireP");
 int currentEmpCounter=0;
-
+String mContextPath = request.getContextPath();
+String idsite=(String) request.getAttribute("idsite");
 %>
 
 
@@ -36,6 +37,7 @@ int currentEmpCounter=0;
 	</head>
 	<body>
 		<!-- Page Layout -->
+		
 		<table id="RnoPage" class="RnoLayout-1col" >
 			<tr>
 				<td id="RnoPageWidthRange">
@@ -79,7 +81,12 @@ int currentEmpCounter=0;
 							
 									<h3 class="RnoSectionTitle">
 										<span></span>Personnels Sélectionnés 
-									</h3>					
+										<input type="button" id="startMockBtn" value="Activer mock" />
+										<input type="button" id="stopTimerBtn" value="Arreter Javascript Timer"/>
+									</h3>	
+									
+									
+												
 									<div class="RnoSectionContent">
 										<div class="RnoDataTable">
 											<table>
@@ -110,7 +117,7 @@ int currentEmpCounter=0;
 													
 												</tr>
 												<c:forEach items="${listeEmploye}" var="list">
-													
+													<tr id="${list.idemp}">
 														<td style="display:none;">${list.idemp}</td>
 														<td>${list.nom}</td>
 														<td>${list.prenom}</td>
@@ -168,10 +175,10 @@ int currentEmpCounter=0;
 															concat(" "+ horairefPrev)); 
 															
 															if(timestampfPrev.equals(timestampf))
-																out.print("Absent , sortie à l'heure"); 
+																out.print("Absent  sortie à l'heure"); 
 															
 															else if(timestampf.before(timestampfPrev))
-																out.print("Absent , sortie avant l'heure");
+																out.print("Absent  sortie avant l'heure");
 														}
 													}
 													%>
@@ -182,9 +189,7 @@ int currentEmpCounter=0;
 
 													
 													
-													<% currentEmpCounter++; 
-													
-													%>
+													<% currentEmpCounter++;%>
 														</tr>
 													
 												</c:forEach>
@@ -203,6 +208,60 @@ int currentEmpCounter=0;
 		<!-- /Page Layout -->
 
 	</body>
+	<script type="text/javascript" src="<%=mContextPath%>/js/jquery-1.9.1.min.js" > </script>
+	<script type="text/javascript">
+	var timerGetStatus;
+		$("#startMockBtn").click(function(){
+			
+			$.ajax({url:'<%=mContextPath+"/demo?action=lancer"%>',
+					type:"POST",
+					success:function(){
+						demarreGetStatusTimer();
+					}
+					});
+		});
+		function stopGetStatusTimer()
+		{
+			clearInterval(timerGetStatus);
+		}
+		function demarreGetStatusTimer(){
+			 timerGetStatus=setInterval(function(){
+				 console.log("voila");
+					$.ajax({url:'<%=mContextPath+"/demo?action=facthoraireAjax&id="+idsite%>',
+						error:function(){
+							console.log("errroe");
+							
+						},
+						success:function(data,textStatus,jqXHR){
+							var arrayEmp=new Array();
+							arrayEmp=data.split("&");
+							for(var key in arrayEmp){
+								//var empArray=new Array();
+								var emp_item=arrayEmp[key]; // chaine sous forme id_emp=status
+								//.log("emp "+emp);
+								var empArray=emp_item.split("=") ;
+								
+									var id_emp=empArray[0];
+									
+									
+									//console.log("tr#"+id_emp);
+								var status_emp=empArray[1];
+								if(id_emp!="")
+								$("tr#"+id_emp+" td:nth-child(7)").html(status_emp);
+														}
+							
+						},
+						type:"GET"
+						});
+				},3000);
+		}
+		$(document).ready(function(){
+		$("#stopTimerBtn").click(function(){
+			stopGetStatusTimer();
+		});
+		});
+		
+	</script>
 </html>
 
 

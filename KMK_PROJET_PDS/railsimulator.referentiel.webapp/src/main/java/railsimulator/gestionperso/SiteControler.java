@@ -5,7 +5,7 @@
  * @author Fatizara
  *
  */
-package railsimulator.gestionperso;
+package servlets;
 
 
 import java.io.IOException; 
@@ -114,7 +114,7 @@ public void afficherRefTacheEmp( HttpServletRequest request, HttpServletResponse
 	request.setAttribute("listeEmploye",listeEmploye);	
 	//System.out.println(idsite);
 	//System.out.println(listeEmploye.get(0).getNom());
-	request.setAttribute("idsite",idsite);
+	request.setAttribute("idsite",String.valueOf(idsite) );
 	request.setAttribute("listStatus",listStatus);
 	request.setAttribute("mapHoraireP",mapHoraireP);
 	this.getServletContext().getRequestDispatcher( "/WEB-INF/empsiteX.jsp").forward( request, response );

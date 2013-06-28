@@ -26,10 +26,10 @@ public class Mock1Emp13AHeure extends TimerTask{
 		DateFormat dateFormat=new SimpleDateFormat("yyyy-MM-dd");
 		Date date=new Date();
 		String dateh=dateFormat.format(date).toString();
-		String  heured = null, heuref=null;
+		String  heured = null, heuref=null;//
 				
 				idemp= 13;
-				dateh ="2013-07-01";
+				//dateh =new SimpleDateFormat("yyyy");
 				heured="04:45:00";
 				heuref="00:00:00";
 			

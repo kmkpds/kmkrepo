@@ -24,7 +24,7 @@ public class Mock1Emp3AHeure  extends TimerTask{
 		
 				
 				idemp= 3;
-				dateh ="2013-07-01";
+			//	dateh ="2013-07-01";
 				heured="18:45:00";
 				heuref="00:00:00";
 		
