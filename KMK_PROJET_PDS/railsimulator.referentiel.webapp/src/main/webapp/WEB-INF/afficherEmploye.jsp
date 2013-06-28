@@ -124,7 +124,7 @@ int currentEmpCounter=0;
 														<td>
 														       
 														<center> 
-																<a href="/GestionPerso/afficherEmploye?action=tache&id=${list.idemp}">
+																<a href="/kmk_ref_webapp/afficherEmploye?action=tache&id=${list.idemp}">
 																	<img alt="update" src="images/updateicon.gif" width="20" height="20">
 																</a>
 														

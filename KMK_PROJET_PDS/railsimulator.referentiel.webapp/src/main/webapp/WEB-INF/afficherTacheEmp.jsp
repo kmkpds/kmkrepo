@@ -57,7 +57,7 @@
 								<div class="RnoSection">
 									<h3 class="RnoSectionTitle">
 										<span></span> tache des employes
-										<a href="/GestionPerso/afficherEmploye?action=formAffecter&idemp=${idemp}">Affecter une tache</a>
+										<a href="/kmk_ref_webapp/afficherEmploye?action=formAffecter&idemp=${idemp}">Affecter une tache</a>
 										
 									</h3>					
 									<div class="RnoSectionContent">

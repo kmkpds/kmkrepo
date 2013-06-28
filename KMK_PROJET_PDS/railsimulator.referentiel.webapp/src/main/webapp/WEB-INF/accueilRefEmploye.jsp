@@ -57,7 +57,7 @@
 							
 									<h3 class="RnoSectionTitle">
 										<span></span>Personnels Sélectionnés 
-										<a href="/GestionPerso/employe?action=formAjouter">Ajouter un employé</a>
+										<a href="/kmk_ref_webapp/employe?action=formAjouter">Ajouter un employé</a>
 									</h3>					
 									<div class="RnoSectionContent">
 										<div class="RnoDataTable">
@@ -103,7 +103,7 @@
 														<td>${list.getHorairep().getHeuref()}</td>
 														<td>
 															<center> 
-																<a href="/GestionPerso/employe?action=modif&id=${list.idemp}">
+																<a href="/kmk_ref_webapp/employe?action=modif&id=${list.idemp}">
 																	<img alt="update" src="images/updateicon.gif" width="20" height="20">
 																</a>
 																
@@ -112,7 +112,7 @@
 														</td>
 														<td>
 															<center> 
-																<a onclick="return confirm('Êtes-vous sûr de vouloir supprimer cet employe?')" href="/GestionPerso/employe?action=supp&id=${list.idemp}">
+																<a onclick="return confirm('Êtes-vous sûr de vouloir supprimer cet employe?')" href="/kmk_ref_webapp/employe?action=supp&id=${list.idemp}">
 																	<img alt="delete" src="images/croix.png">
 																</a>
 															</center>

@@ -60,7 +60,7 @@
 								<div class="RnoSection">
 									<h3 class="RnoSectionTitle">
 										<span></span>Taches Sélectionnées 
-										<a href="/GestionPerso/tache?action=formAjouter">Ajouter une tache</a>
+										<a href="/kmk_ref_webapp/tache?action=formAjouter">Ajouter une tache</a>
 									</h3>					
 									<div class="RnoSectionContent">
 										<div class="RnoDataTable">
@@ -89,7 +89,7 @@
 														<td>${list.libelletache}</td>
 														<td>
 															<center> 
-																<a href="/GestionPerso/tache?action=modif&id=${list.idtache}">
+																<a href="/kmk_ref_webapp/tache?action=modif&id=${list.idtache}">
 																	<img alt="update" src="images/updateicon.gif" width="20" height="20">
 																</a>
 													
@@ -97,7 +97,7 @@
 														</td>
 														<td>
 															<center> 
-																<a onclick="return confirm('Êtes-vous sûr de vouloir supprimer cette tache?')" href="/GestionPerso/tache?action=supp&id=${list.idtache}">
+																<a onclick="return confirm('Êtes-vous sûr de vouloir supprimer cette tache?')" href="/kmk_ref_webapp/tache?action=supp&id=${list.idtache}">
 																	<img alt="delete" src="images/croix.png">
 																</a>
 															</center>

@@ -119,7 +119,7 @@
 														<td>
 														       
 														<center> 
-																<a href="/GestionPerso//site?action=tache&id=${list.idsite}">
+																<a href="/kmk_ref_webapp/site?action=tache&id=${list.idsite}">
 																	<img alt="update" src="images/updateicon.gif" width="20" height="20">
 																</a>
 														
