@@ -28,5 +28,6 @@ public class HibernateUtilsBiAuto {
     // Renvoie une session Hibernate
     public static Session getSession() throws HibernateException {
         return sessionFactory.openSession();
+        
     }
 }

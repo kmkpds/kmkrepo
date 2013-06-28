@@ -13,13 +13,13 @@ import beans.BI.TypeAbonnementBI;
 
 public class FrequentationBiDAO {
 	
-	private Session se = null;
+	private Session se = HibernateUtilsBiAuto.getSession();;
     private FrequentationBI freq;
    
     public  void createFreq(Calendar dateFreq, StationBI stationFreq, LigneBI ligneFreq, TypeAbonnementBI typeFreq) {
 	      
 		 
-		se = HibernateUtilsBiAuto.getSession();
+		 //se = HibernateUtilsBiAuto.getSession();
 	     Transaction t = se.beginTransaction();
 	     freq = new FrequentationBI(dateFreq, stationFreq, ligneFreq, typeFreq);
 	     se.save(freq);

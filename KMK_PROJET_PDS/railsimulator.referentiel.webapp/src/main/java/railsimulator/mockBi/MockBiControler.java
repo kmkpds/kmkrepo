@@ -70,7 +70,7 @@ public class MockBiControler extends HttpServlet {
 		
 		FrequentationBiDAO freqDao = new FrequentationBiDAO();
 		
-		for(long i=1;i<=2;i++){
+		for(long i=1;i<=500;i++){
 			
 			Calendar dateFreq;
 			dateFreq = genererDate();
@@ -91,13 +91,13 @@ public class MockBiControler extends HttpServlet {
 	}
 	
 	private static Calendar genererDate(){
-		int jour = (int) Math.random() * 31;
-		int mois = (int) Math.random() * 12;
+		int jour = (int) (Math.random() * 31);
+		int mois = (int) (Math.random() * 12);
 		int annee = 2013;
 		
-		int heure = (int) Math.random() * 12;
-		int minute = (int) Math.random() * 59;
-		int seconde = (int) Math.random() * 59;
+		int heure = (int) (Math.random() * 12);
+		int minute = (int) (Math.random() * 59);
+		int seconde = (int) (Math.random() * 59);
 		
 		Calendar dateReturn = Calendar.getInstance();
 		dateReturn.set(annee, mois, jour, heure, minute, seconde);
