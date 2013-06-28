@@ -157,7 +157,14 @@
 																	</label>
 																</th>
 																<td>
-																	<input type="text" name="horairep_id" id="horairep_id" value="" /> 
+																		<SELECT  name="horairep_id" id="horairep_id"/>
+																		<c:forEach items="${listeHoraireP}" var="list">
+																 
+																		<OPTION VALUE= "${list.idhorairep}"> ${list.idhorairep} </OPTION>
+																		</c:forEach>
+																		</SELECT>	
+																	
+																</td>																
 																	<c:if test="${erreur[3]==true}">
 																		<div class="RnoFrmErrorMsg">
 																			<strong>
@@ -177,7 +184,14 @@
 																	</label>
 																</th>
 																<td>
-																	<input type="text" name="site_idsite" id="site_idsite" value="" /> 
+																		<SELECT  name="site_idsite" id="site_idsite"/>
+																		<c:forEach items="${listeSite}" var="list">
+																 
+																		<OPTION VALUE= "${list.idsite}"> ${list.idsite} </OPTION>
+																		</c:forEach>
+																		</SELECT>	
+																	
+																</td>			
 																	<c:if test="${erreur[4]==true}">
 																		<div class="RnoFrmErrorMsg">
 																			<strong>
