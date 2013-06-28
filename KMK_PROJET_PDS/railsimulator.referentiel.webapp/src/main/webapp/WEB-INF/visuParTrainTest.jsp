@@ -14,29 +14,16 @@
 <link rel="author" title="Auteur" href="http://www.sqliagency.com/" />
 <title>Visualisation Par Train - Rail Simulator</title>
 
+<script type="text/javascript" src="js/visualiserTrainJavaScript.js"></script>
+
 <script type="text/javascript">
-	function showhide(id){
-		 nb_fichiers = document.getElementsByName(id).length;
-		 typeAffichage = document.getElementsByName(id).item(0).style.display;
-		 if (typeAffichage == 'block'){
-			 affichage = 'none';
-		 }
-		 else{
-			 affichage = 'block';
-		 }
-		 for (i=0; i<nb_fichiers; i++) 
-		{  
-			document.getElementsByName(id).item(i).style.display = affichage; 
-		 } 
-		
-	}//fin function showhide
+setTimeout("testIntegration()",500);
 
-	
-
+//testIntegration2();	
 </script>
 </head>
 <body>
-	<form action="train" method=get class="RnoForm" name="formAfficher">
+	<form action="train" method=get class="RnoForm" name="formAfficher2">
 		<h3 class="RnoSectionTitle">Informations du Train</h3>
 
 
@@ -119,7 +106,7 @@
 										<td >Porte fermée</td>
 									</c:if>
 									<c:if test="${porte.statut == 1}">
-										<td bgcolor="red">Porte ouverte</td>
+										<td >Porte ouverte</td>
 									</c:if>
 									</c:if>
 								</tr>
@@ -158,7 +145,7 @@
 		<input type="hidden" name="idTrain" id="idTrain"
 			value="<c:out value="${idTrain}"/>" />
 
-		<button type="submit" value="deconnexionTrain" name="action"
+		<button type="submit" value="deconnexionTrainTest" name="action"
 			id="action" width="200px">Deconnexion</button>
 	</form>
 

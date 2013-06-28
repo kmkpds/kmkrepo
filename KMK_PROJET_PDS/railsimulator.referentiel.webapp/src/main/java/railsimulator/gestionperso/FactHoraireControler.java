@@ -1,5 +1,6 @@
 package railsimulator.gestionperso;
 
+
 import java.io.IOException;
 import java.security.SecureRandom;
 import java.sql.Date;
@@ -14,10 +15,12 @@ import javax.servlet.http.HttpServletResponse;
 import javax.xml.bind.JAXBException;
 import beans.FactHoraire;
 import org.xml.sax.SAXException;
+
 import communication.jms.perso.Consommateur;
 import communication.jms.perso.Listener;
 import communication.jms.perso.Producteur;
 import communication.jms.perso.XmlTransformer;
+
 import dao.FactHoraireDAO;
 
 
@@ -50,7 +53,7 @@ public class FactHoraireControler extends HttpServlet {
 				catch (SAXException e) {e.printStackTrace();}
 			
 			request.setAttribute("confirmation", confirmation);
-			this.getServletContext().getRequestDispatcher( "/WEB-INF/prodconsomDemo.jsp").forward( request, response );             	
+			this.getServletContext().getRequestDispatcher( "/WEB-INF/empprodconsomDemo.jsp").forward( request, response );             	
 
 		}   	
     }
@@ -60,7 +63,7 @@ public class FactHoraireControler extends HttpServlet {
 		String action = request.getParameter("action");
 
 		if(action.equals("demo")){
-			this.getServletContext().getRequestDispatcher( "/WEB-INF/prodconsomDemo.jsp").forward( request, response );		
+			this.getServletContext().getRequestDispatcher( "/WEB-INF/empprodconsomDemo.jsp").forward( request, response );		
 		}
 	}
 
