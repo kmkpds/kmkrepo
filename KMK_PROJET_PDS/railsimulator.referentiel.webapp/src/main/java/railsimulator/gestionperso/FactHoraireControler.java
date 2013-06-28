@@ -1,10 +1,11 @@
-package railsimulator.gestionperso;
-
+package servlets;
 
 import java.io.IOException;
 import java.security.SecureRandom;
 import java.sql.Date;
 import java.util.Random;
+import java.util.Timer;
+
 import javax.jms.JMSException;
 import javax.jms.MessageListener;
 import javax.naming.NamingException;
@@ -13,15 +14,27 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.xml.bind.JAXBException;
+
 import beans.FactHoraire;
+import mock.Mock1Emp2Absent;
+import mock.Mock1Emp3AHeure;
+import mock.Mock1Emp13AHeure;
+import mock.Mock1Emp3SortieHeure;
+import mock.Mock2Emp18SortieAvantHeure;
+import mock.Mock2Emp4ARetard;
+import mock.Mock2Emp4SortieAHeure;
+
+import org.hibernate.Query;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
 import org.xml.sax.SAXException;
 
-import communication.jms.perso.Consommateur;
-import communication.jms.perso.Listener;
-import communication.jms.perso.Producteur;
-import communication.jms.perso.XmlTransformer;
-
+import communicationJMS.Consommateur;
+import communicationJMS.Listener;
+import communicationJMS.Producteur;
+import communicationJMS.XmlTransformer;
 import dao.FactHoraireDAO;
+import dao.HibernateUtils;
 
 
 public class FactHoraireControler extends HttpServlet {
@@ -34,29 +47,47 @@ public class FactHoraireControler extends HttpServlet {
 	String confirmation ="";
 	int cpt;
    
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)	throws ServletException, IOException {
+ 
     	
-    	String action = request.getParameter("action");
-    
-    	if(action.equals("lancer")){
-			String nomQueue = "Fact_Horaire" ;
-			Consommateur consomme = new Consommateur("localhost", nomQueue);
-			MessageListener listener = new Listener();
-			consomme.lancer(listener);// lancer la lecture des messages		
-			try {
-					
-			
-					 cpt = envoyerPlusieursMessage();	
-					 confirmation = +cpt+" messages envoyes : " ;
-				}catch (JMSException e) {e.printStackTrace();} 
-				catch (JAXBException e) {e.printStackTrace();}
-				catch (SAXException e) {e.printStackTrace();}
-			
-			request.setAttribute("confirmation", confirmation);
-			this.getServletContext().getRequestDispatcher( "/WEB-INF/empprodconsomDemo.jsp").forward( request, response );             	
+    	public void doPost( HttpServletRequest request, HttpServletResponse response ) throws ServletException, IOException{
 
-		}   	
-    }
+
+    		String action = request.getParameter("action");
+    		Session se = null;
+    		Timer moteurMessage;
+
+
+
+    		if(action.equals("lancer")){
+
+    			se = HibernateUtils.getSession();
+    			Transaction t = se.beginTransaction();
+
+    			//Purge de la table fact horaire de la bdd
+    			
+    			
+    			Query delete1=se.createQuery("delete from FactHoraire");
+    			delete1.executeUpdate();
+    			t.commit();
+
+    			//Exécution des tâches
+    			moteurMessage = new Timer();		
+
+    			moteurMessage.schedule(new Mock1Emp13AHeure(), 5000);
+    			moteurMessage.schedule(new Mock1Emp3AHeure(), 7000);
+    			moteurMessage.schedule(new Mock1Emp2Absent(), 9000);
+    			moteurMessage.schedule(new Mock2Emp4ARetard(), 10000);
+    			
+    			moteurMessage.schedule(new Mock2Emp4SortieAHeure(), 20000);
+    			moteurMessage.schedule(new Mock1Emp3SortieHeure(), 30000);
+    			moteurMessage.schedule(new Mock2Emp18SortieAvantHeure(), 14000);
+    		
+    		}
+    		
+    		this.getServletContext().getRequestDispatcher( "/WEB-INF/empprodconsomDemo.jsp").forward( request, response );		
+
+    	}
+
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
@@ -67,62 +98,5 @@ public class FactHoraireControler extends HttpServlet {
 		}
 	}
 
-	public static int envoyerPlusieursMessage() throws JMSException, JAXBException, SAXException{
-		int cpt =0;
-		String messageXML ;
-		System.out.println("avant try ");
-				try {
-					//long start = System.currentTimeMillis();
-				//	while( System.currentTimeMillis() < ( start + (1000 * +seconde))) {
-					
-					for(int i=2; i<6; i++){
-						
-						Integer idemp = null ;
-						String dateh=null, heured = null, heuref=null; 
-							
-						if(i==5){
-							
-							idemp= 5;
-							dateh ="2013-07-01";
-							heured="04:48:00";
-							heuref="12:00:00";
-						}
-						if(i==2){
-							
-							idemp= 2;
-							dateh ="2013-07-01";
-							heured="11:45:00";
-							heuref="19:00:00";
-						}
-						if(i==3){
-												
-							idemp= 3;
-							dateh ="2013-07-01";
-							heured="18:47:30";
-							heuref="01:30:00";
-											}
-						if(i==4){
-							
-							idemp= 4;
-							dateh ="2013-07-01";
-							heured="00:00:00";
-							heuref="00:00:00";
-						}
-						System.out.println("avant object ");
-											
-						facthoraire =new FactHoraire(idemp,dateh,heured,heuref);
-					   fact_dao.createFactHoraire(facthoraire);	
-					   messageXML = transforme.transformeXML(facthoraire);
-						  System.out.println(messageXML);
-						  producteur.ecrireMessage(messageXML);		
-						   cpt ++ ;
-					
-					}			
-			 
-			  } catch (NamingException e) {
-			   e.printStackTrace();
-			  }
-		return cpt;		 
-	}	
-	
+
 	}
