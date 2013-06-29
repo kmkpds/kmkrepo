@@ -5,7 +5,7 @@
  * @author Fatizara
  *
  */
-package servlets;
+package railsimulator.gestionperso;
 
 
 import java.io.IOException; 
