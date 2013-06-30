@@ -116,6 +116,24 @@
 		<servlet-class>railsimulator.gestionperso.FactHoraireControler</servlet-class>
 	</servlet>
 	
+		<servlet>
+    <servlet-name>testAbonnement</servlet-name>
+    <servlet-class>railsimulator.abonnement.testAbonnement</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>testAbonnement</servlet-name>
+    <url-pattern>/Abonnement</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>AbonnementControler</servlet-name>
+    <servlet-class>railsimulator.abonnement.AbonnementControler</servlet-class>
+    <load-on-startup>1</load-on-startup> 
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AbonnementControler</servlet-name>
+    <url-pattern>/AbonControler</url-pattern>
+  </servlet-mapping>
+	
 
 	
 	<servlet-mapping>
