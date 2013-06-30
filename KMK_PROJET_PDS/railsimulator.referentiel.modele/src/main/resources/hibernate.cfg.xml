@@ -54,6 +54,13 @@
 		<mapping class="beans.FactHoraire" />
 		<mapping class="beans.Tache" />
 		<mapping class="beans.EmpTache" />
+		<mapping class="beans.TypeAbonnement" />
+		<mapping class="beans.AbonnementMany" />
+		<mapping class="beans.ZoneAbo" /> 
+		<mapping class="beans.Client" />
+		<mapping class="beans.Tourniquet" />
+		<mapping class="beans.ClientPassTourniquet" />
+		 <mapping class="beans.ClientTourniquetID" />
         
         
 
