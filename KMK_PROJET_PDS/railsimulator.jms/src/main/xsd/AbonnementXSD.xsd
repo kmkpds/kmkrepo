@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.example.org/AbonnementXSD" xmlns:tns="http://www.example.org/AbonnementXSD" elementFormDefault="qualified">
+
+    <complexType name="TourniquetJms">
+    	<attribute name="idTourniquet" type="int"></attribute>
+    	<attribute name="zone" type="int"></attribute>
+    </complexType>
+
+
+
+    <complexType name="Client">
+    	<attribute name="idClient" type="int"></attribute>
+    </complexType>
+
+    <attribute name="NewAttribute" type="string"></attribute>
+
+
+
+    <element name="CheckAboAller">
+    	<complexType>
+    		<sequence>
+    			<element name="tourniquet" type="tns:TourniquetJms"></element>
+    			<sequence>
+    				<element name="client" type="tns:Client"></element>
+    			</sequence>
+    		</sequence>
+    		<attribute name="idtransaction" type="int"></attribute>
+    	</complexType>
+    </element>
+
+    <element name="CheckAboRetour">
+    	<complexType>
+    		<sequence>
+    			<element name="tourniquet" type="tns:TourniquetJms"></element>
+    		</sequence>
+    		<attribute name="return" type="boolean"></attribute>
+    		<attribute name="idtransaction" type="int"></attribute>
+    	</complexType>
+    </element>
+
+</schema>
