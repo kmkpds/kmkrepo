@@ -11,7 +11,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
 @Entity
-@Table(name="FrequentationLigne")
+@Table(name="bifrequentationligne")
 public class FrequentationLigneDWH {
 	
 	@Id
