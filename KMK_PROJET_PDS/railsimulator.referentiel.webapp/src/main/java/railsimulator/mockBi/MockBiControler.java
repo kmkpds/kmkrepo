@@ -95,7 +95,12 @@ public class MockBiControler extends HttpServlet {
 	}
 	
 	private static int genererMois(){
-		return (int) (Math.random() * 12);
+		int mois = (int) (Math.random() * 12);
+		if (mois == 0) {
+			mois +=1;
+		}
+				
+		return mois;
 	}
 	
 	private static String genererDate(int mois, int annee){
