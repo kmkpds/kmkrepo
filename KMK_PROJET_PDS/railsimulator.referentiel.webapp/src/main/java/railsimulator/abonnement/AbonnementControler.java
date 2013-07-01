@@ -70,28 +70,7 @@ public class AbonnementControler extends HttpServlet {
 		MessageListener listener = new ListenerAbonnement();
 		consomme.lancer(listener);// lancer la lecture des messages		
 		System.out.println("listner get init ");
-		try {
-			
-			abo = daoabo.getAbonnementManyByIdClient(142);
-			System.out.println("abo client "+abo.getIdclient().getNom());
-			
-			System.out.println("abo 2 "+daoabo.getAbonnementManyByIdClient(140).getNom());
-			
-			System.out.println("dao client "+daoC.getClientById(140));
 		
-			zone= daoz.getZoneAboById(25);
-			System.out.println("zone "+zone.getNumZone());
-		//	tour.setIdtourniquet(1111);
-			tour.setZoneAbo(zone);
-			System.out.println("bean tour avant dao tour "+tour.getZoneAbo().getNumZone());
-			
-			System.out.println("daotou zone  "+daotour.createTourniquetReturnTourniquet(tour).getZoneAbo());
-			System.out.println("dao tour get id188 "+daotour.getTourniquetById(188).getIdtourniquet());
-			//daotour.createTourniquetReturnTourniquet(tourn)
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 		
     }
     }
