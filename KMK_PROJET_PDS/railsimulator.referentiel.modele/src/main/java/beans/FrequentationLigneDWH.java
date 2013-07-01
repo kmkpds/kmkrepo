@@ -35,7 +35,7 @@ public class FrequentationLigneDWH {
 	@Column(name="annee")
 	private int annee;
 	
-	@Column(name="id_ligne")
+	@Column(name="biligne_idligne")
 	private int idligne;
 	
 	public FrequentationLigneDWH() {}
