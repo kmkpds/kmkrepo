@@ -25,7 +25,11 @@ public class FrequentationBiDAO {
 	     se.save(freq);
 		
 	     t.commit();
-	     se.close();
+	     
 	}
+    
+    public void sessionClosed(){
+    	se.close();
+    }
 
 }

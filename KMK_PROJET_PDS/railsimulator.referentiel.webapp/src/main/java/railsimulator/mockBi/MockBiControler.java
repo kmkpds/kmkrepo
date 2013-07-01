@@ -88,6 +88,7 @@ public class MockBiControler extends HttpServlet {
 			freqDao.createFreq(dateFreq, stationFreq, ligneFreq, typeFreq);
 			
 		}
+		freqDao.sessionClosed();
 	}
 	
 	private static Calendar genererDate(){
