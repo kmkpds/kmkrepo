@@ -68,7 +68,7 @@ public class MockBiControler extends HttpServlet {
 		FrequentationLigneDWH freqLigne;
 		FrequentationLigneDWHDAO freqLigneDao;
 		
-		for(int i=1;i<=500;i++){
+		for(int i=1;i<=49;i++){
 			int idFreq = i; 
 			
 			Integer freq, freqEtu, freqSalarie, freqRetraite, freqAutres;
