@@ -103,7 +103,7 @@ public class PassTourniquet {
 			System.out.println(clientPassT.getClient().getNom());
 			session = HibernateUtils.getSession();
 			session.beginTransaction();
-			//session.save(tour);
+			session.save(tour);
 			session.save(clientPassT);
 			System.out.println("id transaction "+clientPassT.getIdtransaction());
 			session.getTransaction().commit();
@@ -143,7 +143,7 @@ public class PassTourniquet {
 			
 		
 		session2 = HibernateUtils.getSession();
-		//session2.flush();
+		session2.flush();
 			session2.beginTransaction();
 			//
 			
