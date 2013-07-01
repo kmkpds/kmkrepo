@@ -16,8 +16,6 @@ public class FrequentationLigneDWH {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	@Column(name="ID_Freq_DWH")
-	private int id_frequ_dwh ;
 	@Column(name="idfrequentationligne")
 	private int idFrequentationLigne ;
 	@Column(name="frequentation")
@@ -41,9 +39,18 @@ public class FrequentationLigneDWH {
 	private int idligne;
 	
 	public FrequentationLigneDWH() {}
-	public FrequentationLigneDWH(int idFrequentationLigne, Integer frequentation,Integer frequentationEtudiant,
-			Integer frequentationSalarie, Integer frequentationRetraite, Integer frequentationAutre,
-			String date, int mois, int annee , int idligne){
+	
+	public FrequentationLigneDWH(
+			int idFrequentationLigne,
+			Integer frequentation,
+			Integer frequentationEtudiant,
+			Integer frequentationSalarie,
+			Integer frequentationRetraite,
+			Integer frequentationAutre,
+			String date,
+			int mois,
+			int annee ,
+			int idligne){
 		this.idFrequentationLigne = idFrequentationLigne;
 		this.frequentation=frequentation;
 		this.frequentationEtudiant=frequentationEtudiant;
@@ -57,12 +64,6 @@ public class FrequentationLigneDWH {
 		
 	}
 
-	public int getId_frequ_dwh() {
-		return id_frequ_dwh;
-	}
-	public void setId_frequ_dwh(int id_frequ_dwh) {
-		this.id_frequ_dwh = id_frequ_dwh;
-	}
 	public int getIdFrequentationLigne() {
 		return idFrequentationLigne;
 	}

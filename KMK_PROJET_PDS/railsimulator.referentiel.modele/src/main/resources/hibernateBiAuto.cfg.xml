@@ -7,7 +7,7 @@
 	<session-factory>
 		<property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
 		<property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
-		<property name="hibernate.connection.url">jdbc:mysql://192.168.0.252:3306/rail_test_bi</property>
+		<property name="hibernate.connection.url">jdbc:mysql://192.168.0.252:3306/railsimulator</property>
 		<property name="hibernate.connection.username">alex</property>
 		<property name="hibernate.connection.password">langea94700</property>
 		
@@ -17,10 +17,7 @@
 
 
 		<!-- Fichiers à mapper -->
-		<mapping class="beans.BI.FrequentationBI" />
-		<mapping class="beans.BI.LigneBI" />
-		<mapping class="beans.BI.StationBI" />
-		<mapping class="beans.BI.TypeAbonnementBI" />       
+		<mapping class="beans.FrequentationLigneDWHDAO" />  
         
 
 		<!-- Affiche les logs SQL -->

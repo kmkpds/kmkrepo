@@ -14,14 +14,11 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
-import beans.BI.LigneBI;
-import beans.BI.StationBI;
-import beans.BI.TypeAbonnementBI;
+import beans.BiFrequentationLigne;
+import beans.FrequentationLigneDWH;
 
-import dao.BI.FrequentationBiDAO;
+import dao.FrequentationLigneDWHDAO;
 import dao.BI.HibernateUtilsBiAuto;
-import dao.BI.StationBiDAO;
-import dao.BI.TypeAbonnementBiDAO;
 
 
 public class MockBiControler extends HttpServlet {
@@ -68,66 +65,48 @@ public class MockBiControler extends HttpServlet {
 	
 	private void lancerMoteur(){
 		
-		FrequentationBiDAO freqDao = new FrequentationBiDAO();
+		FrequentationLigneDWH freqLigne;
+		FrequentationLigneDWHDAO freqLigneDao;
 		
-		for(long i=1;i<=500;i++){
+		for(int i=1;i<=500;i++){
+			int idFreq = i; 
 			
-			Calendar dateFreq;
-			dateFreq = genererDate();
+			Integer freq, freqEtu, freqSalarie, freqRetraite, freqAutres;
+			freqEtu = genererFreq();
+			freqSalarie = genererFreq();
+			freqRetraite = genererFreq();
+			freqAutres = genererFreq();
+			freq = freqEtu + freqSalarie + freqRetraite + freqAutres;
 			
-			StationBI stationFreq = new StationBI();
-			stationFreq = genereStationFreq();
+			int mois, annee;
+			mois = genererMois();
+			annee = 2012;
 			
-			LigneBI ligneFreq = new LigneBI();
-			ligneFreq.setIdLigneBi(1);
-			ligneFreq.setNomLigneBi("Ligne 1");
+			int idligne = 1;
 			
-			TypeAbonnementBI typeFreq = new TypeAbonnementBI();
-			typeFreq = genereTypeFreq();	
+			String dateFreq = genererDate(mois, annee);
 			
-			freqDao.createFreq(dateFreq, stationFreq, ligneFreq, typeFreq);
+			freqLigneDao = new FrequentationLigneDWHDAO();
+			freqLigne = new FrequentationLigneDWH(idFreq, freq, freqEtu, freqSalarie, freqRetraite, freqAutres, dateFreq, mois, annee, idligne);
+			freqLigneDao.insertFrequentation(freqLigne);
 			
 		}
-		freqDao.sessionClosed();
+		
 	}
 	
-	private static Calendar genererDate(){
+	private static int genererMois(){
+		return (int) (Math.random() * 12);
+	}
+	
+	private static String genererDate(int mois, int annee){
 		int jour = (int) (Math.random() * 31);
-		int mois = (int) (Math.random() * 12);
-		int annee = 2013;
-		
-		int heure = (int) (Math.random() * 12);
-		int minute = (int) (Math.random() * 59);
-		int seconde = (int) (Math.random() * 59);
-		
-		Calendar dateReturn = Calendar.getInstance();
-		dateReturn.set(annee, mois, jour, heure, minute, seconde);
-		
-		
-		return dateReturn;
+		String date = String.valueOf(annee) + "-" + String.valueOf(mois) + "-" + String.valueOf(jour);
+		return date;
 	}
 	
-	private static StationBI genereStationFreq(){
-		StationBiDAO stationDao = new StationBiDAO();
-		List<StationBI> listStation;
-		listStation = stationDao.listerStation();
-		StationBI stationReturn;
-		
-		int intReturn = (int) (Math.random()*listStation.size());
-		stationReturn = listStation.get(intReturn); 
-		
-		return stationReturn;
+	private static int genererFreq(){
+		return (int) (Math.random() * 100000);
 	}
+
 	
-	private static TypeAbonnementBI genereTypeFreq(){
-		TypeAbonnementBiDAO typeDao = new TypeAbonnementBiDAO();
-		List<TypeAbonnementBI> listType;
-		listType = typeDao.listerTypeAbo();
-		TypeAbonnementBI typeReturn;
-		
-		int intReturn = (int) (Math.random()*listType.size());
-		typeReturn = listType.get(intReturn); 
-		
-		return typeReturn;
-	}
 }
