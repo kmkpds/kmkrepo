@@ -105,12 +105,19 @@ public class MockBiControler extends HttpServlet {
 	
 	private static String genererDate(int mois, int annee){
 		int jour = (int) (Math.random() * 31);
+		if (jour == 0) {
+			jour +=1;
+		}
 		String date = String.valueOf(annee) + "-" + String.valueOf(mois) + "-" + String.valueOf(jour);
 		return date;
 	}
 	
 	private static int genererFreq(){
-		return (int) (Math.random() * 100000);
+		int freq = (int) (Math.random() * 100000);
+		if (freq == 0) {
+			freq +=1;
+		}
+		return freq;
 	}
 
 	
