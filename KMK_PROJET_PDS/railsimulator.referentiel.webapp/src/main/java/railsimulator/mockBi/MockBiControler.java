@@ -57,7 +57,7 @@ public class MockBiControler extends HttpServlet {
 		se = HibernateUtilsBiAuto.getSession();
 
 		Transaction t12 = se.beginTransaction();
-		Query create12 = se.createSQLQuery("delete from FrequentationBi");
+		Query create12 = se.createSQLQuery("delete from bifrequentationligne");
 		create12.executeUpdate();
 		t12.commit();
 		

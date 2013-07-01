@@ -17,7 +17,7 @@
 
 
 		<!-- Fichiers à mapper -->
-		<mapping class="beans.FrequentationLigneDWHDAO" />  
+		<mapping class="beans.FrequentationLigneDWH" />  
         
 
 		<!-- Affiche les logs SQL -->
